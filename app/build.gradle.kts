@@ -41,12 +41,20 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.core)
+    //implementation(libs.sceneform.ux)
+
+    // Testing libraries
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
     //Gson for json converter
     implementation("com.google.code.gson:gson:2.10.1")
+
+    // Sceneform for AR
+    implementation("com.google.ar:core:1.31.0")
+
 
 
 }
