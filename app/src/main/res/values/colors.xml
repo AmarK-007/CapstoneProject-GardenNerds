@@ -21,4 +21,7 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+    <color name="card_color">#E0F0CC</color>
+    <color name="category_text_color">#88E41A</color>
+    <color name="transparent_black">#88E41A</color>
 </resources>

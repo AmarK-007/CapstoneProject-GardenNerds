@@ -1,16 +1,26 @@
 [versions]
-agp = "8.6.0"
+agp = "8.7.2"
+coreVersion = "1.46.0"
+gson = "2.10.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.9.2"
-constraintlayout = "2.1.4"
+activity = "1.9.3"
+constraintlayout = "2.2.0"
 core = "1.17.1"
 sceneformUx = "1.17.1"
 
+
+picasso = "2.8"
+retrofit = "2.9.0"
+shimmer = "0.5.0"
+lifecycleViewmodel = "2.8.7"
+
 [libraries]
+ar-core = { module = "com.google.ar:core", version.ref = "coreVersion" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -20,6 +30,17 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 core = { group = "com.google.ar.sceneform", name = "core", version.ref = "core" }
 sceneform-ux = { group = "com.google.ar.sceneform.ux", name = "sceneform-ux", version.ref = "sceneformUx" }
+
+
+
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata", version.ref = "lifecycleViewmodel" }
+lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
+
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

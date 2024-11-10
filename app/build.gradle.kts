@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.android.msd.capstone.project.gardennerds"
-        minSdk = 31
+        minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -50,10 +50,19 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     //Gson for json converter
-    implementation("com.google.code.gson:gson:2.10.1")
+    implementation(libs.gson)
 
     // Sceneform for AR
-    implementation("com.google.ar:core:1.31.0")
+    implementation(libs.ar.core)
+
+
+    implementation(libs.picasso)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.livedata)
+    implementation(libs.shimmer)
 
 
 
