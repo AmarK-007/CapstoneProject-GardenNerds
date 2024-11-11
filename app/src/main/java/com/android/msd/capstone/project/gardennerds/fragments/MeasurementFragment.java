@@ -269,8 +269,7 @@ public class MeasurementFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (arSession != null) {msfadmin
-                msf
+        if (arSession != null) {
             arSession.pause();
         }
         sceneView.pause();
