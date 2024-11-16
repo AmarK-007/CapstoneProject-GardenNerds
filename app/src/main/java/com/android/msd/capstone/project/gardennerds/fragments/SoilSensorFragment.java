@@ -42,7 +42,7 @@ public class SoilSensorFragment extends Fragment implements View.OnClickListener
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    FragmentSoilSensorBinding binding;
+    private FragmentSoilSensorBinding binding;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -86,6 +86,12 @@ public class SoilSensorFragment extends Fragment implements View.OnClickListener
         binding = FragmentSoilSensorBinding.inflate(inflater, container, false);
         binding.buttonGetSoilData.setOnClickListener(this);
         return binding.getRoot();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     @Override

@@ -13,12 +13,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.databinding.FragmentSupportBinding;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
 
 
 // SupportFragment class that extends Fragment
 public class SupportFragment extends Fragment {
 
+    private FragmentSupportBinding binding;
     private EditText nameEditText;
     private EditText emailEditText;
     private EditText issueEditText;
@@ -30,13 +32,14 @@ public class SupportFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_support, container, false);
+        // Inflate the layout for this fragment using view binding
+        binding = FragmentSupportBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
-        nameEditText = view.findViewById(R.id.support_name);
-        emailEditText = view.findViewById(R.id.support_email);
-        issueEditText = view.findViewById(R.id.issue_text);
-        submitButton = view.findViewById(R.id.support_btn);
+        nameEditText = binding.supportName;
+        emailEditText = binding.supportEmail;
+        issueEditText = binding.issueText;
+        submitButton = binding.supportBtn;
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +66,12 @@ public class SupportFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     /**

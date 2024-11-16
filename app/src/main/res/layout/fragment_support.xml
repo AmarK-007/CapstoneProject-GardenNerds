@@ -20,7 +20,7 @@
             app:errorTextAppearance="@style/error_appearance">
 
             <EditText
-                android:id="@+id/support_name"
+                android:id="@+id/supportName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@fonts/roboto_light"
@@ -41,7 +41,7 @@
             app:errorTextAppearance="@style/error_appearance">
 
             <EditText
-                android:id="@+id/support_email"
+                android:id="@+id/supportEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@fonts/roboto_light"
@@ -63,7 +63,7 @@
             app:errorTextAppearance="@style/error_appearance">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/issue_text"
+                android:id="@+id/issueText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
@@ -73,7 +73,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/support_btn"
+            android:id="@+id/supportBtn"
             style="@style/button_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

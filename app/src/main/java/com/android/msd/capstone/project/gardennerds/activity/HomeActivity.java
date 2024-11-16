@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -25,6 +26,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.databinding.ActivityHomeBinding;
+import com.android.msd.capstone.project.gardennerds.databinding.MenuDrawerHeaderBinding;
 import com.android.msd.capstone.project.gardennerds.fragments.AboutFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.HomeFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.ProfileFragment;
@@ -45,7 +48,9 @@ public class HomeActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     NavigationView navDrawerMenu;
+    MenuDrawerHeaderBinding navHeaderBinding;
     TextView userName;
+    ActivityHomeBinding homeBinding;
 
     private static final String TAG = HomeActivity.class.getSimpleName();
 
@@ -58,12 +63,18 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        EdgeToEdge.enable(this);
+        homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
+        View view = homeBinding.getRoot();
+        setContentView(view);
 
         // Initialize the toolbar, drawer layout, and navigation view.
-        materialToolbar = findViewById(R.id.homeToolBar);
-        drawerLayout = findViewById(R.id.drawerMenu);
-        navigationView = findViewById(R.id.navMenu);
+        materialToolbar = homeBinding.homeToolBar;
+        drawerLayout = homeBinding.drawerMenu;
+        navigationView = homeBinding.navMenu;
+        navDrawerMenu = homeBinding.navMenu;
+        View headerView = navDrawerMenu.getHeaderView(0);
+        navHeaderBinding = MenuDrawerHeaderBinding.bind(headerView);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, materialToolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -76,7 +87,7 @@ public class HomeActivity extends AppCompatActivity {
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
             public void onBackStackChanged() {
-                Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frames);
+                Fragment currentFragment = getSupportFragmentManager().findFragmentById(homeBinding.frames.getId());
                 updateTitle(currentFragment);
             }
         });
@@ -86,21 +97,19 @@ public class HomeActivity extends AppCompatActivity {
      * This method sets up the navigation drawer with its items and their respective click listeners.
      */
     private void setDrawer() {
-        navDrawerMenu = findViewById(R.id.navMenu);
-
         navDrawerMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 int i = item.getItemId();
 
-                if (i == R.id.myProfile) {
+                if (i == homeBinding.navMenu.getMenu().findItem(R.id.myProfile).getItemId()) {
                     changeFragment(new ProfileFragment());
-                } else if (i == R.id.support) {
+                } else if (i == homeBinding.navMenu.getMenu().findItem(R.id.support).getItemId()) {
                     changeFragment(new SupportFragment());
-                } else if (i == R.id.about) {
+                } else if (i == homeBinding.navMenu.getMenu().findItem(R.id.about).getItemId()) {
                     changeFragment(new AboutFragment());
-                } else if (i == R.id.logout) {
+                } else if (i == homeBinding.navMenu.getMenu().findItem(R.id.logout).getItemId()) {
                     showAppExitingAlertLogout(HomeActivity.this);
                 }
                 return false;
@@ -150,7 +159,7 @@ public class HomeActivity extends AppCompatActivity {
     @SuppressLint("MissingSuperCall")
     @Override
     public void onBackPressed() {
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frames);
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(homeBinding.frames.getId());
         if (currentFragment instanceof HomeFragment) {
             showAppExitingAlert(this);
         } else {
@@ -191,7 +200,7 @@ public class HomeActivity extends AppCompatActivity {
 
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frames, fragment);
+        fragmentTransaction.replace(homeBinding.frames.getId(), fragment);
         fragmentTransaction.addToBackStack(null); // Add this line
         fragmentTransaction.commit();
         drawerLayout.closeDrawers();
@@ -259,9 +268,7 @@ public class HomeActivity extends AppCompatActivity {
      * This method shows the username in the navigation drawer.
      */
     public void setUsernameInDrawer() {
-        navDrawerMenu = findViewById(R.id.navMenu);
-        View navHeaderView = navDrawerMenu.getHeaderView(0);
-        userName = navHeaderView.findViewById(R.id.welcomeUser);
+        userName = navHeaderBinding.welcomeUser;
         SharedPreferences sharedPreferences = getSharedPreferences("Login_Username", Context.MODE_PRIVATE);
         String getUsername = sharedPreferences.getString("userName", "");
         userName.setText("Welcome, " + Utility.capitalizeFirstLetter(getUsername));

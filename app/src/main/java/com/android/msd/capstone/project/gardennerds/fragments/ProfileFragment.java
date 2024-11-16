@@ -17,11 +17,14 @@ import androidx.fragment.app.Fragment;
 
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.adapters.CustomSpinnerAdapter;
+import com.android.msd.capstone.project.gardennerds.databinding.FragmentProfileBinding;
+import com.android.msd.capstone.project.gardennerds.databinding.UpdateAddressDialogBinding;
 
 
 // ProfileFragment class that extends Fragment
 public class ProfileFragment extends Fragment {
 
+    private FragmentProfileBinding binding;
     // Declare variables
     private String selectedProvince;
     TextView firstName, lastName, email, addressLine1, addressLine2, city, postalCode, province;
@@ -31,19 +34,19 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        // Inflate the layout for this fragment using view binding
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
         // Initialize TextViews and ImageButton
-        firstName = view.findViewById(R.id.profile_firstName);
-        lastName = view.findViewById(R.id.profile_lastName);
-        email = view.findViewById(R.id.profile_email);
-        addressLine1 = view.findViewById(R.id.profile_address_firstLine);
-        addressLine2 = view.findViewById(R.id.profile_address_secondLine);
-        city = view.findViewById(R.id.profile_address_city);
-        postalCode = view.findViewById(R.id.profile_address_postal);
-        province = view.findViewById(R.id.profile_address_province);
-        editButton = view.findViewById(R.id.update_address);
+        firstName = binding.profileFirstName;
+        lastName = binding.profileLastName;
+        email = binding.profileEmail;
+        addressLine1 = binding.profileAddressFirstLine;
+        addressLine2 = binding.profileAddressSecondLine;
+        city = binding.profileAddressCity;
+        postalCode = binding.profileAddressPostal;
+        province = binding.profileAddressProvince;
+        editButton = binding.updateAddress;
 
         // Set onClickListener for the editButton
         editButton.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +54,9 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 // Create a new dialog
                 Dialog updateDialog = new Dialog(getContext());
-                updateDialog.setContentView(R.layout.update_address_dialog);
+                // Use view binding for the dialog's layout
+                UpdateAddressDialogBinding dialogBinding = UpdateAddressDialogBinding.inflate(getLayoutInflater());
+                updateDialog.setContentView(dialogBinding.getRoot());
 
 
                 String[] provinces = getResources().getStringArray(R.array.canadian_provinces);
@@ -60,12 +65,12 @@ public class ProfileFragment extends Fragment {
 
 
                 // Initialize EditTexts, Spinner, and Button
-                EditText updatedAddress1 = updateDialog.findViewById(R.id.update_address1);
-                EditText updatedAddress2 = updateDialog.findViewById(R.id.update_address2);
-                EditText updatedCity = updateDialog.findViewById(R.id.update_city);
-                EditText updatedPostalCode = updateDialog.findViewById(R.id.update_postalCode);
-                Spinner updatedProvince = updateDialog.findViewById(R.id.update_provinceSpinner);
-                Button updateButton = updateDialog.findViewById(R.id.update_btn);
+                EditText updatedAddress1 = dialogBinding.updateAddress1;
+                EditText updatedAddress2 = dialogBinding.updateAddress2;
+                EditText updatedCity = dialogBinding.updateCity;
+                EditText updatedPostalCode = dialogBinding.updatePostalCode;
+                Spinner updatedProvince = dialogBinding.updateProvinceSpinner;
+                Button updateButton = dialogBinding.updateBtn;
 
                 // Set the adapter for the Spinner
                 updatedProvince.setAdapter(adapter);
@@ -105,5 +110,11 @@ public class ProfileFragment extends Fragment {
 
         // Return the root view
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
