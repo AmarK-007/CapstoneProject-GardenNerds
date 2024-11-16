@@ -18,7 +18,7 @@
         android:textSize="18dp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/update_addressOneWrapper"
+        android:id="@+id/updateAddressOneWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -28,7 +28,7 @@
         app:errorTextAppearance="@style/error_appearance">
 
         <EditText
-            android:id="@+id/update_address1"
+            android:id="@+id/updateAddress1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@fonts/roboto_light"
@@ -43,7 +43,7 @@
 
     <!-- Address 2 -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/update_addressTwoWrapper"
+        android:id="@+id/updateAddressTwoWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -53,7 +53,7 @@
         app:errorTextAppearance="@style/error_appearance">
 
         <EditText
-            android:id="@+id/update_address2"
+            android:id="@+id/updateAddress2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@fonts/roboto_light"
@@ -68,7 +68,7 @@
 
     <!-- Postal Code -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/update_postalCodeWrapper"
+        android:id="@+id/updatePostalCodeWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -78,7 +78,7 @@
         app:errorTextAppearance="@style/error_appearance">
 
         <EditText
-            android:id="@+id/update_postalCode"
+            android:id="@+id/updatePostalCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@fonts/roboto_light"
@@ -93,7 +93,7 @@
 
     <!-- City -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/update_cityWrapper"
+        android:id="@+id/updateCityWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -103,7 +103,7 @@
         app:errorTextAppearance="@style/error_appearance">
 
         <EditText
-            android:id="@+id/update_city"
+            android:id="@+id/updateCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@fonts/roboto_light"
@@ -117,7 +117,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/update_provinceSpinnerWrapper"
+        android:id="@+id/updateProvinceSpinnerWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -128,7 +128,7 @@
         app:errorTextAppearance="@style/error_appearance">
 
         <Spinner
-            android:id="@+id/update_provinceSpinner"
+            android:id="@+id/updateProvinceSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/SpinnerTheme" />
@@ -137,7 +137,7 @@
 
 
     <Button
-        android:id="@+id/update_btn"
+        android:id="@+id/updateBtn"
         style="@style/button_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

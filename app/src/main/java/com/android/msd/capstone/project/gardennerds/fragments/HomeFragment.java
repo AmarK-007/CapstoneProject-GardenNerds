@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.databinding.FragmentAboutBinding;
+import com.android.msd.capstone.project.gardennerds.databinding.FragmentHomeBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +32,8 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private FragmentHomeBinding binding;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -65,13 +69,14 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-// on click listener for all buttons in home fragment
+        // Inflate the layout for this fragment using view binding
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
-        Button btnMeasurement = view.findViewById(R.id.btnMeasurement);
-        Button btnApiSearch = view.findViewById(R.id.btnApiSearch);
-        Button btnSoilSensor = view.findViewById(R.id.btnSoilSensor);
+        // on click listener for all buttons in home fragment
+        Button btnMeasurement = binding.btnMeasurement;
+        Button btnApiSearch = binding.btnApiSearch;
+        Button btnSoilSensor = binding.btnSoilSensor;
 
         btnMeasurement.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,5 +115,11 @@ public class HomeFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
