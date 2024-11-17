@@ -53,7 +53,7 @@ dependencies {
     implementation(libs.gson)
 
     // Sceneform for AR
-    implementation(libs.ar.core)
+//    implementation(libs.ar.core)
 
 
     implementation(libs.picasso)
@@ -64,6 +64,11 @@ dependencies {
     implementation(libs.lifecycle.livedata)
     implementation(libs.shimmer)
 
+//retrofit libs
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
+    //viewpager
+    implementation(libs.viewpager2)
 
 }

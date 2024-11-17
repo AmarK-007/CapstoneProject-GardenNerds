@@ -4,7 +4,7 @@
     <item quantity="one">%d uusi ilmoitus</item>
     <item quantity="other">%d uutta ilmoitusta</item>
   </plurals>
-    <string name="__arcore_cancel">Peru</string>
+    <string name="__arcore_cancel">Peruuta</string>
     <string name="__arcore_continue">Jatka</string>
     <string name="__arcore_install_app">Tämän sovelluksen käyttö edellyttää Google Play Services for AR:n uusinta versiota.</string>
     <string name="__arcore_install_feature">Tämän ominaisuuden käyttö edellyttää Google Play Services for AR:n uusinta versiota.</string>

@@ -1,20 +1,32 @@
 package com.android.msd.capstone.project.gardennerds.fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.adapters.CustomCategoryAdapter;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentHomeBinding;
+import com.android.msd.capstone.project.gardennerds.interfaces.AdapterInterface;
+import com.android.msd.capstone.project.gardennerds.models.Category;
+
+import java.util.Calendar;
+import java.util.Objects;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements AdapterInterface<Category> {
     FragmentHomeBinding binding;
     CustomCategoryAdapter adapter;
 
@@ -87,12 +99,47 @@ public class HomeFragment extends Fragment {
     }
 
     public void onSearch() {
-
+        binding.searchEdt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH){
+                    if (!Objects.requireNonNull(binding.searchEdt.getText()).toString().isEmpty()){
+                       moveToProductListFragment("Gardening "+binding.searchEdt.getText().toString());
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     public void setRecyclerView() {
-        adapter = new CustomCategoryAdapter();
+        adapter = new CustomCategoryAdapter(this);
         binding.homeRv.setAdapter(adapter);
         binding.homeRv.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+    }
+
+    public void moveToProductListFragment(String query){
+        Bundle bundle = new Bundle();
+        bundle.putString("QUERY", query);
+
+        Fragment fragment = new ProductListFragment();
+        fragment.setArguments(bundle);
+        FragmentManager supportFragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frames, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+
+    @Override
+    public void onItemSelected(Category data, int position) {
+        moveToProductListFragment(data.getQuery());
+    }
+
+    @Override
+    public void onItemRemoved() {
+
     }
 }

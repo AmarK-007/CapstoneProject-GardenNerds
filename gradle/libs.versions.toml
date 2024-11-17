@@ -1,6 +1,5 @@
 [versions]
 agp = "8.7.2"
-coreVersion = "1.46.0"
 gson = "2.10.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -17,9 +16,10 @@ picasso = "2.8"
 retrofit = "2.9.0"
 shimmer = "0.5.0"
 lifecycleViewmodel = "2.8.7"
+viewpager2 = "1.1.0"
 
 [libraries]
-ar-core = { module = "com.google.ar:core", version.ref = "coreVersion" }
+
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -39,6 +39,7 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
 lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata", version.ref = "lifecycleViewmodel" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
+viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 
 
 

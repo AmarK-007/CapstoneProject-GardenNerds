@@ -94,6 +94,10 @@
     <style name="BellezaRegular" parent="android:Widget.TextView">
         <item name="android:fontFamily">@fonts/belleza_regular</item>
     </style>
+    <style name="CustomSearchTextInputEditText" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:drawableTint">@color/colorPrimary</item>
+    </style>
     <style name="CustomTextInputEditText" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:drawableTint">@color/colorPrimary</item>

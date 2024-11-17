@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-34:/values-es-rPA/values-es-rPA.xml",
+            "outputFile": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-35:/values-es-rPA/values-es-rPA.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\7d63fa0887b013cadb14fc70a299c823\\transformed\\core-1.46.0\\res\\values-es-rPA\\values.xml",
+                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\bab68bab6505b2430d99ce3dd6c15fa3\\transformed\\core-1.15.0\\res\\values-es-rPA\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8",
                         "startColumns": "0,0,0,0,0",

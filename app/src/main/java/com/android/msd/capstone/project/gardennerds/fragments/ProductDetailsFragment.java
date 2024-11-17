@@ -33,6 +33,13 @@ public class ProductDetailsFragment extends Fragment {
         assert getArguments() != null;
         productID = getArguments().getString("PRODUCT_ID");
         binding = FragmentProductDetailsBinding.inflate(inflater,container,false);
+        viewModel = new ViewModelProvider(this).get(ProductViewModel.class);
+        viewModel.getProductResults(productID).observe(requireActivity(), new Observer<ProductResults>() {
+            @Override
+            public void onChanged(ProductResults productResults) {
+                setData(productResults);
+            }
+        });
         return binding.getRoot();
     }
 
@@ -41,13 +48,7 @@ public class ProductDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Log.d("TAG", productID);
-        viewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-        viewModel.getProductResults(productID).observe(requireActivity(), new Observer<ProductResults>() {
-            @Override
-            public void onChanged(ProductResults productResults) {
-                setData(productResults);
-            }
-        });
+
     }
 
     @SuppressLint("SetTextI18n")

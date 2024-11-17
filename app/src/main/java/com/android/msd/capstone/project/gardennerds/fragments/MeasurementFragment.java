@@ -270,6 +270,9 @@ public class MeasurementFragment extends Fragment {
     public void onPause() {
         super.onPause();
         if (arSession != null) {
+            /**Mann Commented because there wasn't any thing understandable*/
+//            msfadmin
+//                msf
             arSession.pause();
         }
         sceneView.pause();

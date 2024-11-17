@@ -12,227 +12,209 @@
 11-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:5:5-65
 11-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:5:22-62
 12    <uses-permission android:name="android.permission.INTERNET" />
-12-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:6:5-67
+12-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:6:5-66
 12-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:6:22-64
 13
 14    <uses-feature
-14-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:8:5-10:35
+14-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:7:5-9:35
 15        android:name="android.hardware.camera.ar"
-15-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:9:9-50
+15-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:8:9-50
 16        android:required="true" />
-16-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:10:9-32
+16-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:9:9-32
 17    <uses-feature
-17-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:11:5-13:35
+17-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:10:5-12:35
 18        android:name="android.hardware.camera"
-18-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:12:9-47
+18-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:11:9-47
 19        android:required="true" />
-19-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:13:9-32
+19-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:12:9-32
 20    <uses-feature android:name="android.hardware.camera.autofocus" />
-20-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:14:5-70
-20-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:14:19-67
+20-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:13:5-70
+20-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:13:19-67
 21
-22    <queries>
-22-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:20:5-27:15
-23        <package android:name="com.google.ar.core" />
-23-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:21:9-54
-23-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:21:18-51
-24        <package android:name="com.android.vending" />
-24-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:22:9-55
-24-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:22:18-52
+22    <permission
+22-->[androidx.core:core:1.13.0] C:\Users\manna\.gradle\caches\8.9\transforms\cf9e9ff31119e86a2acb0cfb9f508bfd\transformed\core-1.13.0\AndroidManifest.xml:22:5-24:47
+23        android:name="com.android.msd.capstone.project.gardennerds.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+23-->[androidx.core:core:1.13.0] C:\Users\manna\.gradle\caches\8.9\transforms\cf9e9ff31119e86a2acb0cfb9f508bfd\transformed\core-1.13.0\AndroidManifest.xml:23:9-81
+24        android:protectionLevel="signature" />
+24-->[androidx.core:core:1.13.0] C:\Users\manna\.gradle\caches\8.9\transforms\cf9e9ff31119e86a2acb0cfb9f508bfd\transformed\core-1.13.0\AndroidManifest.xml:24:9-44
 25
-26        <intent>
-26-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:24:9-26:18
-27            <action android:name="com.google.android.play.core.install.BIND_INSTALL_SERVICE" />
-27-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:25:13-96
-27-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:25:21-93
-28        </intent>
-29    </queries>
-30
-31    <permission
-31-->[androidx.core:core:1.13.0] C:\Users\manna\.gradle\caches\8.9\transforms\06357f50cd3bd86ec81b7240b5969ede\transformed\core-1.13.0\AndroidManifest.xml:22:5-24:47
-32        android:name="com.android.msd.capstone.project.gardennerds.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-32-->[androidx.core:core:1.13.0] C:\Users\manna\.gradle\caches\8.9\transforms\06357f50cd3bd86ec81b7240b5969ede\transformed\core-1.13.0\AndroidManifest.xml:23:9-81
-33        android:protectionLevel="signature" />
-33-->[androidx.core:core:1.13.0] C:\Users\manna\.gradle\caches\8.9\transforms\06357f50cd3bd86ec81b7240b5969ede\transformed\core-1.13.0\AndroidManifest.xml:24:9-44
-34
-35    <uses-permission android:name="com.android.msd.capstone.project.gardennerds.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-35-->[androidx.core:core:1.13.0] C:\Users\manna\.gradle\caches\8.9\transforms\06357f50cd3bd86ec81b7240b5969ede\transformed\core-1.13.0\AndroidManifest.xml:26:5-97
-35-->[androidx.core:core:1.13.0] C:\Users\manna\.gradle\caches\8.9\transforms\06357f50cd3bd86ec81b7240b5969ede\transformed\core-1.13.0\AndroidManifest.xml:26:22-94
-36
-37    <application
-37-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:16:5-56:19
-38        android:allowBackup="true"
-38-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:17:9-35
-39        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-39-->[androidx.core:core:1.13.0] C:\Users\manna\.gradle\caches\8.9\transforms\06357f50cd3bd86ec81b7240b5969ede\transformed\core-1.13.0\AndroidManifest.xml:28:18-86
-40        android:dataExtractionRules="@xml/data_extraction_rules"
-40-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:18:9-65
-41        android:debuggable="true"
-42        android:extractNativeLibs="false"
-43        android:fullBackupContent="@xml/backup_rules"
-43-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:19:9-54
-44        android:hardwareAccelerated="true"
-44-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:20:9-43
-45        android:icon="@mipmap/ic_launcher"
-45-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:21:9-43
-46        android:label="@string/app_name"
-46-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:22:9-41
-47        android:roundIcon="@mipmap/ic_launcher_round"
-47-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:23:9-54
-48        android:supportsRtl="true"
-48-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:24:9-35
-49        android:testOnly="true"
-50        android:theme="@style/AppTheme" >
-50-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:25:9-40
-51        <meta-data
-51-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:28:9-30:40
-52            android:name="com.google.ar.core"
-52-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:29:13-46
-53            android:value="required" />
-53-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:30:13-37
-54
-55        <activity
-55-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:32:9-42:20
-56            android:name="com.android.msd.capstone.project.gardennerds.activity.SplashScreenActivity"
-56-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:33:13-58
-57            android:exported="true"
-57-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:34:13-36
-58            android:screenOrientation="portrait"
-58-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:35:13-49
-59            android:theme="@style/AppTheme.SplashTheme" >
-59-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:36:13-56
-60            <intent-filter>
-60-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:37:13-41:29
-61                <action android:name="android.intent.action.MAIN" />
-61-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:38:17-69
-61-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:38:25-66
-62
-63                <category android:name="android.intent.category.LAUNCHER" />
-63-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:40:17-77
-63-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:40:27-74
-64            </intent-filter>
-65        </activity>
-66        <activity
-66-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:43:9-46:53
-67            android:name="com.android.msd.capstone.project.gardennerds.activity.HomeActivity"
-67-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:44:13-50
-68            android:exported="false"
-68-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:45:13-37
+26    <uses-permission android:name="com.android.msd.capstone.project.gardennerds.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+26-->[androidx.core:core:1.13.0] C:\Users\manna\.gradle\caches\8.9\transforms\cf9e9ff31119e86a2acb0cfb9f508bfd\transformed\core-1.13.0\AndroidManifest.xml:26:5-97
+26-->[androidx.core:core:1.13.0] C:\Users\manna\.gradle\caches\8.9\transforms\cf9e9ff31119e86a2acb0cfb9f508bfd\transformed\core-1.13.0\AndroidManifest.xml:26:22-94
+27
+28    <application
+28-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:15:5-55:19
+29        android:allowBackup="true"
+29-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:16:9-35
+30        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+30-->[androidx.core:core:1.13.0] C:\Users\manna\.gradle\caches\8.9\transforms\cf9e9ff31119e86a2acb0cfb9f508bfd\transformed\core-1.13.0\AndroidManifest.xml:28:18-86
+31        android:dataExtractionRules="@xml/data_extraction_rules"
+31-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:17:9-65
+32        android:debuggable="true"
+33        android:extractNativeLibs="false"
+34        android:fullBackupContent="@xml/backup_rules"
+34-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:18:9-54
+35        android:hardwareAccelerated="true"
+35-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:19:9-43
+36        android:icon="@mipmap/ic_launcher"
+36-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:20:9-43
+37        android:label="@string/app_name"
+37-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:21:9-41
+38        android:roundIcon="@mipmap/ic_launcher_round"
+38-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:22:9-54
+39        android:supportsRtl="true"
+39-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:23:9-35
+40        android:testOnly="true"
+41        android:theme="@style/AppTheme" >
+41-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:24:9-40
+42        <meta-data
+42-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:27:9-29:40
+43            android:name="com.google.ar.core"
+43-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:28:13-46
+44            android:value="required" />
+44-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:29:13-37
+45
+46        <activity
+46-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:31:9-41:20
+47            android:name="com.android.msd.capstone.project.gardennerds.activity.SplashScreenActivity"
+47-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:32:13-58
+48            android:exported="true"
+48-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:33:13-36
+49            android:screenOrientation="portrait"
+49-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:34:13-49
+50            android:theme="@style/AppTheme.SplashTheme" >
+50-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:35:13-56
+51            <intent-filter>
+51-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:36:13-40:29
+52                <action android:name="android.intent.action.MAIN" />
+52-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:37:17-69
+52-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:37:25-66
+53
+54                <category android:name="android.intent.category.LAUNCHER" />
+54-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:39:17-77
+54-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:39:27-74
+55            </intent-filter>
+56        </activity>
+57        <activity
+57-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:42:9-45:53
+58            android:name="com.android.msd.capstone.project.gardennerds.activity.HomeActivity"
+58-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:43:13-50
+59            android:exported="false"
+59-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:44:13-37
+60            android:theme="@style/AppTheme.Login" />
+60-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:45:13-50
+61        <activity
+61-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:46:9-49:53
+62            android:name="com.android.msd.capstone.project.gardennerds.activity.SignUpScreenActivity"
+62-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:47:13-58
+63            android:exported="false"
+63-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:48:13-37
+64            android:theme="@style/AppTheme.Login" />
+64-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:49:13-50
+65        <activity
+65-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:50:9-54:53
+66            android:name="com.android.msd.capstone.project.gardennerds.activity.LoginScreenActivity"
+66-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:51:13-57
+67            android:exported="false"
+67-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:52:13-37
+68            android:screenOrientation="portrait"
+68-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:53:13-49
 69            android:theme="@style/AppTheme.Login" />
-69-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:46:13-50
-70        <activity
-70-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:47:9-50:53
-71            android:name="com.android.msd.capstone.project.gardennerds.activity.SignUpScreenActivity"
-71-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:48:13-58
-72            android:exported="false"
-72-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:49:13-37
-73            android:theme="@style/AppTheme.Login" />
-73-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:50:13-50
-74        <activity
-74-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:51:9-55:53
-75            android:name="com.android.msd.capstone.project.gardennerds.activity.LoginScreenActivity"
-75-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:52:13-57
-76            android:exported="false"
-76-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:53:13-37
-77            android:screenOrientation="portrait"
-77-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:54:13-49
-78            android:theme="@style/AppTheme.Login" />
-78-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:55:13-50
-79        <!-- The minimal version code of ARCore APK required for an app using this SDK. -->
-80        <meta-data
-80-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:32:9-34:41
-81            android:name="com.google.ar.core.min_apk_version"
-81-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:33:13-62
-82            android:value="242040000" /> <!-- This activity is critical for installing ARCore when it is not already present. -->
-82-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:34:13-38
-83        <activity
-83-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:36:9-42:80
-84            android:name="com.google.ar.core.InstallActivity"
-84-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:37:13-62
-85            android:configChanges="keyboardHidden|orientation|screenSize"
-85-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:38:13-74
-86            android:excludeFromRecents="true"
-86-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:39:13-46
-87            android:exported="false"
-87-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:40:13-37
-88            android:launchMode="singleTop"
-88-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:41:13-43
-89            android:theme="@android:style/Theme.Material.Light.Dialog.Alert" />
-89-->[com.google.ar:core:1.46.0] C:\Users\manna\.gradle\caches\8.9\transforms\7d63fa0887b013cadb14fc70a299c823\transformed\core-1.46.0\AndroidManifest.xml:42:13-77
-90
-91        <provider
-91-->[com.squareup.picasso:picasso:2.8] C:\Users\manna\.gradle\caches\8.9\transforms\4b5951b0dd1ad2b3bf49bd2e87b30eb5\transformed\picasso-2.8\AndroidManifest.xml:8:9-11:40
-92            android:name="com.squareup.picasso.PicassoProvider"
-92-->[com.squareup.picasso:picasso:2.8] C:\Users\manna\.gradle\caches\8.9\transforms\4b5951b0dd1ad2b3bf49bd2e87b30eb5\transformed\picasso-2.8\AndroidManifest.xml:9:13-64
-93            android:authorities="com.android.msd.capstone.project.gardennerds.com.squareup.picasso"
-93-->[com.squareup.picasso:picasso:2.8] C:\Users\manna\.gradle\caches\8.9\transforms\4b5951b0dd1ad2b3bf49bd2e87b30eb5\transformed\picasso-2.8\AndroidManifest.xml:10:13-72
-94            android:exported="false" />
-94-->[com.squareup.picasso:picasso:2.8] C:\Users\manna\.gradle\caches\8.9\transforms\4b5951b0dd1ad2b3bf49bd2e87b30eb5\transformed\picasso-2.8\AndroidManifest.xml:11:13-37
-95        <provider
-95-->[androidx.emoji2:emoji2:1.3.0] C:\Users\manna\.gradle\caches\8.9\transforms\07d020cdbdf61ccaa33d4caf9153bd79\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
-96            android:name="androidx.startup.InitializationProvider"
-96-->[androidx.emoji2:emoji2:1.3.0] C:\Users\manna\.gradle\caches\8.9\transforms\07d020cdbdf61ccaa33d4caf9153bd79\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
-97            android:authorities="com.android.msd.capstone.project.gardennerds.androidx-startup"
-97-->[androidx.emoji2:emoji2:1.3.0] C:\Users\manna\.gradle\caches\8.9\transforms\07d020cdbdf61ccaa33d4caf9153bd79\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
-98            android:exported="false" >
-98-->[androidx.emoji2:emoji2:1.3.0] C:\Users\manna\.gradle\caches\8.9\transforms\07d020cdbdf61ccaa33d4caf9153bd79\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
-99            <meta-data
-99-->[androidx.emoji2:emoji2:1.3.0] C:\Users\manna\.gradle\caches\8.9\transforms\07d020cdbdf61ccaa33d4caf9153bd79\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
-100                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-100-->[androidx.emoji2:emoji2:1.3.0] C:\Users\manna\.gradle\caches\8.9\transforms\07d020cdbdf61ccaa33d4caf9153bd79\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
-101                android:value="androidx.startup" />
-101-->[androidx.emoji2:emoji2:1.3.0] C:\Users\manna\.gradle\caches\8.9\transforms\07d020cdbdf61ccaa33d4caf9153bd79\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
-102            <meta-data
-102-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\manna\.gradle\caches\8.9\transforms\d98db13d5d32a8f3c858c1b479e9485d\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:29:13-31:52
-103                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-103-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\manna\.gradle\caches\8.9\transforms\d98db13d5d32a8f3c858c1b479e9485d\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:30:17-78
-104                android:value="androidx.startup" />
-104-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\manna\.gradle\caches\8.9\transforms\d98db13d5d32a8f3c858c1b479e9485d\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:31:17-49
-105            <meta-data
-105-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
-106                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-106-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
-107                android:value="androidx.startup" />
-107-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
-108        </provider>
-109
-110        <receiver
-110-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
-111            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-111-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
-112            android:directBootAware="false"
-112-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
-113            android:enabled="true"
-113-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
-114            android:exported="true"
-114-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
-115            android:permission="android.permission.DUMP" >
-115-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
-116            <intent-filter>
-116-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
-117                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-117-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
-117-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
-118            </intent-filter>
-119            <intent-filter>
-119-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
-120                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-120-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
-120-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
-121            </intent-filter>
-122            <intent-filter>
-122-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
-123                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-123-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
-123-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
-124            </intent-filter>
-125            <intent-filter>
-125-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
-126                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-126-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
-126-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\d57f445eea2e41218026ef051f4115ac\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
-127            </intent-filter>
-128        </receiver>
-129    </application>
-130
-131</manifest>
+69-->M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\src\main\AndroidManifest.xml:54:13-50
+70
+71        <provider
+71-->[com.squareup.picasso:picasso:2.8] C:\Users\manna\.gradle\caches\8.9\transforms\f940dd7a65e02888cb77f487fdc5fddf\transformed\picasso-2.8\AndroidManifest.xml:8:9-11:40
+72            android:name="com.squareup.picasso.PicassoProvider"
+72-->[com.squareup.picasso:picasso:2.8] C:\Users\manna\.gradle\caches\8.9\transforms\f940dd7a65e02888cb77f487fdc5fddf\transformed\picasso-2.8\AndroidManifest.xml:9:13-64
+73            android:authorities="com.android.msd.capstone.project.gardennerds.com.squareup.picasso"
+73-->[com.squareup.picasso:picasso:2.8] C:\Users\manna\.gradle\caches\8.9\transforms\f940dd7a65e02888cb77f487fdc5fddf\transformed\picasso-2.8\AndroidManifest.xml:10:13-72
+74            android:exported="false" />
+74-->[com.squareup.picasso:picasso:2.8] C:\Users\manna\.gradle\caches\8.9\transforms\f940dd7a65e02888cb77f487fdc5fddf\transformed\picasso-2.8\AndroidManifest.xml:11:13-37
+75        <provider
+75-->[androidx.emoji2:emoji2:1.3.0] C:\Users\manna\.gradle\caches\8.9\transforms\73dfbf38b6d7495c8181516c794ea01e\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+76            android:name="androidx.startup.InitializationProvider"
+76-->[androidx.emoji2:emoji2:1.3.0] C:\Users\manna\.gradle\caches\8.9\transforms\73dfbf38b6d7495c8181516c794ea01e\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+77            android:authorities="com.android.msd.capstone.project.gardennerds.androidx-startup"
+77-->[androidx.emoji2:emoji2:1.3.0] C:\Users\manna\.gradle\caches\8.9\transforms\73dfbf38b6d7495c8181516c794ea01e\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+78            android:exported="false" >
+78-->[androidx.emoji2:emoji2:1.3.0] C:\Users\manna\.gradle\caches\8.9\transforms\73dfbf38b6d7495c8181516c794ea01e\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+79            <meta-data
+79-->[androidx.emoji2:emoji2:1.3.0] C:\Users\manna\.gradle\caches\8.9\transforms\73dfbf38b6d7495c8181516c794ea01e\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+80                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+80-->[androidx.emoji2:emoji2:1.3.0] C:\Users\manna\.gradle\caches\8.9\transforms\73dfbf38b6d7495c8181516c794ea01e\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+81                android:value="androidx.startup" />
+81-->[androidx.emoji2:emoji2:1.3.0] C:\Users\manna\.gradle\caches\8.9\transforms\73dfbf38b6d7495c8181516c794ea01e\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+82            <meta-data
+82-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\manna\.gradle\caches\8.9\transforms\109cbbe5258dd9323b30f9042964cb9b\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:29:13-31:52
+83                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+83-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\manna\.gradle\caches\8.9\transforms\109cbbe5258dd9323b30f9042964cb9b\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:30:17-78
+84                android:value="androidx.startup" />
+84-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\manna\.gradle\caches\8.9\transforms\109cbbe5258dd9323b30f9042964cb9b\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:31:17-49
+85            <meta-data
+85-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+86                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+86-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+87                android:value="androidx.startup" />
+87-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+88        </provider>
+89
+90        <receiver
+90-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+91            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+91-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+92            android:directBootAware="false"
+92-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+93            android:enabled="true"
+93-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+94            android:exported="true"
+94-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+95            android:permission="android.permission.DUMP" >
+95-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+96            <intent-filter>
+96-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+97                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+97-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+97-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+98            </intent-filter>
+99            <intent-filter>
+99-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+100                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+100-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+100-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+101            </intent-filter>
+102            <intent-filter>
+102-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+103                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+103-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+103-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+104            </intent-filter>
+105            <intent-filter>
+105-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+106                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+106-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+106-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\manna\.gradle\caches\8.9\transforms\bedfe659e3e37f31f570b200c649e013\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
+107            </intent-filter>
+108        </receiver> <!-- The minimal version code of ARCore APK required for an app using this SDK. -->
+109        <meta-data
+109-->[com.google.ar:core:1.15.0] C:\Users\manna\.gradle\caches\8.9\transforms\bab68bab6505b2430d99ce3dd6c15fa3\transformed\core-1.15.0\AndroidManifest.xml:33:9-35:41
+110            android:name="com.google.ar.core.min_apk_version"
+110-->[com.google.ar:core:1.15.0] C:\Users\manna\.gradle\caches\8.9\transforms\bab68bab6505b2430d99ce3dd6c15fa3\transformed\core-1.15.0\AndroidManifest.xml:34:13-62
+111            android:value="191106000" /> <!-- This activity is critical for installing ARCore when it is not already present. -->
+111-->[com.google.ar:core:1.15.0] C:\Users\manna\.gradle\caches\8.9\transforms\bab68bab6505b2430d99ce3dd6c15fa3\transformed\core-1.15.0\AndroidManifest.xml:35:13-38
+112        <activity
+112-->[com.google.ar:core:1.15.0] C:\Users\manna\.gradle\caches\8.9\transforms\bab68bab6505b2430d99ce3dd6c15fa3\transformed\core-1.15.0\AndroidManifest.xml:37:9-43:80
+113            android:name="com.google.ar.core.InstallActivity"
+113-->[com.google.ar:core:1.15.0] C:\Users\manna\.gradle\caches\8.9\transforms\bab68bab6505b2430d99ce3dd6c15fa3\transformed\core-1.15.0\AndroidManifest.xml:38:13-62
+114            android:configChanges="keyboardHidden|orientation|screenSize"
+114-->[com.google.ar:core:1.15.0] C:\Users\manna\.gradle\caches\8.9\transforms\bab68bab6505b2430d99ce3dd6c15fa3\transformed\core-1.15.0\AndroidManifest.xml:39:13-74
+115            android:excludeFromRecents="true"
+115-->[com.google.ar:core:1.15.0] C:\Users\manna\.gradle\caches\8.9\transforms\bab68bab6505b2430d99ce3dd6c15fa3\transformed\core-1.15.0\AndroidManifest.xml:40:13-46
+116            android:exported="false"
+116-->[com.google.ar:core:1.15.0] C:\Users\manna\.gradle\caches\8.9\transforms\bab68bab6505b2430d99ce3dd6c15fa3\transformed\core-1.15.0\AndroidManifest.xml:41:13-37
+117            android:launchMode="singleTop"
+117-->[com.google.ar:core:1.15.0] C:\Users\manna\.gradle\caches\8.9\transforms\bab68bab6505b2430d99ce3dd6c15fa3\transformed\core-1.15.0\AndroidManifest.xml:42:13-43
+118            android:theme="@android:style/Theme.Material.Light.Dialog.Alert" />
+118-->[com.google.ar:core:1.15.0] C:\Users\manna\.gradle\caches\8.9\transforms\bab68bab6505b2430d99ce3dd6c15fa3\transformed\core-1.15.0\AndroidManifest.xml:43:13-77
+119    </application>
+120
+121</manifest>

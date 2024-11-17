@@ -4,6 +4,7 @@ package com.android.msd.capstone.project.gardennerds.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,11 +21,23 @@ public final class FragmentProductListBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
+  public final ImageView ivGrid;
+
+  @NonNull
+  public final ImageView ivList;
+
+  @NonNull
+  public final ImageView ivUpDown;
+
+  @NonNull
   public final RecyclerView rvProductList;
 
-  private FragmentProductListBinding(@NonNull LinearLayout rootView,
-      @NonNull RecyclerView rvProductList) {
+  private FragmentProductListBinding(@NonNull LinearLayout rootView, @NonNull ImageView ivGrid,
+      @NonNull ImageView ivList, @NonNull ImageView ivUpDown, @NonNull RecyclerView rvProductList) {
     this.rootView = rootView;
+    this.ivGrid = ivGrid;
+    this.ivList = ivList;
+    this.ivUpDown = ivUpDown;
     this.rvProductList = rvProductList;
   }
 
@@ -55,13 +68,32 @@ public final class FragmentProductListBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.iv_grid;
+      ImageView ivGrid = ViewBindings.findChildViewById(rootView, id);
+      if (ivGrid == null) {
+        break missingId;
+      }
+
+      id = R.id.iv_list;
+      ImageView ivList = ViewBindings.findChildViewById(rootView, id);
+      if (ivList == null) {
+        break missingId;
+      }
+
+      id = R.id.iv_up_down;
+      ImageView ivUpDown = ViewBindings.findChildViewById(rootView, id);
+      if (ivUpDown == null) {
+        break missingId;
+      }
+
       id = R.id.rv_product_list;
       RecyclerView rvProductList = ViewBindings.findChildViewById(rootView, id);
       if (rvProductList == null) {
         break missingId;
       }
 
-      return new FragmentProductListBinding((LinearLayout) rootView, rvProductList);
+      return new FragmentProductListBinding((LinearLayout) rootView, ivGrid, ivList, ivUpDown,
+          rvProductList);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

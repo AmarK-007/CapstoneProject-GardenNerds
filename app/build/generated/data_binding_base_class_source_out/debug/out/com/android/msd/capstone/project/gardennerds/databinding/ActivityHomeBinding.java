@@ -12,6 +12,7 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.android.msd.capstone.project.gardennerds.R;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -20,6 +21,9 @@ import java.lang.String;
 public final class ActivityHomeBinding implements ViewBinding {
   @NonNull
   private final DrawerLayout rootView;
+
+  @NonNull
+  public final BottomNavigationView bottomNavigationView;
 
   @NonNull
   public final DrawerLayout drawerMenu;
@@ -33,10 +37,12 @@ public final class ActivityHomeBinding implements ViewBinding {
   @NonNull
   public final NavigationView navMenu;
 
-  private ActivityHomeBinding(@NonNull DrawerLayout rootView, @NonNull DrawerLayout drawerMenu,
+  private ActivityHomeBinding(@NonNull DrawerLayout rootView,
+      @NonNull BottomNavigationView bottomNavigationView, @NonNull DrawerLayout drawerMenu,
       @NonNull FrameLayout frames, @NonNull MaterialToolbar homeToolBar,
       @NonNull NavigationView navMenu) {
     this.rootView = rootView;
+    this.bottomNavigationView = bottomNavigationView;
     this.drawerMenu = drawerMenu;
     this.frames = frames;
     this.homeToolBar = homeToolBar;
@@ -70,6 +76,12 @@ public final class ActivityHomeBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.bottomNavigationView;
+      BottomNavigationView bottomNavigationView = ViewBindings.findChildViewById(rootView, id);
+      if (bottomNavigationView == null) {
+        break missingId;
+      }
+
       DrawerLayout drawerMenu = (DrawerLayout) rootView;
 
       id = R.id.frames;
@@ -90,8 +102,8 @@ public final class ActivityHomeBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityHomeBinding((DrawerLayout) rootView, drawerMenu, frames, homeToolBar,
-          navMenu);
+      return new ActivityHomeBinding((DrawerLayout) rootView, bottomNavigationView, drawerMenu,
+          frames, homeToolBar, navMenu);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

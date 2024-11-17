@@ -47,8 +47,8 @@ public class Category {
         ArrayList<Category> categories = new ArrayList<>();
         categories.add(new Category(R.drawable.indoor_plants,"Indoor Plants", "Indoor Gardening Plants"));
         categories.add(new Category(R.drawable.outdoor_plants,"Outdoor Plants", "Outdoor Gardening Plants"));
-        categories.add(new Category(R.drawable.gardening_tools,"Gardening Tools", "Gardening Tools"));
-        categories.add(new Category(R.drawable.gardening_decors,"Garden Decorative", "Garden Decorative"));
+        categories.add(new Category(R.drawable.gardening_tools,"Tools", "Gardening Tools"));
+        categories.add(new Category(R.drawable.gardening_decors,"Decorative", "Garden Decorative"));
 
         return categories;
     }

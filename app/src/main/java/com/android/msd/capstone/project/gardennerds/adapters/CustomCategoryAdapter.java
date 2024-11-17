@@ -8,12 +8,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.msd.capstone.project.gardennerds.databinding.CustomCardCategoryLayoutBinding;
+import com.android.msd.capstone.project.gardennerds.interfaces.AdapterInterface;
 import com.android.msd.capstone.project.gardennerds.models.Category;
 
 import java.util.ArrayList;
 
 public class CustomCategoryAdapter extends RecyclerView.Adapter<CustomCategoryAdapter.MyViewHolder> {
     ArrayList<Category> categories = new Category().getCategoryList();
+    AdapterInterface<Category> adapterInterface;
+
+    public CustomCategoryAdapter(AdapterInterface<Category> adapterInterface) {
+        this.adapterInterface = adapterInterface;
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,6 +47,12 @@ public class CustomCategoryAdapter extends RecyclerView.Adapter<CustomCategoryAd
         public void bind(Category category){
             binding.ivCategory.setImageResource(category.getImageId());
             binding.tvCategory.setText(category.getTitle());
+            binding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    adapterInterface.onItemSelected(category,getAdapterPosition());
+                }
+            });
         }
     }
 }

@@ -19,15 +19,6 @@
         android:required="true" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <queries>
-        <package android:name="com.google.ar.core" />
-        <package android:name="com.android.vending" />
-
-        <intent>
-            <action android:name="com.google.android.play.core.install.BIND_INSTALL_SERVICE" />
-        </intent>
-    </queries>
-
     <permission
         android:name="com.android.msd.capstone.project.gardennerds.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
@@ -76,17 +67,6 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Login" />
-        <!-- The minimal version code of ARCore APK required for an app using this SDK. -->
-        <meta-data
-            android:name="com.google.ar.core.min_apk_version"
-            android:value="242040000" /> <!-- This activity is critical for installing ARCore when it is not already present. -->
-        <activity
-            android:name="com.google.ar.core.InstallActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:excludeFromRecents="true"
-            android:exported="false"
-            android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Material.Light.Dialog.Alert" />
 
         <provider
             android:name="com.squareup.picasso.PicassoProvider"
@@ -125,7 +105,17 @@
             <intent-filter>
                 <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
             </intent-filter>
-        </receiver>
+        </receiver> <!-- The minimal version code of ARCore APK required for an app using this SDK. -->
+        <meta-data
+            android:name="com.google.ar.core.min_apk_version"
+            android:value="191106000" /> <!-- This activity is critical for installing ARCore when it is not already present. -->
+        <activity
+            android:name="com.google.ar.core.InstallActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Material.Light.Dialog.Alert" />
     </application>
 
 </manifest>

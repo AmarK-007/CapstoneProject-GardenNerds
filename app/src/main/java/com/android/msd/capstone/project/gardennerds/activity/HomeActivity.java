@@ -25,12 +25,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.databinding.ActivityHomeBinding;
 import com.android.msd.capstone.project.gardennerds.fragments.AboutFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.HomeFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.ProfileFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.SupportFragment;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -47,6 +49,8 @@ public class HomeActivity extends AppCompatActivity {
     NavigationView navDrawerMenu;
     TextView userName;
 
+    ActivityHomeBinding binding;
+
     private static final String TAG = HomeActivity.class.getSimpleName();
 
     /**
@@ -58,7 +62,8 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // Initialize the toolbar, drawer layout, and navigation view.
         materialToolbar = findViewById(R.id.homeToolBar);
@@ -71,6 +76,7 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.colorAccent));
         setDrawer();
+        setBottomNavigation();
         changeFragment(new HomeFragment());
         setUsernameInDrawer();
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
@@ -104,6 +110,26 @@ public class HomeActivity extends AppCompatActivity {
                     showAppExitingAlertLogout(HomeActivity.this);
                 }
                 return false;
+            }
+        });
+    }
+
+    private void setBottomNavigation(){
+       binding.bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                int i = item.getItemId();
+                // Check the selected menu item ID
+                if (i == R.id.btm_home) {
+                    changeFragment(new HomeFragment());
+                } else if (i == R.id.btm_my_garden) {
+                    Toast.makeText(HomeActivity.this, "Yet to implement", Toast.LENGTH_SHORT).show();
+                } else if (i == R.id.btm_scanner) {
+                    Toast.makeText(HomeActivity.this, "Yet to implement", Toast.LENGTH_SHORT).show();
+
+                }
+                        return false;
+
             }
         });
     }
