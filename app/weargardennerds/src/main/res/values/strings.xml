@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">GardenNerds</string>
 
+    <string name="btn_title_my_garden">My Garden</string>
+    <string name="btn_title_reminders">Reminders</string>
+
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="username">Username</string>
