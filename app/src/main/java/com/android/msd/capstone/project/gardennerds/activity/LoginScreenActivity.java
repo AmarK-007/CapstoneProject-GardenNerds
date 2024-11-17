@@ -18,6 +18,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.databinding.ActivityLoginScreenBinding;
 import com.android.msd.capstone.project.gardennerds.db.UserDataSource;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
 
@@ -28,6 +29,7 @@ public class LoginScreenActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private Button loginButton;
 
+    ActivityLoginScreenBinding loginScreenBinding;
     /**
      * This method is called when the activity is first created.
      * It sets the content view and initializes the username, password and login button.
@@ -37,11 +39,14 @@ public class LoginScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_screen);
+        EdgeToEdge.enable(this);
+        loginScreenBinding = ActivityLoginScreenBinding.inflate(getLayoutInflater());
+        View view = loginScreenBinding.getRoot();
+        setContentView(view);
 
-        usernameEditText = findViewById(R.id.username);
-        passwordEditText = findViewById(R.id.password);
-        loginButton = findViewById(R.id.login_btn);
+        usernameEditText = loginScreenBinding.username;
+        passwordEditText = loginScreenBinding.password;
+        loginButton = loginScreenBinding.loginBtn;
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +84,7 @@ public class LoginScreenActivity extends AppCompatActivity {
             }
         });
 
-        TextView signUpButton = findViewById(R.id.signUpTxt);
+        TextView signUpButton = loginScreenBinding.signUpTxt;
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override

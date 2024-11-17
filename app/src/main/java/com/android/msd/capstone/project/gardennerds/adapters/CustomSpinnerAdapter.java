@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.databinding.SpinnerItemBinding;
 
 
 public class CustomSpinnerAdapter extends ArrayAdapter<String> {
@@ -33,9 +34,8 @@ public class CustomSpinnerAdapter extends ArrayAdapter<String> {
 
     public View getCustomView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View row = inflater.inflate(R.layout.spinner_item, parent, false);
-        TextView textView = row.findViewById(R.id.text1);
-        textView.setText(mProvinces[position]);
-        return row;
+        SpinnerItemBinding binding = SpinnerItemBinding.inflate(inflater, parent, false);
+        binding.text1.setText(mProvinces[position]);
+        return binding.getRoot();
     }
 }

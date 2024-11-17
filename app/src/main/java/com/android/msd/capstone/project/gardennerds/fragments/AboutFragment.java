@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.databinding.FragmentAboutBinding;
 
 
 /**
@@ -16,6 +17,8 @@ import com.android.msd.capstone.project.gardennerds.R;
  * create an instance of this fragment.
  */
 public class AboutFragment extends Fragment {
+
+    private FragmentAboutBinding binding;
 
     /**
      * Use this factory method to create a new instance of
@@ -27,7 +30,14 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_about, container, false);
+        binding = FragmentAboutBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
