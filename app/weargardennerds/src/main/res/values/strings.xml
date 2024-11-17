@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">GardenNerds</string>
+
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+
+    <string name="msg_first_name_empty">First Name can\&apos;t be empty!</string>
+    <string name="msg_last_name_empty">Last Name can\&apos;t be empty!</string>
+    <string name="msg_not_valid_username">Not a valid user name!</string>
+    <string name="msg_enter_alpha_numeric">Enter only AlphaNumeric!</string>
+    <string name="msg_space_not_allowed">Space not allowed!</string>
+    <string name="msg_password_field_cant_be_empty">Password field can\&apos;t be empty!</string>
+    <string name="msg_enter_min_5characters">"Enter minimum 5 Characters"</string>
+    <string name="msg_enter_valid_email">"Enter valid email"</string>
+    <string name="msg_passwords_are_same">"Password entered should not match"</string>
+    <string name="msg_login_failed">Login Failed! Wrong User Name or Password.</string>
+    <string name="msg_signup_failed">Sign Up Failed! Please try again.</string>
+    <string name="msg_signup_success">Sign Up Successful! Please Login.</string>
+    <string name="msg_app_exit">Do you want to Exit App?</string>
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="submit">Submit</string>
+    <string name="request_message">Support Request Sent</string>
+    <string name="about_text"> Discover about Garden Nerds, your one-stop shop for all things gardening. \n\nEstablished in 2024, we provide high-quality gardening supplies at reasonable costs. We want to make it easy for you to grow your garden with our wide selection and hassle-free buying process. \n\nBecome a member of our community now to up your gardening game!</string>
+
+</resources>
