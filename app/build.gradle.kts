@@ -55,8 +55,10 @@ dependencies {
     // Sceneform for AR
     implementation("com.google.ar:core:1.31.0")
 
-//retrofit libs
+    //retrofit libs
     implementation(libs.retrofit)
     implementation(libs.converter.gson.v290)
 
+    //Glide
+    implementation(libs.glide)
 }
