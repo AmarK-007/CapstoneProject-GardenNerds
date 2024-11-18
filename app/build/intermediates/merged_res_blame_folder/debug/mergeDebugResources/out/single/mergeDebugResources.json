@@ -1,286 +1,282 @@
 [
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_nav_icon_profile.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\nav_icon_profile.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_icon_update.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/icon_update.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\mipmap-mdpi\\ic_launcher_round.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_custom_product_listing_list_layout.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/custom_product_listing_list_layout.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\mipmap-xxxhdpi\\ic_launcher_round.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/menu_bottom_nav_menu.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/menu/bottom_nav_menu.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_header_background.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\header_background.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_fragment_about.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_about.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_activity_login_screen.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\activity_login_screen.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_list.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/list.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_spinner_item.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\spinner_item.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_fragment_measurement.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_measurement.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\mipmap-xxhdpi\\ic_launcher_round.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/mipmap-xxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_menu_drawer_header.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\menu_drawer_header.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_search_start_24.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/search_start_24.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_nav_icon_about.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\nav_icon_about.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_header_background.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/header_background.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_fragment_product_details.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_product_details.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/mipmap-hdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\animator_fill_animate_elem_2.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\animator\\fill_animate_elem_2.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_avatar.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/avatar.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_outdoor_plants.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\outdoor_plants.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_fragment_soil_sensor.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_soil_sensor.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_icon_home.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\icon_home.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_nav_icon_profile.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/nav_icon_profile.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\anim_slide_out.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\anim\\slide_out.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_gardening_tools.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/gardening_tools.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_custom_card_category_layout.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\custom_card_category_layout.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_fragment_soil_sensor.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_soil_sensor.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/raw_default_material.mat.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/raw/default_material.mat"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_fragment_product_details.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_product_details.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_update_address_dialog.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\update_address_dialog.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/mipmap-mdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_gardening_tools.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\gardening_tools.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/xml_data_extraction_rules.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_activity_splash_screen.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\activity_splash_screen.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\transition_changebounds_with_arcmotion.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\transition\\changebounds_with_arcmotion.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_search_end.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/search_end.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_indoor_plants.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\indoor_plants.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_activity_sign_up_screen.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/activity_sign_up_screen.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_menu.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\menu.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_activity_splash_screen.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/activity_splash_screen.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_fragment_api_search_result.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_api_search_result.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_search_end.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\search_end.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/anim_slide_in.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/anim/slide_in.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_icon_search.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\icon_search.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_fragment_support.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_support.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\mipmap-xhdpi\\ic_launcher_round.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_icon_search.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/icon_search.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_nav_icon_logout.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\nav_icon_logout.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_animated_vector.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/animated_vector.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\animator_fill_animate_elem_1.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\animator\\fill_animate_elem_1.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_animated_vector.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\animated_vector.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_designer.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\designer.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/mipmap-mdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\menu_drawer_menu.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\menu\\drawer_menu.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_search_end_24.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/search_end_24.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_fragment_product_list.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_product_list.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/animator_fill_animate_elem_3.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/animator/fill_animate_elem_3.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\mipmap-xhdpi\\ic_launcher.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_fragment_about.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_about.xml"
-    },
-    {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_custom_product_listing_grid_layout.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\custom_product_listing_grid_layout.xml"
-    },
-    {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\mipmap-mdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_fragment_home.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_home.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
         "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_fragment_subscription.xml.flat",
         "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_subscription.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\anim_slide_in.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\anim\\slide_in.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/mipmap-xxxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_hamburger_menu.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\hamburger_menu.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_scanner.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/scanner.png"
+    },
+    {
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_up_down.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/up_down.png"
+    },
+    {
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_fragment_profile.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_menu.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/menu.png"
+    },
+    {
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/xml_backup_rules.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_activity_login_screen.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/activity_login_screen.xml"
     },
     {
         "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_fragment_home.xml.flat",
         "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_home.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_new_garden_nerds.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\new_garden_nerds.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/menu_drawer_menu.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/menu/drawer_menu.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_up_down.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\up_down.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_update_address_dialog.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/update_address_dialog.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\xml_backup_rules.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\xml\\backup_rules.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_fragment_api_search_result.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_api_search_result.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\menu_bottom_nav_menu.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\menu\\bottom_nav_menu.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_nav_icon_logout.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/nav_icon_logout.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_icon_update.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\icon_update.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/anim_slide_out.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/anim/slide_out.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_activity_home.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/activity_home.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_fragment_profile.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_profile.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_indoor_plants.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/indoor_plants.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\xml_data_extraction_rules.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\xml\\data_extraction_rules.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_custom_card_category_layout.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/custom_card_category_layout.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_nav_icon_support.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\nav_icon_support.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_hamburger_menu.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/hamburger_menu.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_fragment_measurement.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_measurement.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_new_garden_nerds.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/new_garden_nerds.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_gardening_decors.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\gardening_decors.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_gardening_decors.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/gardening_decors.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_fragment_support.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_support.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_spinner_item.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/spinner_item.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_avatar.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\avatar.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/animator_fill_animate_elem_2.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/animator/fill_animate_elem_2.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\mipmap-xxxhdpi\\ic_launcher.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_fragment_product_list.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_product_list.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_list.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\list.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_nav_icon_support.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/nav_icon_support.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_activity_sign_up_screen.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\activity_sign_up_screen.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_outdoor_plants.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/outdoor_plants.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\animator_fill_animate_elem_3.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\animator\\fill_animate_elem_3.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_icon_home.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/icon_home.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_activity_home.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\activity_home.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_nav_icon_about.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/nav_icon_about.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\layout_custom_product_listing_list_layout.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\custom_product_listing_list_layout.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\ic_launcher_foreground.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/transition_changebounds_with_arcmotion.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/transition/changebounds_with_arcmotion.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_search_start.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\search_start.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_menu_drawer_header.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/menu_drawer_header.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\raw_default_material.mat.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\raw\\default_material.mat"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_search_start.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/search_start.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_scanner.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\scanner.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/drawable_designer.png.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/drawable/designer.png"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_search_start_24.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\search_start_24.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/animator_fill_animate_elem_1.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/animator/fill_animate_elem_1.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\mipmap-hdpi\\ic_launcher_round.png"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/menu_appbar_menu.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/menu/appbar_menu.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
-    },
-    {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\menu_appbar_menu.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\menu\\appbar_menu.xml"
-    },
-    {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\mipmap-xxhdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-debug-37:\\drawable_search_end_24.xml.flat",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\drawable\\search_end_24.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-debug-37:/layout_custom_product_listing_grid_layout.xml.flat",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/custom_product_listing_grid_layout.xml"
     }
 ]

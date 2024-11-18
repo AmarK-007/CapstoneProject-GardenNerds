@@ -60,13 +60,13 @@ public final class FragmentMeasurementBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.measurement_text_view;
+      id = R.id.measurementTextView;
       TextView measurementTextView = ViewBindings.findChildViewById(rootView, id);
       if (measurementTextView == null) {
         break missingId;
       }
 
-      id = R.id.scene_view;
+      id = R.id.sceneView;
       ArSceneView sceneView = ViewBindings.findChildViewById(rootView, id);
       if (sceneView == null) {
         break missingId;

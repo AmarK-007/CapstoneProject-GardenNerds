@@ -1,83 +1,79 @@
 [
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\fragment_soil_sensor.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_soil_sensor.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/fragment_product_details.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_product_details.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\fragment_product_details.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_product_details.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/fragment_support.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_support.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\fragment_about.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_about.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/fragment_product_list.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_product_list.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\menu_drawer_header.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\menu_drawer_header.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/update_address_dialog.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/update_address_dialog.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\fragment_api_search_result.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_api_search_result.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/fragment_soil_sensor.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_soil_sensor.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\fragment_profile.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_profile.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/fragment_profile.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_profile.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\fragment_home.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_home.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/fragment_about.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_about.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\fragment_product_list.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_product_list.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/activity_splash_screen.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/activity_splash_screen.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\activity_splash_screen.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\activity_splash_screen.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/activity_sign_up_screen.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/activity_sign_up_screen.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\custom_card_category_layout.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\custom_card_category_layout.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/spinner_item.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/spinner_item.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\activity_home.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\activity_home.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/custom_product_listing_list_layout.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/custom_product_listing_list_layout.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\activity_login_screen.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\activity_login_screen.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/custom_product_listing_grid_layout.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/custom_product_listing_grid_layout.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\custom_product_listing_list_layout.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\custom_product_listing_list_layout.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/fragment_api_search_result.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_api_search_result.xml"
     },
     {
         "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/fragment_home.xml",
         "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_home.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\spinner_item.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\spinner_item.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/fragment_measurement.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/fragment_measurement.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\fragment_measurement.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_measurement.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/activity_login_screen.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/activity_login_screen.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\fragment_support.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\fragment_support.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/menu_drawer_header.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/menu_drawer_header.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\activity_sign_up_screen.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\activity_sign_up_screen.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/custom_card_category_layout.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/custom_card_category_layout.xml"
     },
     {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\update_address_dialog.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\update_address_dialog.xml"
-    },
-    {
-        "merged": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:\\layout\\custom_product_listing_grid_layout.xml",
-        "source": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-main-39:\\layout\\custom_product_listing_grid_layout.xml"
+        "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/activity_home.xml",
+        "source": "com.android.msd.capstone.project.gardennerds.app-main-39:/layout/activity_home.xml"
     },
     {
         "merged": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-36:/layout/fragment_subscription.xml",

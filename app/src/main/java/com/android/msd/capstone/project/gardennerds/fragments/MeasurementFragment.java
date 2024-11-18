@@ -1,6 +1,7 @@
 package com.android.msd.capstone.project.gardennerds.fragments;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.databinding.FragmentMeasurementBinding;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Frame;
 import com.google.ar.core.HitResult;
@@ -53,6 +55,8 @@ public class MeasurementFragment extends Fragment {
     private ArSceneView sceneView;
     private Session arSession;
     private List<Vector3> points = new ArrayList<>();
+
+    private FragmentMeasurementBinding binding;
 
     public MeasurementFragment() {
         // Required empty public constructor
@@ -116,13 +120,14 @@ public class MeasurementFragment extends Fragment {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_measurement, container, false);
-
-        sceneView = view.findViewById(R.id.scene_view);
+        // Inflate the layout for this fragment using view binding
+        binding = FragmentMeasurementBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        sceneView = binding.sceneView;
 
         // Request camera permission if not granted
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
@@ -147,6 +152,12 @@ public class MeasurementFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     private void initializeArSession() {
@@ -253,7 +264,7 @@ public class MeasurementFragment extends Fragment {
 
     private void displayMeasurement(String measurement) {
         // Assuming you have a TextView in your layout to display the measurement
-        TextView measurementTextView = getView().findViewById(R.id.measurement_text_view);
+        TextView measurementTextView = binding.measurementTextView;
         measurementTextView.setText(measurement);
     }
 
@@ -270,9 +281,6 @@ public class MeasurementFragment extends Fragment {
     public void onPause() {
         super.onPause();
         if (arSession != null) {
-            /**Mann Commented because there wasn't any thing understandable*/
-//            msfadmin
-//                msf
             arSession.pause();
         }
         sceneView.pause();

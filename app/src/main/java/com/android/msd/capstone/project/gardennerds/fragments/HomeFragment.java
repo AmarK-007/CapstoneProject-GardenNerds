@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.databinding.FragmentAboutBinding;
+import com.android.msd.capstone.project.gardennerds.databinding.FragmentHomeBinding;
 import com.android.msd.capstone.project.gardennerds.adapters.CustomCategoryAdapter;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentHomeBinding;
 import com.android.msd.capstone.project.gardennerds.interfaces.AdapterInterface;
@@ -27,8 +30,16 @@ import java.util.Objects;
 
 
 public class HomeFragment extends Fragment implements AdapterInterface<Category>, View.OnClickListener {
-    FragmentHomeBinding binding;
+
     CustomCategoryAdapter adapter;
+
+    private FragmentHomeBinding binding;
+
+    public HomeFragment() {
+        // Required empty public constructor
+    }
+
+
 
 
     @Override
@@ -43,6 +54,14 @@ public class HomeFragment extends Fragment implements AdapterInterface<Category>
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment using view binding
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
+        // on click listener for all buttons in home fragment
+        Button btnMeasurement = binding.btnMeasurement;
+        Button btnApiSearch = binding.btnApiSearch;
+        Button btnSoilSensor = binding.btnSoilSensor;
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         // Inflate the layout for this fragment
 //        View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -148,5 +167,11 @@ public class HomeFragment extends Fragment implements AdapterInterface<Category>
         if (v == binding.btnSubscribe){
             //subscrive page
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

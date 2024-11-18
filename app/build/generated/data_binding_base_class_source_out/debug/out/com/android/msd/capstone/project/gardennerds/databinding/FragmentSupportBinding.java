@@ -70,25 +70,25 @@ public final class FragmentSupportBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.issue_text;
+      id = R.id.issueText;
       TextInputEditText issueText = ViewBindings.findChildViewById(rootView, id);
       if (issueText == null) {
         break missingId;
       }
 
-      id = R.id.support_btn;
+      id = R.id.supportBtn;
       Button supportBtn = ViewBindings.findChildViewById(rootView, id);
       if (supportBtn == null) {
         break missingId;
       }
 
-      id = R.id.support_email;
+      id = R.id.supportEmail;
       EditText supportEmail = ViewBindings.findChildViewById(rootView, id);
       if (supportEmail == null) {
         break missingId;
       }
 
-      id = R.id.support_name;
+      id = R.id.supportName;
       EditText supportName = ViewBindings.findChildViewById(rootView, id);
       if (supportName == null) {
         break missingId;

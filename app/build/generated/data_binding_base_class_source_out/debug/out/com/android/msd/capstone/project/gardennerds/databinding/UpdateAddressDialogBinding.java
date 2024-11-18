@@ -104,67 +104,67 @@ public final class UpdateAddressDialogBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.update_address1;
+      id = R.id.updateAddress1;
       EditText updateAddress1 = ViewBindings.findChildViewById(rootView, id);
       if (updateAddress1 == null) {
         break missingId;
       }
 
-      id = R.id.update_address2;
+      id = R.id.updateAddress2;
       EditText updateAddress2 = ViewBindings.findChildViewById(rootView, id);
       if (updateAddress2 == null) {
         break missingId;
       }
 
-      id = R.id.update_addressOneWrapper;
+      id = R.id.updateAddressOneWrapper;
       TextInputLayout updateAddressOneWrapper = ViewBindings.findChildViewById(rootView, id);
       if (updateAddressOneWrapper == null) {
         break missingId;
       }
 
-      id = R.id.update_addressTwoWrapper;
+      id = R.id.updateAddressTwoWrapper;
       TextInputLayout updateAddressTwoWrapper = ViewBindings.findChildViewById(rootView, id);
       if (updateAddressTwoWrapper == null) {
         break missingId;
       }
 
-      id = R.id.update_btn;
+      id = R.id.updateBtn;
       Button updateBtn = ViewBindings.findChildViewById(rootView, id);
       if (updateBtn == null) {
         break missingId;
       }
 
-      id = R.id.update_city;
+      id = R.id.updateCity;
       EditText updateCity = ViewBindings.findChildViewById(rootView, id);
       if (updateCity == null) {
         break missingId;
       }
 
-      id = R.id.update_cityWrapper;
+      id = R.id.updateCityWrapper;
       TextInputLayout updateCityWrapper = ViewBindings.findChildViewById(rootView, id);
       if (updateCityWrapper == null) {
         break missingId;
       }
 
-      id = R.id.update_postalCode;
+      id = R.id.updatePostalCode;
       EditText updatePostalCode = ViewBindings.findChildViewById(rootView, id);
       if (updatePostalCode == null) {
         break missingId;
       }
 
-      id = R.id.update_postalCodeWrapper;
+      id = R.id.updatePostalCodeWrapper;
       TextInputLayout updatePostalCodeWrapper = ViewBindings.findChildViewById(rootView, id);
       if (updatePostalCodeWrapper == null) {
         break missingId;
       }
 
-      id = R.id.update_provinceSpinner;
+      id = R.id.updateProvinceSpinner;
       Spinner updateProvinceSpinner = ViewBindings.findChildViewById(rootView, id);
       if (updateProvinceSpinner == null) {
         break missingId;
       }
 
-      id = R.id.update_provinceSpinnerWrapper;
+      id = R.id.updateProvinceSpinnerWrapper;
       TextInputLayout updateProvinceSpinnerWrapper = ViewBindings.findChildViewById(rootView, id);
       if (updateProvinceSpinnerWrapper == null) {
         break missingId;

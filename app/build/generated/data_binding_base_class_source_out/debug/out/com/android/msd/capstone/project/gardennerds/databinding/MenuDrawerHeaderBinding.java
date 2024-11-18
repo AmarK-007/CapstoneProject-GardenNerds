@@ -20,10 +20,15 @@ public final class MenuDrawerHeaderBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
+  public final LinearLayout menuDrawerHeader;
+
+  @NonNull
   public final TextView welcomeUser;
 
-  private MenuDrawerHeaderBinding(@NonNull LinearLayout rootView, @NonNull TextView welcomeUser) {
+  private MenuDrawerHeaderBinding(@NonNull LinearLayout rootView,
+      @NonNull LinearLayout menuDrawerHeader, @NonNull TextView welcomeUser) {
     this.rootView = rootView;
+    this.menuDrawerHeader = menuDrawerHeader;
     this.welcomeUser = welcomeUser;
   }
 
@@ -54,13 +59,15 @@ public final class MenuDrawerHeaderBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      LinearLayout menuDrawerHeader = (LinearLayout) rootView;
+
       id = R.id.welcomeUser;
       TextView welcomeUser = ViewBindings.findChildViewById(rootView, id);
       if (welcomeUser == null) {
         break missingId;
       }
 
-      return new MenuDrawerHeaderBinding((LinearLayout) rootView, welcomeUser);
+      return new MenuDrawerHeaderBinding((LinearLayout) rootView, menuDrawerHeader, welcomeUser);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -98,7 +98,7 @@ public final class ActivityLoginScreenBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.login_btn;
+      id = R.id.loginBtn;
       Button loginBtn = ViewBindings.findChildViewById(rootView, id);
       if (loginBtn == null) {
         break missingId;

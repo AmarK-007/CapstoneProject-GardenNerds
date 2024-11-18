@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.databinding.FragmentApiSearchResultBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +26,8 @@ public class APISearchResultFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private FragmentApiSearchResultBinding binding;
 
     public APISearchResultFragment() {
         // Required empty public constructor
@@ -60,7 +63,15 @@ public class APISearchResultFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_api_search_result, container, false);
+        // Inflate the layout for this fragment using view binding
+        binding = FragmentApiSearchResultBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

@@ -92,55 +92,55 @@ public final class FragmentProfileBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.profile_address_city;
+      id = R.id.profileAddressCity;
       TextView profileAddressCity = ViewBindings.findChildViewById(rootView, id);
       if (profileAddressCity == null) {
         break missingId;
       }
 
-      id = R.id.profile_address_firstLine;
+      id = R.id.profileAddressFirstLine;
       TextView profileAddressFirstLine = ViewBindings.findChildViewById(rootView, id);
       if (profileAddressFirstLine == null) {
         break missingId;
       }
 
-      id = R.id.profile_address_postal;
+      id = R.id.profileAddressPostal;
       TextView profileAddressPostal = ViewBindings.findChildViewById(rootView, id);
       if (profileAddressPostal == null) {
         break missingId;
       }
 
-      id = R.id.profile_address_province;
+      id = R.id.profileAddressProvince;
       TextView profileAddressProvince = ViewBindings.findChildViewById(rootView, id);
       if (profileAddressProvince == null) {
         break missingId;
       }
 
-      id = R.id.profile_address_secondLine;
+      id = R.id.profileAddressSecondLine;
       TextView profileAddressSecondLine = ViewBindings.findChildViewById(rootView, id);
       if (profileAddressSecondLine == null) {
         break missingId;
       }
 
-      id = R.id.profile_email;
+      id = R.id.profileEmail;
       TextView profileEmail = ViewBindings.findChildViewById(rootView, id);
       if (profileEmail == null) {
         break missingId;
       }
 
-      id = R.id.profile_firstName;
+      id = R.id.profileFirstName;
       TextView profileFirstName = ViewBindings.findChildViewById(rootView, id);
       if (profileFirstName == null) {
         break missingId;
       }
 
-      id = R.id.profile_lastName;
+      id = R.id.profileLastName;
       TextView profileLastName = ViewBindings.findChildViewById(rootView, id);
       if (profileLastName == null) {
         break missingId;
       }
 
-      id = R.id.update_address;
+      id = R.id.updateAddress;
       ImageButton updateAddress = ViewBindings.findChildViewById(rootView, id);
       if (updateAddress == null) {
         break missingId;

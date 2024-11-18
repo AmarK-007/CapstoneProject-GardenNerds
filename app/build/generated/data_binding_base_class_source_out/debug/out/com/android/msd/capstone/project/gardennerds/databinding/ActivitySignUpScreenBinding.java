@@ -186,7 +186,7 @@ public final class ActivitySignUpScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.signup_btn;
+      id = R.id.signupBtn;
       Button signupBtn = ViewBindings.findChildViewById(rootView, id);
       if (signupBtn == null) {
         break missingId;

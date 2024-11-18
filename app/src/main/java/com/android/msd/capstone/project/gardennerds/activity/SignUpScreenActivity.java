@@ -17,6 +17,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.databinding.ActivitySignUpScreenBinding;
 import com.android.msd.capstone.project.gardennerds.db.UserDataSource;
 import com.android.msd.capstone.project.gardennerds.models.User;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
@@ -32,27 +33,28 @@ public class SignUpScreenActivity extends AppCompatActivity {
     private EditText usernameEditText;
     private EditText emailEditText;
     private EditText passwordEditText;
-    private Button signupButton;
-    private TextView loginTextView;
+    ActivitySignUpScreenBinding signUpScreenBinding;
 
     /**
      * This method is called when the activity is first created.
      * It sets the content view and initializes the first name, last name, username, email, password, signup button and login text view.
      *
-     * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_screen);
+        EdgeToEdge.enable(this);
+        signUpScreenBinding = ActivitySignUpScreenBinding.inflate(getLayoutInflater());
+        View view = signUpScreenBinding.getRoot();
+        setContentView(view);
 
-        firstnameEditText = findViewById(R.id.firstname);
-        lastnameEditText = findViewById(R.id.lastname);
-        usernameEditText = findViewById(R.id.username);
-        emailEditText = findViewById(R.id.email);
-        passwordEditText = findViewById(R.id.password);
-        signupButton = findViewById(R.id.signup_btn);
-        loginTextView = findViewById(R.id.loginTxt);
+        firstnameEditText = signUpScreenBinding.firstname;
+        lastnameEditText = signUpScreenBinding.lastname;
+        usernameEditText = signUpScreenBinding.username;
+        emailEditText = signUpScreenBinding.email;
+        passwordEditText = signUpScreenBinding.password;
+        Button signupButton = signUpScreenBinding.signupBtn;
+        TextView loginTextView = signUpScreenBinding.loginTxt;
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override

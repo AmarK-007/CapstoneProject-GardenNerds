@@ -36,7 +36,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/profile_firstName"
+                    android:id="@+id/profileFirstName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
@@ -71,7 +71,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/profile_lastName"
+                    android:id="@+id/profileLastName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
@@ -106,7 +106,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/profile_email"
+                    android:id="@+id/profileEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
@@ -152,7 +152,7 @@
                         android:layout_weight="1" />
 
                     <ImageButton
-                        android:id="@+id/update_address"
+                        android:id="@+id/updateAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
@@ -169,7 +169,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/profile_address_firstLine"
+                        android:id="@+id/profileAddressFirstLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@fonts/roboto_light"
@@ -177,7 +177,7 @@
                         android:textSize="18dp" />
 
                     <TextView
-                        android:id="@+id/profile_address_secondLine"
+                        android:id="@+id/profileAddressSecondLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@fonts/roboto_light"
@@ -190,7 +190,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/profile_address_city"
+                            android:id="@+id/profileAddressCity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@fonts/roboto_light"
@@ -198,7 +198,7 @@
                             android:textSize="18dp" />
 
                         <TextView
-                            android:id="@+id/profile_address_postal"
+                            android:id="@+id/profileAddressPostal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
@@ -208,7 +208,7 @@
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/profile_address_province"
+                        android:id="@+id/profileAddressProvince"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@fonts/roboto_light"
