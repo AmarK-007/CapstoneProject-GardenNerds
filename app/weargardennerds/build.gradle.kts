@@ -3,17 +3,16 @@ plugins {
 }
 
 android {
-    namespace = "com.android.msd.capstone.project.gardennerds"
+    namespace = "com.android.msd.capstone.project.wear.gardennerds"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.android.msd.capstone.project.gardennerds"
-        minSdk = 31
+        applicationId = "com.android.msd.capstone.project.wear.gardennerds"
+        minSdk = 33
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -36,26 +35,10 @@ android {
 
 dependencies {
 
+    implementation(libs.play.services.wearable)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.core)
-    //implementation(libs.sceneform.ux)
-
-    // Testing libraries
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
-
-    //Gson for json converter
-    implementation("com.google.code.gson:gson:2.10.1")
-
-    // Sceneform for AR
-    implementation("com.google.ar:core:1.31.0")
-
-//retrofit libs
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson.v290)
-
+    implementation(libs.wear)
 }
