@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -11,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.activity.HomeActivity;
 import com.android.msd.capstone.project.gardennerds.adapters.MyGardenAdapter;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentMyGardenBinding;
 import com.android.msd.capstone.project.gardennerds.models.Garden;
@@ -73,7 +76,23 @@ public class MyGardenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         myGardenBinding = FragmentMyGardenBinding.inflate(inflater, container, false);
+
+        init();
+
         return myGardenBinding.getRoot();
+    }
+
+    private void init(){
+
+        myGardenBinding.fabAddGarden.setOnClickListener(v -> {
+            // Replace the current fragment with AddGardenFragment
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frames, new AddGardenFragment())  // Assuming frame_container is the container ID
+                    .addToBackStack(null)  // Add this transaction to the back stack
+                    .commit();
+        });
+
     }
 
     @Override

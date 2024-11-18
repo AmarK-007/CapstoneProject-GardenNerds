@@ -14,6 +14,8 @@ retrofit = "2.9.0"
 converterGson = "2.9.0"
 #glide
 glide = "4.15.0"
+# Latest version of the location services
+location = "18.0.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -32,6 +34,9 @@ converter-gson-v290 = { module = "com.squareup.retrofit2:converter-gson", versio
 
 # Glide
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+
+# Location
+fused-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "location" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

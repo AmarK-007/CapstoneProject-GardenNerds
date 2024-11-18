@@ -61,4 +61,8 @@ dependencies {
 
     //Glide
     implementation(libs.glide)
+
+    //Location
+    implementation(libs.fused.location)
+
 }
