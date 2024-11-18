@@ -3296,6 +3296,7 @@ id btm_scanner
 id btnApiSearch
 id btnMeasurement
 id btnSoilSensor
+id btn_subscribe
 id buttonPanel
 id button_get_soil_data
 id cache_measures
@@ -3941,6 +3942,7 @@ layout fragment_product_details
 layout fragment_product_list
 layout fragment_profile
 layout fragment_soil_sensor
+layout fragment_subscription
 layout fragment_support
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity

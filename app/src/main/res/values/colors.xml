@@ -24,4 +24,42 @@
     <color name="card_color">#E0F0CC</color>
     <color name="category_text_color">#88E41A</color>
     <color name="transparent_black">#88E41A</color>
-</resources>
+
+
+
+<!--    mann new-->
+    <!-- Primary and Secondary Colors -->
+<!--    <color name="colorPrimary">#4CAF50</color> &lt;!&ndash; Green &ndash;&gt;-->
+<!--    <color name="colorPrimaryLight">#81C784</color> &lt;!&ndash; Light Green &ndash;&gt;-->
+<!--    <color name="colorPrimaryDark">#388E3C</color> &lt;!&ndash; Dark Green &ndash;&gt;-->
+<!--    <color name="colorSecondary">#C8E6C9</color> &lt;!&ndash; Soft Green &ndash;&gt;-->
+<!--    <color name="colorSecondaryVariant">#A5D6A7</color> &lt;!&ndash; Slightly Darker Soft Green &ndash;&gt;-->
+
+<!--    &lt;!&ndash; Text Colors &ndash;&gt;-->
+<!--    <color name="colorOnPrimary">#FFFFFF</color> &lt;!&ndash; White for text on primary &ndash;&gt;-->
+<!--    <color name="colorOnSecondary">#000000</color> &lt;!&ndash; Black for text on secondary &ndash;&gt;-->
+
+<!--    &lt;!&ndash; Status Bar Color &ndash;&gt;-->
+<!--    <color name="statusBarColorDark">#2E7D32</color> &lt;!&ndash; Darker Green for dark theme &ndash;&gt;-->
+<!--    <color name="statusBarColorLight">#66BB6A</color> &lt;!&ndash; Lighter Green for light theme &ndash;&gt;-->
+
+<!--    &lt;!&ndash; Additional Colors &ndash;&gt;-->
+<!--    <color name="colorCardBackground">#E0F0CC</color> &lt;!&ndash; Pale green for card background &ndash;&gt;-->
+<!--    <color name="colorCategoryText">#88E41A</color> &lt;!&ndash; Bright green for category text &ndash;&gt;-->
+<!--    <color name="transparentBlack">#88000000</color> &lt;!&ndash; Transparent black &ndash;&gt;-->
+
+<!--    &lt;!&ndash; Utility Colors &ndash;&gt;-->
+<!--    <color name="black">#FF000000</color>-->
+<!--    <color name="white">#FFFFFFFF</color>-->
+<!--    <color name="grey">#E6888888</color>-->
+<!--    <color name="dividerColor">@color/grey</color>-->
+<!--    <color name="colorAccent">#88E41A</color> &lt;!&ndash; Vibrant green &ndash;&gt;-->
+<!--    <color name="colorAccentDark">#6CB116</color>-->
+<!--    <color name="colorErrorText">#FFE10606</color>-->
+<!--    <color name="card_color">#E0F0CC</color>&ndash;&gt;-->
+<!--        <color name="category_text_color">#88E41A</color>-->
+<!--       <color name="transparent_black">#88E41A</color>-->
+<!--    <color name="colorGreen">#FF94B62D</color>-->
+<!--    <color name="colorGrayLight">#FFc5c5c5</color>-->
+
+        </resources>

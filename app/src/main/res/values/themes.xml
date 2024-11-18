@@ -12,5 +12,20 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+
+<!--        mann changes-->
+<!--        <item name="colorPrimary">@color/colorPrimaryLight</item>-->
+<!--        <item name="colorPrimaryVariant">@color/colorPrimary</item>-->
+<!--        <item name="colorOnPrimary">@color/white</item>-->
+<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
+<!--        <item name="colorSecondary">@color/colorSecondary</item>-->
+<!--        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>-->
+<!--        <item name="colorOnSecondary">@color/black</item>-->
+<!--        &lt;!&ndash; Background and Surface Colors &ndash;&gt;-->
+<!--        <item name="android:colorBackground">@color/white</item>-->
+<!--        <item name="colorSurface">@color/colorCardBackground</item>-->
+<!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
+<!--        <item name="android:statusBarColor">@color/statusBarColorLight</item>-->
     </style>
 </resources>

@@ -26,7 +26,7 @@ import java.util.Calendar;
 import java.util.Objects;
 
 
-public class HomeFragment extends Fragment implements AdapterInterface<Category> {
+public class HomeFragment extends Fragment implements AdapterInterface<Category>, View.OnClickListener {
     FragmentHomeBinding binding;
     CustomCategoryAdapter adapter;
 
@@ -141,5 +141,12 @@ public class HomeFragment extends Fragment implements AdapterInterface<Category>
     @Override
     public void onItemRemoved() {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == binding.btnSubscribe){
+            //subscrive page
+        }
     }
 }

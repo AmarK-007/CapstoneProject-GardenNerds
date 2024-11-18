@@ -32,6 +32,9 @@ public final class FragmentHomeBinding implements ViewBinding {
   public final Button btnSoilSensor;
 
   @NonNull
+  public final Button btnSubscribe;
+
+  @NonNull
   public final RecyclerView homeRv;
 
   @NonNull
@@ -41,12 +44,14 @@ public final class FragmentHomeBinding implements ViewBinding {
   public final TextInputLayout searchTxtLayout;
 
   private FragmentHomeBinding(@NonNull FrameLayout rootView, @NonNull Button btnApiSearch,
-      @NonNull Button btnMeasurement, @NonNull Button btnSoilSensor, @NonNull RecyclerView homeRv,
-      @NonNull TextInputEditText searchEdt, @NonNull TextInputLayout searchTxtLayout) {
+      @NonNull Button btnMeasurement, @NonNull Button btnSoilSensor, @NonNull Button btnSubscribe,
+      @NonNull RecyclerView homeRv, @NonNull TextInputEditText searchEdt,
+      @NonNull TextInputLayout searchTxtLayout) {
     this.rootView = rootView;
     this.btnApiSearch = btnApiSearch;
     this.btnMeasurement = btnMeasurement;
     this.btnSoilSensor = btnSoilSensor;
+    this.btnSubscribe = btnSubscribe;
     this.homeRv = homeRv;
     this.searchEdt = searchEdt;
     this.searchTxtLayout = searchTxtLayout;
@@ -97,6 +102,12 @@ public final class FragmentHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btn_subscribe;
+      Button btnSubscribe = ViewBindings.findChildViewById(rootView, id);
+      if (btnSubscribe == null) {
+        break missingId;
+      }
+
       id = R.id.home_rv;
       RecyclerView homeRv = ViewBindings.findChildViewById(rootView, id);
       if (homeRv == null) {
@@ -116,7 +127,7 @@ public final class FragmentHomeBinding implements ViewBinding {
       }
 
       return new FragmentHomeBinding((FrameLayout) rootView, btnApiSearch, btnMeasurement,
-          btnSoilSensor, homeRv, searchEdt, searchTxtLayout);
+          btnSoilSensor, btnSubscribe, homeRv, searchEdt, searchTxtLayout);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

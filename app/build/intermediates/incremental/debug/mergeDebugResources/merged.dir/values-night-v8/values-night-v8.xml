@@ -19,6 +19,20 @@
         
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </style>
     <style name="Theme.Material3.DayNight" parent="Theme.Material3.Dark"/>
     <style name="Theme.Material3.DayNight.BottomSheetDialog" parent="Theme.Material3.Dark.BottomSheetDialog"/>

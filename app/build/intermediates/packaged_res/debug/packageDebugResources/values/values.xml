@@ -146,6 +146,21 @@
         
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </style>
     <style name="button_style" parent="Theme.AppCompat">
         <item name="android:textSize">15sp</item>
