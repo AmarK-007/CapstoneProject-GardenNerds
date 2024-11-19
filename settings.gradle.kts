@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "GardenNerds"
 include(":app")
- 
+include(":app:weargardennerds")
