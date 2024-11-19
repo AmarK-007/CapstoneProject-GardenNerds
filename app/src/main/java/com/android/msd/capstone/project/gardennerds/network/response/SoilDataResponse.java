@@ -29,12 +29,19 @@ public class SoilDataResponse {
         @SerializedName("time")
         private String time;
 
+        @SerializedName("surfaceTemperature")
+        private SurfaceTemperature surfaceTemperature;
+
         public SoilMoisture getSoilMoisture() {
             return soilMoisture;
         }
 
         public SoilTemperature getSoilTemperature() {
             return soilTemperature;
+        }
+
+        public SurfaceTemperature getSurfaceTemperature() {
+            return surfaceTemperature;
         }
 
         public String getTime() {
@@ -59,6 +66,22 @@ public class SoilDataResponse {
     }
 
     public static class SoilTemperature {
+        @SerializedName("noaa")
+        private double noaa;
+
+        @SerializedName("sg")
+        private double sg;
+
+        public double getNoaa() {
+            return noaa;
+        }
+
+        public double getSg() {
+            return sg;
+        }
+    }
+
+    public static class SurfaceTemperature {
         @SerializedName("noaa")
         private double noaa;
 

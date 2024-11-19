@@ -1,14 +1,25 @@
 package com.android.msd.capstone.project.gardennerds.models;
 
-public class Garden {
-    private String name;
-    private String area;
-    private String imageUrl;
+import java.io.Serializable;
 
-    public Garden(String name, String area, String imageUrl) {
+public class Garden implements Serializable {
+    private String name;
+    private String description;
+    private String gardenArea;
+    private String sunlightPreference;
+    private String wateringFrequency;
+    private String moistureLevel;
+    private String imageUri;  // URL or URI to the garden image
+
+    public Garden(String name, String description, String gardenArea, String sunlightPreference, String wateringFrequency, String moistureLevel, String imageUri) {
+
         this.name = name;
-        this.area = area;
-        this.imageUrl = imageUrl;
+        this.description = description;
+        this.gardenArea = gardenArea;
+        this.sunlightPreference = sunlightPreference;
+        this.wateringFrequency = wateringFrequency;
+        this.moistureLevel = moistureLevel;
+        this.imageUri = imageUri;
     }
 
     public String getName() {
@@ -19,19 +30,51 @@ public class Garden {
         this.name = name;
     }
 
-    public String getArea() {
-        return area;
+    public String getDescription() {
+        return description;
     }
 
-    public void setArea(String area) {
-        this.area = area;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getGardenArea() {
+        return gardenArea;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setGardenArea(String gardenArea) {
+        this.gardenArea = gardenArea;
+    }
+
+    public String getSunlightPreference() {
+        return sunlightPreference;
+    }
+
+    public void setSunlightPreference(String sunlightPreference) {
+        this.sunlightPreference = sunlightPreference;
+    }
+
+    public String getWateringFrequency() {
+        return wateringFrequency;
+    }
+
+    public void setWateringFrequency(String wateringFrequency) {
+        this.wateringFrequency = wateringFrequency;
+    }
+
+    public String getMoistureLevel() {
+        return moistureLevel;
+    }
+
+    public void setMoistureLevel(String moistureLevel) {
+        this.moistureLevel = moistureLevel;
+    }
+
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
     }
 }

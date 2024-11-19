@@ -88,7 +88,7 @@ public class MyGardenFragment extends Fragment {
             // Replace the current fragment with AddGardenFragment
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frames, new AddGardenFragment())  // Assuming frame_container is the container ID
+                    .replace(R.id.frames, new AddGardenFragment())
                     .addToBackStack(null)  // Add this transaction to the back stack
                     .commit();
         });
@@ -119,7 +119,7 @@ public class MyGardenFragment extends Fragment {
         if (gardenAdapter == null) {
 
             // Initialize garden adapter
-            gardenAdapter = new MyGardenAdapter(gardenList);
+            gardenAdapter = new MyGardenAdapter(gardenList, requireActivity());
             myGardenBinding.recyclerViewGardens.setLayoutManager(new LinearLayoutManager(getContext()));
             myGardenBinding.recyclerViewGardens.setAdapter(gardenAdapter);
         } else {
@@ -129,10 +129,10 @@ public class MyGardenFragment extends Fragment {
 
     private void loadGardens() {
         // Add demo gardens (URL is null for placeholder image)
-        gardenList.add(new Garden("Indoor Garden", "150", null));
-        gardenList.add(new Garden("Backyard Garden", "300", null));
-        gardenList.add(new Garden("Frontyard Garden", "200", null));
-        gardenList.add(new Garden("Balcony Garden", "50", null));
+        gardenList.add(new Garden("Indoor Garden","This is garden details and description", "150","Shady","3","12", null));
+        gardenList.add(new Garden("Backyard Garden", "This is garden details and description","300", "Partial Sunlight","2","13",null));
+        gardenList.add(new Garden("Frontyard Garden","This is garden details and description", "200","Shady","3","10", null));
+        gardenList.add(new Garden("Balcony Garden","This is garden details and description", "50", "Full Sunlight","1","8",null));
     }
 
     @Override

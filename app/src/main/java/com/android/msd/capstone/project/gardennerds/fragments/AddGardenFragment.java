@@ -181,7 +181,7 @@ public class AddGardenFragment extends Fragment {
         GetSoilDataService apiService = RetrofitClient.getRetrofitInstance().create(GetSoilDataService.class);
         //double lat = 50.714691; // Default latitude
         //double lng = 4.399100;  // Default longitude
-        String params = "soilMoisture,soilTemperature";
+        String params = "soilMoisture,soilTemperature,surfaceTemperature";
 
         Call<SoilDataResponse> call = apiService.getSoilData(API_KEY, lat, lng, params);
         call.enqueue(new Callback<SoilDataResponse>() {
@@ -196,6 +196,7 @@ public class AddGardenFragment extends Fragment {
                                 "Soil Temperature: " + recentData.getSoilTemperature().getNoaa() + " °C\n";
                         addGardenBinding.tvMoisture.setText("Soil Moisture: " + recentData.getSoilMoisture().getNoaa() + " m³/m³");
                         addGardenBinding.tvTemperature.setText("Soil Temperature: " + recentData.getSoilTemperature().getNoaa() + " °C");
+                        addGardenBinding.tvSurfaceTemperature.setText("Surface Temperature: " + recentData.getSurfaceTemperature().getNoaa() + " °C");
                     }
                 } else {
                     Log.e("API_ERROR", "Error fetching data: " + response.message());
@@ -226,6 +227,7 @@ public class AddGardenFragment extends Fragment {
             // Set the result to the TextView
             addGardenBinding.tvMoisture.setText("Soil Moisture: " + currentData.getSoilMoisture().getNoaa() + " m³/m³");
             addGardenBinding.tvTemperature.setText("Soil Temperature: " + currentData.getSoilTemperature().getNoaa() + " °C");
+            addGardenBinding.tvSurfaceTemperature.setText("Surface Temperature: " + currentData.getSurfaceTemperature().getNoaa() + " °C");
         } else {
             // Handle the case where hours list is empty
             addGardenBinding.tvMoisture.setText("No data available.");
