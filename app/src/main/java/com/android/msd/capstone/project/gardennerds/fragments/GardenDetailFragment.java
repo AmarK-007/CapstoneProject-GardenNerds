@@ -6,11 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.adapters.MyPlantAdapter;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentGardenDetailBinding;
 import com.android.msd.capstone.project.gardennerds.models.Garden;
+import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -81,7 +87,7 @@ public class GardenDetailFragment extends Fragment {
             gardenDetailBinding.textViewDescription.setText(garden.getDescription());
             gardenDetailBinding.textViewSunlightPreference.setText("Sunlight Required: "+garden.getSunlightPreference());
             gardenDetailBinding.textViewWateringFrequency.setText("Watering Frequency: "+garden.getWateringFrequency()+"days");
-            gardenDetailBinding.textViewMoistureLevel.setText("Current Moisture level: "+garden.getMoistureLevel()+"%");
+            gardenDetailBinding.textViewMoistureLevel.setText("Garden Area: "+garden.getGardenArea());
 
             // Use image loading library like Glide to load the image
             Glide.with(requireActivity())
@@ -98,5 +104,24 @@ public class GardenDetailFragment extends Fragment {
                     .addToBackStack(null)  // Add this transaction to the back stack
                     .commit();
         });
+
+        setPlantAdapter();
+    }
+
+    private void setPlantAdapter() {
+        // Example list of plants
+        List<Plant> plantList = new ArrayList<>();
+        plantList.add(new Plant("White Rose"));
+        plantList.add(new Plant("White Tulip"));
+        plantList.add(new Plant("Red Tulip"));
+        plantList.add(new Plant("Pink Tulip"));
+        plantList.add(new Plant("Red Rose"));
+        plantList.add(new Plant("Orchid"));
+        plantList.add(new Plant("Dalia"));
+
+        // Set up adapter and RecyclerView
+        MyPlantAdapter plantAdapter = new MyPlantAdapter(requireActivity(), plantList);
+        gardenDetailBinding.recyclerViewPlants.setAdapter(plantAdapter);
+        gardenDetailBinding.recyclerViewPlants.setLayoutManager(new LinearLayoutManager(requireActivity()));
     }
 }

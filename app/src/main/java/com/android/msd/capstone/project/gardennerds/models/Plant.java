@@ -29,6 +29,10 @@ public class Plant implements Parcelable {
         this.growthConditions = growthConditions;
     }
 
+    public Plant(String plantName){
+        this.plantName = plantName;
+    }
+
     // Getters and Setters
     public int getPlantId() {
         return plantId;

@@ -1,19 +1,16 @@
 package com.android.msd.capstone.project.gardennerds.fragments;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.android.msd.capstone.project.gardennerds.R;
-import com.android.msd.capstone.project.gardennerds.activity.HomeActivity;
 import com.android.msd.capstone.project.gardennerds.adapters.MyGardenAdapter;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentMyGardenBinding;
 import com.android.msd.capstone.project.gardennerds.models.Garden;
@@ -82,7 +79,7 @@ public class MyGardenFragment extends Fragment {
         return myGardenBinding.getRoot();
     }
 
-    private void init(){
+    private void init() {
 
         myGardenBinding.fabAddGarden.setOnClickListener(v -> {
             // Replace the current fragment with AddGardenFragment
@@ -116,28 +113,18 @@ public class MyGardenFragment extends Fragment {
 
     //initializing and setting adapter
     private void bindAdapter() {
-        if (gardenAdapter == null) {
 
-            // Initialize garden adapter
-            gardenAdapter = new MyGardenAdapter(gardenList, requireActivity());
-            myGardenBinding.recyclerViewGardens.setLayoutManager(new LinearLayoutManager(getContext()));
-            myGardenBinding.recyclerViewGardens.setAdapter(gardenAdapter);
-        } else {
-            gardenAdapter.notifyDataSetChanged();
-        }
+        // Initialize garden adapter
+        gardenAdapter = new MyGardenAdapter(gardenList, requireActivity());
+        myGardenBinding.recyclerViewGardens.setAdapter(gardenAdapter);
+        myGardenBinding.recyclerViewGardens.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     private void loadGardens() {
         // Add demo gardens (URL is null for placeholder image)
-        gardenList.add(new Garden("Indoor Garden","This is garden details and description", "150","Shady","3","12", null));
-        gardenList.add(new Garden("Backyard Garden", "This is garden details and description","300", "Partial Sunlight","2","13",null));
-        gardenList.add(new Garden("Frontyard Garden","This is garden details and description", "200","Shady","3","10", null));
-        gardenList.add(new Garden("Balcony Garden","This is garden details and description", "50", "Full Sunlight","1","8",null));
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        myGardenBinding = null;
+        gardenList.add(new Garden("Indoor Garden", "This is garden details and description", "150", "", "", "Shady", "3", null));
+        gardenList.add(new Garden("Backyard Garden", "This is garden details and description", "300", "", "", "Partial Sunlight", "2", null));
+        gardenList.add(new Garden("Frontyard Garden", "This is garden details and description", "200", "", "", "Shady", "3", null));
+        gardenList.add(new Garden("Balcony Garden", "This is garden details and description", "50", "", "", "Full Sunlight", "1", null));
     }
 }

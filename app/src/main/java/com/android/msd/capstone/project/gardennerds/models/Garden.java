@@ -3,23 +3,39 @@ package com.android.msd.capstone.project.gardennerds.models;
 import java.io.Serializable;
 
 public class Garden implements Serializable {
+
+    private int gardenId = -1;
     private String name;
     private String description;
     private String gardenArea;
+    private String gardenLatitude;
+    private String gardenLongitude;
     private String sunlightPreference;
     private String wateringFrequency;
-    private String moistureLevel;
     private String imageUri;  // URL or URI to the garden image
+    private int userId = -1;
 
-    public Garden(String name, String description, String gardenArea, String sunlightPreference, String wateringFrequency, String moistureLevel, String imageUri) {
+    public Garden(String name, String description, String gardenArea,String gardenLatitude, String gardenLongitude, String sunlightPreference, String wateringFrequency, String imageUri) {
 
         this.name = name;
-        this.description = description;
+        this.description = (description != null && !description.isEmpty()) ? description : "Description";
         this.gardenArea = gardenArea;
-        this.sunlightPreference = sunlightPreference;
-        this.wateringFrequency = wateringFrequency;
-        this.moistureLevel = moistureLevel;
+        this.gardenLatitude = (gardenLatitude != null && !gardenLatitude.isEmpty()) ? gardenLatitude : "";
+        this.gardenLongitude = (gardenLongitude != null && !gardenLongitude.isEmpty()) ? gardenLongitude : "";
+        this.sunlightPreference = (sunlightPreference != null && !sunlightPreference.isEmpty()) ? sunlightPreference : "";
+        this.wateringFrequency = (wateringFrequency != null && !wateringFrequency.isEmpty()) ? wateringFrequency : "";
         this.imageUri = imageUri;
+    }
+
+    public Garden() {
+    }
+
+    public int getGardenId() {
+        return gardenId;
+    }
+
+    public void setGardenId(int gardenId) {
+        this.gardenId = gardenId;
     }
 
     public String getName() {
@@ -46,6 +62,22 @@ public class Garden implements Serializable {
         this.gardenArea = gardenArea;
     }
 
+    public String getGardenLatitude() {
+        return gardenLatitude;
+    }
+
+    public void setGardenLatitude(String gardenLatitude) {
+        this.gardenLatitude = gardenLatitude;
+    }
+
+    public String getGardenLongitude() {
+        return gardenLongitude;
+    }
+
+    public void setGardenLongitude(String gardenLongitude) {
+        this.gardenLongitude = gardenLongitude;
+    }
+
     public String getSunlightPreference() {
         return sunlightPreference;
     }
@@ -62,19 +94,19 @@ public class Garden implements Serializable {
         this.wateringFrequency = wateringFrequency;
     }
 
-    public String getMoistureLevel() {
-        return moistureLevel;
-    }
-
-    public void setMoistureLevel(String moistureLevel) {
-        this.moistureLevel = moistureLevel;
-    }
-
     public String getImageUri() {
         return imageUri;
     }
 
     public void setImageUri(String imageUri) {
         this.imageUri = imageUri;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
