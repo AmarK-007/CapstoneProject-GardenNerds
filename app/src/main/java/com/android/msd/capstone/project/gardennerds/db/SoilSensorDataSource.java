@@ -24,7 +24,7 @@ public class SoilSensorDataSource {
      * @return
      */
     public SoilSensorDataSource(Context context) {
-        dbHelper = new DBHelper(context);
+        dbHelper = DBHelper.getInstance(context);
     }
 
     // SoilSensor table name

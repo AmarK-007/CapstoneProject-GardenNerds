@@ -16,6 +16,8 @@ converterGson = "2.9.0"
 glide = "4.15.0"
 # Latest version of the location services
 location = "18.0.0"
+playServicesWearable = "18.2.0"
+wear = "1.3.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -31,6 +33,8 @@ sceneform-ux = { group = "com.google.ar.sceneform.ux", name = "sceneform-ux", ve
 #retrofit
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 converter-gson-v290 = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+play-services-wearable = { group = "com.google.android.gms", name = "play-services-wearable", version.ref = "playServicesWearable" }
+wear = { group = "androidx.wear", name = "wear", version.ref = "wear" }
 
 # Glide
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }

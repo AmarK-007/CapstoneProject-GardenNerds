@@ -24,7 +24,7 @@ public class PlantDataSource {
      * @return
      */
     public PlantDataSource(Context context) {
-        dbHelper = new DBHelper(context);
+        dbHelper = DBHelper.getInstance(context);
     }
 
     // Plant table name
