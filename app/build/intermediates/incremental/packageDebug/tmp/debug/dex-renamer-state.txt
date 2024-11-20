@@ -1,17 +1,17 @@
-#Wed Nov 20 11:07:06 EST 2024
-base.0=M\:\\conestoga\\Sem4\\capstone\\Bitbucket\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=M\:\\conestoga\\Sem4\\capstone\\Bitbucket\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.10=M\:\\conestoga\\Sem4\\capstone\\Bitbucket\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
-base.11=M\:\\conestoga\\Sem4\\capstone\\Bitbucket\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
-base.12=M\:\\conestoga\\Sem4\\capstone\\Bitbucket\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
-base.2=M\:\\conestoga\\Sem4\\capstone\\Bitbucket\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
-base.3=M\:\\conestoga\\Sem4\\capstone\\Bitbucket\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\11\\classes.dex
-base.4=M\:\\conestoga\\Sem4\\capstone\\Bitbucket\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\13\\classes.dex
-base.5=M\:\\conestoga\\Sem4\\capstone\\Bitbucket\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex
-base.6=M\:\\conestoga\\Sem4\\capstone\\Bitbucket\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
-base.7=M\:\\conestoga\\Sem4\\capstone\\Bitbucket\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
-base.8=M\:\\conestoga\\Sem4\\capstone\\Bitbucket\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
-base.9=M\:\\conestoga\\Sem4\\capstone\\Bitbucket\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
+#Wed Nov 20 17:23:20 EST 2024
+base.0=E\:\\Conestoga\\Sem-4\\Capstone\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=E\:\\Conestoga\\Sem-4\\Capstone\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.10=E\:\\Conestoga\\Sem-4\\Capstone\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
+base.11=E\:\\Conestoga\\Sem-4\\Capstone\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
+base.12=E\:\\Conestoga\\Sem-4\\Capstone\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+base.2=E\:\\Conestoga\\Sem-4\\Capstone\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
+base.3=E\:\\Conestoga\\Sem-4\\Capstone\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\11\\classes.dex
+base.4=E\:\\Conestoga\\Sem-4\\Capstone\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\13\\classes.dex
+base.5=E\:\\Conestoga\\Sem-4\\Capstone\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex
+base.6=E\:\\Conestoga\\Sem-4\\Capstone\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
+base.7=E\:\\Conestoga\\Sem-4\\Capstone\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
+base.8=E\:\\Conestoga\\Sem-4\\Capstone\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
+base.9=E\:\\Conestoga\\Sem-4\\Capstone\\CapstoneProject-GardenNerds\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.10=6/classes.dex

@@ -4,9 +4,11 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,6 +28,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.activity.HomeActivity;
@@ -40,6 +44,10 @@ import com.google.ar.core.Pose;
 import com.google.ar.core.Session;
 import com.google.ar.core.exceptions.CameraNotAvailableException;
 import com.google.ar.core.exceptions.TextureNotSetException;
+import com.google.ar.core.exceptions.UnavailableApkTooOldException;
+import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
+import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
+import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
 import com.google.ar.sceneform.ArSceneView;
 import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.core.Config;
@@ -176,6 +184,30 @@ public class MeasurementFragment extends Fragment {
         binding = null;
     }
 
+    private void promptUserToInstallARCore() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("ARCore not installed")
+                .setMessage("Please install ARCore from the Google Play Store to use this feature.")
+                .setPositiveButton("Install", (dialog, which) -> {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.google.ar.core"));
+                    startActivity(intent);
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
+    private void promptUserToUpdateARCore() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("ARCore update required")
+                .setMessage("Please update ARCore from the Google Play Store to use this feature.")
+                .setPositiveButton("Update", (dialog, which) -> {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.google.ar.core"));
+                    startActivity(intent);
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
     private void initializeArSession() {
         try {
             if (arSession == null) {
@@ -186,7 +218,19 @@ public class MeasurementFragment extends Fragment {
             }
             arSession.resume();
             sceneView.resume();
-            sceneView.setupSession(arSession); // Ensure the SceneView is set up with the AR session
+            sceneView.setupSession(arSession);
+        } catch (UnavailableArcoreNotInstalledException e) {
+            Log.e(TAG, "ARCore is not installed", e);
+            promptUserToInstallARCore();
+        } catch (UnavailableApkTooOldException e) {
+            Log.e(TAG, "ARCore APK is too old", e);
+            promptUserToUpdateARCore();
+        } catch (UnavailableSdkTooOldException e) {
+            Log.e(TAG, "ARCore SDK is too old", e);
+            Toast.makeText(getActivity(), "Please update this app to use AR features", Toast.LENGTH_LONG).show();
+        } catch (UnavailableDeviceNotCompatibleException e) {
+            Log.e(TAG, "This device does not support ARCore", e);
+            Toast.makeText(getActivity(), "This device does not support AR features", Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             Log.e(TAG, "Error initializing AR session: " + e.getMessage());
         }
@@ -325,15 +369,7 @@ public class MeasurementFragment extends Fragment {
 
                     //Navigate to Next Fragment
                     String areaValue = extractAreaValue(measurement);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("area", areaValue);
-
-                    APISearchResultFragment fragment = new APISearchResultFragment();
-                    fragment.setArguments(bundle);
-
-                /*requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frames, fragment)
-                            .commit();*/
+                    moveToProductListFragment("Gardening " + areaValue);
                 }
             });
             builder.setNegativeButton("Cancel", null);
@@ -382,6 +418,20 @@ public class MeasurementFragment extends Fragment {
         }
     }
 
+    public void moveToProductListFragment(String query) {
+        Bundle bundle = new Bundle();
+        bundle.putString("QUERY", query);
+
+        Fragment fragment = new ProductListFragment();
+        fragment.setArguments(bundle);
+        FragmentManager supportFragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frames, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+
     private Bitmap takeScreenshot() {
         // Get the root view of your layout
         View rootView = requireActivity().getWindow().getDecorView().getRootView();
@@ -409,7 +459,17 @@ public class MeasurementFragment extends Fragment {
         super.onResume();
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED) {
-            initializeArSession();
+            if (arSession == null) {
+                initializeArSession();
+            } else {
+                try {
+                    arSession.resume();
+                    sceneView.resume();
+                } catch (CameraNotAvailableException e) {
+                    Log.e(TAG, "Camera not available during onResume", e);
+                    arSession = null;
+                }
+            }
         }
     }
 
