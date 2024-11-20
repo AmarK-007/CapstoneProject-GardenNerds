@@ -4,7 +4,75 @@
             "outputFile": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-35:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\4511438546233321dbf300c39b1b54b5\\transformed\\appcompat-1.7.0\\res\\values-night-v8\\values-night-v8.xml",
+                    "source": "M:\\conestoga\\Sem4\\capstone\\Bitbucket\\CapstoneProject-GardenNerds\\app\\src\\main\\res\\values-night\\colors.xml",
+                    "from": {
+                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,26,-1,-1,-1,-1,-1,-1,-1",
+                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,4,-1,-1,-1,-1,-1,-1,-1",
+                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,1160,-1,-1,-1,-1,-1,-1,-1",
+                        "endColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,43,-1,-1,-1,-1,-1,-1,-1",
+                        "endOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,1199,-1,-1,-1,-1,-1,-1,-1"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,97,142,196,244,296,347,398,445,494,547,605,659,710,766,807,851,898,945,992,1037,1082,1134",
+                        "endColumns": "41,44,53,47,51,50,50,46,48,52,57,53,50,55,40,43,46,46,46,44,44,51,41",
+                        "endOffsets": "92,137,191,239,291,342,393,440,489,542,600,654,705,761,802,846,893,940,987,1032,1077,1129,1171"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\2ff23584755e5d707448ab3250076959\\transformed\\appcompat-1.7.0\\res\\values-night-v8\\values-night-v8.xml",
+                    "from": {
+                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1"
+                    },
+                    "to": {
+                        "startLines": "25,26,27,28,29,30,31,85",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "1176,1246,1330,1414,1510,1612,1714,5292",
+                        "endColumns": "69,83,83,95,101,101,93,88",
+                        "endOffsets": "1241,1325,1409,1505,1607,1709,1803,5376"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\f7ebeabbc96a3ef53c5ca0f5be872ee9\\transformed\\material-1.12.0\\res\\values-night-v8\\values-night-v8.xml",
+                    "from": {
+                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
+                    },
+                    "to": {
+                        "startLines": "59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,86,87,88,89,90,91,92,93",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "2404,2479,2590,2679,2780,2887,2994,3093,3200,3303,3430,3518,3642,3744,3846,3962,4064,4178,4306,4422,4544,4680,4800,4934,5054,5166,5381,5498,5622,5752,5874,6012,6146,6262",
+                        "endColumns": "74,110,88,100,106,106,98,106,102,126,87,123,101,101,115,101,113,127,115,121,135,119,133,119,111,125,116,123,129,121,137,133,115,119",
+                        "endOffsets": "2474,2585,2674,2775,2882,2989,3088,3195,3298,3425,3513,3637,3739,3841,3957,4059,4173,4301,4417,4539,4675,4795,4929,5049,5161,5287,5493,5617,5747,5869,6007,6141,6257,6377"
+                    }
+                },
+                {
+                    "source": "M:\\conestoga\\Sem4\\capstone\\Bitbucket\\CapstoneProject-GardenNerds\\app\\src\\main\\res\\values-night\\themes.xml",
+                    "from": {
+                        "startLines": "-1",
+                        "startColumns": "-1",
+                        "startOffsets": "-1"
+                    },
+                    "to": {
+                        "startLines": "32",
+                        "startColumns": "4",
+                        "startOffsets": "1808",
+                        "endLines": "58",
+                        "endColumns": "12",
+                        "endOffsets": "2399"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\manna\\.gradle\\daemon\\8.9\\com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-35:\\values-night-v8\\values-night-v8.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\2ff23584755e5d707448ab3250076959\\transformed\\appcompat-1.7.0\\res\\values-night-v8\\values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -21,7 +89,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\85912cbcf49834534d8e9129a4d38647\\transformed\\material-1.12.0\\res\\values-night-v8\\values-night-v8.xml",
+                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\f7ebeabbc96a3ef53c5ca0f5be872ee9\\transformed\\material-1.12.0\\res\\values-night-v8\\values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

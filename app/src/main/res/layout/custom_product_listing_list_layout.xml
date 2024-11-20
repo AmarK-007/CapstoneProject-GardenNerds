@@ -6,7 +6,7 @@
     android:layout_margin="8dp"
     android:elevation="4dp"
     android:padding="8dp"
-    android:background="@color/card_color"
+    app:cardBackgroundColor="@color/card_color"
     app:cardCornerRadius="8dp">
 
     <RelativeLayout
@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
-            android:textSize="18sp"
+            android:textSize="12sp"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:maxLines="3"
@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
-            android:textSize="14sp"
+            android:textSize="10sp"
             android:textColor="@android:color/darker_gray"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

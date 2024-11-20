@@ -4,7 +4,7 @@
             "outputFile": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-35:/values-en-rCA/values-en-rCA.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\4511438546233321dbf300c39b1b54b5\\transformed\\appcompat-1.7.0\\res\\values-en-rCA\\values-en-rCA.xml",
+                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\2ff23584755e5d707448ab3250076959\\transformed\\appcompat-1.7.0\\res\\values-en-rCA\\values-en-rCA.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,24 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\bab68bab6505b2430d99ce3dd6c15fa3\\transformed\\core-1.15.0\\res\\values-en-rCA\\values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8",
-                        "startColumns": "0,0,0,0,0",
-                        "startOffsets": "194,241,292,414,536",
-                        "endColumns": "46,50,121,121,83",
-                        "endOffsets": "240,291,413,535,619"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6",
-                        "startColumns": "4,4,4,4,4",
-                        "startOffsets": "105,156,211,337,463",
-                        "endColumns": "50,54,125,125,87",
-                        "endOffsets": "151,206,332,458,546"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\cf9e9ff31119e86a2acb0cfb9f508bfd\\transformed\\core-1.13.0\\res\\values-en-rCA\\values-en-rCA.xml",
+                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\c74c168438d635c6b6c6d744e16c6ad9\\transformed\\core-1.13.0\\res\\values-en-rCA\\values-en-rCA.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -52,6 +35,23 @@
                         "startOffsets": "3208,3304,3406,3505,3604,3708,3810,4009",
                         "endColumns": "95,101,98,98,103,101,115,100",
                         "endOffsets": "3299,3401,3500,3599,3703,3805,3921,4105"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\e1fa96735fa6675bae5e341c37127478\\transformed\\core-1.15.0\\res\\values-en-rCA\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8",
+                        "startColumns": "0,0,0,0,0",
+                        "startOffsets": "194,241,292,414,536",
+                        "endColumns": "46,50,121,121,83",
+                        "endOffsets": "240,291,413,535,619"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "105,156,211,337,463",
+                        "endColumns": "50,54,125,125,87",
+                        "endOffsets": "151,206,332,458,546"
                     }
                 }
             ]

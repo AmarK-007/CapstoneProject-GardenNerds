@@ -4,22 +4,22 @@ package com.android.msd.capstone.project.gardennerds.models.productResponses;
 public class SearchMetadata {
     private String id;
     private String status;
-    private String jsonEndpoint;
-    private String createdAt;
-    private String processedAt;
-    private String googleProductURL;
-    private String rawHTMLFile;
-    private double totalTimeTaken;
+    private String json_endpoint;
+    private String created_at;
+    private String processed_at;
+    private String google_product_url;
+    private String raw_html_file;
+    private double total_time_taken;
 
-    public SearchMetadata(String id, String status, String jsonEndpoint, String createdAt, String processedAt, String googleProductURL, String rawHTMLFile, double totalTimeTaken) {
+    public SearchMetadata(String id, String status, String json_endpoint, String created_at, String processed_at, String google_product_url, String raw_html_file, double total_time_taken) {
         this.id = id;
         this.status = status;
-        this.jsonEndpoint = jsonEndpoint;
-        this.createdAt = createdAt;
-        this.processedAt = processedAt;
-        this.googleProductURL = googleProductURL;
-        this.rawHTMLFile = rawHTMLFile;
-        this.totalTimeTaken = totalTimeTaken;
+        this.json_endpoint = json_endpoint;
+        this.created_at = created_at;
+        this.processed_at = processed_at;
+        this.google_product_url = google_product_url;
+        this.raw_html_file = raw_html_file;
+        this.total_time_taken = total_time_taken;
     }
 
     public String getId() {
@@ -38,51 +38,51 @@ public class SearchMetadata {
         this.status = status;
     }
 
-    public String getJsonEndpoint() {
-        return jsonEndpoint;
+    public String getJson_endpoint() {
+        return json_endpoint;
     }
 
-    public void setJsonEndpoint(String jsonEndpoint) {
-        this.jsonEndpoint = jsonEndpoint;
+    public void setJson_endpoint(String json_endpoint) {
+        this.json_endpoint = json_endpoint;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getCreated_at() {
+        return created_at;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 
-    public String getProcessedAt() {
-        return processedAt;
+    public String getProcessed_at() {
+        return processed_at;
     }
 
-    public void setProcessedAt(String processedAt) {
-        this.processedAt = processedAt;
+    public void setProcessed_at(String processed_at) {
+        this.processed_at = processed_at;
     }
 
-    public String getGoogleProductURL() {
-        return googleProductURL;
+    public String getGoogle_product_url() {
+        return google_product_url;
     }
 
-    public void setGoogleProductURL(String googleProductURL) {
-        this.googleProductURL = googleProductURL;
+    public void setGoogle_product_url(String google_product_url) {
+        this.google_product_url = google_product_url;
     }
 
-    public String getRawHTMLFile() {
-        return rawHTMLFile;
+    public String getRaw_html_file() {
+        return raw_html_file;
     }
 
-    public void setRawHTMLFile(String rawHTMLFile) {
-        this.rawHTMLFile = rawHTMLFile;
+    public void setRaw_html_file(String raw_html_file) {
+        this.raw_html_file = raw_html_file;
     }
 
-    public double getTotalTimeTaken() {
-        return totalTimeTaken;
+    public double getTotal_time_taken() {
+        return total_time_taken;
     }
 
-    public void setTotalTimeTaken(double totalTimeTaken) {
-        this.totalTimeTaken = totalTimeTaken;
+    public void setTotal_time_taken(double total_time_taken) {
+        this.total_time_taken = total_time_taken;
     }
 }

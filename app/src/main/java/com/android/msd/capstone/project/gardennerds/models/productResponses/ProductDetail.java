@@ -2,29 +2,30 @@ package com.android.msd.capstone.project.gardennerds.models.productResponses;
 
 
 public class ProductDetail {
-    private SearchMetadata searchMetadata;
-    private SearchParameters searchParameters;
+    private SearchMetadata search_metadata;
+    private SearchParameters search_parameters;
     private ProductResults product_results;
-    private SellersResults sellersResults;
-    private SpecsResults specsResults;
+    private SellersResults sellers_results;
+    private RelatedProduct related_products;
+    private SpecsResults specs_results;
     private ReviewsResults reviewsResults;
 
 
 
     public SearchMetadata getSearchMetadata() {
-        return searchMetadata;
+        return search_metadata;
     }
 
     public void setSearchMetadata(SearchMetadata searchMetadata) {
-        this.searchMetadata = searchMetadata;
+        this.search_metadata = searchMetadata;
     }
 
     public SearchParameters getSearchParameters() {
-        return searchParameters;
+        return search_parameters;
     }
 
     public void setSearchParameters(SearchParameters searchParameters) {
-        this.searchParameters = searchParameters;
+        this.search_parameters = searchParameters;
     }
 
     public ProductResults getProductResults() {
@@ -36,19 +37,19 @@ public class ProductDetail {
     }
 
     public SellersResults getSellersResults() {
-        return sellersResults;
+        return sellers_results;
     }
 
     public void setSellersResults(SellersResults sellersResults) {
-        this.sellersResults = sellersResults;
+        this.sellers_results = sellersResults;
     }
 
     public SpecsResults getSpecsResults() {
-        return specsResults;
+        return specs_results;
     }
 
     public void setSpecsResults(SpecsResults specsResults) {
-        this.specsResults = specsResults;
+        this.specs_results = specsResults;
     }
 
     public ReviewsResults getReviewsResults() {
@@ -58,33 +59,12 @@ public class ProductDetail {
     public void setReviewsResults(ReviewsResults reviewsResults) {
         this.reviewsResults = reviewsResults;
     }
-//    @JsonProperty("search_metadata")
-//    public SearchMetadata getSearchMetadata() { return searchMetadata; }
-//    @JsonProperty("search_metadata")
-//    public void setSearchMetadata(SearchMetadata value) { this.searchMetadata = value; }
-//
-//    @JsonProperty("search_parameters")
-//    public SearchParameters getSearchParameters() { return searchParameters; }
-//    @JsonProperty("search_parameters")
-//    public void setSearchParameters(SearchParameters value) { this.searchParameters = value; }
-//
-//    @JsonProperty("product_results")
-//    public ProductResults getProductResults() { return productResults; }
-//    @JsonProperty("product_results")
-//    public void setProductResults(ProductResults value) { this.productResults = value; }
-//
-//    @JsonProperty("sellers_results")
-//    public SellersResults getSellersResults() { return sellersResults; }
-//    @JsonProperty("sellers_results")
-//    public void setSellersResults(SellersResults value) { this.sellersResults = value; }
-//
-//    @JsonProperty("specs_results")
-//    public SpecsResults getSpecsResults() { return specsResults; }
-//    @JsonProperty("specs_results")
-//    public void setSpecsResults(SpecsResults value) { this.specsResults = value; }
-//
-//    @JsonProperty("reviews_results")
-//    public ReviewsResults getReviewsResults() { return reviewsResults; }
-//    @JsonProperty("reviews_results")
-//    public void setReviewsResults(ReviewsResults value) { this.reviewsResults = value; }
+
+    public RelatedProduct getRelated_products() {
+        return related_products;
+    }
+
+    public void setRelated_products(RelatedProduct related_products) {
+        this.related_products = related_products;
+    }
 }

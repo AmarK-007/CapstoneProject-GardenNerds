@@ -19,8 +19,11 @@ color colorPrimaryDark
 color colorPrimaryDarkLight
 color colorPrimaryLight
 color dividerColor
+color fragment_background
 color grey
 color ic_launcher_background
+color icon_tint
+color mtrl_textinput_default_box_stroke_color
 color purple_200
 color purple_500
 color purple_700
@@ -32,6 +35,7 @@ dimen activity_full_margin
 dimen activity_horizontal_margin
 dimen activity_vertical_margin
 drawable animated_vector
+drawable arrow_down
 drawable avatar
 drawable designer
 drawable gardening_decors
@@ -51,6 +55,7 @@ drawable nav_icon_profile
 drawable nav_icon_support
 drawable new_garden_nerds
 drawable outdoor_plants
+drawable popup_background
 drawable scanner
 drawable search_end
 drawable search_end_24
@@ -66,8 +71,10 @@ id btm_scanner
 id btnApiSearch
 id btnMeasurement
 id btnSoilSensor
+id btn_buynow
 id btn_subscribe
 id button_get_soil_data
+id cv_description
 id drawerMenu
 id email
 id emailWrapper
@@ -82,6 +89,7 @@ id issueText
 id iv_category
 id iv_grid
 id iv_list
+id iv_more_description
 id iv_up_down
 id lastname
 id lastnameWrapper
@@ -99,12 +107,8 @@ id navMenu
 id passWordWrapper
 id password
 id passwordWrapper
-id product_description
 id product_highlights
 id product_image
-id product_image_one
-id product_image_three
-id product_image_two
 id product_price
 id product_rating
 id product_reviews
@@ -120,6 +124,7 @@ id profileFirstName
 id profileLastName
 id rv_product_list
 id sceneView
+id scrollview
 id search
 id search_edt
 id search_txt_layout
@@ -134,11 +139,14 @@ id support
 id supportBtn
 id supportEmail
 id supportName
+id tabLayout
 id text1
 id textView
 id textView2
 id textview_result
 id tv_category
+id tv_description
+id tv_details
 id updateAddress
 id updateAddress1
 id updateAddress2
@@ -154,6 +162,7 @@ id updateProvinceSpinnerWrapper
 id username
 id usernameWrapper
 id version
+id viewPager
 id welcomeUser
 integer anim_duration_long
 layout activity_home
@@ -161,6 +170,8 @@ layout activity_login_screen
 layout activity_sign_up_screen
 layout activity_splash_screen
 layout custom_card_category_layout
+layout custom_item_image_slider
+layout custom_loading_dialog_view
 layout custom_product_listing_grid_layout
 layout custom_product_listing_list_layout
 layout fragment_about
@@ -228,6 +239,7 @@ style SpinnerTheme
 style Theme.GardenNerds
 style button_style
 style cardViewStyle
+style custom_card
 style error_appearance
 transition changebounds_with_arcmotion
 xml backup_rules

@@ -4,41 +4,39 @@ package com.android.msd.capstone.project.gardennerds.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.ViewFlipper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import androidx.viewpager2.widget.ViewPager2;
 import com.android.msd.capstone.project.gardennerds.R;
+import com.google.android.material.tabs.TabLayout;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
 
 public final class FragmentProductDetailsBinding implements ViewBinding {
   @NonNull
-  private final ScrollView rootView;
+  private final RelativeLayout rootView;
 
   @NonNull
-  public final TextView productDescription;
+  public final Button btnBuynow;
+
+  @NonNull
+  public final CardView cvDescription;
+
+  @NonNull
+  public final ImageView ivMoreDescription;
 
   @NonNull
   public final TextView productHighlights;
-
-  @NonNull
-  public final ViewFlipper productImage;
-
-  @NonNull
-  public final ImageView productImageOne;
-
-  @NonNull
-  public final ImageView productImageThree;
-
-  @NonNull
-  public final ImageView productImageTwo;
 
   @NonNull
   public final TextView productPrice;
@@ -51,6 +49,9 @@ public final class FragmentProductDetailsBinding implements ViewBinding {
 
   @NonNull
   public final TextView productTitle;
+
+  @NonNull
+  public final ScrollView scrollview;
 
   @NonNull
   public final TextView sellerLink;
@@ -67,35 +68,50 @@ public final class FragmentProductDetailsBinding implements ViewBinding {
   @NonNull
   public final LinearLayout sellersList;
 
-  private FragmentProductDetailsBinding(@NonNull ScrollView rootView,
-      @NonNull TextView productDescription, @NonNull TextView productHighlights,
-      @NonNull ViewFlipper productImage, @NonNull ImageView productImageOne,
-      @NonNull ImageView productImageThree, @NonNull ImageView productImageTwo,
-      @NonNull TextView productPrice, @NonNull TextView productRating,
-      @NonNull TextView productReviews, @NonNull TextView productTitle,
-      @NonNull TextView sellerLink, @NonNull TextView sellerName, @NonNull TextView sellerPrice,
-      @NonNull TextView sellerTitle, @NonNull LinearLayout sellersList) {
+  @NonNull
+  public final TabLayout tabLayout;
+
+  @NonNull
+  public final TextView tvDescription;
+
+  @NonNull
+  public final TextView tvDetails;
+
+  @NonNull
+  public final ViewPager2 viewPager;
+
+  private FragmentProductDetailsBinding(@NonNull RelativeLayout rootView, @NonNull Button btnBuynow,
+      @NonNull CardView cvDescription, @NonNull ImageView ivMoreDescription,
+      @NonNull TextView productHighlights, @NonNull TextView productPrice,
+      @NonNull TextView productRating, @NonNull TextView productReviews,
+      @NonNull TextView productTitle, @NonNull ScrollView scrollview, @NonNull TextView sellerLink,
+      @NonNull TextView sellerName, @NonNull TextView sellerPrice, @NonNull TextView sellerTitle,
+      @NonNull LinearLayout sellersList, @NonNull TabLayout tabLayout,
+      @NonNull TextView tvDescription, @NonNull TextView tvDetails, @NonNull ViewPager2 viewPager) {
     this.rootView = rootView;
-    this.productDescription = productDescription;
+    this.btnBuynow = btnBuynow;
+    this.cvDescription = cvDescription;
+    this.ivMoreDescription = ivMoreDescription;
     this.productHighlights = productHighlights;
-    this.productImage = productImage;
-    this.productImageOne = productImageOne;
-    this.productImageThree = productImageThree;
-    this.productImageTwo = productImageTwo;
     this.productPrice = productPrice;
     this.productRating = productRating;
     this.productReviews = productReviews;
     this.productTitle = productTitle;
+    this.scrollview = scrollview;
     this.sellerLink = sellerLink;
     this.sellerName = sellerName;
     this.sellerPrice = sellerPrice;
     this.sellerTitle = sellerTitle;
     this.sellersList = sellersList;
+    this.tabLayout = tabLayout;
+    this.tvDescription = tvDescription;
+    this.tvDetails = tvDetails;
+    this.viewPager = viewPager;
   }
 
   @Override
   @NonNull
-  public ScrollView getRoot() {
+  public RelativeLayout getRoot() {
     return rootView;
   }
 
@@ -120,39 +136,27 @@ public final class FragmentProductDetailsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.product_description;
-      TextView productDescription = ViewBindings.findChildViewById(rootView, id);
-      if (productDescription == null) {
+      id = R.id.btn_buynow;
+      Button btnBuynow = ViewBindings.findChildViewById(rootView, id);
+      if (btnBuynow == null) {
+        break missingId;
+      }
+
+      id = R.id.cv_description;
+      CardView cvDescription = ViewBindings.findChildViewById(rootView, id);
+      if (cvDescription == null) {
+        break missingId;
+      }
+
+      id = R.id.iv_more_description;
+      ImageView ivMoreDescription = ViewBindings.findChildViewById(rootView, id);
+      if (ivMoreDescription == null) {
         break missingId;
       }
 
       id = R.id.product_highlights;
       TextView productHighlights = ViewBindings.findChildViewById(rootView, id);
       if (productHighlights == null) {
-        break missingId;
-      }
-
-      id = R.id.product_image;
-      ViewFlipper productImage = ViewBindings.findChildViewById(rootView, id);
-      if (productImage == null) {
-        break missingId;
-      }
-
-      id = R.id.product_image_one;
-      ImageView productImageOne = ViewBindings.findChildViewById(rootView, id);
-      if (productImageOne == null) {
-        break missingId;
-      }
-
-      id = R.id.product_image_three;
-      ImageView productImageThree = ViewBindings.findChildViewById(rootView, id);
-      if (productImageThree == null) {
-        break missingId;
-      }
-
-      id = R.id.product_image_two;
-      ImageView productImageTwo = ViewBindings.findChildViewById(rootView, id);
-      if (productImageTwo == null) {
         break missingId;
       }
 
@@ -177,6 +181,12 @@ public final class FragmentProductDetailsBinding implements ViewBinding {
       id = R.id.product_title;
       TextView productTitle = ViewBindings.findChildViewById(rootView, id);
       if (productTitle == null) {
+        break missingId;
+      }
+
+      id = R.id.scrollview;
+      ScrollView scrollview = ViewBindings.findChildViewById(rootView, id);
+      if (scrollview == null) {
         break missingId;
       }
 
@@ -210,10 +220,34 @@ public final class FragmentProductDetailsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentProductDetailsBinding((ScrollView) rootView, productDescription,
-          productHighlights, productImage, productImageOne, productImageThree, productImageTwo,
-          productPrice, productRating, productReviews, productTitle, sellerLink, sellerName,
-          sellerPrice, sellerTitle, sellersList);
+      id = R.id.tabLayout;
+      TabLayout tabLayout = ViewBindings.findChildViewById(rootView, id);
+      if (tabLayout == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_description;
+      TextView tvDescription = ViewBindings.findChildViewById(rootView, id);
+      if (tvDescription == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_details;
+      TextView tvDetails = ViewBindings.findChildViewById(rootView, id);
+      if (tvDetails == null) {
+        break missingId;
+      }
+
+      id = R.id.viewPager;
+      ViewPager2 viewPager = ViewBindings.findChildViewById(rootView, id);
+      if (viewPager == null) {
+        break missingId;
+      }
+
+      return new FragmentProductDetailsBinding((RelativeLayout) rootView, btnBuynow, cvDescription,
+          ivMoreDescription, productHighlights, productPrice, productRating, productReviews,
+          productTitle, scrollview, sellerLink, sellerName, sellerPrice, sellerTitle, sellersList,
+          tabLayout, tvDescription, tvDetails, viewPager);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

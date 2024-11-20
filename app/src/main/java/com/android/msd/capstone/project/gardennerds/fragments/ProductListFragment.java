@@ -1,5 +1,6 @@
 package com.android.msd.capstone.project.gardennerds.fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ public class ProductListFragment extends Fragment implements AdapterInterface<Sh
     private String searchQuery;
     private ArrayList<ShoppingResult> products;
     public Boolean isAscending = true;
+    private Dialog loadingDialog= null;
 
 
     @Override
@@ -44,6 +46,7 @@ public class ProductListFragment extends Fragment implements AdapterInterface<Sh
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentProductListBinding.inflate(inflater, container, false);
+        showLoadingPopup();
         init();
         return binding.getRoot();
     }
@@ -81,7 +84,7 @@ public class ProductListFragment extends Fragment implements AdapterInterface<Sh
                 if(shoppingResults!=null) {
                     Log.e("TAG", shoppingResults.size() + " numbers");
                     products = (ArrayList<ShoppingResult>) shoppingResults;
-
+                    dismissLoadingPopup();
                     adapter.submitList(products);
                 }
             }
@@ -156,5 +159,25 @@ public class ProductListFragment extends Fragment implements AdapterInterface<Sh
         // Remove the dollar sign and parse the number
         // Return true if price is greater than zero, otherwise false
         return Double.parseDouble(price.replace("$", ""));
+    }
+
+
+    private void showLoadingPopup() {
+//        if (loadingDialog == null) {
+            loadingDialog = new Dialog(requireContext());
+            loadingDialog.setContentView(R.layout.custom_loading_dialog_view);
+            loadingDialog.setCancelable(false); // Prevent the user from dismissing it
+            if (loadingDialog.getWindow() != null) {
+                loadingDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            }
+            loadingDialog.show();
+//        }
+    }
+
+    private void dismissLoadingPopup() {
+        if (loadingDialog != null) {
+            loadingDialog.dismiss();
+            loadingDialog = null;
+        }
     }
 }

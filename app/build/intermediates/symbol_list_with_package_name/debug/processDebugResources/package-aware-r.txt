@@ -1472,10 +1472,12 @@ color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
 color foreground_material_light
+color fragment_background
 color grey
 color highlighted_text_material_dark
 color highlighted_text_material_light
 color ic_launcher_background
+color icon_tint
 color m3_appbar_overlay_color
 color m3_assist_chip_icon_tint_color
 color m3_assist_chip_stroke_color
@@ -3047,6 +3049,7 @@ drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable animated_vector
+drawable arrow_down
 drawable avatar
 drawable avd_hide_password
 drawable avd_show_password
@@ -3172,6 +3175,7 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable outdoor_plants
+drawable popup_background
 drawable scanner
 drawable sceneform_plane
 drawable search_end
@@ -3296,6 +3300,7 @@ id btm_scanner
 id btnApiSearch
 id btnMeasurement
 id btnSoilSensor
+id btn_buynow
 id btn_subscribe
 id buttonPanel
 id button_get_soil_data
@@ -3337,6 +3342,7 @@ id currentState
 id custom
 id customPanel
 id cut
+id cv_description
 id date_picker_actions
 id decelerate
 id decelerateAndComplete
@@ -3444,6 +3450,7 @@ id item_touch_helper_previous_elevation
 id iv_category
 id iv_grid
 id iv_list
+id iv_more_description
 id iv_up_down
 id jumpToEnd
 id jumpToStart
@@ -3588,12 +3595,8 @@ id pooling_container_listener_holder_tag
 id position
 id postLayout
 id pressed
-id product_description
 id product_highlights
 id product_image
-id product_image_one
-id product_image_three
-id product_image_two
 id product_price
 id product_rating
 id product_reviews
@@ -3636,6 +3639,7 @@ id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
 id scrollable
+id scrollview
 id search
 id search_badge
 id search_bar
@@ -3701,6 +3705,7 @@ id supportBtn
 id supportEmail
 id supportName
 id supportScrollUp
+id tabLayout
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -3756,6 +3761,8 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tv_category
+id tv_description
+id tv_details
 id unchecked
 id uniform
 id unlabeled
@@ -3778,6 +3785,7 @@ id usernameWrapper
 id version
 id vertical
 id vertical_only
+id viewPager
 id view_offset_helper
 id view_transition
 id view_tree_lifecycle_owner
@@ -3918,6 +3926,8 @@ layout activity_sign_up_screen
 layout activity_splash_screen
 layout custom_card_category_layout
 layout custom_dialog
+layout custom_item_image_slider
+layout custom_loading_dialog_view
 layout custom_product_listing_grid_layout
 layout custom_product_listing_list_layout
 layout design_bottom_navigation_item
@@ -5372,6 +5382,7 @@ style Widget_MaterialComponents_Tooltip
 style Widget_Support_CoordinatorLayout
 style button_style
 style cardViewStyle
+style custom_card
 style error_appearance
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity

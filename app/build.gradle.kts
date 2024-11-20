@@ -8,7 +8,8 @@ android {
 
     defaultConfig {
         applicationId = "com.android.msd.capstone.project.gardennerds"
-        minSdk = 31
+//        minSdk = 31
+        minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -49,7 +50,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     //Gson for json converter
-    implementation(libs.gson)
+//    implementation(libs.gson)
 
     // Sceneform for AR
 //    implementation(libs.ar.core)
@@ -69,5 +70,7 @@ dependencies {
 
     //viewpager
     implementation(libs.viewpager2)
+
+    implementation (libs.viewpager2)
 
 }

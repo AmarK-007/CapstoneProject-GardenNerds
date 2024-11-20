@@ -28,8 +28,11 @@
     <color name="colorPrimaryDarkLight">#FF43B4BD</color>
     <color name="colorPrimaryLight">#FF05A3B1</color>
     <color name="dividerColor">@color/grey</color>
+    <color name="fragment_background">#FFFFFFFF</color>
     <color name="grey">#E6888888</color>
     <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="icon_tint">#000000</color>
+    <color name="mtrl_textinput_default_box_stroke_color">@color/grey</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -182,6 +185,12 @@
         <item name="android:padding">10dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="custom_card" parent="CardView">
+        <item name="cardBackgroundColor">@color/card_color</item>
+        <item name="elevation">4dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="cardCornerRadius">8dp</item>
     </style>
     <style name="error_appearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/colorErrorText</item>

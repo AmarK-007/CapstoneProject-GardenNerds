@@ -20,14 +20,14 @@ public class ProductRepository {
         this.apiService =  RetrofitClient.getApiService();
     }
 
-    public LiveData<ProductResults> fetchProductDetails(String productID){
-        MutableLiveData<ProductResults> data = new MutableLiveData<>();
+    public LiveData<ProductDetail> fetchProductDetails(String productID){
+        MutableLiveData<ProductDetail> data = new MutableLiveData<>();
         apiService.getProductResults("google_product", productID, "google.com", apiKey).enqueue(new Callback<ProductDetail>() {
 
             @Override
             public void onResponse(Call<ProductDetail> call, Response<ProductDetail> response) {
                 if (response.isSuccessful() && response.body() != null){
-                    data.setValue(response.body().getProductResults());
+                    data.setValue(response.body());
                 }else {
                     data.setValue(null);
                 }

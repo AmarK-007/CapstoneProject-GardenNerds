@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fragment_background"
+    android:backgroundTint="@color/fragment_background"
     tools:context=".fragments.HomeFragment">
 
     <!-- create 3 button in center of screen vertically for Measurement, API search and Soil sensor -->
@@ -34,7 +36,10 @@
                 app:boxStrokeWidthFocused="2dp"
                 app:cursorColor="@color/category_text_color"
                 app:hintTextColor="@color/category_text_color"
-                app:placeholderTextColor="@color/category_text_color">
+                app:placeholderTextColor="@color/category_text_color"
+
+               >
+<!--                 -->
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/search_edt"
@@ -43,6 +48,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/search_start_24"
                     android:drawableEnd="@drawable/search_end_24"
+                    android:drawableTint="@color/category_text_color"
                     android:imeOptions="actionSearch"
 
                     android:singleLine="true"
