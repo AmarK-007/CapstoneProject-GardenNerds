@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF03636B</color>
+    <color name="colorPrimaryDark">#FF31858c</color>
+    <color name="colorPrimaryDarkLight">#FF43B4BD</color>
+    <color name="colorPrimaryLight">#FF05A3B1</color>
+    <color name="colorAccent">#FFfAAF16</color>
+    <color name="colorAccentDark">#FFC3AA01</color>
+    <color name="colorGreen">#FF94B62D</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="grey">#E6888888</color>
+    <color name="dividerColor">@color/grey</color>
+
+    <color name="colorErrorText">#FFE10606</color>
+    <color name="colorGrayLight">#FFc5c5c5</color>
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="card_color">#E0F0CC</color>
+    <color name="category_text_color">#88E41A</color>
+    <color name="transparent_black">#88E41A</color>
+    <color name="fragment_background">#FF000000</color>
+    <color name="icon_tint">#FFFFFF</color>
+</resources>

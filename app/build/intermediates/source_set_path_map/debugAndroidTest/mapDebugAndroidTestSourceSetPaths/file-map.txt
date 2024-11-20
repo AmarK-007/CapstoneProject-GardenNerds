@@ -1,0 +1,5 @@
+com.android.msd.capstone.project.gardennerds.test.app-core-1.6.1-0 C:\Users\manna\.gradle\caches\8.9\transforms\ca1391ad142e049f09a6eaab1af7a76a\transformed\core-1.6.1\res
+com.android.msd.capstone.project.gardennerds.test.app-androidTest-1 M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\build\generated\res\resValues\androidTest\debug
+com.android.msd.capstone.project.gardennerds.test.app-mergeDebugAndroidTestResources-2 M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.android.msd.capstone.project.gardennerds.test.app-mergeDebugAndroidTestResources-3 M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.android.msd.capstone.project.gardennerds.test.app-debugAndroidTest-4 M:\conestoga\Sem4\capstone\Bitbucket\CapstoneProject-GardenNerds\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

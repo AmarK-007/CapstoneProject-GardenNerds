@@ -1,15 +1,20 @@
 [versions]
 agp = "8.7.2"
+
+gson = "2.10.1"
+
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.9.2"
-constraintlayout = "2.1.4"
+activity = "1.9.3"
+constraintlayout = "2.2.0"
 core = "1.17.1"
 sceneformUx = "1.17.1"
-#retrofit
+
+
+picasso = "2.8"
 retrofit = "2.9.0"
 converterGson = "2.9.0"
 #glide
@@ -18,6 +23,9 @@ glide = "4.15.0"
 location = "18.0.0"
 playServicesWearable = "18.2.0"
 wear = "1.3.0"
+shimmer = "0.5.0"
+lifecycleViewmodel = "2.8.7"
+viewpager2 = "1.1.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -36,11 +44,22 @@ converter-gson-v290 = { module = "com.squareup.retrofit2:converter-gson", versio
 play-services-wearable = { group = "com.google.android.gms", name = "play-services-wearable", version.ref = "playServicesWearable" }
 wear = { group = "androidx.wear", name = "wear", version.ref = "wear" }
 
+
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata", version.ref = "lifecycleViewmodel" }
+lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
+viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
+
+
+
 # Glide
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 
 # Location
 fused-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "location" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
