@@ -28,7 +28,7 @@
             android:layout_marginBottom="24dp"
             android:text="Upload Photo" />
 
-        <!-- CardView for Garden Name and Other Inputs -->
+        <!-- CardView for Garden Details -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,6 +53,16 @@
                     android:layout_marginBottom="16dp"
                     android:inputType="text" />
 
+                <!-- Garden Description -->
+                <EditText
+                    android:id="@+id/et_garden_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Garden Description"
+                    android:layout_marginBottom="16dp"
+                    android:inputType="textMultiLine"
+                    android:maxLines="2" />
+
                 <!-- Watering Interval -->
                 <EditText
                     android:id="@+id/et_watering_interval"
@@ -61,6 +71,15 @@
                     android:hint="Set Watering Interval (in days)"
                     android:layout_marginBottom="16dp"
                     android:inputType="number" />
+
+                <!-- Garden Area -->
+                <EditText
+                    android:id="@+id/et_garden_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Garden Area (in sq. ft.)"
+                    android:layout_marginBottom="16dp"
+                    android:inputType="numberDecimal" />
 
                 <!-- Sunlight Preference -->
                 <TextView

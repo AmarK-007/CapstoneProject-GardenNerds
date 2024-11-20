@@ -30,6 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(UserDataSource.CREATE_TABLE);
+        db.execSQL(GardenDataSource.CREATE_TABLE);
     }
 
     /**
@@ -43,6 +44,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + UserDataSource.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + GardenDataSource.TABLE_NAME);
         onCreate(db);
     }
 }

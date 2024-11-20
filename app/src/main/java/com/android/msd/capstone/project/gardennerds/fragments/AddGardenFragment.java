@@ -20,6 +20,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentAddGardenBinding;
+import com.android.msd.capstone.project.gardennerds.db.GardenDataSource;
+import com.android.msd.capstone.project.gardennerds.models.Garden;
 import com.android.msd.capstone.project.gardennerds.network.RetrofitClient;
 import com.android.msd.capstone.project.gardennerds.network.response.SoilDataResponse;
 import com.android.msd.capstone.project.gardennerds.network.service.GetSoilDataService;
@@ -68,6 +70,7 @@ public class AddGardenFragment extends Fragment {
     private static final int REQUEST_CAMERA_CAPTURE = 3;
     private FusedLocationProviderClient fusedLocationClient;
     private double latitude, longitude;
+    private GardenDataSource gardenDataSource;
 
     public AddGardenFragment() {
         // Required empty public constructor
@@ -114,6 +117,9 @@ public class AddGardenFragment extends Fragment {
         // Configure Toolbar
         //setupToolbar();
 
+        //Initialize Garden datasource
+        gardenDataSource = new GardenDataSource(requireActivity());
+
         // Initialize FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
 
@@ -142,7 +148,7 @@ public class AddGardenFragment extends Fragment {
 
         addGardenBinding.btnSaveGarden.setOnClickListener(v -> {
             // Save garden data (e.g., save to a database or backend)
-            //saveGardenData();
+            saveGardenData();
         });
 
     }
@@ -268,13 +274,63 @@ public class AddGardenFragment extends Fragment {
         return formattedDate;
     }
 
+    // Save garden data to the database
+    private void saveGardenData() {
+        // Validate input fields
+        String name = addGardenBinding.etGardenName.getText().toString().trim();
+        String description = addGardenBinding.etGardenDescription.getText().toString().trim();
+        String areaMeasurement = addGardenBinding.etGardenArea.getText().toString().trim();
+        String sunlightPreference = getSunlightPreference();
+        String wateringFrequency = addGardenBinding.etWateringInterval.getText().toString().trim();
 
-    private void setupToolbar() {
-       /* Toolbar toolbar = ((HomeActivity) requireActivity()).getToolbar();
+        if (name.isEmpty() || description.isEmpty() || areaMeasurement.isEmpty() || sunlightPreference.isEmpty() || wateringFrequency.isEmpty()) {
+            Toast.makeText(requireContext(), "Please fill in all fields!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        // Ensure the toolbar has the right menu items
-        toolbar.setNavigationIcon(R.drawable.ic_back); // back button icon
-        toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());*/
+        // Get latitude and longitude (already fetched or default to 0.0 if not available)
+        double latitude = this.latitude != 0.0 ? this.latitude : 0.0;
+        double longitude = this.longitude != 0.0 ? this.longitude : 0.0;
 
+        // Get image URI (placeholder in this case)
+        String imageUri = "example_image_uri"; // Replace with actual image URI after uploading photo
+
+        // Create Garden object
+        Garden garden = new Garden();
+        garden.setDescription(description);
+        garden.setGardenArea(areaMeasurement);
+        garden.setSunlightPreference(sunlightPreference);
+        garden.setWateringFrequency(wateringFrequency);
+        garden.setGardenLatitude(String.valueOf(latitude));
+        garden.setGardenLongitude(String.valueOf(longitude));
+        garden.setImageUri(imageUri);
+        garden.setUserId(1); // Default user ID; replace as needed
+
+        // Insert into database
+        boolean isInserted = gardenDataSource.insertGarden(garden);
+
+        if (isInserted) {
+            Toast.makeText(requireContext(), "Garden saved successfully!", Toast.LENGTH_SHORT).show();
+            // Optionally clear form or navigate away
+            clearForm();
+        } else {
+            Toast.makeText(requireContext(), "Failed to save garden!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Clear input form
+    private void clearForm() {
+        addGardenBinding.etGardenName.setText("");
+        addGardenBinding.etGardenDescription.setText("");
+        addGardenBinding.etGardenArea.setText("");
+        addGardenBinding.etWateringInterval.setText("");
+    }
+
+    private String getSunlightPreference() {
+
+        if (addGardenBinding.rbFullSunlight.isChecked()) return "Full Sunlight";
+        else if (addGardenBinding.rbPartialSunlight.isChecked()) return "PartialSunlight";
+        else if (addGardenBinding.rbShady.isChecked()) return "Shady";
+        else return "";
     }
 }
