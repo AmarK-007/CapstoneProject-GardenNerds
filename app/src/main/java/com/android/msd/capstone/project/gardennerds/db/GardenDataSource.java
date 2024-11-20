@@ -24,7 +24,7 @@ public class GardenDataSource {
      * @return
      */
     public GardenDataSource(Context context) {
-        dbHelper = new DBHelper(context);
+        dbHelper = DBHelper.getInstance(context);
     }
 
     // Garden table name

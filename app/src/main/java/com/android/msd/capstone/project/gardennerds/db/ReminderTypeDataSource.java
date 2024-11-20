@@ -24,7 +24,7 @@ public class ReminderTypeDataSource {
      * @return
      */
     public ReminderTypeDataSource(Context context) {
-        dbHelper = new DBHelper(context);
+        dbHelper = DBHelper.getInstance(context);
     }
 
     // ReminderType table name
