@@ -67,7 +67,6 @@ public class DBHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.e(TAG, "Error in onCreate: " + e.getMessage());
         }
-
     }
 
     /**

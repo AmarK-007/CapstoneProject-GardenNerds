@@ -30,16 +30,28 @@ public class GardenDataSource {
     // Garden table name
     public static final String TABLE_NAME = "gardens";
     public static final String COLUMN_GARDEN_ID = "garden_id";
-    public static final String COLUMN_LOCATION = "location";
+    public static final String COLUMN_GARDEN_NAME = "garden_name";
+    public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_AREA_MEASUREMENT = "area_measurement";
+    public static final String COLUMN_LOCATION_LAT = "latitude";
+    public static final String COLUMN_LOCATION_LONG = "longitude";
+    public static final String COLUMN_SUNLIGHT_PREFERENCE = "sunlight_preference";
+    public static final String COLUMN_WATERING_INTERVAL = "watering_interval";
+    public static final String COLUMN_IMAGE_URI = "image";
     public static final String COLUMN_USER_ID = "user_id";
 
     // Create table SQL query
     public static final String CREATE_TABLE =
             "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "("
                     + COLUMN_GARDEN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + COLUMN_LOCATION + " FLOAT,"
+                    + COLUMN_GARDEN_NAME + " TEXT,"
+                    + COLUMN_DESCRIPTION + " TEXT,"
                     + COLUMN_AREA_MEASUREMENT + " TEXT,"
+                    + COLUMN_LOCATION_LAT + " TEXT,"
+                    + COLUMN_LOCATION_LONG + " TEXT,"
+                    + COLUMN_SUNLIGHT_PREFERENCE + " TEXT,"
+                    + COLUMN_WATERING_INTERVAL + " TEXT,"
+                    + COLUMN_IMAGE_URI + " TEXT,"
                     + COLUMN_USER_ID + " INTEGER,"
                     + "FOREIGN KEY(" + COLUMN_USER_ID + ") REFERENCES users(user_id)"
                     + ")";
@@ -53,10 +65,18 @@ public class GardenDataSource {
     public boolean insertGarden(Garden garden) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
+        // Prepare content values for insertion
         ContentValues values = new ContentValues();
-        values.put(COLUMN_LOCATION, garden.getLocation());
-        values.put(COLUMN_AREA_MEASUREMENT, garden.getAreaMeasurement());
-        values.put(COLUMN_USER_ID, garden.getUserId());
+        //values.put(COLUMN_GARDEN_ID, 1);
+        values.put(COLUMN_GARDEN_NAME, garden.getName());
+        values.put(COLUMN_DESCRIPTION, garden.getDescription());
+        values.put(COLUMN_AREA_MEASUREMENT, garden.getGardenArea());
+        values.put(COLUMN_LOCATION_LAT, garden.getGardenLatitude());
+        values.put(COLUMN_LOCATION_LONG, garden.getGardenLongitude());
+        values.put(COLUMN_SUNLIGHT_PREFERENCE, garden.getSunlightPreference());
+        values.put(COLUMN_WATERING_INTERVAL, garden.getWateringFrequency());
+        values.put(COLUMN_IMAGE_URI, "");
+        values.put(COLUMN_USER_ID, 1);
 
         long result = db.insert(TABLE_NAME, null, values);
         db.close();
@@ -83,8 +103,14 @@ public class GardenDataSource {
         if (cursor != null && cursor.moveToFirst()) {
             Garden garden = new Garden();
             garden.setGardenId(cursor.getInt(cursor.getColumnIndex(COLUMN_GARDEN_ID)));
-            garden.setLocation(cursor.getFloat(cursor.getColumnIndex(COLUMN_LOCATION)));
-            garden.setAreaMeasurement(cursor.getString(cursor.getColumnIndex(COLUMN_AREA_MEASUREMENT)));
+            garden.setName(cursor.getString(cursor.getColumnIndex(COLUMN_GARDEN_NAME)));
+            garden.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
+            garden.setGardenArea(cursor.getString(cursor.getColumnIndex(COLUMN_AREA_MEASUREMENT)));
+            garden.setGardenLatitude(cursor.getString(cursor.getColumnIndex(COLUMN_LOCATION_LAT)));
+            garden.setGardenLongitude(cursor.getString(cursor.getColumnIndex(COLUMN_LOCATION_LONG)));
+            garden.setSunlightPreference(cursor.getString(cursor.getColumnIndex(COLUMN_SUNLIGHT_PREFERENCE)));
+            garden.setWateringFrequency(cursor.getString(cursor.getColumnIndex(COLUMN_WATERING_INTERVAL)));
+            garden.setImageUri(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_URI)));
             garden.setUserId(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID)));
 
             cursor.close();
@@ -111,8 +137,14 @@ public class GardenDataSource {
             do {
                 Garden garden = new Garden();
                 garden.setGardenId(cursor.getInt(cursor.getColumnIndex(COLUMN_GARDEN_ID)));
-                garden.setLocation(cursor.getFloat(cursor.getColumnIndex(COLUMN_LOCATION)));
-                garden.setAreaMeasurement(cursor.getString(cursor.getColumnIndex(COLUMN_AREA_MEASUREMENT)));
+                garden.setName(cursor.getString(cursor.getColumnIndex(COLUMN_GARDEN_NAME)));
+                garden.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
+                garden.setGardenArea(cursor.getString(cursor.getColumnIndex(COLUMN_AREA_MEASUREMENT)));
+                garden.setGardenLatitude(cursor.getString(cursor.getColumnIndex(COLUMN_LOCATION_LAT)));
+                garden.setGardenLongitude(cursor.getString(cursor.getColumnIndex(COLUMN_LOCATION_LONG)));
+                garden.setSunlightPreference(cursor.getString(cursor.getColumnIndex(COLUMN_SUNLIGHT_PREFERENCE)));
+                garden.setWateringFrequency(cursor.getString(cursor.getColumnIndex(COLUMN_WATERING_INTERVAL)));
+                garden.setImageUri(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_URI)));
                 garden.setUserId(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID)));
 
                 gardens.add(garden);
@@ -133,9 +165,15 @@ public class GardenDataSource {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_LOCATION, garden.getLocation());
-        values.put(COLUMN_AREA_MEASUREMENT, garden.getAreaMeasurement());
-        values.put(COLUMN_USER_ID, garden.getUserId());
+        values.put(COLUMN_GARDEN_NAME, garden.getName());
+        values.put(COLUMN_DESCRIPTION, garden.getDescription());
+        values.put(COLUMN_AREA_MEASUREMENT, garden.getGardenArea());
+        values.put(COLUMN_LOCATION_LAT, garden.getGardenLatitude());
+        values.put(COLUMN_LOCATION_LONG, garden.getGardenLongitude());
+        values.put(COLUMN_SUNLIGHT_PREFERENCE, garden.getSunlightPreference());
+        values.put(COLUMN_WATERING_INTERVAL, garden.getWateringFrequency());
+        values.put(COLUMN_IMAGE_URI, garden.getImageUri());
+        values.put(COLUMN_USER_ID, 1);
 
         return db.update(TABLE_NAME, values, COLUMN_GARDEN_ID + " = ?",
                 new String[]{String.valueOf(garden.getGardenId())});

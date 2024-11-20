@@ -1,5 +1,5 @@
 [versions]
-agp = "8.6.0"
+agp = "8.7.2"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -12,6 +12,10 @@ sceneformUx = "1.17.1"
 #retrofit
 retrofit = "2.9.0"
 converterGson = "2.9.0"
+#glide
+glide = "4.15.0"
+# Latest version of the location services
+location = "18.0.0"
 playServicesWearable = "18.2.0"
 wear = "1.3.0"
 
@@ -31,6 +35,12 @@ retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = 
 converter-gson-v290 = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 play-services-wearable = { group = "com.google.android.gms", name = "play-services-wearable", version.ref = "playServicesWearable" }
 wear = { group = "androidx.wear", name = "wear", version.ref = "wear" }
+
+# Glide
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+
+# Location
+fused-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "location" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

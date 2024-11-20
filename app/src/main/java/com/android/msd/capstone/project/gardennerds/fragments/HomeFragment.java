@@ -106,7 +106,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // navigate to soil sensor fragment
-                Fragment fragment = new SoilSensorFragment();
+                //Fragment fragment = new SoilSensorFragment();
+                Fragment fragment = new MyGardenFragment();
                 FragmentManager supportFragmentManager = requireActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frames, fragment);
