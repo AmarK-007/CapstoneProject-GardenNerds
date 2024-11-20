@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-35:/values-de-rAT/values-de-rAT.xml",
+            "outputFile": "com.android.msd.capstone.project.gardennerds.app-mergeDebugResources-38:/values-de-rAT/values-de-rAT.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\e1fa96735fa6675bae5e341c37127478\\transformed\\core-1.15.0\\res\\values-de-rAT\\values.xml",
+                    "source": "C:\\Users\\manna\\.gradle\\caches\\8.9\\transforms\\8a22d69d93207367f3971b09f86c61b3\\transformed\\core-1.15.0\\res\\values-de-rAT\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8",
                         "startColumns": "0,0,0,0,0",

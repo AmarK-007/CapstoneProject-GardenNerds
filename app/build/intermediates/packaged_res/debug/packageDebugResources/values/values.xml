@@ -46,10 +46,12 @@
     <integer name="anim_duration_long">400</integer>
     <string name="about_text"> Discover about Garden Nerds, your one-stop shop for all things gardening. \n\nEstablished in 2024, we provide high-quality gardening supplies at reasonable costs. We want to make it easy for you to grow your garden with our wide selection and hassle-free buying process. \n\nBecome a member of our community now to up your gardening game!</string>
     <string name="app_name">GardenNerds</string>
+    <string name="area_measured">Area Measured</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_ok">OK</string>
     <string name="close">Close</string>
     <string name="email">Email</string>
+    <string name="find_products">Find Products</string>
     <string name="first_name">First Name</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="last_name">Last Name</string>
@@ -72,8 +74,10 @@
     <string name="password">Password</string>
     <string name="product_image">image</string>
     <string name="request_message">Support Request Sent</string>
+    <string name="screenshot">Screenshot</string>
     <string name="signup">Sign Up</string>
     <string name="submit">Submit</string>
+    <string name="update_address">Update Address</string>
     <string name="username">Username</string>
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
     <style name="AppTheme.Login" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -119,6 +123,10 @@
     </style>
     <style name="ITCRegular" parent="android:Widget.TextView">
         <item name="android:fontFamily">@fonts/itc_officina_sans_book_font</item>
+    </style>
+    <style name="MyDialogButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/colorAccent</item>
+
     </style>
     <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         

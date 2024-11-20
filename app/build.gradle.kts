@@ -8,8 +8,8 @@ android {
 
     defaultConfig {
         applicationId = "com.android.msd.capstone.project.gardennerds"
-//        minSdk = 31
-        minSdk = 30
+         minSdk = 31
+        //minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -64,7 +64,7 @@ dependencies {
     implementation(libs.lifecycle.livedata)
     implementation(libs.shimmer)
 
-//retrofit libs
+    //retrofit libs
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 
@@ -72,5 +72,11 @@ dependencies {
     implementation(libs.viewpager2)
 
     implementation (libs.viewpager2)
+
+    //Glide
+    implementation(libs.glide)
+
+    //Location
+    implementation(libs.fused.location)
 
 }

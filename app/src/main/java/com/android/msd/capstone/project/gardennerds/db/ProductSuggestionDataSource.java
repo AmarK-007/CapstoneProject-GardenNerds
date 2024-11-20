@@ -24,7 +24,7 @@ public class ProductSuggestionDataSource {
      * @return
      */
     public ProductSuggestionDataSource(Context context) {
-        dbHelper = new DBHelper(context);
+        dbHelper = DBHelper.getInstance(context);
     }
 
     // ProductSuggestion table name

@@ -31,7 +31,14 @@
     <string name="submit">Submit</string>
     <string name="request_message">Support Request Sent</string>
     <string name="about_text"> Discover about Garden Nerds, your one-stop shop for all things gardening. \n\nEstablished in 2024, we provide high-quality gardening supplies at reasonable costs. We want to make it easy for you to grow your garden with our wide selection and hassle-free buying process. \n\nBecome a member of our community now to up your gardening game!</string>
+
     <string name="product_image">image</string>
+
+    <string name="screenshot">Screenshot</string>
+    <string name="find_products">Find Products</string>
+    <string name="update_address">Update Address</string>
+    <string name="area_measured">Area Measured</string>
+
 
     <string-array name="canadian_provinces">
         <item>Alberta</item>

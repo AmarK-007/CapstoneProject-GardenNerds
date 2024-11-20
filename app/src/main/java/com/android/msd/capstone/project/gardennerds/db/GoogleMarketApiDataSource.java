@@ -24,7 +24,7 @@ public class GoogleMarketApiDataSource {
      * @return
      */
     public GoogleMarketApiDataSource(Context context) {
-        dbHelper = new DBHelper(context);
+        dbHelper = DBHelper.getInstance(context);
     }
 
     // GoogleMarketApi table name

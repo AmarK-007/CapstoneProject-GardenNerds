@@ -321,4 +321,15 @@ public class HomeActivity extends AppCompatActivity {
         });
         alertDialog.show();
     }
+
+    /*public androidx.appcompat.widget.Toolbar getToolbar() {
+        return homeBinding.homeToolBar;
+    }*/
+
+    // Method to change the navigation icon from a fragment
+    /*public void setNavigationIcon(int resId) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeAsUpIndicator(resId);  // Change the icon
+        }
+    }*/
 }

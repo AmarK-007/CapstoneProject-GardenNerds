@@ -25,7 +25,7 @@ public class UserDataSource {
      * @return
      */
     public UserDataSource(Context context) {
-        dbHelper = new DBHelper(context);
+        dbHelper = DBHelper.getInstance(context);
     }
 
     // User table name

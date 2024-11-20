@@ -138,6 +138,7 @@ public class HomeFragment extends Fragment implements AdapterInterface<Category>
         binding.homeRv.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
     }
 
+
     public void moveToProductListFragment(String query){
         Bundle bundle = new Bundle();
         bundle.putString("QUERY", query);
