@@ -24,7 +24,7 @@ public class OrderDataSource {
      * @return
      */
     public OrderDataSource(Context context) {
-        dbHelper = new DBHelper(context);
+        dbHelper = DBHelper.getInstance(context);
     }
 
     // Order table name

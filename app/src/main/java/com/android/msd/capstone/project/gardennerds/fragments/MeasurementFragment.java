@@ -2,23 +2,37 @@ package com.android.msd.capstone.project.gardennerds.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.activity.HomeActivity;
+import com.android.msd.capstone.project.gardennerds.databinding.DialogMeasuredAreaBinding;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentMeasurementBinding;
+import com.android.msd.capstone.project.gardennerds.databinding.UpdateAddressDialogBinding;
+import com.android.msd.capstone.project.gardennerds.utils.Utility;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Frame;
 import com.google.ar.core.HitResult;
@@ -31,6 +45,8 @@ import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.core.Config;
 import com.google.ar.core.Config.UpdateMode;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -236,7 +252,12 @@ public class MeasurementFragment extends Fragment {
             } else if (points.size() >= 2) {
                 float area = calculateArea(points); // Calculate area once we have at least 2 points
                 Log.d(TAG, "Calculated Area: " + area);
-                displayMeasurement("Area: " + area + " sq. meters");
+                //rounding off the area to 2 decimal places
+                DecimalFormat df = new DecimalFormat("#.##");
+                df.setRoundingMode(RoundingMode.HALF_UP);
+                String roundedArea = df.format(Double.parseDouble(area + ""));
+
+                displayMeasurement("Area: " + roundedArea + " sq. meters");
             }
 
             break; // Exit after processing the first touch hit
@@ -266,6 +287,121 @@ public class MeasurementFragment extends Fragment {
         // Assuming you have a TextView in your layout to display the measurement
         TextView measurementTextView = binding.measurementTextView;
         measurementTextView.setText(measurement);
+
+        // if the measurement is Area: xyz sq. meters, take a screen shot of the scene and save it to the device and show it in a pop up dialog
+        // with a button below the image to move to the next fragment i.e. ApiSearchResultsFragment and hit the API with Area value
+        if (measurement.startsWith("Area:")) {
+            // 1. Take Screenshot
+            Bitmap screenshot = takeScreenshot();
+
+            // 2. Create Dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext(), R.style.MyDialogTheme);
+
+            LinearLayout container = new LinearLayout(getActivity());
+            container.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(50, 20, 50, 20);
+
+            TextView titleTextView = new TextView(getActivity());
+            titleTextView.setLayoutParams(params);
+            titleTextView.setTextColor(getResources().getColor(R.color.colorAccent));
+            titleTextView.setHintTextColor(getResources().getColor(R.color.colorGrayLight));
+            titleTextView.setPadding(20, 20, 20, 20);
+            titleTextView.setTextSize(20);
+            titleTextView.setGravity(Gravity.LEFT);
+            titleTextView.setText(getResources().getString(R.string.area_measured));
+            builder.setCustomTitle(titleTextView);
+
+            final TextView areaTextView = Utility.showStyledAlertDialog(requireContext());
+            areaTextView.setText(extractAreaValue(measurement));
+            //gravity in the center
+            areaTextView.setGravity(Gravity.CENTER);
+            container.addView(areaTextView);
+
+            builder.setView(container);
+            builder.setPositiveButton(getString(R.string.find_products), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    //Navigate to Next Fragment
+                    String areaValue = extractAreaValue(measurement);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("area", areaValue);
+
+                    APISearchResultFragment fragment = new APISearchResultFragment();
+                    fragment.setArguments(bundle);
+
+                /*requireActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frames, fragment)
+                            .commit();*/
+                }
+            });
+            builder.setNegativeButton("Cancel", null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            // Get the positive button and set its text color
+            Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            positiveButton.setTextColor(getResources().getColor(R.color.colorAccent));
+            // Get the negative button and set its text color
+            Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+            negativeButton.setTextColor(getResources().getColor(R.color.colorAccent));
+
+
+            /*// Create and inflate the dialog layout
+            DialogMeasuredAreaBinding dialogBinding = DialogMeasuredAreaBinding.inflate(getLayoutInflater());
+            LinearLayout container = (LinearLayout) dialogBinding.getRoot(); // Get the root LinearLayout
+
+            TextView areaTextView = dialogBinding.areaMeasuredTextView;
+            areaTextView.setText(extractAreaValue(measurement));
+//            // Set the screenshot image
+//            ImageView screenshotImageView = dialogBinding.screenshotImageView;
+//            screenshotImageView.setImageBitmap(screenshot);
+
+            // Set the "Next" button click listener
+            Button nextButton = dialogBinding.nextButton;
+            nextButton.setOnClickListener(v -> {
+                // 3. Navigate to Next Fragment
+                String areaValue = extractAreaValue(measurement);
+                Bundle bundle = new Bundle();
+                bundle.putString("area", areaValue);
+
+                APISearchResultFragment fragment = new APISearchResultFragment();
+                fragment.setArguments(bundle);
+
+                *//*requireActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frames, fragment)
+                        .commit();*//*
+
+                // Dismiss the dialog
+                builder.create().dismiss();
+            });
+
+            // Set the view and show the dialog
+            builder.setView(container);
+            builder.show();*/
+        }
+    }
+
+    private Bitmap takeScreenshot() {
+        // Get the root view of your layout
+        View rootView = requireActivity().getWindow().getDecorView().getRootView();
+
+        // Create a bitmap
+        Bitmap bitmap = Bitmap.createBitmap(rootView.getWidth(), rootView.getHeight(), Bitmap.Config.ARGB_8888);
+
+        // Draw the view onto the bitmap
+        Canvas canvas = new Canvas(bitmap);
+        rootView.draw(canvas);
+
+        return bitmap;
+    }
+
+    private String extractAreaValue(String measurement) {
+        // Implement logic to extract the area value from the measurement string
+        // Example: If measurement is "Area: 123 sq. meters", extract "123"
+        String extractedAreaValue = measurement.replace("Area: ", "");//.replace(" sq. meters", "");
+        Log.d(TAG, "Extracted Area Value: " + extractedAreaValue);
+        return extractedAreaValue;
     }
 
     @Override
