@@ -30,6 +30,8 @@ import com.android.msd.capstone.project.gardennerds.databinding.ActivityHomeBind
 import com.android.msd.capstone.project.gardennerds.databinding.MenuDrawerHeaderBinding;
 import com.android.msd.capstone.project.gardennerds.fragments.AboutFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.HomeFragment;
+import com.android.msd.capstone.project.gardennerds.fragments.MeasurementFragment;
+import com.android.msd.capstone.project.gardennerds.fragments.MyGardenFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.ProfileFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.SupportFragment;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
@@ -128,10 +130,9 @@ public class HomeActivity extends AppCompatActivity {
                 if (i == R.id.btm_home) {
                     changeFragment(new HomeFragment());
                 } else if (i == R.id.btm_my_garden) {
-                    Toast.makeText(HomeActivity.this, "Yet to implement", Toast.LENGTH_SHORT).show();
+                    changeFragment(new MyGardenFragment());
                 } else if (i == R.id.btm_scanner) {
-                    Toast.makeText(HomeActivity.this, "Yet to implement", Toast.LENGTH_SHORT).show();
-
+                    changeFragment(new MeasurementFragment());
                 }
                         return false;
 

@@ -1,3 +1,0 @@
-com.android.msd.capstone.project.gardennerds.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme
