@@ -30,10 +30,13 @@ import com.android.msd.capstone.project.gardennerds.databinding.ActivityHomeBind
 import com.android.msd.capstone.project.gardennerds.databinding.MenuDrawerHeaderBinding;
 import com.android.msd.capstone.project.gardennerds.fragments.AboutFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.HomeFragment;
+import com.android.msd.capstone.project.gardennerds.fragments.MeasurementFragment;
+import com.android.msd.capstone.project.gardennerds.fragments.MyGardenFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.ProfileFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.SupportFragment;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -82,6 +85,7 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.colorAccent));
         setDrawer();
+        setBottomNavigation();
         changeFragment(new HomeFragment());
         setUsernameInDrawer();
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
@@ -113,6 +117,25 @@ public class HomeActivity extends AppCompatActivity {
                     showAppExitingAlertLogout(HomeActivity.this);
                 }
                 return false;
+            }
+        });
+    }
+
+    private void setBottomNavigation(){
+        homeBinding.bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                int i = item.getItemId();
+                // Check the selected menu item ID
+                if (i == R.id.btm_home) {
+                    changeFragment(new HomeFragment());
+                } else if (i == R.id.btm_my_garden) {
+                    changeFragment(new MyGardenFragment());
+                } else if (i == R.id.btm_scanner) {
+                    changeFragment(new MeasurementFragment());
+                }
+                        return false;
+
             }
         });
     }

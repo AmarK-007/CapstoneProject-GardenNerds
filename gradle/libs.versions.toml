@@ -1,47 +1,62 @@
 [versions]
-agp = "8.7.2"
+agp = "8.5.2"
 junit = "4.13.2"
+coreVersion = "1.46.0"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.9.2"
-constraintlayout = "2.1.4"
+activity = "1.9.3"
+constraintlayout = "2.2.0"
 core = "1.17.1"
 sceneformUx = "1.17.1"
-#retrofit
+picasso = "2.8"
 retrofit = "2.9.0"
 converterGson = "2.9.0"
-#glide
 glide = "4.15.0"
-# Latest version of the location services
-location = "18.0.0"
+location = "21.3.0"
 playServicesWearable = "18.2.0"
 wear = "1.3.0"
+shimmer = "0.5.0"
+lifecycleViewmodel = "2.8.7"
+viewpager2 = "1.1.0"
 
 [libraries]
+# AR and Sceneform Libraries
+ar-core = { module = "com.google.ar:core", version.ref = "coreVersion" }
+sceneform-ux = { group = "com.google.ar.sceneform.ux", name = "sceneform-ux", version.ref = "sceneformUx" }
+
+# Gson and Retrofit
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+
+# Testing Libraries
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+
+# Android Libraries
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-core = { group = "com.google.ar.sceneform", name = "core", version.ref = "core" }
-sceneform-ux = { group = "com.google.ar.sceneform.ux", name = "sceneform-ux", version.ref = "sceneformUx" }
 
-#retrofit
-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-converter-gson-v290 = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+# Picasso, Glide, and Shimmer
+picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+
+# Lifecycle
+lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata", version.ref = "lifecycleViewmodel" }
+lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
+
+# ViewPager and Wearable
+viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 play-services-wearable = { group = "com.google.android.gms", name = "play-services-wearable", version.ref = "playServicesWearable" }
 wear = { group = "androidx.wear", name = "wear", version.ref = "wear" }
 
-# Glide
-glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
-
-# Location
+# Location Services
 fused-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "location" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-

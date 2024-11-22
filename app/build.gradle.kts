@@ -8,7 +8,8 @@ android {
 
     defaultConfig {
         applicationId = "com.android.msd.capstone.project.gardennerds"
-        minSdk = 31
+         minSdk = 31
+        //minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -36,32 +37,40 @@ android {
 
 dependencies {
 
+    // Android Libraries
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.core)
-    //implementation(libs.sceneform.ux)
 
-    // Testing libraries
+    // AR Libraries
+    implementation(libs.ar.core)
+    // Sceneform for AR
+    implementation(libs.sceneform.ux)
+
+    // Gson and Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    // Picasso, Glide, and Shimmer
+    implementation(libs.picasso)
+    implementation(libs.glide)
+    implementation(libs.shimmer)
+
+    // Lifecycle
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.livedata)
+
+    // Location
+    implementation(libs.fused.location)
+
+    // ViewPager and Wearable
+    implementation(libs.viewpager2)
+
+
+    // Testing Libraries
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-
-    //Gson for json converter
-    implementation("com.google.code.gson:gson:2.10.1")
-
-    // Sceneform for AR
-    implementation("com.google.ar:core:1.31.0")
-
-    //retrofit libs
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson.v290)
-
-    //Glide
-    implementation(libs.glide)
-
-    //Location
-    implementation(libs.fused.location)
 
 }
