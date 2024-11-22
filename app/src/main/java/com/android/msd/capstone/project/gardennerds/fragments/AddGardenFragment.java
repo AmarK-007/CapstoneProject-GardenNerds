@@ -311,7 +311,7 @@ public class AddGardenFragment extends Fragment {
 
         if (isInserted) {
             Toast.makeText(requireContext(), "Garden saved successfully!", Toast.LENGTH_SHORT).show();
-            // Optionally clear form or navigate away
+            // Optionally clear form
             clearForm();
         } else {
             Toast.makeText(requireContext(), "Failed to save garden!", Toast.LENGTH_SHORT).show();
