@@ -1,19 +1,21 @@
 package com.android.msd.capstone.project.gardennerds.models.productResponses;
 
 
+import java.util.ArrayList;
+
 public class SellersResults {
-    private OnlineSeller[] onlineSellers;
+    private ArrayList<OnlineSeller> online_sellers;
 
-    public SellersResults(OnlineSeller[] onlineSellers) {
-        this.onlineSellers = onlineSellers;
+    public SellersResults(ArrayList<OnlineSeller> onlineSellers) {
+        this.online_sellers = onlineSellers;
     }
 
-    public OnlineSeller[] getOnlineSellers() {
-        return onlineSellers;
+    public ArrayList<OnlineSeller> getOnlineSellers() {
+        return online_sellers;
     }
 
-    public void setOnlineSellers(OnlineSeller[] onlineSellers) {
-        this.onlineSellers = onlineSellers;
+    public void setOnlineSellers(ArrayList<OnlineSeller> onlineSellers) {
+        this.online_sellers = onlineSellers;
     }
 
     //    @JsonProperty("online_sellers")

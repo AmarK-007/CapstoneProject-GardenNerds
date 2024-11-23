@@ -26,6 +26,7 @@
     <color name="transparent_black">#88E41A</color>
     <color name="fragment_background">#FFFFFFFF</color>
     <color name="icon_tint">#000000</color>
+    <color name="outline_color">#C4D2B3</color>
     <color name="mtrl_textinput_default_box_stroke_color">@color/grey</color>
 
 

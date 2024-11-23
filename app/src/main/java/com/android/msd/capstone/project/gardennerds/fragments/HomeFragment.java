@@ -107,6 +107,8 @@ public class HomeFragment extends Fragment implements AdapterInterface<Category>
 //            }
 //        });
 
+        binding.btnSubscribe.setOnClickListener(this);
+
         return binding.getRoot();
     }
 
@@ -167,6 +169,8 @@ public class HomeFragment extends Fragment implements AdapterInterface<Category>
     public void onClick(View v) {
         if (v == binding.btnSubscribe){
             //subscrive page
+            SubscriptionFragment dialogFragment = new SubscriptionFragment();
+            dialogFragment.show(getParentFragmentManager(),"SubscriptionFragment");
         }
     }
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    style="@style/custom_card"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/sellers_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seller_title"
+
+        android:orientation="vertical">
+
+        <!-- Example Seller Item -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/seller_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bonanza - BundleGalore's Booth"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/seller_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: $613.79 + $19.99 shipping"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/seller_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Buy Now"
+                android:textColor="@color/category_text_color" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
