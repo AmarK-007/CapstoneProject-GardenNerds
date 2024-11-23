@@ -39,6 +39,23 @@
     <string name="update_address">Update Address</string>
     <string name="area_measured">Area Measured</string>
     <string name="available_sellers">Available Sellers</string>
+    <string name="text_enter_plant_name">Enter Plant Name</string>
+    <string name="text_enter_moisture_level">Enter Moisture Level</string>
+    <string name="text_enter_temperature">Enter Temperature</string>
+    <string name="text_enter_watering_interval">Enter Watering Interval</string>
+    <string name="text_enter_sunlight_required">Enter Sunlight Required</string>
+    <string name="text_enter_nutrition_required">Enter Nutrition Required</string>
+    <string name="text_reminders">Reminders</string>
+    <string name="text_add_reminder">Add Reminder</string>
+    <string name="text_enter_frequency">Enter Frequency</string>
+    <string name="text_no_reminders_added_yet">No Reminders added yet.</string>
+    <string name="text_reminder_type_watering">Watering</string>
+    <string name="text_reminder_type_fertilize">Fertilize</string>
+    <string name="text_reminder_type_sunlight">Sunlight</string>
+    <string name="text_reminder_type_changeSoil">Change Soil</string>
+    <string name="text_indoor">Indoor</string>
+    <string name="text_outdoor">Outdoor</string>
+
 
 
     <string-array name="canadian_provinces">
@@ -55,5 +72,12 @@
         <item>Northwest Territories</item>
         <item>Nunavut</item>
         <item>Yukon</item>
+    </string-array>
+
+    <string-array name="reminder_type">
+        <item>Watering</item>
+        <item>Fertilize</item>
+        <item>Sunlight</item>
+        <item>Change Soil</item>
     </string-array>
 </resources>
