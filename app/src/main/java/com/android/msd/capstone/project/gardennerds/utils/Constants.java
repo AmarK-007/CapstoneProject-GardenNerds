@@ -39,4 +39,11 @@ public class Constants {
             + "\"params\": [\"soilMoisture\", \"soilTemperature\"], "
             + "\"requestCount\": 1, \"start\": \"2024-10-09 00:00\" } }";
 
+
+    // Constants for Reminder Types
+    public static final int REMINDER_TYPE_WATER = 1;
+    public static final int REMINDER_TYPE_FERTILIZE = 2;
+    public static final int REMINDER_TYPE_SUNLIGHT = 3;
+    public static final int REMINDER_TYPE_CHANGE_SOIL = 4;
+
 }

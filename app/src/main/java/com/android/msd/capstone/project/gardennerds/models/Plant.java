@@ -3,6 +3,8 @@ package com.android.msd.capstone.project.gardennerds.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 /**
  * Model class for Plant
  */
@@ -14,26 +16,27 @@ public class Plant implements Parcelable {
     private String plantName;
     private String plantType;
     private String growthConditions;
+    private String moistureLevel;
+    private String wateringInterval;
+    private String temperatureLevel;
+    private String sunlightLevel;
+    private String nutrientRequired;
 
-    public Plant() {
-    }
+    private ArrayList<Reminder> reminders;
 
     /**
      * Constructor for Plant
      */
-    public Plant(int plantId, int gardenId, String plantName, String plantType, String growthConditions) {
-        this.plantId = plantId;
-        this.gardenId = gardenId;
-        this.plantName = plantName;
-        this.plantType = plantType;
-        this.growthConditions = growthConditions;
+    public Plant() {
+        this.reminders = new ArrayList<>();
     }
 
+
+    // Getters and Setters
     public Plant(String plantName){
         this.plantName = plantName;
     }
 
-    // Getters and Setters
     public int getPlantId() {
         return plantId;
     }
@@ -74,6 +77,58 @@ public class Plant implements Parcelable {
         this.growthConditions = growthConditions;
     }
 
+    public String getMoistureLevel() {
+        return moistureLevel;
+    }
+
+    public void setMoistureLevel(String moistureLevel) {
+        this.moistureLevel = moistureLevel;
+    }
+
+    public String getWateringInterval() {
+        return wateringInterval;
+    }
+
+    public void setWateringInterval(String wateringInterval) {
+        this.wateringInterval = wateringInterval;
+    }
+
+    public String getTemperatureLevel() {
+        return temperatureLevel;
+    }
+
+    public void setTemperatureLevel(String temperatureLevel) {
+        this.temperatureLevel = temperatureLevel;
+    }
+
+    public String getSunlightLevel() {
+        return sunlightLevel;
+    }
+
+    public void setSunlightLevel(String sunlightLevel) {
+        this.sunlightLevel = sunlightLevel;
+    }
+
+    public String getNutrientRequired() {
+        return nutrientRequired;
+    }
+
+    public void setNutrientRequired(String nutrientRequired) {
+        this.nutrientRequired = nutrientRequired;
+    }
+
+    public ArrayList<Reminder> getReminders() {
+        return reminders;
+    }
+
+    public void setReminders(ArrayList<Reminder> reminders) {
+        this.reminders = reminders;
+    }
+
+    public void addReminder(Reminder reminder) {
+        reminders.add(reminder);
+    }
+
     /**
      * Constructor for Plant
      */
@@ -83,6 +138,12 @@ public class Plant implements Parcelable {
         plantName = in.readString();
         plantType = in.readString();
         growthConditions = in.readString();
+        moistureLevel = in.readString();
+        wateringInterval = in.readString();
+        temperatureLevel = in.readString();
+        sunlightLevel = in.readString();
+        nutrientRequired = in.readString();
+        reminders = in.createTypedArrayList(Reminder.CREATOR);
     }
 
     /**
@@ -118,5 +179,11 @@ public class Plant implements Parcelable {
         parcel.writeString(plantName);
         parcel.writeString(plantType);
         parcel.writeString(growthConditions);
+        parcel.writeString(moistureLevel);
+        parcel.writeString(wateringInterval);
+        parcel.writeString(temperatureLevel);
+        parcel.writeString(sunlightLevel);
+        parcel.writeString(nutrientRequired);
+        parcel.writeTypedList(reminders);
     }
 }

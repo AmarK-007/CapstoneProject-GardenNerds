@@ -1,0 +1,173 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="16dp"
+    tools:context=".fragments.AddReminderFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/rgReminderType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <!--<LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">-->
+
+                    <RadioButton
+                        android:id="@+id/rbWatering"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:checked="true"
+                        android:text="@string/text_reminder_type_watering"
+                        android:textColor="@color/colorPrimary" />
+
+                    <RadioButton
+                        android:id="@+id/rbFertilize"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="@string/text_reminder_type_fertilize"
+                        android:textColor="@color/colorPrimary" />
+               <!-- </LinearLayout>-->
+
+               <!-- <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">-->
+
+                    <RadioButton
+                        android:id="@+id/rbSunlight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="@string/text_reminder_type_sunlight"
+                        android:textColor="@color/colorPrimary" />
+
+                    <RadioButton
+                        android:id="@+id/rbChangeSoil"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="@string/text_reminder_type_changeSoil"
+                        android:textColor="@color/colorPrimary" />
+                <!--</LinearLayout>-->
+            </RadioGroup>
+            <!-- CardView for Reminder Details -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:padding="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <!-- Frequency Name -->
+                    <EditText
+                        android:id="@+id/edtFrequency"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="@string/text_enter_frequency"
+                        android:inputType="time"
+                        android:theme="@style/CustomEditText" />
+
+                    <!-- Moisture Level -->
+                    <EditText
+                        android:id="@+id/edtMoistureLevel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="@string/text_enter_moisture_level"
+                        android:inputType="numberDecimal"
+                        android:theme="@style/CustomEditText" />
+
+                    <!--&lt;!&ndash; Watering Interval &ndash;&gt;
+                    <EditText
+                        android:id="@+id/edtWateringInterval"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="@string/text_enter_watering_interval"
+                        android:inputType="time"
+                        android:theme="@style/CustomEditText" />-->
+
+                    <!-- Temperature -->
+                    <EditText
+                        android:id="@+id/edtTemperature"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="@string/text_enter_temperature"
+                        android:inputType="number"
+                        android:theme="@style/CustomEditText" />
+
+
+                    <!-- Sunlight Required -->
+                    <EditText
+                        android:id="@+id/edtSunlightRequired"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="@string/text_enter_sunlight_required"
+                        android:inputType="number"
+                        android:theme="@style/CustomEditText" />
+
+                    <!-- Nutrition Required -->
+                    <EditText
+                        android:id="@+id/edtNutritionRequired"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="@string/text_enter_nutrition_required"
+                        android:inputType="text"
+                        android:theme="@style/CustomEditText" />
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+    <!-- Floating Action Button to add a new Reminder -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSaveReminder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="35dp"
+        android:backgroundTint="@color/colorAccent"
+        android:src="@drawable/ic_check" />
+
+
+</RelativeLayout>
