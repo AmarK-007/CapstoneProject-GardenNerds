@@ -23,7 +23,7 @@ import java.util.List;
  * Use the {@link GardenDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GardenDetailFragment extends Fragment {
+public class GardenDetailFragment extends Fragment implements View.OnClickListener, AddPlantFragment.OnPlantAddedListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +35,8 @@ public class GardenDetailFragment extends Fragment {
     private String mParam2;
 
     private FragmentGardenDetailBinding gardenDetailBinding;
+    MyPlantAdapter plantAdapter;
+    List<Plant> plantList = new ArrayList<>();
 
     public GardenDetailFragment() {
         // Required empty public constructor
@@ -80,14 +82,14 @@ public class GardenDetailFragment extends Fragment {
     private void init() {
         // Retrieve the passed garden object
         if (getArguments() != null) {
-            Garden garden = (Garden) getArguments().getSerializable("garden");
+            Garden garden = (Garden) getArguments().getParcelable("garden");
 
             // Set data to the views
             gardenDetailBinding.textViewGardenName.setText(garden.getName());
             gardenDetailBinding.textViewDescription.setText(garden.getDescription());
-            gardenDetailBinding.textViewSunlightPreference.setText("Sunlight Required: "+garden.getSunlightPreference());
-            gardenDetailBinding.textViewWateringFrequency.setText("Watering Frequency: "+garden.getWateringFrequency()+"days");
-            gardenDetailBinding.textViewMoistureLevel.setText("Garden Area: "+garden.getGardenArea());
+            gardenDetailBinding.textViewSunlightPreference.setText("Sunlight Required: " + garden.getSunlightPreference());
+            gardenDetailBinding.textViewWateringFrequency.setText("Watering Frequency: " + garden.getWateringFrequency() + "days");
+            gardenDetailBinding.textViewMoistureLevel.setText("Garden Area: " + garden.getGardenArea());
 
             // Use image loading library like Glide to load the image
             Glide.with(requireActivity())
@@ -96,32 +98,43 @@ public class GardenDetailFragment extends Fragment {
                     .into(gardenDetailBinding.imageViewGarden);
         }
 
-        gardenDetailBinding.fabAddPlant.setOnClickListener(v -> {
-            // Replace the current fragment with AddGardenFragment
-            requireActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.frames, new AddPlantFragment())
-                    .addToBackStack(null)  // Add this transaction to the back stack
-                    .commit();
-        });
+        gardenDetailBinding.fabAddPlant.setOnClickListener(this);
 
         setPlantAdapter();
     }
 
     private void setPlantAdapter() {
         // Example list of plants
-        List<Plant> plantList = new ArrayList<>();
+
         plantList.add(new Plant("White Rose"));
         plantList.add(new Plant("White Tulip"));
-        plantList.add(new Plant("Red Tulip"));
+       /* plantList.add(new Plant("Red Tulip"));
         plantList.add(new Plant("Pink Tulip"));
         plantList.add(new Plant("Red Rose"));
         plantList.add(new Plant("Orchid"));
-        plantList.add(new Plant("Dalia"));
+        plantList.add(new Plant("Dalia"));*/
 
         // Set up adapter and RecyclerView
-        MyPlantAdapter plantAdapter = new MyPlantAdapter(requireActivity(), plantList);
+        plantAdapter = new MyPlantAdapter(requireActivity(), plantList);
         gardenDetailBinding.recyclerViewPlants.setAdapter(plantAdapter);
         gardenDetailBinding.recyclerViewPlants.setLayoutManager(new LinearLayoutManager(requireActivity()));
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == gardenDetailBinding.fabAddPlant.getId()) {
+            // Replace the current fragment with AddPlantFragment
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frames, new AddPlantFragment())
+                    .addToBackStack(null)  // Add this transaction to the back stack
+                    .commit();
+        }
+    }
+
+    @Override
+    public void onPlantAdded(Plant plant) {
+        plantList.add(plant);
+        plantAdapter.notifyDataSetChanged();
     }
 }

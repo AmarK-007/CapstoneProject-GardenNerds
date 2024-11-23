@@ -57,6 +57,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -297,11 +298,9 @@ public class MeasurementFragment extends Fragment {
                 float area = calculateArea(points); // Calculate area once we have at least 2 points
                 Log.d(TAG, "Calculated Area: " + area);
                 //rounding off the area to 2 decimal places
-                DecimalFormat df = new DecimalFormat("#.##");
-                df.setRoundingMode(RoundingMode.HALF_UP);
-                String roundedArea = df.format(Double.parseDouble(area + ""));
-
-                displayMeasurement("Area: " + roundedArea + " sq. meters");
+                String squareFeet = Utility.getSquareMeterToSquareFeet(area + "");
+               // String roundedArea = String.format(Locale.getDefault(), "%.2f", Double.parseDouble(area + ""));
+                displayMeasurement("Area: " + squareFeet + " sq. feet");
             }
 
             break; // Exit after processing the first touch hit
@@ -449,7 +448,8 @@ public class MeasurementFragment extends Fragment {
     private String extractAreaValue(String measurement) {
         // Implement logic to extract the area value from the measurement string
         // Example: If measurement is "Area: 123 sq. meters", extract "123"
-        String extractedAreaValue = measurement.replace("Area: ", "");//.replace(" sq. meters", "");
+        String extractedAreaValue = measurement.replace("Area: ", "").replace(" sq. feet", "");
+        extractedAreaValue = extractedAreaValue.trim() + " ft x " + extractedAreaValue.trim() + " ft";
         Log.d(TAG, "Extracted Area Value: " + extractedAreaValue);
         return extractedAreaValue;
     }

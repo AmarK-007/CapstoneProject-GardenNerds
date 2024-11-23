@@ -53,7 +53,7 @@ public class MyGardenAdapter extends RecyclerView.Adapter<MyGardenAdapter.MyGard
         // Handle item click
         holder.itemView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putSerializable("garden", garden); // Pass the garden object to the detail fragment
+            bundle.putParcelable("garden", garden); // Pass the garden object to the detail fragment
             GardenDetailFragment fragment = new GardenDetailFragment();
             fragment.setArguments(bundle);
 

@@ -14,6 +14,7 @@ import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.adapters.MyGardenAdapter;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentMyGardenBinding;
 import com.android.msd.capstone.project.gardennerds.models.Garden;
+import com.android.msd.capstone.project.gardennerds.models.Plant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.List;
  * Use the {@link MyGardenFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyGardenFragment extends Fragment {
+public class MyGardenFragment extends Fragment implements View.OnClickListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -81,14 +82,7 @@ public class MyGardenFragment extends Fragment {
 
     private void init() {
 
-        myGardenBinding.fabAddGarden.setOnClickListener(v -> {
-            // Replace the current fragment with AddGardenFragment
-            requireActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.frames, new AddGardenFragment())
-                    .addToBackStack(null)  // Add this transaction to the back stack
-                    .commit();
-        });
+        myGardenBinding.fabAddGarden.setOnClickListener(this);
 
     }
 
@@ -122,9 +116,24 @@ public class MyGardenFragment extends Fragment {
 
     private void loadGardens() {
         // Add demo gardens (URL is null for placeholder image)
-        gardenList.add(new Garden("Indoor Garden", "This is garden details and description", "150", "", "", "Shady", "3", null));
-        gardenList.add(new Garden("Backyard Garden", "This is garden details and description", "300", "", "", "Partial Sunlight", "2", null));
-        gardenList.add(new Garden("Frontyard Garden", "This is garden details and description", "200", "", "", "Shady", "3", null));
-        gardenList.add(new Garden("Balcony Garden", "This is garden details and description", "50", "", "", "Full Sunlight", "1", null));
+        gardenList.add(new Garden("Indoor Garden", "This is garden details and description", "150", "", "", "Shady", "3", "", 1, null));
+        gardenList.add(new Garden("Backyard Garden", "This is garden details and description", "300", "", "", "Partial Sunlight", "2", "", 1, null));
+        gardenList.add(new Garden("Frontyard Garden", "This is garden details and description", "200", "", "", "Shady", "3", "", 1, null));
+        gardenList.add(new Garden("Balcony Garden", "This is garden details and description", "50", "", "", "Full Sunlight", "1", "", 1, null));
     }
+
+    @Override
+    public void onClick(View v) {
+        // Handle click events
+        if (v.getId() == myGardenBinding.fabAddGarden.getId()) {
+            // Replace the current fragment with AddGardenFragment
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frames, new AddGardenFragment())
+                    .addToBackStack(null)  // Add this transaction to the back stack
+                    .commit();
+        }
+    }
+
+
 }

@@ -1,14 +1,215 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="16dp"
     tools:context=".fragments.AddPlantFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- CardView for Plant Details -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:padding="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <!-- Plant Type -->
+                    <RadioGroup
+                        android:id="@+id/rgPlantType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rbIndoor"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:buttonTint="@color/white"
+                                android:checked="true"
+                                android:text="@string/text_indoor"
+                                android:textColor="@color/white" />
+
+                            <RadioButton
+                                android:id="@+id/rbOutdoor"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:buttonTint="@color/white"
+                                android:text="@string/text_outdoor"
+                                android:textColor="@color/white" />
+                        </LinearLayout>
+                    </RadioGroup>
+
+                    <!-- Plant Name -->
+                    <EditText
+                        android:id="@+id/edtPlantName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="@string/text_enter_plant_name"
+                        android:inputType="text"
+                        android:theme="@style/CustomEditText" />
+                    <!-- Plant Moisture Level -->
+                    <EditText
+                        android:id="@+id/edtPlantMoistureLevel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="@string/text_enter_moisture_level"
+                        android:inputType="numberDecimal"
+                        android:theme="@style/CustomEditText" />
+
+                    <!-- Plant Temperature -->
+                    <EditText
+                        android:id="@+id/edtPlantTemperature"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="@string/text_enter_temperature"
+                        android:inputType="number"
+                        android:theme="@style/CustomEditText" />
+
+                    <!-- Plant Watering Interval -->
+                    <EditText
+                        android:id="@+id/edtPlantWateringInterval"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="@string/text_enter_watering_interval"
+                        android:inputType="time"
+                        android:theme="@style/CustomEditText" />
+
+                    <!-- Plant Sunlight Required -->
+                    <EditText
+                        android:id="@+id/edtPlantSunlightRequired"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="@string/text_enter_sunlight_required"
+                        android:inputType="number"
+                        android:theme="@style/CustomEditText" />
+
+                    <!-- Plant Nutrition Required -->
+                    <EditText
+                        android:id="@+id/edtPlantNutritionRequired"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="@string/text_enter_nutrition_required"
+                        android:inputType="text"
+                        android:theme="@style/CustomEditText" />
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Divider -->
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayoutGardenDetails" />
+
+            <!-- My Reminders Section -->
+            <RelativeLayout
+                android:id="@+id/rlTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider">
+
+                <!-- My Reminders Title -->
+                <TextView
+                    android:id="@+id/textViewMyPlants"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/text_reminders"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <!-- FAB positioned opposite to My Reminders title -->
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabAddReminder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:contentDescription="@string/text_add_reminder"
+                    android:src="@drawable/ic_add"
+                    app:fabSize="mini" />
+            </RelativeLayout>
+
+            <!-- TextView for empty list scenario -->
+            <TextView
+                android:id="@+id/tvNoReminders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:text="@string/text_no_reminders_added_yet"
+                android:textSize="16sp"
+                android:visibility="gone" />
+            <!-- RecyclerView for Reminders -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewReminders"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp" />
+
+        </LinearLayout>
+    </ScrollView>
+    <!-- Floating Action Button to add a new Plant -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSavePlant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="35dp"
+        android:backgroundTint="@color/colorAccent"
+        android:src="@drawable/ic_save" />
+
+
+</RelativeLayout>
