@@ -20,6 +20,9 @@ import com.android.msd.capstone.project.gardennerds.fragments.HomeFragment;
 import com.android.msd.capstone.project.gardennerds.models.User;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -224,4 +227,127 @@ public class Utility {
         // Commit the transaction
         fragmentTransaction.commit();
     }
+
+    /**
+     * getSquareMeterToSquareFeet method
+     *
+     * @param squareMeter
+     * @return
+     */
+    public static String getSquareMeterToSquareFeet(String squareMeter) {
+        // Conversion factor from square meters to square feet
+        return String.format(Locale.getDefault(), "%.2f", Double.parseDouble(squareMeter) * 10.7639);
+    }
+
+    /**
+     * getReminderTypeString method
+     *
+     * @param context
+     * @param reminderTypeId
+     */
+    public static String getReminderTypeString(Context context, int reminderTypeId) {
+        switch (reminderTypeId) {
+            case Constants.REMINDER_TYPE_WATER:
+                return context.getString(R.string.text_reminder_type_watering);
+            case Constants.REMINDER_TYPE_FERTILIZE:
+                return context.getString(R.string.text_reminder_type_fertilize);
+            case Constants.REMINDER_TYPE_SUNLIGHT:
+                return context.getString(R.string.text_reminder_type_sunlight);
+            case Constants.REMINDER_TYPE_CHANGE_SOIL:
+                return context.getString(R.string.text_reminder_type_changeSoil);
+            default:
+                return "UNKNOWN";
+        }
+    }
+
+    /**
+     * getReminderTypeId method
+     *
+     * @param context
+     * @param reminderTypeString
+     */
+    public static int getReminderTypeId(Context context, String reminderTypeString) {
+        if (reminderTypeString.equals(context.getString(R.string.text_reminder_type_watering))) {
+            return Constants.REMINDER_TYPE_WATER;
+        } else if (reminderTypeString.equals(context.getString(R.string.text_reminder_type_fertilize))) {
+            return Constants.REMINDER_TYPE_FERTILIZE;
+        } else if (reminderTypeString.equals(context.getString(R.string.text_reminder_type_sunlight))) {
+            return Constants.REMINDER_TYPE_SUNLIGHT;
+        } else if (reminderTypeString.equals(context.getString(R.string.text_reminder_type_changeSoil))) {
+            return Constants.REMINDER_TYPE_CHANGE_SOIL;
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+     * getDateTimeInSimpleDateFormat method
+     *
+     * @return String
+     */
+    public static String getDateTimeInSimpleDateFormat() {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+    }
+
+    /**
+     * getCurrentDateTime method
+     *
+     * @return String
+     */
+    public static String getCurrentDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
+    /**
+     * getDateFromString method
+     *
+     * @param dateStr
+     * @return long
+     */
+    public static long getDateFromString(String dateStr) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date date = format.parse(dateStr);
+            return date.getTime();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     * getDateInFormatFromString method
+     *
+     * @param dateStr
+     * @return String
+     */
+    public static String getDateInFormatFromString(String dateStr) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatTo = new SimpleDateFormat("yyyy-MM-dd HH:mm a");
+        try {
+            Date date = format.parse(dateStr);
+            return formatTo.format(date);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
+     * getCurrentTime method
+     *
+     * @return String
+     */
+    public static String getCurrentTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
 }

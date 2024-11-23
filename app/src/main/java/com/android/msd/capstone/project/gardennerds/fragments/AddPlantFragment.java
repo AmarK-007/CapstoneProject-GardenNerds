@@ -7,16 +7,28 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.databinding.FragmentAddPlantBinding;
+import com.android.msd.capstone.project.gardennerds.models.Plant;
+import com.android.msd.capstone.project.gardennerds.models.Reminder;
+import com.android.msd.capstone.project.gardennerds.utils.Utility;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AddPlantFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddPlantFragment extends Fragment {
+public class AddPlantFragment extends Fragment implements View.OnClickListener, AddReminderFragment.OnReminderAddedListener {
 
+    private static final String TAG = AddPlantFragment.class.getSimpleName();
+    private FragmentAddPlantBinding addPlantBinding;
+
+    private List<Reminder> reminderlist = new ArrayList<>();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -61,6 +73,71 @@ public class AddPlantFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_plant, container, false);
+        addPlantBinding = FragmentAddPlantBinding.inflate(inflater, container, false);
+        init();
+        return addPlantBinding.getRoot();
+    }
+
+    private void init() {
+        addPlantBinding.fabAddReminder.setOnClickListener(this);
+        addPlantBinding.fabSavePlant.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == addPlantBinding.fabSavePlant.getId()) {
+            savePlant();
+        } else if (v.getId() == addPlantBinding.fabAddReminder.getId()) {
+            // Replace the current fragment with AddPlantFragment
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frames, new AddReminderFragment())
+                    .addToBackStack(null)  // Add this transaction to the back stack
+                    .commit();
+        }
+    }
+
+    private void savePlant() {
+        if (validatePlant()) {
+            Plant plant = new Plant();
+            plant.setPlantName(addPlantBinding.edtPlantName.getText().toString());
+            plant.setPlantType(addPlantBinding.rgPlantType.getCheckedRadioButtonId() == R.id.rbIndoor ? getString(R.string.text_indoor) : getString(R.string.text_outdoor));
+            plant.setMoistureLevel(addPlantBinding.edtPlantMoistureLevel.getText().toString());
+            plant.setTemperatureLevel(addPlantBinding.edtPlantTemperature.getText().toString());
+            plant.setWateringInterval(addPlantBinding.edtPlantWateringInterval.getText().toString());
+            plant.setSunlightLevel(addPlantBinding.edtPlantSunlightRequired.getText().toString());
+            plant.setNutrientRequired(addPlantBinding.edtPlantNutritionRequired.getText().toString());
+
+            // Pass data back to GardenDetailsFragment
+            if (getParentFragment() instanceof OnPlantAddedListener) {
+                ((OnPlantAddedListener) getParentFragment()).onPlantAdded(plant);
+            }
+            // move back to previous fragment with plant object
+            getActivity().getSupportFragmentManager().popBackStack();
+        }
+    }
+
+    private boolean validatePlant() {
+        if (addPlantBinding.edtPlantName.getText().toString().isEmpty() ||
+                addPlantBinding.rgPlantType.getCheckedRadioButtonId() == -1 ||
+                addPlantBinding.edtPlantMoistureLevel.getText().toString().isEmpty() ||
+                addPlantBinding.edtPlantTemperature.getText().toString().isEmpty() ||
+                addPlantBinding.edtPlantWateringInterval.getText().toString().isEmpty() ||
+                addPlantBinding.edtPlantSunlightRequired.getText().toString().isEmpty() ||
+                addPlantBinding.edtPlantNutritionRequired.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void onReminderAdded(Reminder reminder) {
+        reminderlist.add(reminder);
+
+    }
+
+    public interface OnPlantAddedListener {
+        void onPlantAdded(Plant plant);
     }
 }

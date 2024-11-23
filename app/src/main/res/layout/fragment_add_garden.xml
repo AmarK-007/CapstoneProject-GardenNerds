@@ -1,15 +1,17 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
     android:padding="16dp"
-    android:background="@android:color/white">
+    tools:context=".fragments.AddGardenFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <!-- Image Upload Section -->
         <ImageView
@@ -23,71 +25,82 @@
 
         <Button
             android:id="@+id/btn_upload_photo"
+            style="@style/button_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginBottom="24dp"
-            android:text="Upload Photo" />
+            android:fontFamily="@fonts/roboto_light"
+            android:text="Upload Photo"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <!-- CardView for Garden Details -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
             android:layout_marginBottom="16dp"
-            android:padding="16dp">
+            android:padding="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:padding="8dp"
-                android:gravity="center_horizontal">
+                android:padding="8dp">
 
                 <!-- Garden Name -->
                 <EditText
                     android:id="@+id/et_garden_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Garden Name"
                     android:layout_marginBottom="16dp"
-                    android:inputType="text" />
+                    android:hint="Enter Garden Name"
+                    android:inputType="text"
+                    android:theme="@style/CustomEditText" />
 
                 <!-- Garden Description -->
                 <EditText
                     android:id="@+id/et_garden_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Garden Description"
                     android:layout_marginBottom="16dp"
+                    android:hint="Enter Garden Description"
                     android:inputType="textMultiLine"
-                    android:maxLines="2" />
+                    android:maxLines="2"
+                    android:theme="@style/CustomEditText" />
 
                 <!-- Watering Interval -->
                 <EditText
                     android:id="@+id/et_watering_interval"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Set Watering Interval (in days)"
                     android:layout_marginBottom="16dp"
-                    android:inputType="number" />
+                    android:hint="Set Watering Interval (in days)"
+                    android:inputType="number"
+                    android:theme="@style/CustomEditText" />
 
                 <!-- Garden Area -->
                 <EditText
                     android:id="@+id/et_garden_area"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Garden Area (in sq. ft.)"
                     android:layout_marginBottom="16dp"
-                    android:inputType="numberDecimal" />
+                    android:hint="Enter Garden Area (in sq. ft.)"
+                    android:inputType="numberDecimal"
+                    android:theme="@style/CustomEditText" />
 
                 <!-- Sunlight Preference -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:text="Sunlight Preference:"
                     android:textSize="16sp"
-                    android:layout_marginBottom="8dp" />
+                    android:theme="@style/CustomEditText" />
 
                 <RadioGroup
                     android:id="@+id/rg_sunlight"
@@ -99,69 +112,91 @@
                         android:id="@+id/rb_shady"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Shady" />
+                        android:buttonTint="@color/white"
+                        android:text="Shady"
+                        android:textColor="@color/white" />
 
                     <RadioButton
                         android:id="@+id/rb_partial_sunlight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Partial Sunlight" />
+                        android:buttonTint="@color/white"
+                        android:text="Partial Sunlight"
+                        android:textColor="@color/white" />
 
                     <RadioButton
                         android:id="@+id/rb_full_sunlight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Full Sunlight" />
+                        android:buttonTint="@color/white"
+                        android:text="Full Sunlight"
+                        android:textColor="@color/white" />
                 </RadioGroup>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Get Soil Sensor Data Button -->
-        <Button
-            android:id="@+id/btn_get_soil_sensor_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="Get Soil Sensor Data" />
-
-        <!-- Temperature Display -->
-        <TextView
-            android:id="@+id/tv_temperature"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="Soil Temperature: --°C"
-            android:textSize="16sp"
-            android:textColor="@android:color/black" />
+            android:orientation="vertical"
+            android:padding="16dp">
+            <!-- Get Soil Sensor Data Button -->
+            <Button
+                android:id="@+id/btn_get_soil_sensor_data"
+                style="@style/button_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@fonts/roboto_light"
+                android:text="Get Soil Sensor Data"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-        <!-- Moisture Display -->
-        <TextView
-            android:id="@+id/tv_moisture"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="Soil Moisture: --%"
-            android:textSize="16sp"
-            android:textColor="@android:color/black" />
+            <!-- Temperature Display -->
+            <TextView
+                android:id="@+id/tv_temperature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Soil Temperature: --°C"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
-        <!-- Surface Temperature Display -->
-        <TextView
-            android:id="@+id/tv_surface_temperature"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="Surface Temperature: --°C"
-            android:textSize="16sp"
-            android:textColor="@android:color/black" />
+            <!-- Moisture Display -->
+            <TextView
+                android:id="@+id/tv_moisture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Soil Moisture: --%"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
-        <!-- Save Button -->
-        <Button
-            android:id="@+id/btn_save_garden"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save Garden"
-            android:layout_marginTop="16dp" />
+            <!-- Surface Temperature Display -->
+            <TextView
+                android:id="@+id/tv_surface_temperature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Surface Temperature: --°C"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <!-- Save Button -->
+            <Button
+                android:id="@+id/btn_save_garden"
+                style="@style/button_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@fonts/roboto_light"
+                android:text="Save Garden"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

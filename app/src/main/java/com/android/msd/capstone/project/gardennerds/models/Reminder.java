@@ -14,20 +14,18 @@ public class Reminder implements Parcelable {
     private String dateTime;
     private int plantId;
     private int reminderTypeId;
-
-    public Reminder() {
-    }
+    private String frequency;
+    private String moistureLevel;
+    private String temperatureLevel;
+    private String sunlightLevel;
+    private String nutrientRequired;
 
     /**
      * Constructor for Reminder
      */
-    public Reminder(int reminderId, String message, String dateTime, int plantId, int reminderTypeId) {
-        this.reminderId = reminderId;
-        this.message = message;
-        this.dateTime = dateTime;
-        this.plantId = plantId;
-        this.reminderTypeId = reminderTypeId;
+    public Reminder() {
     }
+
 
     // Getters and Setters
     public int getReminderId() {
@@ -70,6 +68,46 @@ public class Reminder implements Parcelable {
         this.reminderTypeId = reminderTypeId;
     }
 
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+
+    public String getMoistureLevel() {
+        return moistureLevel;
+    }
+
+    public void setMoistureLevel(String moistureLevel) {
+        this.moistureLevel = moistureLevel;
+    }
+
+    public String getTemperatureLevel() {
+        return temperatureLevel;
+    }
+
+    public void setTemperatureLevel(String temperatureLevel) {
+        this.temperatureLevel = temperatureLevel;
+    }
+
+    public String getSunlightLevel() {
+        return sunlightLevel;
+    }
+
+    public void setSunlightLevel(String sunlightLevel) {
+        this.sunlightLevel = sunlightLevel;
+    }
+
+    public String getNutrientRequired() {
+        return nutrientRequired;
+    }
+
+    public void setNutrientRequired(String nutrientRequired) {
+        this.nutrientRequired = nutrientRequired;
+    }
+
     /**
      * Constructor for Reminder
      */
@@ -79,6 +117,11 @@ public class Reminder implements Parcelable {
         dateTime = in.readString();
         plantId = in.readInt();
         reminderTypeId = in.readInt();
+        frequency = in.readString();
+        moistureLevel = in.readString();
+        temperatureLevel = in.readString();
+        sunlightLevel = in.readString();
+        nutrientRequired = in.readString();
     }
 
     /**
@@ -114,5 +157,10 @@ public class Reminder implements Parcelable {
         parcel.writeString(dateTime);
         parcel.writeInt(plantId);
         parcel.writeInt(reminderTypeId);
+        parcel.writeString(frequency);
+        parcel.writeString(moistureLevel);
+        parcel.writeString(temperatureLevel);
+        parcel.writeString(sunlightLevel);
+        parcel.writeString(nutrientRequired);
     }
 }

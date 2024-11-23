@@ -1,8 +1,14 @@
 package com.android.msd.capstone.project.gardennerds.models;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Garden implements Serializable {
+import androidx.annotation.NonNull;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Garden implements Parcelable {
 
     private int gardenId = -1;
     private String name;
@@ -15,7 +21,9 @@ public class Garden implements Serializable {
     private String imageUri;  // URL or URI to the garden image
     private int userId = -1;
 
-    public Garden(String name, String description, String gardenArea,String gardenLatitude, String gardenLongitude, String sunlightPreference, String wateringFrequency, String imageUri) {
+    private ArrayList<Plant> plants;
+
+    public Garden(String name, String description, String gardenArea, String gardenLatitude, String gardenLongitude, String sunlightPreference, String wateringFrequency, String imageUri, int userId, ArrayList<Plant> plants) {
 
         this.name = name;
         this.description = (description != null && !description.isEmpty()) ? description : "Description";
@@ -25,9 +33,27 @@ public class Garden implements Serializable {
         this.sunlightPreference = (sunlightPreference != null && !sunlightPreference.isEmpty()) ? sunlightPreference : "";
         this.wateringFrequency = (wateringFrequency != null && !wateringFrequency.isEmpty()) ? wateringFrequency : "";
         this.imageUri = imageUri;
+        this.userId = userId;
+        this.plants = plants;
+
     }
 
     public Garden() {
+        this.plants = new ArrayList<>();
+    }
+
+    protected Garden(Parcel in) {
+        gardenId = in.readInt();
+        name = in.readString();
+        description = in.readString();
+        gardenArea = in.readString();
+        gardenLatitude = in.readString();
+        gardenLongitude = in.readString();
+        sunlightPreference = in.readString();
+        wateringFrequency = in.readString();
+        imageUri = in.readString();
+        userId = in.readInt();
+        plants = in.createTypedArrayList(Plant.CREATOR);
     }
 
     public int getGardenId() {
@@ -109,4 +135,49 @@ public class Garden implements Serializable {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    public ArrayList<Plant> getPlants() {
+        return plants;
+    }
+
+    public void setPlants(ArrayList<Plant> plants) {
+        this.plants = plants;
+    }
+
+    public void addPlant(Plant plant) {
+        this.plants.add(plant);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeInt(gardenId);
+        dest.writeString(name);
+        dest.writeString(description);
+        dest.writeString(gardenArea);
+        dest.writeString(gardenLatitude);
+        dest.writeString(gardenLongitude);
+        dest.writeString(sunlightPreference);
+        dest.writeString(wateringFrequency);
+        dest.writeString(imageUri);
+        dest.writeInt(userId);
+        dest.writeTypedList(plants);
+    }
+
+    public static final Creator<Garden> CREATOR = new Creator<Garden>() {
+        @Override
+        public Garden createFromParcel(Parcel in) {
+            return new Garden(in);
+        }
+
+        @Override
+        public Garden[] newArray(int size) {
+            return new Garden[size];
+        }
+    };
+
 }
