@@ -17,10 +17,10 @@ import java.util.List;
 public class MyPlantAdapter extends RecyclerView.Adapter<MyPlantAdapter.PlantViewHolder> {
 
     private final Context context;
-    private final List<Plant> plantList;
+    private List<Plant> plantList;
 
     // Constructor
-    public MyPlantAdapter(Context context, List<Plant> plantList) {
+    public MyPlantAdapter(List<Plant> plantList, Context context) {
         this.context = context;
         this.plantList = plantList;
     }
@@ -49,6 +49,12 @@ public class MyPlantAdapter extends RecyclerView.Adapter<MyPlantAdapter.PlantVie
     @Override
     public int getItemCount() {
         return plantList.size();
+    }
+
+    public void updateDataset(List<Plant> newPlantsList) {
+        this.plantList.clear();
+        this.plantList = newPlantsList;
+        notifyDataSetChanged(); // Notify RecyclerView of data changes
     }
 
     // ViewHolder class

@@ -6,13 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.adapters.MyPlantAdapter;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentGardenDetailBinding;
+import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
 import com.android.msd.capstone.project.gardennerds.models.Garden;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
+import com.android.msd.capstone.project.gardennerds.viewmodels.PlantViewModel;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ import java.util.List;
  * Use the {@link GardenDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GardenDetailFragment extends Fragment implements View.OnClickListener, AddPlantFragment.OnPlantAddedListener {
+public class GardenDetailFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,6 +40,8 @@ public class GardenDetailFragment extends Fragment implements View.OnClickListen
     private FragmentGardenDetailBinding gardenDetailBinding;
     MyPlantAdapter plantAdapter;
     List<Plant> plantList = new ArrayList<>();
+
+    private PlantViewModel plantViewModel;
 
     public GardenDetailFragment() {
         // Required empty public constructor
@@ -100,24 +105,29 @@ public class GardenDetailFragment extends Fragment implements View.OnClickListen
 
         gardenDetailBinding.fabAddPlant.setOnClickListener(this);
 
+        // Get the ViewModel
+        plantViewModel = new ViewModelProvider(requireActivity()).get(PlantViewModel.class);
+
         setPlantAdapter();
     }
 
     private void setPlantAdapter() {
-        // Example list of plants
-
-        plantList.add(new Plant("White Rose"));
-        plantList.add(new Plant("White Tulip"));
-       /* plantList.add(new Plant("Red Tulip"));
-        plantList.add(new Plant("Pink Tulip"));
-        plantList.add(new Plant("Red Rose"));
-        plantList.add(new Plant("Orchid"));
-        plantList.add(new Plant("Dalia"));*/
 
         // Set up adapter and RecyclerView
-        plantAdapter = new MyPlantAdapter(requireActivity(), plantList);
-        gardenDetailBinding.recyclerViewPlants.setAdapter(plantAdapter);
         gardenDetailBinding.recyclerViewPlants.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        plantAdapter = new MyPlantAdapter(new ArrayList<>(),requireActivity());
+        gardenDetailBinding.recyclerViewPlants.setAdapter(plantAdapter);
+
+
+        // Observe the plant list for updates
+        plantViewModel.getPlantList().observe(getViewLifecycleOwner(), plants -> {
+            if (plants != null) {
+                plantAdapter.updateDataset(plants); // Refresh the RecyclerView
+            }
+        });
+
+        // Load initial plants for the garden (optional)
+        loadInitialPlants(2); // Replace 1 with the actual garden ID
     }
 
     @Override
@@ -132,9 +142,10 @@ public class GardenDetailFragment extends Fragment implements View.OnClickListen
         }
     }
 
-    @Override
-    public void onPlantAdded(Plant plant) {
-        plantList.add(plant);
-        plantAdapter.notifyDataSetChanged();
+    private void loadInitialPlants(int gardenId) {
+        //Fetch plants from the database for the given garden ID
+        PlantDataSource plantDataSource = new PlantDataSource(requireContext());
+        List<Plant> plants = plantDataSource.getPlantsByGardenId(gardenId);
+        plantViewModel.setPlantList(plants);
     }
 }

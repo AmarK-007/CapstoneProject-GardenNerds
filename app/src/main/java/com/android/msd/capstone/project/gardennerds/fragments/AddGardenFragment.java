@@ -18,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentAddGardenBinding;
 import com.android.msd.capstone.project.gardennerds.db.GardenDataSource;
@@ -26,6 +28,7 @@ import com.android.msd.capstone.project.gardennerds.network.RetrofitClient;
 import com.android.msd.capstone.project.gardennerds.network.response.SoilDataResponse;
 import com.android.msd.capstone.project.gardennerds.network.service.GetSoilDataService;
 import com.android.msd.capstone.project.gardennerds.utils.Constants;
+import com.android.msd.capstone.project.gardennerds.viewmodels.GardenViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -71,6 +74,7 @@ public class AddGardenFragment extends Fragment {
     private FusedLocationProviderClient fusedLocationClient;
     private double latitude, longitude;
     private GardenDataSource gardenDataSource;
+    private GardenViewModel gardenViewModel;
 
     public AddGardenFragment() {
         // Required empty public constructor
@@ -119,6 +123,9 @@ public class AddGardenFragment extends Fragment {
 
         //Initialize Garden datasource
         gardenDataSource = new GardenDataSource(requireActivity());
+
+        // Get the ViewModel
+        gardenViewModel = new ViewModelProvider(requireActivity()).get(GardenViewModel.class);
 
         // Initialize FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
@@ -297,6 +304,7 @@ public class AddGardenFragment extends Fragment {
 
         // Create Garden object
         Garden garden = new Garden();
+        garden.setName(name);
         garden.setDescription(description);
         garden.setGardenArea(areaMeasurement);
         garden.setSunlightPreference(sunlightPreference);
@@ -311,8 +319,13 @@ public class AddGardenFragment extends Fragment {
 
         if (isInserted) {
             Toast.makeText(requireContext(), "Garden saved successfully!", Toast.LENGTH_SHORT).show();
-            // Optionally clear form
-            clearForm();
+
+            // Fetch updated list and update ViewModel
+            List<Garden> updatedGardens = gardenDataSource.getAllGardens();
+            gardenViewModel.setGardenList(updatedGardens);
+
+            // Navigate back to the previous fragment
+            requireActivity().getSupportFragmentManager().popBackStack();
         } else {
             Toast.makeText(requireContext(), "Failed to save garden!", Toast.LENGTH_SHORT).show();
         }

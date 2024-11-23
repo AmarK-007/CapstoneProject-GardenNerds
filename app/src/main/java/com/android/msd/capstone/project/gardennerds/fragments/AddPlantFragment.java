@@ -1,19 +1,20 @@
 package com.android.msd.capstone.project.gardennerds.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentAddPlantBinding;
+import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
-import com.android.msd.capstone.project.gardennerds.utils.Utility;
+import com.android.msd.capstone.project.gardennerds.viewmodels.PlantViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,8 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
     private FragmentAddPlantBinding addPlantBinding;
 
     private List<Reminder> reminderlist = new ArrayList<>();
+    private PlantViewModel plantViewModel;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -81,6 +84,9 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
     private void init() {
         addPlantBinding.fabAddReminder.setOnClickListener(this);
         addPlantBinding.fabSavePlant.setOnClickListener(this);
+
+        // Get the ViewModel
+        plantViewModel = new ViewModelProvider(requireActivity()).get(PlantViewModel.class);
     }
 
     @Override
@@ -98,36 +104,86 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
     }
 
     private void savePlant() {
-        if (validatePlant()) {
+        if (validateInputs()) {
             Plant plant = new Plant();
             plant.setPlantName(addPlantBinding.edtPlantName.getText().toString());
-            plant.setPlantType(addPlantBinding.rgPlantType.getCheckedRadioButtonId() == R.id.rbIndoor ? getString(R.string.text_indoor) : getString(R.string.text_outdoor));
+            plant.setPlantType(getPlantType());
             plant.setMoistureLevel(addPlantBinding.edtPlantMoistureLevel.getText().toString());
             plant.setTemperatureLevel(addPlantBinding.edtPlantTemperature.getText().toString());
             plant.setWateringInterval(addPlantBinding.edtPlantWateringInterval.getText().toString());
-            plant.setSunlightLevel(addPlantBinding.edtPlantSunlightRequired.getText().toString());
+            plant.setSunlightLevel(getSunlightPreference());
             plant.setNutrientRequired(addPlantBinding.edtPlantNutritionRequired.getText().toString());
+            plant.setGardenId(2); //Replace 2 with garden id
 
-            // Pass data back to GardenDetailsFragment
-            if (getParentFragment() instanceof OnPlantAddedListener) {
-                ((OnPlantAddedListener) getParentFragment()).onPlantAdded(plant);
+            // Insert into the database
+            PlantDataSource plantDataSource = new PlantDataSource(requireContext());
+            boolean isInserted = plantDataSource.insertPlant(plant);
+
+            if (isInserted) {
+                Toast.makeText(requireContext(), "Plant added successfully!", Toast.LENGTH_SHORT).show();
+
+                // Fetch updated list of plants and update ViewModel
+                List<Plant> updatedPlants = plantDataSource.getPlantsByGardenId(2); // Replace 2 with the garden ID
+                plantViewModel.setPlantList(updatedPlants);
+
+                getActivity().getSupportFragmentManager().popBackStack();
             }
-            // move back to previous fragment with plant object
-            getActivity().getSupportFragmentManager().popBackStack();
         }
     }
 
-    private boolean validatePlant() {
-        if (addPlantBinding.edtPlantName.getText().toString().isEmpty() ||
-                addPlantBinding.rgPlantType.getCheckedRadioButtonId() == -1 ||
-                addPlantBinding.edtPlantMoistureLevel.getText().toString().isEmpty() ||
-                addPlantBinding.edtPlantTemperature.getText().toString().isEmpty() ||
-                addPlantBinding.edtPlantWateringInterval.getText().toString().isEmpty() ||
-                addPlantBinding.edtPlantSunlightRequired.getText().toString().isEmpty() ||
-                addPlantBinding.edtPlantNutritionRequired.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+    // Java example
+    public boolean validateInputs() {
+        String plantName = addPlantBinding.edtPlantName.getText().toString().trim();
+        String moistureLevel = addPlantBinding.edtPlantMoistureLevel.getText().toString().trim();
+        String temperature = addPlantBinding.edtPlantTemperature.getText().toString().trim();
+        String wateringInterval = addPlantBinding.edtPlantWateringInterval.getText().toString().trim();
+        String nutritionRequired = addPlantBinding.edtPlantNutritionRequired.getText().toString().trim();
+
+        // Validate Plant Name
+        if (plantName.isEmpty()) {
+            addPlantBinding.edtPlantName.setError("Plant name is required");
             return false;
         }
+
+        // Validate Moisture Level (Decimal number)
+        if (moistureLevel.isEmpty()) {
+            addPlantBinding.edtPlantMoistureLevel.setError("Moisture level is required");
+            return false;
+        } else {
+            try {
+                Double.parseDouble(moistureLevel);
+            } catch (NumberFormatException e) {
+                addPlantBinding.edtPlantMoistureLevel.setError("Invalid moisture level");
+                return false;
+            }
+        }
+
+        // Validate Temperature (Integer number)
+        if (temperature.isEmpty()) {
+            addPlantBinding.edtPlantTemperature.setError("Temperature is required");
+            return false;
+        } else {
+            try {
+                Integer.parseInt(temperature);
+            } catch (NumberFormatException e) {
+                addPlantBinding.edtPlantTemperature.setError("Invalid temperature");
+                return false;
+            }
+        }
+
+        // Validate Watering Interval (Time format)
+        if (wateringInterval.isEmpty()) {
+            addPlantBinding.edtPlantWateringInterval.setError("Watering interval is required");
+            return false;
+        }
+
+        // Validate Nutrition Requirement
+        if (nutritionRequired.isEmpty()) {
+            addPlantBinding.edtPlantNutritionRequired.setError("Nutrition required is required");
+            return false;
+        }
+
+        // All validations passed
         return true;
     }
 
@@ -139,5 +195,19 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
 
     public interface OnPlantAddedListener {
         void onPlantAdded(Plant plant);
+    }
+
+    private String getSunlightPreference() {
+
+        if (addPlantBinding.rbFullSunlight.isChecked()) return "Full Sunlight";
+        else if (addPlantBinding.rbPartialSunlight.isChecked()) return "PartialSunlight";
+        else if (addPlantBinding.rbShady.isChecked()) return "Shady";
+        else return "";
+    }
+
+    private String getPlantType() {
+
+        if (addPlantBinding.rbIndoor.isChecked()) return "Indoor";
+        else return "Outdoor";
     }
 }

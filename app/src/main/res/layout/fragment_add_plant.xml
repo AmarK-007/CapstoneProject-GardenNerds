@@ -36,35 +36,40 @@
                     android:padding="8dp">
 
                     <!-- Plant Type -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginBottom="8dp"
+                        android:text="Plant Type:"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
                     <RadioGroup
                         android:id="@+id/rgPlantType"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <RadioButton
+                            android:id="@+id/rbIndoor"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_weight="1"
+                            android:buttonTint="@color/white"
+                            android:checked="true"
+                            android:text="@string/text_indoor"
+                            android:textColor="@color/white" />
 
-                            <RadioButton
-                                android:id="@+id/rbIndoor"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:buttonTint="@color/white"
-                                android:checked="true"
-                                android:text="@string/text_indoor"
-                                android:textColor="@color/white" />
-
-                            <RadioButton
-                                android:id="@+id/rbOutdoor"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:buttonTint="@color/white"
-                                android:text="@string/text_outdoor"
-                                android:textColor="@color/white" />
-                        </LinearLayout>
+                        <RadioButton
+                            android:id="@+id/rbOutdoor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/white"
+                            android:text="@string/text_outdoor"
+                            android:textColor="@color/white" />
                     </RadioGroup>
 
                     <!-- Plant Name -->
@@ -76,7 +81,54 @@
                         android:hint="@string/text_enter_plant_name"
                         android:inputType="text"
                         android:theme="@style/CustomEditText" />
-                    <!-- Plant Moisture Level -->
+
+                    <!-- Sunlight Requirement -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/text_enter_sunlight_required"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rgSunlightRequirement"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rbShady"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/white"
+                            android:checked="true"
+                            android:text="Shady"
+                            android:textColor="@color/white" />
+
+                        <RadioButton
+                            android:id="@+id/rbPartialSunlight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/white"
+                            android:text="Partial Sunlight"
+                            android:textColor="@color/white" />
+
+                        <RadioButton
+                            android:id="@+id/rbFullSunlight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/white"
+                            android:text="Full Sunlight"
+                            android:textColor="@color/white" />
+                    </RadioGroup>
+
+                    <!-- Other Plant Details -->
                     <EditText
                         android:id="@+id/edtPlantMoistureLevel"
                         android:layout_width="match_parent"
@@ -86,7 +138,6 @@
                         android:inputType="numberDecimal"
                         android:theme="@style/CustomEditText" />
 
-                    <!-- Plant Temperature -->
                     <EditText
                         android:id="@+id/edtPlantTemperature"
                         android:layout_width="match_parent"
@@ -96,7 +147,6 @@
                         android:inputType="number"
                         android:theme="@style/CustomEditText" />
 
-                    <!-- Plant Watering Interval -->
                     <EditText
                         android:id="@+id/edtPlantWateringInterval"
                         android:layout_width="match_parent"
@@ -106,17 +156,6 @@
                         android:inputType="time"
                         android:theme="@style/CustomEditText" />
 
-                    <!-- Plant Sunlight Required -->
-                    <EditText
-                        android:id="@+id/edtPlantSunlightRequired"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:hint="@string/text_enter_sunlight_required"
-                        android:inputType="number"
-                        android:theme="@style/CustomEditText" />
-
-                    <!-- Plant Nutrition Required -->
                     <EditText
                         android:id="@+id/edtPlantNutritionRequired"
                         android:layout_width="match_parent"
@@ -125,35 +164,25 @@
                         android:hint="@string/text_enter_nutrition_required"
                         android:inputType="text"
                         android:theme="@style/CustomEditText" />
-
-
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <!-- Divider -->
-
             <View
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/linearLayoutGardenDetails" />
+                android:background="@android:color/darker_gray" />
 
-            <!-- My Reminders Section -->
+            <!-- Reminders Section -->
             <RelativeLayout
                 android:id="@+id/rlTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider">
+                android:layout_marginTop="5dp">
 
-                <!-- My Reminders Title -->
                 <TextView
                     android:id="@+id/textViewMyPlants"
                     android:layout_width="wrap_content"
@@ -165,7 +194,6 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <!-- FAB positioned opposite to My Reminders title -->
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fabAddReminder"
                     android:layout_width="wrap_content"
@@ -179,7 +207,6 @@
                     app:fabSize="mini" />
             </RelativeLayout>
 
-            <!-- TextView for empty list scenario -->
             <TextView
                 android:id="@+id/tvNoReminders"
                 android:layout_width="wrap_content"
@@ -189,20 +216,19 @@
                 android:text="@string/text_no_reminders_added_yet"
                 android:textSize="16sp"
                 android:visibility="gone" />
-            <!-- RecyclerView for Reminders -->
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewReminders"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp" />
-
         </LinearLayout>
     </ScrollView>
-    <!-- Floating Action Button to add a new Plant -->
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabSavePlant"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -210,6 +236,4 @@
         android:layout_marginBottom="35dp"
         android:backgroundTint="@color/colorAccent"
         android:src="@drawable/ic_save" />
-
-
 </RelativeLayout>

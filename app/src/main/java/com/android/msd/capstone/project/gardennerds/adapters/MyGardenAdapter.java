@@ -1,5 +1,6 @@
 package com.android.msd.capstone.project.gardennerds.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ import java.util.List;
 
 public class MyGardenAdapter extends RecyclerView.Adapter<MyGardenAdapter.MyGardenViewHolder>{
 
-    private final List<Garden> gardenList;
+    private List<Garden> gardenList;
     private Context context;
 
     public MyGardenAdapter(List<Garden> gardenList, Context context) {
@@ -68,6 +69,13 @@ public class MyGardenAdapter extends RecyclerView.Adapter<MyGardenAdapter.MyGard
     @Override
     public int getItemCount() {
         return gardenList.size();
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateDataSet(List<Garden> newGardenList) {
+        this.gardenList.clear();
+        this.gardenList = newGardenList;
+        notifyDataSetChanged(); // Notify RecyclerView of data changes
     }
 
     static class MyGardenViewHolder extends RecyclerView.ViewHolder {

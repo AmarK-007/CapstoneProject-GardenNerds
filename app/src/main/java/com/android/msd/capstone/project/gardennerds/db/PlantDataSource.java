@@ -129,6 +129,39 @@ public class PlantDataSource {
     }
 
     /**
+     * getAllPlants by gardenId method
+     *
+     * @return
+     */
+    @SuppressLint("Range")
+    public List<Plant> getPlantsByGardenId(int gardenId) {
+        List<Plant> plants = new ArrayList<>();
+
+        // SQL query to fetch plants belonging to a specific garden ID
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_GARDEN_ID + " = ?";
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(gardenId)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                Plant plant = new Plant();
+                plant.setPlantId(cursor.getInt(cursor.getColumnIndex(COLUMN_PLANT_ID)));
+                plant.setGardenId(cursor.getInt(cursor.getColumnIndex(COLUMN_GARDEN_ID)));
+                plant.setPlantName(cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_NAME)));
+                plant.setPlantType(cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_TYPE)));
+                plant.setGrowthConditions(cursor.getString(cursor.getColumnIndex(COLUMN_GROWTH_CONDITIONS)));
+
+                plants.add(plant);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close(); // Close the database after the operation
+        return plants;
+    }
+
+
+    /**
      * updatePlant method
      *
      * @param plant
