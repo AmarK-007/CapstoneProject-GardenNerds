@@ -85,9 +85,16 @@ public class GardenDetailFragment extends Fragment implements View.OnClickListen
     }
 
     private void init() {
+
+        // Get the ViewModel
+        plantViewModel = new ViewModelProvider(requireActivity()).get(PlantViewModel.class);
+
         // Retrieve the passed garden object
         if (getArguments() != null) {
             Garden garden = (Garden) getArguments().getParcelable("garden");
+
+            //saving garden Id
+            plantViewModel.setGardenId(garden.getGardenId());
 
             // Set data to the views
             gardenDetailBinding.textViewGardenName.setText(garden.getName());
@@ -104,9 +111,6 @@ public class GardenDetailFragment extends Fragment implements View.OnClickListen
         }
 
         gardenDetailBinding.fabAddPlant.setOnClickListener(this);
-
-        // Get the ViewModel
-        plantViewModel = new ViewModelProvider(requireActivity()).get(PlantViewModel.class);
 
         setPlantAdapter();
     }
@@ -127,16 +131,17 @@ public class GardenDetailFragment extends Fragment implements View.OnClickListen
         });
 
         // Load initial plants for the garden (optional)
-        loadInitialPlants(2); // Replace 1 with the actual garden ID
+        loadInitialPlants(plantViewModel.getGardenId());
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == gardenDetailBinding.fabAddPlant.getId()) {
+
             // Replace the current fragment with AddPlantFragment
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frames, new AddPlantFragment())
+                    .replace(R.id.frames, AddPlantFragment.newInstance(plantViewModel.getGardenId()))
                     .addToBackStack(null)  // Add this transaction to the back stack
                     .commit();
         }

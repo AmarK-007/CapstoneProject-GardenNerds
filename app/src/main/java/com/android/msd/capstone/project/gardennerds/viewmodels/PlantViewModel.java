@@ -11,6 +11,7 @@ import java.util.List;
 public class PlantViewModel extends ViewModel {
     // MutableLiveData to store the list of plants
     private final MutableLiveData<List<Plant>> plantList = new MutableLiveData<>();
+    private int gardenId = -1;
 
     // Method to update the plant list
     public void setPlantList(List<Plant> plants) {
@@ -20,5 +21,13 @@ public class PlantViewModel extends ViewModel {
     // Method to retrieve the plant list as LiveData
     public LiveData<List<Plant>> getPlantList() {
         return plantList;
+    }
+
+    public int getGardenId() {
+        return gardenId;
+    }
+
+    public void setGardenId(int gardenId) {
+        this.gardenId = gardenId;
     }
 }

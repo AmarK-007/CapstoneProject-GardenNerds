@@ -35,11 +35,9 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private int gardenId;
 
     public AddPlantFragment() {
         // Required empty public constructor
@@ -50,15 +48,13 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment AddPlantFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddPlantFragment newInstance(String param1, String param2) {
+    public static AddPlantFragment newInstance(int param1) {
         AddPlantFragment fragment = new AddPlantFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_PARAM1, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -67,8 +63,7 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            gardenId = getArguments().getInt(ARG_PARAM1);
         }
     }
 
@@ -87,6 +82,9 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
 
         // Get the ViewModel
         plantViewModel = new ViewModelProvider(requireActivity()).get(PlantViewModel.class);
+
+        //saving gardenId
+        plantViewModel.setGardenId(gardenId);
     }
 
     @Override
@@ -113,7 +111,7 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
             plant.setWateringInterval(addPlantBinding.edtPlantWateringInterval.getText().toString());
             plant.setSunlightLevel(getSunlightPreference());
             plant.setNutrientRequired(addPlantBinding.edtPlantNutritionRequired.getText().toString());
-            plant.setGardenId(2); //Replace 2 with garden id
+            plant.setGardenId(plantViewModel.getGardenId());
 
             // Insert into the database
             PlantDataSource plantDataSource = new PlantDataSource(requireContext());
@@ -123,7 +121,7 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
                 Toast.makeText(requireContext(), "Plant added successfully!", Toast.LENGTH_SHORT).show();
 
                 // Fetch updated list of plants and update ViewModel
-                List<Plant> updatedPlants = plantDataSource.getPlantsByGardenId(2); // Replace 2 with the garden ID
+                List<Plant> updatedPlants = plantDataSource.getPlantsByGardenId(plantViewModel.getGardenId());
                 plantViewModel.setPlantList(updatedPlants);
 
                 getActivity().getSupportFragmentManager().popBackStack();
