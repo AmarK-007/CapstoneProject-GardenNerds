@@ -1,14 +1,19 @@
 package com.android.msd.capstone.project.gardennerds.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.databinding.LayoutItemPlantBinding;
+import com.android.msd.capstone.project.gardennerds.fragments.GardenDetailFragment;
+import com.android.msd.capstone.project.gardennerds.fragments.PlantDetailFragment;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.bumptech.glide.Glide;
 
@@ -44,6 +49,20 @@ public class MyPlantAdapter extends RecyclerView.Adapter<MyPlantAdapter.PlantVie
                 .load("") // URI or URL for plant image
                 .placeholder(R.drawable.ic_plant) // Placeholder image
                 .into(holder.binding.ivPlantImage);
+
+        // Handle item click
+        holder.itemView.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("plant", plant); // Pass the garden object to the detail fragment
+            PlantDetailFragment fragment = new PlantDetailFragment();
+            fragment.setArguments(bundle);
+
+            // Perform fragment transaction to open the detail page
+            FragmentTransaction transaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frames, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        });
     }
 
     @Override

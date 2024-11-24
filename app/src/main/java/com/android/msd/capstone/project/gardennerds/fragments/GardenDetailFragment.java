@@ -38,8 +38,7 @@ public class GardenDetailFragment extends Fragment implements View.OnClickListen
     private String mParam2;
 
     private FragmentGardenDetailBinding gardenDetailBinding;
-    MyPlantAdapter plantAdapter;
-    List<Plant> plantList = new ArrayList<>();
+    private MyPlantAdapter plantAdapter;
 
     private PlantViewModel plantViewModel;
 
@@ -125,8 +124,11 @@ public class GardenDetailFragment extends Fragment implements View.OnClickListen
 
         // Observe the plant list for updates
         plantViewModel.getPlantList().observe(getViewLifecycleOwner(), plants -> {
-            if (plants != null) {
+            if (plants != null && !plants.isEmpty()) {
                 plantAdapter.updateDataset(plants); // Refresh the RecyclerView
+                gardenDetailBinding.tvNoPlants.setVisibility(View.GONE);
+            }else{
+                gardenDetailBinding.tvNoPlants.setVisibility(View.VISIBLE);
             }
         });
 

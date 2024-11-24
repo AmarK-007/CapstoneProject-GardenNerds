@@ -13,7 +13,7 @@
 
         <!-- Top section with garden image and details -->
         <LinearLayout
-            android:id="@+id/linearLayoutGardenDetails"
+            android:id="@+id/linearLayoutPlantDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -30,7 +30,7 @@
                 android:layout_height="120dp"
                 android:layout_marginEnd="16dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/new_garden_nerds" />
+                android:src="@drawable/ic_plant" />
 
             <!-- Garden Details -->
             <LinearLayout
@@ -41,10 +41,10 @@
 
                 <!-- Garden Name -->
                 <TextView
-                    android:id="@+id/textViewGardenName"
+                    android:id="@+id/textViewPlantName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Garden Name"
+                    android:text="Plant Name"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
@@ -52,10 +52,10 @@
 
                 <!-- Description -->
                 <TextView
-                    android:id="@+id/textViewDescription"
+                    android:id="@+id/textViewPlantType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Garden Description goes here"
+                    android:text="Plant Type"
                     android:textSize="14sp"
                     android:textColor="@android:color/black"
                     android:layout_marginBottom="8dp" />
@@ -88,6 +88,16 @@
                     android:layout_height="wrap_content"
                     android:text="Moisture Level: 50%"
                     android:textSize="13sp"
+                    android:layout_marginBottom="8dp"
+                    android:textColor="@android:color/black" />
+
+                <!-- Nutrient Level -->
+                <TextView
+                    android:id="@+id/textViewNutrientLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nutrient Level: 15%"
+                    android:textSize="13sp"
                     android:textColor="@android:color/black" />
             </LinearLayout>
         </LinearLayout>
@@ -99,7 +109,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="@android:color/darker_gray"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutGardenDetails"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutPlantDetails"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -116,10 +126,10 @@
 
             <!-- My Plants Title -->
             <TextView
-                android:id="@+id/textViewMyPlants"
+                android:id="@+id/textViewReminders"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Plants"
+                android:text="Plant Reminders"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
@@ -129,7 +139,7 @@
 
             <!-- FAB positioned opposite to My Plants title -->
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabAddPlant"
+                android:id="@+id/fabAddReminder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -138,18 +148,18 @@
                 android:backgroundTint="@color/colorAccent"
                 android:src="@drawable/ic_add"
                 app:fabSize="mini"
-                android:contentDescription="Add Plant" />
+                android:contentDescription="Add Reminder" />
         </RelativeLayout>
 
         <!-- TextView for empty list scenario -->
         <TextView
-            android:id="@+id/tvNoPlants"
+            android:id="@+id/tvNoReminders"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:text="No plants added yet."
+            android:text="No Reminders added yet."
             android:textSize="16sp"
             android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/rlTitle"
@@ -157,9 +167,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- RecyclerView for Plants -->
+        <!-- RecyclerView for Reminders -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewPlants"
+            android:id="@+id/recyclerViewReminders"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
