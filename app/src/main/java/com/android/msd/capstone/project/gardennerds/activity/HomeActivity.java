@@ -1,16 +1,22 @@
 package com.android.msd.capstone.project.gardennerds.activity;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +32,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.broadcastReceivers.ReminderReceiver;
 import com.android.msd.capstone.project.gardennerds.databinding.ActivityHomeBinding;
 import com.android.msd.capstone.project.gardennerds.databinding.MenuDrawerHeaderBinding;
 import com.android.msd.capstone.project.gardennerds.fragments.AboutFragment;
@@ -39,7 +46,11 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * This is the main activity for the application. It manages the navigation drawer and the fragments that are displayed within the activity.
@@ -95,6 +106,16 @@ public class HomeActivity extends AppCompatActivity {
                 updateTitle(currentFragment);
             }
         });
+
+        /**MAnn's code*/
+        if (getIntent().getBooleanExtra("showDialog", false)) {
+            String reminderType = getIntent().getStringExtra("ReminderType");
+            showWateringReminderDialog(reminderType);
+        }
+//        if (getIntent().getBooleanExtra("showPopUP", false)) {
+//            String reminderType = getIntent().getStringExtra("ReminderType");
+//            showWateringReminderDialog(reminderType);
+//        }
     }
 
     /**
@@ -146,12 +167,13 @@ public class HomeActivity extends AppCompatActivity {
      * @param menu
      * @return
      */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.appbar_menu, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
+    /**Mann commented code*/
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.appbar_menu, menu);
+//
+//        return super.onCreateOptionsMenu(menu);
+//    }
 
     /**
      * This method handles the selection of items in the toolbar.
@@ -321,6 +343,106 @@ public class HomeActivity extends AppCompatActivity {
             alertDialog = null;
         });
         alertDialog.show();
+    }
+/**Mann's Code*/
+    private void showWateringReminderDialog(String reminderType) {
+
+
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.custom_dialog_reminder, null);
+
+        // Initialize UI elements from the custom dialog layout
+        Button snoozeBtn = dialogView.findViewById(R.id.btnSnooze);
+        Button doneBtn = dialogView.findViewById(R.id.btnDone);
+        ImageView image = dialogView.findViewById(R.id.ivReminderType);
+        TextView reminderTitle = dialogView.findViewById(R.id.tvReminderTitle);
+        TextView reminderMessage = dialogView.findViewById(R.id.tvReminderMessage);
+
+//        if (Objects.equals(reminderType, "Fertilizer")){
+//            image.setImageResource(R.drawable.fertilize);
+//        }
+
+        assert reminderType != null;
+        switch (reminderType) {
+            case "Fertilize":
+               reminderTitle.setText("Fertilize Your Plants!");
+               reminderMessage.setText("It's time to fertilize your plants for healthy growth.");
+                image.setImageResource(R.drawable.fertilize);
+                break;
+            case "Watering":
+
+
+                reminderTitle.setText("Water Your Plants!");
+                reminderMessage.setText("It's time to water your plants. Keep them hydrated!");
+                image.setImageResource(R.drawable.watering_plants);
+                break;
+            case "Sunlight":
+
+                reminderTitle.setText("Provide Sunlight to Your Plants!");
+                reminderMessage.setText("Ensure your plants get the required amount of sunlight.");
+                image.setImageResource(R.drawable.sunlight);
+
+                break;
+            case "Change Soil":
+
+                reminderTitle.setText("Change the Soil!");
+                reminderMessage.setText("Your plants may need new soil for better growth.");
+                image.setImageResource(R.drawable.soil);
+
+                break;
+        }
+
+        // Create the dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView)
+                .setCancelable(true);
+        AlertDialog dialog = builder.create();
+        // Handle button click
+        doneBtn.setOnClickListener(v -> {
+//            String inputText = inputEditText.getText().toString();
+            // Do something with the input text
+            Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+            // Dismiss the dialog
+            dialog.dismiss();
+        });
+
+        snoozeBtn.setOnClickListener(v -> {
+//            String inputText = inputEditText.getText().toString();
+            // Do something with the input text
+            setSnoozeReminder(reminderType);
+            Toast.makeText(this, "Snooze: Reminder set for 5 Minutes", Toast.LENGTH_SHORT).show();
+            // Dismiss the dialog
+            dialog.dismiss();
+        });
+
+
+
+        // Show the dialog
+//        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
+    private void setSnoozeReminder(String reminderType) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.SECOND, 20); // Set reminder for 1 minute later (adjust as needed)
+
+        Intent intent = new Intent(this, ReminderReceiver.class).putExtra("ReminderType",reminderType);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager != null) {
+
+            alarmManager.setExact(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.getTimeInMillis(),
+                    pendingIntent
+            );
+
+
+        }
     }
 
     /*public androidx.appcompat.widget.Toolbar getToolbar() {
