@@ -186,7 +186,7 @@ public class MeasurementFragment extends Fragment {
     }
 
     private void promptUserToInstallARCore() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("ARCore not installed")
                 .setMessage("Please install ARCore from the Google Play Store to use this feature.")
                 .setPositiveButton("Install", (dialog, which) -> {

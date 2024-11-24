@@ -38,6 +38,7 @@
     <string name="find_products">Find Products</string>
     <string name="update_address">Update Address</string>
     <string name="area_measured">Area Measured</string>
+    <string name="available_sellers">Available Sellers</string>
     <string name="text_enter_plant_name">Enter Plant Name</string>
     <string name="text_enter_moisture_level">Enter Moisture Level</string>
     <string name="text_enter_temperature">Enter Temperature</string>

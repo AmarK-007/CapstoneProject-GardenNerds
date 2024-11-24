@@ -4,15 +4,15 @@ public class OnlineSeller {
     private long position;
     private String name;
     private boolean topQualityStore;
-    private String paymentMethods;
+    private String payment_methods;
     private String link;
-    private String directLink;
-    private DetailsAndOffer[] detailsAndOffers;
-    private String originalPrice;
-    private String basePrice;
-    private AdditionalPrice additionalPrice;
+    private String direct_link;
+    private DetailsAndOffer[] details_and_offers;
+    private String original_price;
+    private String base_price;
+    private AdditionalPrice additional_price;
     private String badge;
-    private String totalPrice;
+    private String total_price;
 
     public long getPosition() {
         return position;
@@ -39,11 +39,11 @@ public class OnlineSeller {
     }
 
     public String getPaymentMethods() {
-        return paymentMethods;
+        return payment_methods;
     }
 
     public void setPaymentMethods(String paymentMethods) {
-        this.paymentMethods = paymentMethods;
+        this.payment_methods = paymentMethods;
     }
 
     public String getLink() {
@@ -55,43 +55,43 @@ public class OnlineSeller {
     }
 
     public String getDirectLink() {
-        return directLink;
+        return direct_link;
     }
 
     public void setDirectLink(String directLink) {
-        this.directLink = directLink;
+        this.direct_link = directLink;
     }
 
     public DetailsAndOffer[] getDetailsAndOffers() {
-        return detailsAndOffers;
+        return details_and_offers;
     }
 
     public void setDetailsAndOffers(DetailsAndOffer[] detailsAndOffers) {
-        this.detailsAndOffers = detailsAndOffers;
+        this.details_and_offers = detailsAndOffers;
     }
 
     public String getOriginalPrice() {
-        return originalPrice;
+        return original_price;
     }
 
     public void setOriginalPrice(String originalPrice) {
-        this.originalPrice = originalPrice;
+        this.original_price = originalPrice;
     }
 
     public String getBasePrice() {
-        return basePrice;
+        return base_price;
     }
 
     public void setBasePrice(String basePrice) {
-        this.basePrice = basePrice;
+        this.base_price = basePrice;
     }
 
     public AdditionalPrice getAdditionalPrice() {
-        return additionalPrice;
+        return additional_price;
     }
 
     public void setAdditionalPrice(AdditionalPrice additionalPrice) {
-        this.additionalPrice = additionalPrice;
+        this.additional_price = additionalPrice;
     }
 
     public String getBadge() {
@@ -103,10 +103,10 @@ public class OnlineSeller {
     }
 
     public String getTotalPrice() {
-        return totalPrice;
+        return total_price;
     }
 
     public void setTotalPrice(String totalPrice) {
-        this.totalPrice = totalPrice;
+        this.total_price = totalPrice;
     }
 }

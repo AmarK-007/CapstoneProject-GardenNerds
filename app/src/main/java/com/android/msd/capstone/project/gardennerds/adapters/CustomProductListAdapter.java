@@ -19,6 +19,7 @@ import com.android.msd.capstone.project.gardennerds.databinding.CustomProductLis
 import com.android.msd.capstone.project.gardennerds.databinding.CustomProductListingListLayoutBinding;
 import com.android.msd.capstone.project.gardennerds.fragments.ProductDetailsFragment;
 import com.android.msd.capstone.project.gardennerds.interfaces.AdapterInterface;
+import com.android.msd.capstone.project.gardennerds.models.productResponses.DifferentBrand;
 import com.android.msd.capstone.project.gardennerds.models.shoppingResponses.ShoppingResult;
 import com.squareup.picasso.Picasso;
 
@@ -28,8 +29,10 @@ import java.util.List;
 public class CustomProductListAdapter extends RecyclerView.Adapter<CustomProductListAdapter.MyViewHolder> {
 
     private List<ShoppingResult> shoppingResults= new ArrayList<>();
+    private List<DifferentBrand> differentBrands = new ArrayList<>();
+    private Boolean isBrands = false;
 //    private AppCompatActivity activity;
-    private Boolean isList;
+    private Boolean isList = false;
     AdapterInterface<ShoppingResult> adapterInterface;
 
     public CustomProductListAdapter( List<ShoppingResult> results,Boolean isList, AdapterInterface<ShoppingResult> adapterInterface){
@@ -37,6 +40,12 @@ public class CustomProductListAdapter extends RecyclerView.Adapter<CustomProduct
 
         this.isList = isList;
         this.adapterInterface = adapterInterface;
+    }
+
+    public CustomProductListAdapter(List<DifferentBrand> results,Boolean isList, Boolean isBrands){
+        this.differentBrands = results;
+        this.isList = isList;
+        this.isBrands = isBrands;
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -53,28 +62,38 @@ public class CustomProductListAdapter extends RecyclerView.Adapter<CustomProduct
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (isList){
-            return new MyViewHolder(CustomProductListingListLayoutBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false),adapterInterface);
+        if (isBrands){
+            return new MyViewHolder(CustomProductListingGridLayoutBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
         }else {
-            return new MyViewHolder(CustomProductListingGridLayoutBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false),adapterInterface);
+            if (isList) {
+                return new MyViewHolder(CustomProductListingListLayoutBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), adapterInterface);
+            } else {
+                return new MyViewHolder(CustomProductListingGridLayoutBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), adapterInterface);
+            }
         }
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        ShoppingResult products =  shoppingResults.get(position);
-        if (isList){
-            holder.bindList(products);
-        }else {
-            holder.bindGrid(products);
-        }
 
+
+        if (isBrands){
+            DifferentBrand brand = differentBrands.get(position);
+            holder.bindBrandGrid(brand);
+        }else {
+            ShoppingResult products =  shoppingResults.get(position);
+            if (isList) {
+                holder.bindList(products);
+            } else {
+                holder.bindGrid(products);
+            }
+        }
     }
 
     @Override
     public int getItemCount() {
-        return shoppingResults.size();
+        return isBrands? differentBrands.size() : shoppingResults.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -91,6 +110,10 @@ public class CustomProductListAdapter extends RecyclerView.Adapter<CustomProduct
             this.listBinding = binding;
             this.adapterInterface = adapterInterface;
 
+        }
+        public MyViewHolder(CustomProductListingGridLayoutBinding binding) {
+            super(binding.getRoot());
+            this.gridBinding = binding;
         }
 
         public void bindGrid(ShoppingResult products){
@@ -115,6 +138,19 @@ public class CustomProductListAdapter extends RecyclerView.Adapter<CustomProduct
             });
 
 
+        }
+
+        public void bindBrandGrid(DifferentBrand brand){
+        //    gridBinding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            gridBinding.productPrice.setText(brand.getPrice());
+            gridBinding.productSource.setText("");
+            gridBinding.productTitle.setText(brand.getTitle());
+
+            Picasso.get().load(brand.getThumbnail()).placeholder(R.drawable.designer).into(gridBinding.productImage);
+
+            gridBinding.getRoot().setOnClickListener(v ->{
+
+            });
         }
 
         public void bindList(ShoppingResult products){

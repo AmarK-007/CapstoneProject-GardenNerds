@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Set transparent background -->
+    <solid android:color="@android:color/transparent" />
+
+    <!-- Add border (outline) -->
+    <stroke
+        android:width="2dp"
+        android:color="@color/category_text_color" /> <!-- Replace with your desired border color -->
+
+    <!-- Optional: Add rounded corners -->
+    <corners android:radius="8dp" />
+</shape>
