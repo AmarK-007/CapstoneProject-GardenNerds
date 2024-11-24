@@ -50,7 +50,7 @@ public class MyGardenAdapter extends RecyclerView.Adapter<MyGardenAdapter.MyGard
         holder.binding.textViewGardenArea.setText("Area: " + garden.getGardenArea() + " sq ft");
 
         // Use Glide or another library to load the garden image (lazy loading)
-        Glide.with(holder.itemView.getContext())
+        Glide.with(context)
                 .load(garden.getImageUri())  // replace with image URL if available
                 .placeholder(R.drawable.new_garden_nerds)  // default image
                 .into(holder.binding.imageViewGarden);

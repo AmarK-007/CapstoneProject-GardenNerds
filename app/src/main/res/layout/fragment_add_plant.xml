@@ -18,6 +18,28 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
+            <!-- Image Upload Section -->
+            <ImageView
+                android:id="@+id/iv_garden_photo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginBottom="16dp"
+                android:contentDescription="Garden Photo"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_plant" />
+
+            <Button
+                android:id="@+id/btn_upload_photo"
+                style="@style/button_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@fonts/roboto_light"
+                android:text="Upload Photo"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
             <!-- CardView for Plant Details -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"

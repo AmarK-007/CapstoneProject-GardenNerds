@@ -107,7 +107,7 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
 
             // Use image loading library like Glide to load the image
             Glide.with(requireActivity())
-                    .load("plant.getImageUri()")  // replace with image URL if available
+                    .load(plant.getImageUri())
                     .placeholder(R.drawable.ic_plant)  // default image
                     .into(plantDetailBinding.imageViewGarden);
         }

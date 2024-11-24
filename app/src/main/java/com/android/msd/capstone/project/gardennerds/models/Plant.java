@@ -21,6 +21,7 @@ public class Plant implements Parcelable {
     private String temperatureLevel;
     private String sunlightLevel;
     private String nutrientRequired;
+    private String imageUri;  // URL or URI to the garden image
 
     private ArrayList<Reminder> reminders;
 
@@ -117,6 +118,14 @@ public class Plant implements Parcelable {
         this.nutrientRequired = nutrientRequired;
     }
 
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
+    }
+
     public ArrayList<Reminder> getReminders() {
         return reminders;
     }
@@ -143,6 +152,7 @@ public class Plant implements Parcelable {
         temperatureLevel = in.readString();
         sunlightLevel = in.readString();
         nutrientRequired = in.readString();
+        imageUri = in.readString();
         reminders = in.createTypedArrayList(Reminder.CREATOR);
     }
 
@@ -184,6 +194,7 @@ public class Plant implements Parcelable {
         parcel.writeString(temperatureLevel);
         parcel.writeString(sunlightLevel);
         parcel.writeString(nutrientRequired);
+        parcel.writeString(imageUri);
         parcel.writeTypedList(reminders);
     }
 }

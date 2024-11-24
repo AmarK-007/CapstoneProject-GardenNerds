@@ -34,6 +34,7 @@ public class PlantDataSource {
     public static final String COLUMN_PLANT_NAME = "plant_name";
     public static final String COLUMN_PLANT_TYPE = "plant_type";
     public static final String COLUMN_GROWTH_CONDITIONS = "growth_conditions";
+    public static final String COLUMN_IMAGE_PATH = "image";
 
     // Create table SQL query
     public static final String CREATE_TABLE =
@@ -43,6 +44,7 @@ public class PlantDataSource {
                     + COLUMN_PLANT_NAME + " TEXT,"
                     + COLUMN_PLANT_TYPE + " TEXT,"
                     + COLUMN_GROWTH_CONDITIONS + " TEXT,"
+                    + COLUMN_IMAGE_PATH + " TEXT,"
                     + "FOREIGN KEY(" + COLUMN_GARDEN_ID + ") REFERENCES gardens(garden_id)"
                     + ")";
 
@@ -60,6 +62,7 @@ public class PlantDataSource {
         values.put(COLUMN_PLANT_NAME, plant.getPlantName());
         values.put(COLUMN_PLANT_TYPE, plant.getPlantType());
         values.put(COLUMN_GROWTH_CONDITIONS, plant.getGrowthConditions());
+        values.put(COLUMN_IMAGE_PATH,plant.getImageUri());
 
         long result = db.insert(TABLE_NAME, null, values);
         db.close();
@@ -150,6 +153,7 @@ public class PlantDataSource {
                 plant.setPlantName(cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_NAME)));
                 plant.setPlantType(cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_TYPE)));
                 plant.setGrowthConditions(cursor.getString(cursor.getColumnIndex(COLUMN_GROWTH_CONDITIONS)));
+                plant.setImageUri(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_PATH)));
 
                 plants.add(plant);
             } while (cursor.moveToNext());

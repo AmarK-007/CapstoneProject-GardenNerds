@@ -46,7 +46,7 @@ public class MyPlantAdapter extends RecyclerView.Adapter<MyPlantAdapter.PlantVie
 
         // Load plant image using Glide
         Glide.with(context)
-                .load("") // URI or URL for plant image
+                .load(plant.getImageUri()) // URI or URL for plant image
                 .placeholder(R.drawable.ic_plant) // Placeholder image
                 .into(holder.binding.ivPlantImage);
 

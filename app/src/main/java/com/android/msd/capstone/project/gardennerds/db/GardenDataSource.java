@@ -75,7 +75,7 @@ public class GardenDataSource {
         values.put(COLUMN_LOCATION_LONG, garden.getGardenLongitude());
         values.put(COLUMN_SUNLIGHT_PREFERENCE, garden.getSunlightPreference());
         values.put(COLUMN_WATERING_INTERVAL, garden.getWateringFrequency());
-        values.put(COLUMN_IMAGE_URI, "");
+        values.put(COLUMN_IMAGE_URI, garden.getImageUri());
         values.put(COLUMN_USER_ID, 1);
 
         long result = db.insert(TABLE_NAME, null, values);

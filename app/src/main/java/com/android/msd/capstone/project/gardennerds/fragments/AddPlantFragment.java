@@ -1,11 +1,21 @@
 package com.android.msd.capstone.project.gardennerds.fragments;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -15,7 +25,9 @@ import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
 import com.android.msd.capstone.project.gardennerds.viewmodels.PlantViewModel;
+import com.bumptech.glide.Glide;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +43,7 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
 
     private List<Reminder> reminderlist = new ArrayList<>();
     private PlantViewModel plantViewModel;
+    private Uri selectedImageUri; // To store the image URI
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,18 +52,36 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
     // TODO: Rename and change types of parameters
     private int gardenId;
 
+    // Launcher for the gallery or camera result
+    private final ActivityResultLauncher<Intent> resultLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == getActivity().RESULT_OK && result.getData() != null) {
+                        Intent data = result.getData();
+                        // Handle the result based on the request code (camera or gallery)
+                        if (data.getData() != null) {
+                            selectedImageUri = data.getData();
+                        } else if (data.getExtras() != null) {
+                            // Camera case
+                            Bundle extras = data.getExtras();
+                            if (extras != null) {
+                                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                                selectedImageUri = getImageUri(requireActivity(), imageBitmap);
+                            }
+                        }
+                        // Display the image in ImageView using Glide
+                        Glide.with(requireActivity())
+                                .load(selectedImageUri)
+                                .into(addPlantBinding.ivGardenPhoto); // Your ImageView in the layout
+                    }
+                }
+            });
+
     public AddPlantFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @return A new instance of fragment AddPlantFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static AddPlantFragment newInstance(int param1) {
         AddPlantFragment fragment = new AddPlantFragment();
         Bundle args = new Bundle();
@@ -85,6 +116,54 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
 
         //saving gardenId
         plantViewModel.setGardenId(gardenId);
+
+        // Set listeners
+        addPlantBinding.btnUploadPhoto.setOnClickListener(v -> {
+            showImageSourceDialog();
+        });
+    }
+
+    private void showImageSourceDialog() {
+        // Show a dialog to select between gallery or camera
+        new AlertDialog.Builder(requireActivity())
+                .setTitle("Choose Image Source")
+                .setItems(new String[]{"Camera", "Gallery"}, (dialog, which) -> {
+                    if (which == 0) {
+                        // Open Camera
+                        openCamera();
+                    } else {
+                        // Open Gallery
+                        openGallery();
+                    }
+                })
+                .show();
+    }
+
+    private void openCamera() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
+            resultLauncher.launch(takePictureIntent);
+        }
+    }
+
+    private void openGallery() {
+        Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        resultLauncher.launch(pickPhoto);
+    }
+
+    // Convert Bitmap to Uri (for camera image)
+    public Uri getImageUri(Context context, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    // Store image path in DB
+    private String getImagePath() {
+        if (selectedImageUri != null) {
+            return selectedImageUri.toString();
+        } else return "";
     }
 
     @Override
@@ -111,6 +190,7 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
             plant.setWateringInterval(addPlantBinding.edtPlantWateringInterval.getText().toString());
             plant.setSunlightLevel(getSunlightPreference());
             plant.setNutrientRequired(addPlantBinding.edtPlantNutritionRequired.getText().toString());
+            plant.setImageUri(getImagePath());
             plant.setGardenId(plantViewModel.getGardenId());
 
             // Insert into the database
