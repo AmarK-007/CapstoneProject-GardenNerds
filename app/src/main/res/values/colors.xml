@@ -12,6 +12,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#E6888888</color>
     <color name="dividerColor">@color/grey</color>
+    <color name="colorPrimaryDeepDark">#00191B</color>
 
     <color name="colorErrorText">#FFE10606</color>
     <color name="colorGrayLight">#FFc5c5c5</color>
