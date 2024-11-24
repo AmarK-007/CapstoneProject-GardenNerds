@@ -4,23 +4,34 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.broadcastReceivers.ReminderReceiver;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentAddPlantBinding;
+import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
-import com.android.msd.capstone.project.gardennerds.utils.Utility;
+import com.android.msd.capstone.project.gardennerds.viewmodels.PlantViewModel;
+import com.bumptech.glide.Glide;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -36,33 +47,50 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
     private FragmentAddPlantBinding addPlantBinding;
 
     private List<Reminder> reminderlist = new ArrayList<>();
+    private PlantViewModel plantViewModel;
+    private Uri selectedImageUri; // To store the image URI
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private int gardenId;
+
+    // Launcher for the gallery or camera result
+    private final ActivityResultLauncher<Intent> resultLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == getActivity().RESULT_OK && result.getData() != null) {
+                        Intent data = result.getData();
+                        // Handle the result based on the request code (camera or gallery)
+                        if (data.getData() != null) {
+                            selectedImageUri = data.getData();
+                        } else if (data.getExtras() != null) {
+                            // Camera case
+                            Bundle extras = data.getExtras();
+                            if (extras != null) {
+                                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                                selectedImageUri = getImageUri(requireActivity(), imageBitmap);
+                            }
+                        }
+                        // Display the image in ImageView using Glide
+                        Glide.with(requireActivity())
+                                .load(selectedImageUri)
+                                .into(addPlantBinding.ivGardenPhoto); // Your ImageView in the layout
+                    }
+                }
+            });
 
     public AddPlantFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AddPlantFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AddPlantFragment newInstance(String param1, String param2) {
+    public static AddPlantFragment newInstance(int param1) {
         AddPlantFragment fragment = new AddPlantFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_PARAM1, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -71,8 +99,7 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            gardenId = getArguments().getInt(ARG_PARAM1);
         }
     }
 
@@ -88,6 +115,60 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
     private void init() {
         addPlantBinding.fabAddReminder.setOnClickListener(this);
         addPlantBinding.fabSavePlant.setOnClickListener(this);
+
+        // Get the ViewModel
+        plantViewModel = new ViewModelProvider(requireActivity()).get(PlantViewModel.class);
+
+        //saving gardenId
+        plantViewModel.setGardenId(gardenId);
+
+        // Set listeners
+        addPlantBinding.btnUploadPhoto.setOnClickListener(v -> {
+            showImageSourceDialog();
+        });
+    }
+
+    private void showImageSourceDialog() {
+        // Show a dialog to select between gallery or camera
+        new AlertDialog.Builder(requireActivity())
+                .setTitle("Choose Image Source")
+                .setItems(new String[]{"Camera", "Gallery"}, (dialog, which) -> {
+                    if (which == 0) {
+                        // Open Camera
+                        openCamera();
+                    } else {
+                        // Open Gallery
+                        openGallery();
+                    }
+                })
+                .show();
+    }
+
+    private void openCamera() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
+            resultLauncher.launch(takePictureIntent);
+        }
+    }
+
+    private void openGallery() {
+        Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        resultLauncher.launch(pickPhoto);
+    }
+
+    // Convert Bitmap to Uri (for camera image)
+    public Uri getImageUri(Context context, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    // Store image path in DB
+    private String getImagePath() {
+        if (selectedImageUri != null) {
+            return selectedImageUri.toString();
+        } else return "";
     }
 
     @Override
@@ -105,26 +186,42 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
     }
 
     private void savePlant() {
-        if (validatePlant()) {
+        if (validateInputs()) {
             Plant plant = new Plant();
             plant.setPlantName(addPlantBinding.edtPlantName.getText().toString());
-            plant.setPlantType(addPlantBinding.rgPlantType.getCheckedRadioButtonId() == R.id.rbIndoor ? getString(R.string.text_indoor) : getString(R.string.text_outdoor));
+            plant.setPlantType(getPlantType());
             plant.setMoistureLevel(addPlantBinding.edtPlantMoistureLevel.getText().toString());
             plant.setTemperatureLevel(addPlantBinding.edtPlantTemperature.getText().toString());
             plant.setWateringInterval(addPlantBinding.edtPlantWateringInterval.getText().toString());
-            plant.setSunlightLevel(addPlantBinding.edtPlantSunlightRequired.getText().toString());
+            plant.setSunlightLevel(getSunlightPreference());
             plant.setNutrientRequired(addPlantBinding.edtPlantNutritionRequired.getText().toString());
-            /**Mann's Code*/
+            plant.setImageUri(getImagePath());
+            plant.setGardenId(plantViewModel.getGardenId());
+
+            // Insert into the database
+            PlantDataSource plantDataSource = new PlantDataSource(requireContext());
+            boolean isInserted = plantDataSource.insertPlant(plant);
+
+            if (isInserted) {
+                Toast.makeText(requireContext(), "Plant added successfully!", Toast.LENGTH_SHORT).show();
+
+                // Fetch updated list of plants and update ViewModel
+                List<Plant> updatedPlants = plantDataSource.getPlantsByGardenId(plantViewModel.getGardenId());
+                plantViewModel.setPlantList(updatedPlants);
+
+                /**Mann's Code*/
 //            setWateringReminder();
-            /**till here*/
-            // Pass data back to GardenDetailsFragment
-            if (getParentFragment() instanceof OnPlantAddedListener) {
-                ((OnPlantAddedListener) getParentFragment()).onPlantAdded(plant);
+                /**till here*/
+                // Pass data back to GardenDetailsFragment
+                if (getParentFragment() instanceof OnPlantAddedListener) {
+                    ((OnPlantAddedListener) getParentFragment()).onPlantAdded(plant);
+                }
+                // move back to previous fragment with plant object
+                getActivity().getSupportFragmentManager().popBackStack();
             }
-            // move back to previous fragment with plant object
-            getActivity().getSupportFragmentManager().popBackStack();
         }
     }
+
 
     /**Mann's code*/
     private void setWateringReminder(String reminderType) {
@@ -139,11 +236,11 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
         AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
         if (alarmManager != null) {
 
-                alarmManager.setExact(
-                        AlarmManager.RTC_WAKEUP,
-                        calendar.getTimeInMillis(),
-                        pendingIntent
-                );
+            alarmManager.setExact(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.getTimeInMillis(),
+                    pendingIntent
+            );
 
 
         }
@@ -187,28 +284,59 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
 
     /**Till here*/
 
-    private boolean validatePlant() {
-        /**Mann's Code*/
-//        setWateringReminder();//yet to implement in save plant
+    // Java example
+    public boolean validateInputs() {
+        String plantName = addPlantBinding.edtPlantName.getText().toString().trim();
+        String moistureLevel = addPlantBinding.edtPlantMoistureLevel.getText().toString().trim();
+        String temperature = addPlantBinding.edtPlantTemperature.getText().toString().trim();
+        String wateringInterval = addPlantBinding.edtPlantWateringInterval.getText().toString().trim();
+        String nutritionRequired = addPlantBinding.edtPlantNutritionRequired.getText().toString().trim();
 
-        /**Reminder Type
-         * Fertilize
-         * Watering
-         * Sunlight
-         * Change Soil
-         * */
-        setAlarmsForFrequency(1,"Fertilize");
-        /**till here*/
-        if (addPlantBinding.edtPlantName.getText().toString().isEmpty() ||
-                addPlantBinding.rgPlantType.getCheckedRadioButtonId() == -1 ||
-                addPlantBinding.edtPlantMoistureLevel.getText().toString().isEmpty() ||
-                addPlantBinding.edtPlantTemperature.getText().toString().isEmpty() ||
-                addPlantBinding.edtPlantWateringInterval.getText().toString().isEmpty() ||
-                addPlantBinding.edtPlantSunlightRequired.getText().toString().isEmpty() ||
-                addPlantBinding.edtPlantNutritionRequired.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+        // Validate Plant Name
+        if (plantName.isEmpty()) {
+            addPlantBinding.edtPlantName.setError("Plant name is required");
             return false;
         }
+
+        // Validate Moisture Level (Decimal number)
+        if (moistureLevel.isEmpty()) {
+            addPlantBinding.edtPlantMoistureLevel.setError("Moisture level is required");
+            return false;
+        } else {
+            try {
+                Double.parseDouble(moistureLevel);
+            } catch (NumberFormatException e) {
+                addPlantBinding.edtPlantMoistureLevel.setError("Invalid moisture level");
+                return false;
+            }
+        }
+
+        // Validate Temperature (Integer number)
+        if (temperature.isEmpty()) {
+            addPlantBinding.edtPlantTemperature.setError("Temperature is required");
+            return false;
+        } else {
+            try {
+                Integer.parseInt(temperature);
+            } catch (NumberFormatException e) {
+                addPlantBinding.edtPlantTemperature.setError("Invalid temperature");
+                return false;
+            }
+        }
+
+        // Validate Watering Interval (Time format)
+        if (wateringInterval.isEmpty()) {
+            addPlantBinding.edtPlantWateringInterval.setError("Watering interval is required");
+            return false;
+        }
+
+        // Validate Nutrition Requirement
+        if (nutritionRequired.isEmpty()) {
+            addPlantBinding.edtPlantNutritionRequired.setError("Nutrition required is required");
+            return false;
+        }
+
+        // All validations passed
         return true;
     }
 
@@ -220,5 +348,19 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
 
     public interface OnPlantAddedListener {
         void onPlantAdded(Plant plant);
+    }
+
+    private String getSunlightPreference() {
+
+        if (addPlantBinding.rbFullSunlight.isChecked()) return "Full Sunlight";
+        else if (addPlantBinding.rbPartialSunlight.isChecked()) return "PartialSunlight";
+        else if (addPlantBinding.rbShady.isChecked()) return "Shady";
+        else return "";
+    }
+
+    private String getPlantType() {
+
+        if (addPlantBinding.rbIndoor.isChecked()) return "Indoor";
+        else return "Outdoor";
     }
 }

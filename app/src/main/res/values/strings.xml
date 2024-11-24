@@ -43,7 +43,7 @@
     <string name="text_enter_moisture_level">Enter Moisture Level</string>
     <string name="text_enter_temperature">Enter Temperature</string>
     <string name="text_enter_watering_interval">Enter Watering Interval</string>
-    <string name="text_enter_sunlight_required">Enter Sunlight Required</string>
+    <string name="text_enter_sunlight_required">Sunlight Preference:</string>
     <string name="text_enter_nutrition_required">Enter Nutrition Required</string>
     <string name="text_reminders">Reminders</string>
     <string name="text_add_reminder">Add Reminder</string>
@@ -55,7 +55,6 @@
     <string name="text_reminder_type_changeSoil">Change Soil</string>
     <string name="text_indoor">Indoor</string>
     <string name="text_outdoor">Outdoor</string>
-
 
 
     <string-array name="canadian_provinces">

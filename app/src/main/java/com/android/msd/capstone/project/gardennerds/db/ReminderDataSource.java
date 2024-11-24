@@ -130,6 +130,38 @@ public class ReminderDataSource {
     }
 
     /**
+     * getAllReminders by plantId method
+     *
+     * @return
+     */
+    @SuppressLint("Range")
+    public List<Reminder> getRemindersByPlantId(int plantId) {
+        List<Reminder> reminders = new ArrayList<>();
+
+        // Modify the query to filter by plantId
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_PLANT_ID + " = ?";
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(plantId)}); // Use plantId as the parameter
+
+        if (cursor.moveToFirst()) {
+            do {
+                Reminder reminder = new Reminder();
+                reminder.setReminderId(cursor.getInt(cursor.getColumnIndex(COLUMN_REMINDER_ID)));
+                reminder.setMessage(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE)));
+                reminder.setDateTime(cursor.getString(cursor.getColumnIndex(COLUMN_DATE_TIME)));
+                reminder.setPlantId(cursor.getInt(cursor.getColumnIndex(COLUMN_PLANT_ID)));
+                reminder.setReminderTypeId(cursor.getInt(cursor.getColumnIndex(COLUMN_REMINDER_TYPE_ID)));
+
+                reminders.add(reminder);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return reminders;
+    }
+
+    /**
      * updateReminder method
      *
      * @param reminder

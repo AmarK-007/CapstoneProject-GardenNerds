@@ -4,9 +4,12 @@ import static com.android.msd.capstone.project.gardennerds.utils.Constants.API_K
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -15,17 +18,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentAddGardenBinding;
 import com.android.msd.capstone.project.gardennerds.db.GardenDataSource;
 import com.android.msd.capstone.project.gardennerds.models.Garden;
 import com.android.msd.capstone.project.gardennerds.network.RetrofitClient;
 import com.android.msd.capstone.project.gardennerds.network.response.SoilDataResponse;
-import com.android.msd.capstone.project.gardennerds.network.service.GetSoilDataService;
+import com.android.msd.capstone.project.gardennerds.network.service.ApiService;
 import com.android.msd.capstone.project.gardennerds.utils.Constants;
+import com.android.msd.capstone.project.gardennerds.viewmodels.GardenViewModel;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +44,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -60,31 +72,46 @@ public class AddGardenFragment extends Fragment {
     private String mParam2;
 
     private FragmentAddGardenBinding addGardenBinding;
-
-    private static final int PERMISSION_REQUEST_CODE = 100;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 101;
     private boolean allPermissionsGranted = false;
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
-    private static final int REQUEST_IMAGE_PICK = 2;
-    private static final int REQUEST_CAMERA_CAPTURE = 3;
+    private Uri selectedImageUri; // To store the image URI
+    private static final String BASE_URL = "https://api.stormglass.io/v2/";
     private FusedLocationProviderClient fusedLocationClient;
     private double latitude, longitude;
     private GardenDataSource gardenDataSource;
+    private GardenViewModel gardenViewModel;
+
+    // Launcher for the gallery or camera result
+    private final ActivityResultLauncher<Intent> resultLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == getActivity().RESULT_OK && result.getData() != null) {
+                        Intent data = result.getData();
+                        // Handle the result based on the request code (camera or gallery)
+                        if (data.getData() != null) {
+                            selectedImageUri = data.getData();
+                        } else if (data.getExtras() != null) {
+                            // Camera case
+                            Bundle extras = data.getExtras();
+                            if (extras != null) {
+                                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                                selectedImageUri = getImageUri(requireActivity(), imageBitmap);
+                            }
+                        }
+                        // Display the image in ImageView using Glide
+                        Glide.with(AddGardenFragment.this)
+                                .load(selectedImageUri)
+                                .into(addGardenBinding.ivGardenPhoto); // Your ImageView in the layout
+                    }
+                }
+            });
 
     public AddGardenFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AddGardenFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static AddGardenFragment newInstance(String param1, String param2) {
         AddGardenFragment fragment = new AddGardenFragment();
         Bundle args = new Bundle();
@@ -120,6 +147,9 @@ public class AddGardenFragment extends Fragment {
         //Initialize Garden datasource
         gardenDataSource = new GardenDataSource(requireActivity());
 
+        // Get the ViewModel
+        gardenViewModel = new ViewModelProvider(requireActivity()).get(GardenViewModel.class);
+
         // Initialize FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
 
@@ -137,8 +167,7 @@ public class AddGardenFragment extends Fragment {
 
         // Set listeners
         addGardenBinding.btnUploadPhoto.setOnClickListener(v -> {
-            // Open camera or gallery to upload a photo
-            openImagePicker();
+            showImageSourceDialog();
         });
 
         addGardenBinding.btnGetSoilSensorData.setOnClickListener(v -> {
@@ -153,10 +182,47 @@ public class AddGardenFragment extends Fragment {
 
     }
 
-    // Open image picker (camera or gallery)
-    private void openImagePicker() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, REQUEST_IMAGE_PICK);
+    private void showImageSourceDialog() {
+        // Show a dialog to select between gallery or camera
+        new AlertDialog.Builder(requireActivity())
+                .setTitle("Choose Image Source")
+                .setItems(new String[]{"Camera", "Gallery"}, (dialog, which) -> {
+                    if (which == 0) {
+                        // Open Camera
+                        openCamera();
+                    } else {
+                        // Open Gallery
+                        openGallery();
+                    }
+                })
+                .show();
+    }
+
+    private void openCamera() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
+            resultLauncher.launch(takePictureIntent);
+        }
+    }
+
+    private void openGallery() {
+        Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        resultLauncher.launch(pickPhoto);
+    }
+
+    // Convert Bitmap to Uri (for camera image)
+    public Uri getImageUri(Context context, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    // Store image path in DB
+    private String getImagePath() {
+        if (selectedImageUri != null) {
+            return selectedImageUri.toString();
+        } else return "";
     }
 
     // Get current location and fetch temperature and moisture data from API
@@ -184,7 +250,7 @@ public class AddGardenFragment extends Fragment {
     }
 
     private void fetchSoilData(double lat, double lng) {
-        GetSoilDataService apiService = RetrofitClient.getRetrofitInstance().create(GetSoilDataService.class);
+        ApiService apiService = RetrofitClient.getRetrofitInstance(BASE_URL).create(ApiService.class);
         //double lat = 50.714691; // Default latitude
         //double lng = 4.399100;  // Default longitude
         String params = "soilMoisture,soilTemperature,surfaceTemperature";
@@ -293,17 +359,18 @@ public class AddGardenFragment extends Fragment {
         double longitude = this.longitude != 0.0 ? this.longitude : 0.0;
 
         // Get image URI (placeholder in this case)
-        String imageUri = "example_image_uri"; // Replace with actual image URI after uploading photo
+        //String imageUri = "example_image_uri"; // Replace with actual image URI after uploading photo
 
         // Create Garden object
         Garden garden = new Garden();
+        garden.setName(name);
         garden.setDescription(description);
         garden.setGardenArea(areaMeasurement);
         garden.setSunlightPreference(sunlightPreference);
         garden.setWateringFrequency(wateringFrequency);
         garden.setGardenLatitude(String.valueOf(latitude));
         garden.setGardenLongitude(String.valueOf(longitude));
-        garden.setImageUri(imageUri);
+        garden.setImageUri(getImagePath());
         garden.setUserId(1); // Default user ID; replace as needed
 
         // Insert into database
@@ -311,8 +378,13 @@ public class AddGardenFragment extends Fragment {
 
         if (isInserted) {
             Toast.makeText(requireContext(), "Garden saved successfully!", Toast.LENGTH_SHORT).show();
-            // Optionally clear form or navigate away
-            clearForm();
+
+            // Fetch updated list and update ViewModel
+            List<Garden> updatedGardens = gardenDataSource.getAllGardens();
+            gardenViewModel.setGardenList(updatedGardens);
+
+            // Navigate back to the previous fragment
+            requireActivity().getSupportFragmentManager().popBackStack();
         } else {
             Toast.makeText(requireContext(), "Failed to save garden!", Toast.LENGTH_SHORT).show();
         }

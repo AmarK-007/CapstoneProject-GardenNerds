@@ -8,13 +8,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.adapters.MyGardenAdapter;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentMyGardenBinding;
+import com.android.msd.capstone.project.gardennerds.db.GardenDataSource;
 import com.android.msd.capstone.project.gardennerds.models.Garden;
-import com.android.msd.capstone.project.gardennerds.models.Plant;
+import com.android.msd.capstone.project.gardennerds.viewmodels.GardenViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,7 @@ import java.util.List;
  * Use the {@link MyGardenFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyGardenFragment extends Fragment implements View.OnClickListener{
+public class MyGardenFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,7 +39,9 @@ public class MyGardenFragment extends Fragment implements View.OnClickListener{
 
     private FragmentMyGardenBinding myGardenBinding;
     private MyGardenAdapter gardenAdapter;
-    private List<Garden> gardenList;
+    private GardenDataSource gardenDataSource;
+    private GardenViewModel gardenViewModel;
+
 
     public MyGardenFragment() {
         // Required empty public constructor
@@ -83,6 +87,7 @@ public class MyGardenFragment extends Fragment implements View.OnClickListener{
     private void init() {
 
         myGardenBinding.fabAddGarden.setOnClickListener(this);
+        gardenDataSource = new GardenDataSource(requireContext());
 
     }
 
@@ -90,36 +95,42 @@ public class MyGardenFragment extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Initialize garden list
-        gardenList = new ArrayList<>();
-        // Demo data - This will eventually be replaced by data from a local database
-        loadGardens();
-
-        // Show or hide the "No gardens added" message based on the list size
-        if (gardenList.isEmpty()) {
-            myGardenBinding.tvNoGardens.setVisibility(View.VISIBLE);
-        } else {
-            myGardenBinding.tvNoGardens.setVisibility(View.GONE);
-        }
+        // Get the ViewModel
+        gardenViewModel = new ViewModelProvider(requireActivity()).get(GardenViewModel.class);
 
         bindAdapter();
+
+        // Observe the garden list for updates
+        gardenViewModel.getGardenList().observe(getViewLifecycleOwner(), gardens -> {
+            if (gardens != null && !gardens.isEmpty()) {
+                gardenAdapter.updateDataSet(gardens); // Refresh the RecyclerView
+                myGardenBinding.tvNoGardens.setVisibility(View.GONE);
+            }else{
+                // Show or hide the "No gardens added" message based on the list size
+                myGardenBinding.tvNoGardens.setVisibility(View.VISIBLE);
+            }
+        });
+
+        // Load gardens from the database
+        loadGardens();
+
     }
 
     //initializing and setting adapter
     private void bindAdapter() {
 
-        // Initialize garden adapter
-        gardenAdapter = new MyGardenAdapter(gardenList, requireActivity());
+        // Initialize adapter with an empty list
+        myGardenBinding.recyclerViewGardens.setLayoutManager(new LinearLayoutManager(requireActivity()));
+
+        gardenAdapter = new MyGardenAdapter(new ArrayList<>(),requireActivity(),gardenViewModel);
         myGardenBinding.recyclerViewGardens.setAdapter(gardenAdapter);
-        myGardenBinding.recyclerViewGardens.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     private void loadGardens() {
-        // Add demo gardens (URL is null for placeholder image)
-        gardenList.add(new Garden("Indoor Garden", "This is garden details and description", "150", "", "", "Shady", "3", "", 1, null));
-        gardenList.add(new Garden("Backyard Garden", "This is garden details and description", "300", "", "", "Partial Sunlight", "2", "", 1, null));
-        gardenList.add(new Garden("Frontyard Garden", "This is garden details and description", "200", "", "", "Shady", "3", "", 1, null));
-        gardenList.add(new Garden("Balcony Garden", "This is garden details and description", "50", "", "", "Full Sunlight", "1", "", 1, null));
+        // Fetch all gardens from the database
+        List<Garden> gardens = gardenDataSource.getAllGardens();
+        gardenViewModel.setGardenList(gardens);
+
     }
 
     @Override
@@ -129,11 +140,10 @@ public class MyGardenFragment extends Fragment implements View.OnClickListener{
             // Replace the current fragment with AddGardenFragment
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frames, new AddGardenFragment())
-                    .addToBackStack(null)  // Add this transaction to the back stack
+                    .replace(R.id.frames, new AddGardenFragment(), "MyGardenFragmentTag")
+                    .addToBackStack("MyGardenFragmentTag")  // Add this transaction to the back stack
                     .commit();
         }
     }
-
 
 }
