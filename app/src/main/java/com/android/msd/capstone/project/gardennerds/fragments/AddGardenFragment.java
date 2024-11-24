@@ -18,7 +18,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentAddGardenBinding;
@@ -26,7 +25,7 @@ import com.android.msd.capstone.project.gardennerds.db.GardenDataSource;
 import com.android.msd.capstone.project.gardennerds.models.Garden;
 import com.android.msd.capstone.project.gardennerds.network.RetrofitClient;
 import com.android.msd.capstone.project.gardennerds.network.response.SoilDataResponse;
-import com.android.msd.capstone.project.gardennerds.network.service.GetSoilDataService;
+import com.android.msd.capstone.project.gardennerds.network.service.ApiService;
 import com.android.msd.capstone.project.gardennerds.utils.Constants;
 import com.android.msd.capstone.project.gardennerds.viewmodels.GardenViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -71,6 +70,7 @@ public class AddGardenFragment extends Fragment {
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private static final int REQUEST_IMAGE_PICK = 2;
     private static final int REQUEST_CAMERA_CAPTURE = 3;
+    private static final String BASE_URL = "https://api.stormglass.io/v2/";
     private FusedLocationProviderClient fusedLocationClient;
     private double latitude, longitude;
     private GardenDataSource gardenDataSource;
@@ -180,8 +180,8 @@ public class AddGardenFragment extends Fragment {
                                 longitude = location.getLongitude();
 
                                 // Call your API to fetch temperature and moisture data using latitude, longitude
-                                //fetchSoilData(latitude, longitude);
-                                fetchFromDummyData();
+                                fetchSoilData(latitude, longitude);
+                                //fetchFromDummyData();
                             }
                         } else {
                             Toast.makeText(requireContext(), "Failed to get location", Toast.LENGTH_SHORT).show();
@@ -191,7 +191,7 @@ public class AddGardenFragment extends Fragment {
     }
 
     private void fetchSoilData(double lat, double lng) {
-        GetSoilDataService apiService = RetrofitClient.getRetrofitInstance().create(GetSoilDataService.class);
+        ApiService apiService = RetrofitClient.getRetrofitInstance(BASE_URL).create(ApiService.class);
         //double lat = 50.714691; // Default latitude
         //double lng = 4.399100;  // Default longitude
         String params = "soilMoisture,soilTemperature,surfaceTemperature";
