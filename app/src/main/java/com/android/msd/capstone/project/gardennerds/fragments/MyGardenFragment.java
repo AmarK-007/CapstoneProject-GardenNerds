@@ -95,14 +95,14 @@ public class MyGardenFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        bindAdapter();
-
         // Get the ViewModel
         gardenViewModel = new ViewModelProvider(requireActivity()).get(GardenViewModel.class);
 
+        bindAdapter();
+
         // Observe the garden list for updates
         gardenViewModel.getGardenList().observe(getViewLifecycleOwner(), gardens -> {
-            if (gardens != null) {
+            if (gardens != null && !gardens.isEmpty()) {
                 gardenAdapter.updateDataSet(gardens); // Refresh the RecyclerView
                 myGardenBinding.tvNoGardens.setVisibility(View.GONE);
             }else{
@@ -122,7 +122,7 @@ public class MyGardenFragment extends Fragment implements View.OnClickListener {
         // Initialize adapter with an empty list
         myGardenBinding.recyclerViewGardens.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
-        gardenAdapter = new MyGardenAdapter(new ArrayList<>(),requireActivity());
+        gardenAdapter = new MyGardenAdapter(new ArrayList<>(),requireActivity(),gardenViewModel);
         myGardenBinding.recyclerViewGardens.setAdapter(gardenAdapter);
     }
 

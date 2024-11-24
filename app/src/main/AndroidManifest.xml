@@ -12,6 +12,7 @@
     <!-- For accessing local storage (needed for file upload or saving photos) -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
 
     <uses-feature
         android:name="android.hardware.camera.ar"
