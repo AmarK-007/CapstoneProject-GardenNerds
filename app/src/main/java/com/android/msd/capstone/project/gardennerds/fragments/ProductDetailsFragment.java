@@ -15,15 +15,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.adapters.CustomAvailableSellerAdapter;
+import com.android.msd.capstone.project.gardennerds.adapters.CustomProductListAdapter;
 import com.android.msd.capstone.project.gardennerds.adapters.ImageSliderAdapter;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentProductDetailsBinding;
+import com.android.msd.capstone.project.gardennerds.models.productResponses.DifferentBrand;
+import com.android.msd.capstone.project.gardennerds.models.productResponses.OnlineSeller;
 import com.android.msd.capstone.project.gardennerds.models.productResponses.ProductDetail;
 import com.android.msd.capstone.project.gardennerds.models.productResponses.ProductResults;
 import com.android.msd.capstone.project.gardennerds.viewmodels.ProductViewModel;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 
 public class ProductDetailsFragment extends Fragment implements View.OnClickListener {
@@ -32,6 +39,8 @@ public class ProductDetailsFragment extends Fragment implements View.OnClickList
     public ProductViewModel viewModel;
     private Dialog loadingDialog= null;
     private ProductDetail productDetails;
+    private CustomAvailableSellerAdapter sellerAdapter;
+    private CustomProductListAdapter productAdapter;
 
 
     @Override
@@ -47,8 +56,22 @@ public class ProductDetailsFragment extends Fragment implements View.OnClickList
             @Override
             public void onChanged(ProductDetail productDetail) {
                 dismissLoadingPopup();
+                binding.layLinContent.setVisibility(View.VISIBLE);
+                binding.btnBuynow.setVisibility(View.VISIBLE);
                 productDetails = productDetail;
                 setData(productDetails.getProductResults());
+                setSellerRecyclerView(productDetail.getSellersResults().getOnlineSellers());
+                try {
+                    if (productDetail.getRelated_products().getDifferent_brand() != null) {
+                        Log.d("TAG", " hello " + productDetail.getRelated_products().getDifferent_brand().toString());
+                        setRelatedProductAdapter(productDetail.getRelated_products().getDifferent_brand());
+                    } else {
+                        binding.tvRelatedProducts.setText("");
+                    }
+                }catch (Exception e){
+                    binding.tvRelatedProducts.setText("");
+                    System.out.println(e.getMessage());
+                }
             }
         });
         binding.btnBuynow.setOnClickListener(this);
@@ -69,15 +92,7 @@ public class ProductDetailsFragment extends Fragment implements View.OnClickList
         Log.d("TAG",products.toString());
 
         binding.productTitle.setText(products.getTitle());
-//        if (!products.getMedia().get(0).getLink().isEmpty() || products.getMedia().get(0).getLink() != null) {
-//            Picasso.get().load(products.getMedia().get(0).getLink()).placeholder(R.drawable.designer).into(binding.productImageOne);
-//        }
-//        if (!products.getMedia().get(1).getLink().isEmpty() || products.getMedia().get(1).getLink() != null){
-//            Picasso.get().load(products.getMedia().get(1).getLink()).placeholder(R.drawable.designer).into(binding.productImageTwo);
-//        }
-//        if (!products.getMedia().get(2).getLink().isEmpty() || products.getMedia().get(2).getLink() != null){
-//            Picasso.get().load(products.getMedia().get(2).getLink()).placeholder(R.drawable.designer).into(binding.productImageThree);
-//        }
+
 
         ImageSliderAdapter adapter = new ImageSliderAdapter(products.getMedia(), requireContext());
         binding.viewPager.setAdapter(adapter);
@@ -94,17 +109,13 @@ public class ProductDetailsFragment extends Fragment implements View.OnClickList
         binding.tvDescription.setText(products.getDescription());
 
         StringBuilder bulletList = new StringBuilder();
-//        Log.d("TAG","highlights length "+products.getHighlights().length);
         if (products.getHighlights() != null){
         for (String highlight : products.getHighlights()) {
             bulletList.append("\u2022 ").append(highlight).append("\n");
         }
         }
        binding.productHighlights.setText(bulletList);
-//        binding.productHighlights.setText(products.getHighlights()[0]);
 
-//        binding.shimmerLayout.stopShimmer();
-//        binding.shimmerLayout.hideShimmer();
     }
 
     private void showLoadingPopup() {
@@ -117,6 +128,19 @@ public class ProductDetailsFragment extends Fragment implements View.OnClickList
         }
         loadingDialog.show();
 //        }
+    }
+
+    private void setSellerRecyclerView(ArrayList<OnlineSeller> onlineSeller){
+        sellerAdapter = new CustomAvailableSellerAdapter(onlineSeller,requireActivity());
+        binding.rvAvailableSellers.setLayoutManager(new LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false));
+        binding.rvAvailableSellers.setAdapter(sellerAdapter);
+
+    }
+
+    private void setRelatedProductAdapter(ArrayList<DifferentBrand> brands){
+        productAdapter = new CustomProductListAdapter(brands,true,true);
+        binding.rvRelatedProducts.setLayoutManager(new LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false));
+        binding.rvRelatedProducts.setAdapter(productAdapter);
     }
 
     private void dismissLoadingPopup() {
