@@ -23,13 +23,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/appbar_menu"
+
             app:navigationIcon="@drawable/hamburger_menu"
             app:navigationIconTint="@color/white"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="@string/app_name"
             app:titleTextColor="@color/white" />
-
+<!-- app:menu="@menu/appbar_menu"-->
         <FrameLayout
             android:id="@+id/frames"
             android:layout_width="match_parent"

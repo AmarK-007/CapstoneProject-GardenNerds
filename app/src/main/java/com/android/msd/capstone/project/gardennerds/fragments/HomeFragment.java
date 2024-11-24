@@ -1,6 +1,5 @@
 package com.android.msd.capstone.project.gardennerds.fragments;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -18,14 +17,12 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.android.msd.capstone.project.gardennerds.R;
-import com.android.msd.capstone.project.gardennerds.databinding.FragmentAboutBinding;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentHomeBinding;
 import com.android.msd.capstone.project.gardennerds.adapters.CustomCategoryAdapter;
-import com.android.msd.capstone.project.gardennerds.databinding.FragmentHomeBinding;
+import com.android.msd.capstone.project.gardennerds.dialogs.SubscriptionFragment;
 import com.android.msd.capstone.project.gardennerds.interfaces.AdapterInterface;
 import com.android.msd.capstone.project.gardennerds.models.Category;
 
-import java.util.Calendar;
 import java.util.Objects;
 
 

@@ -1,21 +1,28 @@
 package com.android.msd.capstone.project.gardennerds.fragments;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.broadcastReceivers.ReminderReceiver;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentAddPlantBinding;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -107,7 +114,9 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
             plant.setWateringInterval(addPlantBinding.edtPlantWateringInterval.getText().toString());
             plant.setSunlightLevel(addPlantBinding.edtPlantSunlightRequired.getText().toString());
             plant.setNutrientRequired(addPlantBinding.edtPlantNutritionRequired.getText().toString());
-
+            /**Mann's Code*/
+//            setWateringReminder();
+            /**till here*/
             // Pass data back to GardenDetailsFragment
             if (getParentFragment() instanceof OnPlantAddedListener) {
                 ((OnPlantAddedListener) getParentFragment()).onPlantAdded(plant);
@@ -117,7 +126,79 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
+    /**Mann's code*/
+    private void setWateringReminder(String reminderType) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.SECOND, 20); // Set reminder for 1 minute later (adjust as needed)
+
+        Intent intent = new Intent(requireActivity(), ReminderReceiver.class).putExtra("ReminderType",reminderType);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                requireContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager != null) {
+
+                alarmManager.setExact(
+                        AlarmManager.RTC_WAKEUP,
+                        calendar.getTimeInMillis(),
+                        pendingIntent
+                );
+
+
+        }
+    }
+
+
+    private void setAlarmsForFrequency(int frequency,String reminderType) {
+        Calendar calendar = Calendar.getInstance();
+
+        // Start time (e.g., 10 AM)
+        calendar.set(Calendar.HOUR_OF_DAY, 12);  // 10 AM
+        calendar.set(Calendar.MINUTE, 58);
+        calendar.set(Calendar.SECOND, 0);
+
+        // Loop to set alarms based on the frequency
+        for (int i = 0; i < frequency; i++) {
+            // Calculate the time for each alarm
+            Calendar alarmTime = (Calendar) calendar.clone();
+            alarmTime.add(Calendar.HOUR_OF_DAY, i * 2);  // Increment hours by 2 for each frequency
+
+            // Log alarm times (for debugging)
+            Log.d("Alarm", "Setting alarm for: " + alarmTime.getTime());
+
+            // Set the alarm
+            setAlarm(alarmTime,i,reminderType);
+        }
+    }
+
+    // Helper method to set a single alarm
+    private void setAlarm(Calendar alarmTime,int uniqueCode,String reminderType) {
+        Intent intent = new Intent(requireContext(), ReminderReceiver.class).putExtra("ReminderType",reminderType);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(), uniqueCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
+
+        // Set the alarm to trigger at the exact time
+        if (alarmManager != null) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
+        }
+    }
+
+    /**Till here*/
+
     private boolean validatePlant() {
+        /**Mann's Code*/
+//        setWateringReminder();//yet to implement in save plant
+
+        /**Reminder Type
+         * Fertilize
+         * Watering
+         * Sunlight
+         * Change Soil
+         * */
+        setAlarmsForFrequency(1,"Fertilize");
+        /**till here*/
         if (addPlantBinding.edtPlantName.getText().toString().isEmpty() ||
                 addPlantBinding.rgPlantType.getCheckedRadioButtonId() == -1 ||
                 addPlantBinding.edtPlantMoistureLevel.getText().toString().isEmpty() ||
