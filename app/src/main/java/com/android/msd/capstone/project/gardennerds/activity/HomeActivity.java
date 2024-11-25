@@ -7,11 +7,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -37,7 +35,7 @@ import com.android.msd.capstone.project.gardennerds.databinding.ActivityHomeBind
 import com.android.msd.capstone.project.gardennerds.databinding.MenuDrawerHeaderBinding;
 import com.android.msd.capstone.project.gardennerds.fragments.AboutFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.HomeFragment;
-import com.android.msd.capstone.project.gardennerds.fragments.MeasurementFragment;
+import com.android.msd.capstone.project.gardennerds.fragments.ScanMeasureGardenFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.MyGardenFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.ProfileFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.SupportFragment;
@@ -46,11 +44,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Objects;
 
 /**
  * This is the main activity for the application. It manages the navigation drawer and the fragments that are displayed within the activity.
@@ -142,7 +136,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    private void setBottomNavigation(){
+    private void setBottomNavigation() {
         homeBinding.bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -153,9 +147,9 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (i == R.id.btm_my_garden) {
                     changeFragment(new MyGardenFragment());
                 } else if (i == R.id.btm_scanner) {
-                    changeFragment(new MeasurementFragment());
+                    changeFragment(new ScanMeasureGardenFragment());
                 }
-                        return false;
+                return false;
 
             }
         });
@@ -246,7 +240,8 @@ public class HomeActivity extends AppCompatActivity {
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
         fragmentTransaction.replace(homeBinding.frames.getId(), fragment);
-        fragmentTransaction.addToBackStack(null); // Add this line
+        if (!(fragment instanceof ScanMeasureGardenFragment))
+            fragmentTransaction.addToBackStack(null); // Add this line
         fragmentTransaction.commit();
         drawerLayout.closeDrawers();
     }
@@ -344,7 +339,10 @@ public class HomeActivity extends AppCompatActivity {
         });
         alertDialog.show();
     }
-/**Mann's Code*/
+
+    /**
+     * Mann's Code
+     */
     private void showWateringReminderDialog(String reminderType) {
 
 
@@ -365,8 +363,8 @@ public class HomeActivity extends AppCompatActivity {
         assert reminderType != null;
         switch (reminderType) {
             case "Fertilize":
-               reminderTitle.setText("Fertilize Your Plants!");
-               reminderMessage.setText("It's time to fertilize your plants for healthy growth.");
+                reminderTitle.setText("Fertilize Your Plants!");
+                reminderMessage.setText("It's time to fertilize your plants for healthy growth.");
                 image.setImageResource(R.drawable.fertilize);
                 break;
             case "Watering":
@@ -416,7 +414,6 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-
         // Show the dialog
 //        AlertDialog dialog = builder.create();
         dialog.show();
@@ -427,12 +424,12 @@ public class HomeActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.SECOND, 20); // Set reminder for 1 minute later (adjust as needed)
 
-        Intent intent = new Intent(this, ReminderReceiver.class).putExtra("ReminderType",reminderType);
+        Intent intent = new Intent(this, ReminderReceiver.class).putExtra("ReminderType", reminderType);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
 
-        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         if (alarmManager != null) {
 
             alarmManager.setExact(

@@ -148,12 +148,12 @@ public class PlantDataSource {
         if (cursor.moveToFirst()) {
             do {
                 Plant plant = new Plant();
-                plant.setPlantId(cursor.getInt(cursor.getColumnIndex(COLUMN_PLANT_ID)));
-                plant.setGardenId(cursor.getInt(cursor.getColumnIndex(COLUMN_GARDEN_ID)));
-                plant.setPlantName(cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_NAME)));
-                plant.setPlantType(cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_TYPE)));
-                plant.setGrowthConditions(cursor.getString(cursor.getColumnIndex(COLUMN_GROWTH_CONDITIONS)));
-                plant.setImageUri(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_PATH)));
+                plant.setPlantId(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_PLANT_ID)));
+                plant.setGardenId(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_GARDEN_ID)));
+                plant.setPlantName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PLANT_NAME)));
+                plant.setPlantType(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PLANT_TYPE)));
+                plant.setGrowthConditions(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GROWTH_CONDITIONS)));
+                plant.setImageUri(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IMAGE_PATH)));
 
                 plants.add(plant);
             } while (cursor.moveToNext());

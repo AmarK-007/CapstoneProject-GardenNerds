@@ -12,10 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginTop="24dp"
-        android:layout_centerInParent="true"
         android:text="No gardens added yet."
+        android:textColor="@color/colorPrimaryDeepDark"
         android:textSize="16sp"
         android:visibility="gone" />
 
@@ -24,10 +25,10 @@
         android:id="@+id/recyclerViewGardens"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
         android:layout_above="@+id/fabAddGarden"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:visibility="visible" />
 
     <!-- Floating Action Button to add a new garden -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton

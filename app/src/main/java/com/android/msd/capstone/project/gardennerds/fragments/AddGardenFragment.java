@@ -23,11 +23,14 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentAddGardenBinding;
 import com.android.msd.capstone.project.gardennerds.db.GardenDataSource;
 import com.android.msd.capstone.project.gardennerds.models.Garden;
@@ -127,6 +130,16 @@ public class AddGardenFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Ensure Activity and ActionBar are available
+        if (getActivity() != null && getActivity() instanceof AppCompatActivity) {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            activity.getSupportActionBar().setTitle(getString(R.string.text_add_garden));
         }
     }
 

@@ -3,11 +3,11 @@
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Ensure the status bar is not translucent -->
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
         <item name="android:fitsSystemWindows">true</item>
 
-        <item name="android:statusBarColor">@color/colorPrimary</item>
-        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDeepDark</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDeepDark</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:colorControlNormal">@color/colorPrimary</item>
         <item name="android:windowDisablePreview">true</item>
