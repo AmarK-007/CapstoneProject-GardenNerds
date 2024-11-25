@@ -46,15 +46,26 @@
     <string name="text_enter_sunlight_required">Sunlight Preference:</string>
     <string name="text_enter_nutrition_required">Enter Nutrition Required</string>
     <string name="text_reminders">Reminders</string>
-    <string name="text_add_reminder">Add Reminder</string>
     <string name="text_enter_frequency">Enter Frequency</string>
-    <string name="text_no_reminders_added_yet">No Reminders added yet.</string>
     <string name="text_reminder_type_watering">Watering</string>
     <string name="text_reminder_type_fertilize">Fertilize</string>
     <string name="text_reminder_type_sunlight">Sunlight</string>
     <string name="text_reminder_type_changeSoil">Change Soil</string>
     <string name="text_indoor">Indoor</string>
     <string name="text_outdoor">Outdoor</string>
+
+    //my_garden
+    <string name="text_my_garden">My Garden</string>
+    <string name="text_garden_Details">Garden Details</string>
+    <string name="text_plant_details">Plant Details</string>
+    <string name="text_no_gardens_added_yet">No gardens added yet.</string>
+    <string name="text_add_garden">Add Garden</string>
+    <string name="text_add_plant">Add Plant</string>
+    <string name="text_my_plants">My Plants</string>
+    <string name="text_no_plants_added_yet">No plants added yet.</string>
+    <string name="text_add_reminder">Add Reminder</string>
+    <string name="text_no_reminders_added_yet">No Reminders added yet.</string>
+    <string name="text_scan_garden">Scan Garden</string>
 
 
     <string-array name="canadian_provinces">

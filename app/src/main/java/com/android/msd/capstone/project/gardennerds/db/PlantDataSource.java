@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.android.msd.capstone.project.gardennerds.models.Plant;
+import com.android.msd.capstone.project.gardennerds.models.Reminder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,10 +65,22 @@ public class PlantDataSource {
         values.put(COLUMN_GROWTH_CONDITIONS, plant.getGrowthConditions());
         values.put(COLUMN_IMAGE_PATH,plant.getImageUri());
 
-        long result = db.insert(TABLE_NAME, null, values);
+        long plantId = db.insert(TABLE_NAME, null, values);
+
+        if (plantId == -1) {
+            return false;
+        }
+
+        // Insert reminders
+        for (Reminder reminder : plant.getReminders()) {
+            ContentValues reminderValues = new ContentValues();
+            reminderValues.put(COLUMN_PLANT_ID, plantId);
+            // Add reminder details to reminderValues...
+            db.insert(ReminderDataSource.TABLE_NAME, null, reminderValues);
+        }
         db.close();
 
-        return result != -1; // Return true if insertion was successful, false otherwise
+        return plantId != -1; // Return true if insertion was successful, false otherwise
     }
 
     /**
@@ -148,12 +161,16 @@ public class PlantDataSource {
         if (cursor.moveToFirst()) {
             do {
                 Plant plant = new Plant();
-                plant.setPlantId(cursor.getInt(cursor.getColumnIndex(COLUMN_PLANT_ID)));
-                plant.setGardenId(cursor.getInt(cursor.getColumnIndex(COLUMN_GARDEN_ID)));
-                plant.setPlantName(cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_NAME)));
-                plant.setPlantType(cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_TYPE)));
-                plant.setGrowthConditions(cursor.getString(cursor.getColumnIndex(COLUMN_GROWTH_CONDITIONS)));
-                plant.setImageUri(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_PATH)));
+                plant.setPlantId(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_PLANT_ID)));
+                plant.setGardenId(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_GARDEN_ID)));
+                plant.setPlantName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PLANT_NAME)));
+                plant.setPlantType(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PLANT_TYPE)));
+                plant.setGrowthConditions(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GROWTH_CONDITIONS)));
+                plant.setImageUri(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IMAGE_PATH)));
+
+                // Get reminders for the plant
+                ArrayList<Reminder> reminders = getRemindersByPlantId(plant.getPlantId());
+                plant.setReminders(reminders);
 
                 plants.add(plant);
             } while (cursor.moveToNext());
@@ -164,6 +181,22 @@ public class PlantDataSource {
         return plants;
     }
 
+    private ArrayList<Reminder> getRemindersByPlantId(long plantId) {
+        ArrayList<Reminder> reminders = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query("reminders", null, "plant_id=?", new String[]{String.valueOf(plantId)}, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                Reminder reminder = new Reminder();
+                // Set reminder details from cursor...
+                reminders.add(reminder);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+
+        return reminders;
+    }
 
     /**
      * updatePlant method

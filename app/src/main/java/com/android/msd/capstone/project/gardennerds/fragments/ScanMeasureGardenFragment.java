@@ -2,7 +2,6 @@ package com.android.msd.capstone.project.gardennerds.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,14 +16,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -32,10 +31,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.msd.capstone.project.gardennerds.R;
-import com.android.msd.capstone.project.gardennerds.activity.HomeActivity;
-import com.android.msd.capstone.project.gardennerds.databinding.DialogMeasuredAreaBinding;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentMeasurementBinding;
-import com.android.msd.capstone.project.gardennerds.databinding.UpdateAddressDialogBinding;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Frame;
@@ -53,18 +49,15 @@ import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.core.Config;
 import com.google.ar.core.Config.UpdateMode;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MeasurementFragment#newInstance} factory method to
+ * Use the {@link ScanMeasureGardenFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MeasurementFragment extends Fragment {
+public class ScanMeasureGardenFragment extends Fragment {
 
     private static final String TAG = "MeasurementFragment";
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
@@ -83,7 +76,7 @@ public class MeasurementFragment extends Fragment {
 
     private FragmentMeasurementBinding binding;
 
-    public MeasurementFragment() {
+    public ScanMeasureGardenFragment() {
         // Required empty public constructor
     }
 
@@ -96,8 +89,8 @@ public class MeasurementFragment extends Fragment {
      * @return A new instance of fragment MeasurementFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MeasurementFragment newInstance(String param1, String param2) {
-        MeasurementFragment fragment = new MeasurementFragment();
+    public static ScanMeasureGardenFragment newInstance(String param1, String param2) {
+        ScanMeasureGardenFragment fragment = new ScanMeasureGardenFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -177,6 +170,17 @@ public class MeasurementFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Ensure Activity and ActionBar are available
+        if (getActivity() != null && getActivity() instanceof AppCompatActivity) {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            activity.getSupportActionBar().setTitle(getString(R.string.text_scan_garden));
+        }
     }
 
     @Override

@@ -34,6 +34,11 @@ public class ReminderDataSource {
     public static final String COLUMN_DATE_TIME = "date_time";
     public static final String COLUMN_PLANT_ID = "plant_id";
     public static final String COLUMN_REMINDER_TYPE_ID = "reminder_type_id";
+    public static final String COLUMN_FREQUENCY = "frequency";
+    public static final String COLUMN_MOISTURE_LEVEL = "moisture_level";
+    public static final String COLUMN_TEMPERATURE_LEVEL = "temperature_level";
+    public static final String COLUMN_SUNLIGHT_LEVEL = "sunlight_level";
+    public static final String COLUMN_NUTRIENT_REQUIRED = "nutrient_required";
 
     // Create table SQL query
     public static final String CREATE_TABLE =
@@ -43,6 +48,11 @@ public class ReminderDataSource {
                     + COLUMN_DATE_TIME + " TIMESTAMP,"
                     + COLUMN_PLANT_ID + " INTEGER,"
                     + COLUMN_REMINDER_TYPE_ID + " INTEGER,"
+                    + COLUMN_FREQUENCY + " TEXT,"
+                    + COLUMN_MOISTURE_LEVEL + " TEXT,"
+                    + COLUMN_TEMPERATURE_LEVEL + " TEXT,"
+                    + COLUMN_SUNLIGHT_LEVEL + " TEXT,"
+                    + COLUMN_NUTRIENT_REQUIRED + " TEXT,"
                     + "FOREIGN KEY(" + COLUMN_PLANT_ID + ") REFERENCES plants(plant_id),"
                     + "FOREIGN KEY(" + COLUMN_REMINDER_TYPE_ID + ") REFERENCES reminder_types(reminder_type_id)"
                     + ")";
@@ -61,6 +71,11 @@ public class ReminderDataSource {
         values.put(COLUMN_DATE_TIME, reminder.getDateTime());
         values.put(COLUMN_PLANT_ID, reminder.getPlantId());
         values.put(COLUMN_REMINDER_TYPE_ID, reminder.getReminderTypeId());
+        values.put(COLUMN_FREQUENCY, reminder.getFrequency());
+        values.put(COLUMN_MOISTURE_LEVEL, reminder.getMoistureLevel());
+        values.put(COLUMN_TEMPERATURE_LEVEL, reminder.getTemperatureLevel());
+        values.put(COLUMN_SUNLIGHT_LEVEL, reminder.getSunlightLevel());
+        values.put(COLUMN_NUTRIENT_REQUIRED, reminder.getNutrientRequired());
 
         long result = db.insert(TABLE_NAME, null, values);
         db.close();
@@ -91,6 +106,11 @@ public class ReminderDataSource {
             reminder.setDateTime(cursor.getString(cursor.getColumnIndex(COLUMN_DATE_TIME)));
             reminder.setPlantId(cursor.getInt(cursor.getColumnIndex(COLUMN_PLANT_ID)));
             reminder.setReminderTypeId(cursor.getInt(cursor.getColumnIndex(COLUMN_REMINDER_TYPE_ID)));
+            reminder.setFrequency(cursor.getString(cursor.getColumnIndex(COLUMN_FREQUENCY)));
+            reminder.setMoistureLevel(cursor.getString(cursor.getColumnIndex(COLUMN_MOISTURE_LEVEL)));
+            reminder.setTemperatureLevel(cursor.getString(cursor.getColumnIndex(COLUMN_TEMPERATURE_LEVEL)));
+            reminder.setSunlightLevel(cursor.getString(cursor.getColumnIndex(COLUMN_SUNLIGHT_LEVEL)));
+            reminder.setNutrientRequired(cursor.getString(cursor.getColumnIndex(COLUMN_NUTRIENT_REQUIRED)));
 
             cursor.close();
             return reminder;
@@ -120,6 +140,11 @@ public class ReminderDataSource {
                 reminder.setDateTime(cursor.getString(cursor.getColumnIndex(COLUMN_DATE_TIME)));
                 reminder.setPlantId(cursor.getInt(cursor.getColumnIndex(COLUMN_PLANT_ID)));
                 reminder.setReminderTypeId(cursor.getInt(cursor.getColumnIndex(COLUMN_REMINDER_TYPE_ID)));
+                reminder.setFrequency(cursor.getString(cursor.getColumnIndex(COLUMN_FREQUENCY)));
+                reminder.setMoistureLevel(cursor.getString(cursor.getColumnIndex(COLUMN_MOISTURE_LEVEL)));
+                reminder.setTemperatureLevel(cursor.getString(cursor.getColumnIndex(COLUMN_TEMPERATURE_LEVEL)));
+                reminder.setSunlightLevel(cursor.getString(cursor.getColumnIndex(COLUMN_SUNLIGHT_LEVEL)));
+                reminder.setNutrientRequired(cursor.getString(cursor.getColumnIndex(COLUMN_NUTRIENT_REQUIRED)));
 
                 reminders.add(reminder);
             } while (cursor.moveToNext());
@@ -152,6 +177,11 @@ public class ReminderDataSource {
                 reminder.setDateTime(cursor.getString(cursor.getColumnIndex(COLUMN_DATE_TIME)));
                 reminder.setPlantId(cursor.getInt(cursor.getColumnIndex(COLUMN_PLANT_ID)));
                 reminder.setReminderTypeId(cursor.getInt(cursor.getColumnIndex(COLUMN_REMINDER_TYPE_ID)));
+                reminder.setFrequency(cursor.getString(cursor.getColumnIndex(COLUMN_FREQUENCY)));
+                reminder.setMoistureLevel(cursor.getString(cursor.getColumnIndex(COLUMN_MOISTURE_LEVEL)));
+                reminder.setTemperatureLevel(cursor.getString(cursor.getColumnIndex(COLUMN_TEMPERATURE_LEVEL)));
+                reminder.setSunlightLevel(cursor.getString(cursor.getColumnIndex(COLUMN_SUNLIGHT_LEVEL)));
+                reminder.setNutrientRequired(cursor.getString(cursor.getColumnIndex(COLUMN_NUTRIENT_REQUIRED)));
 
                 reminders.add(reminder);
             } while (cursor.moveToNext());
@@ -175,6 +205,11 @@ public class ReminderDataSource {
         values.put(COLUMN_DATE_TIME, reminder.getDateTime());
         values.put(COLUMN_PLANT_ID, reminder.getPlantId());
         values.put(COLUMN_REMINDER_TYPE_ID, reminder.getReminderTypeId());
+        values.put(COLUMN_FREQUENCY, reminder.getFrequency());
+        values.put(COLUMN_MOISTURE_LEVEL, reminder.getMoistureLevel());
+        values.put(COLUMN_TEMPERATURE_LEVEL, reminder.getTemperatureLevel());
+        values.put(COLUMN_SUNLIGHT_LEVEL, reminder.getSunlightLevel());
+        values.put(COLUMN_NUTRIENT_REQUIRED, reminder.getNutrientRequired());
 
         return db.update(TABLE_NAME, values, COLUMN_REMINDER_ID + " = ?",
                 new String[]{String.valueOf(reminder.getReminderId())});

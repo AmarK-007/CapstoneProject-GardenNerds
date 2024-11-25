@@ -2,7 +2,11 @@ package com.android.msd.capstone.project.gardennerds.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +14,10 @@ import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentAddReminderBinding;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
+import com.android.msd.capstone.project.gardennerds.models.SharedViewModel;
 import com.android.msd.capstone.project.gardennerds.utils.Constants;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
 
@@ -27,7 +33,7 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private SharedViewModel sharedViewModel;
 
     // TODO: Rename and change types of parameters
     private int plantId;
@@ -56,6 +62,7 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         if (getArguments() != null) {
             plantId = getArguments().getInt(ARG_PARAM1);
         }
@@ -68,6 +75,16 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
         addReminderBinding = FragmentAddReminderBinding.inflate(inflater, container, false);
         init();
         return addReminderBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Ensure Activity and ActionBar are available
+        if (getActivity() != null && getActivity() instanceof AppCompatActivity) {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            activity.getSupportActionBar().setTitle(getString(R.string.text_add_reminder));
+        }
     }
 
     private void init() {
@@ -106,32 +123,31 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
         // Save reminder
         if(validateReminder()){
             Reminder reminder = new Reminder();
-            if(addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbWatering.getId()) {
-                reminder.setReminderId(Constants.REMINDER_TYPE_WATER);
+            if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbWatering.getId()) {
+                reminder.setReminderTypeId(Constants.REMINDER_TYPE_WATER);
                 reminder.setFrequency(addReminderBinding.edtFrequency.getText().toString());
                 reminder.setMoistureLevel(addReminderBinding.edtMoistureLevel.getText().toString());
-            } else if(addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbFertilize.getId()) {
-                reminder.setReminderId(Constants.REMINDER_TYPE_FERTILIZE);
+            } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbFertilize.getId()) {
+                reminder.setReminderTypeId(Constants.REMINDER_TYPE_FERTILIZE);
                 reminder.setFrequency(addReminderBinding.edtFrequency.getText().toString());
-                reminder.setMoistureLevel(addReminderBinding.edtNutritionRequired.getText().toString());
-            } else if(addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbSunlight.getId()) {
-                reminder.setReminderId(Constants.REMINDER_TYPE_SUNLIGHT);
+                reminder.setNutrientRequired(addReminderBinding.edtNutritionRequired.getText().toString());
+            } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbSunlight.getId()) {
+                reminder.setReminderTypeId(Constants.REMINDER_TYPE_SUNLIGHT);
                 reminder.setFrequency(addReminderBinding.edtFrequency.getText().toString());
-                reminder.setMoistureLevel(addReminderBinding.edtTemperature.getText().toString());
-                reminder.setMoistureLevel(addReminderBinding.edtSunlightRequired.getText().toString());
-            } else if(addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbChangeSoil.getId()) {
-                reminder.setReminderId(Constants.REMINDER_TYPE_CHANGE_SOIL);
+                reminder.setTemperatureLevel(addReminderBinding.edtTemperature.getText().toString());
+                reminder.setSunlightLevel(addReminderBinding.edtSunlightRequired.getText().toString());
+            } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbChangeSoil.getId()) {
+                reminder.setReminderTypeId(Constants.REMINDER_TYPE_CHANGE_SOIL);
                 reminder.setFrequency(addReminderBinding.edtFrequency.getText().toString());
             }
             reminder.setDateTime(Utility.getCurrentDateTime());
 
-            //TODO : How we will get plantId if coming from AddPlantFragment
-            //reminder.setPlantId(plantId);
+            sharedViewModel.setReminder(reminder);
 
-            // Pass data back to parent activity
+            /*// Pass data back to parent activity
             if (getActivity() instanceof OnReminderAddedListener) {
                 ((OnReminderAddedListener) getActivity()).onReminderAdded(reminder);
-            }
+            }*/
             // move back to previous fragment with reminder object
             getActivity().getSupportFragmentManager().popBackStack();
 
@@ -141,28 +157,28 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
 
     private boolean validateReminder() {
         // Validate reminder
-        if(addReminderBinding.rgReminderType.getCheckedRadioButtonId() == -1) {
+        if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == -1) {
             Toast.makeText(getContext(), "Please select a reminder type", Toast.LENGTH_SHORT).show();
-            return  false;
-        }else if(addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbWatering.getId()) {
-            if(addReminderBinding.edtFrequency.getText().toString().isEmpty() || addReminderBinding.edtMoistureLevel.getText().toString().isEmpty()) {
+            return false;
+        } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbWatering.getId()) {
+            if (addReminderBinding.edtFrequency.getText().toString().isEmpty() || addReminderBinding.edtMoistureLevel.getText().toString().isEmpty()) {
                 Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
-                return  false;
+                return false;
             }
-        }else if(addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbFertilize.getId()) {
-            if(addReminderBinding.edtFrequency.getText().toString().isEmpty() || addReminderBinding.edtNutritionRequired.getText().toString().isEmpty()) {
+        } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbFertilize.getId()) {
+            if (addReminderBinding.edtFrequency.getText().toString().isEmpty() || addReminderBinding.edtNutritionRequired.getText().toString().isEmpty()) {
                 Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
-                return  false;
+                return false;
             }
-        }else if(addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbSunlight.getId()) {
+        } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbSunlight.getId()) {
             if (addReminderBinding.edtFrequency.getText().toString().isEmpty() || addReminderBinding.edtTemperature.getText().toString().isEmpty() || addReminderBinding.edtSunlightRequired.getText().toString().isEmpty()) {
                 Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
-                return  false;
+                return false;
             }
-        }else if(addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbChangeSoil.getId()) {
-            if(addReminderBinding.edtFrequency.getText().toString().isEmpty()) {
+        } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbChangeSoil.getId()) {
+            if (addReminderBinding.edtFrequency.getText().toString().isEmpty()) {
                 Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
-                return  false;
+                return false;
             }
         }
         return true;

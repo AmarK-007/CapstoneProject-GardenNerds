@@ -23,6 +23,7 @@
     <color name="card_color">#E0F0CC</color>
     <color name="category_text_color">#88E41A</color>
     <color name="transparent_black">#88E41A</color>
-    <color name="fragment_background">#FF000000</color>
+    <color name="fragment_background">@color/colorPrimaryDeepDark
+    </color><!--    #FF000000</color>-->
     <color name="icon_tint">#FFFFFF</color>
 </resources>
