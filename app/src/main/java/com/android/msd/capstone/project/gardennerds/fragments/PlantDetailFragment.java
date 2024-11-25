@@ -49,6 +49,7 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
     private ReminderAdapter reminderAdapter;
 
     private FragmentPlantDetailBinding plantDetailBinding;
+    private Plant plant;
 
     public PlantDetailFragment() {
         // Required empty public constructor
@@ -76,6 +77,7 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            plant = getArguments().getParcelable("plant");
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
@@ -105,9 +107,7 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
          reminderViewModel= new ViewModelProvider(this).get(ReminderViewModel.class);
 
         // Retrieve the passed garden object
-        if (getArguments() != null) {
-            Plant plant = (Plant) getArguments().getParcelable("plant");
-
+        if (plant != null) {
             //saving garden Id
             //plantViewModel.setGardenId(plant.getPlantId());
 
@@ -140,7 +140,8 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
         // Observe the plant list for updates
         reminderViewModel.getReminderList().observe(getViewLifecycleOwner(), reminders -> {
             if (reminders != null && !reminders.isEmpty()) {
-                reminderAdapter.setReminders(reminders); // Refresh the RecyclerView
+                reminderAdapter.setReminders(reminders);
+                reminderAdapter.notifyDataSetChanged();
                 plantDetailBinding.tvNoReminders.setVisibility(View.GONE);
             }else{
                 plantDetailBinding.tvNoReminders.setVisibility(View.VISIBLE);
@@ -167,5 +168,24 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
                 .replace(R.id.frames, AddReminderFragment.newInstance(reminderViewModel.getPlantId()))
                 .addToBackStack(null)  // Add this transaction to the back stack
                 .commit();
+    }
+
+    public void saveReminder(Reminder reminder) {
+        ReminderDataSource reminderDataSource = new ReminderDataSource(requireContext());
+        reminder.setPlantId(plant.getPlantId());
+        boolean isInserted = reminderDataSource.insertReminder(reminder);
+
+        if (isInserted) {
+            List<Reminder> updatedReminders = reminderDataSource.getRemindersByPlantId(plant.getPlantId());
+            reminderViewModel.setReminderList(updatedReminders);
+            // Update the adapter's list and notify it
+            reminderAdapter.setReminders(updatedReminders);
+            reminderAdapter.notifyDataSetChanged();
+
+            // Optionally, hide "No Reminders" message if any reminders exist
+            if (!updatedReminders.isEmpty()) {
+                plantDetailBinding.tvNoReminders.setVisibility(View.GONE);
+            }
+        }
     }
 }
