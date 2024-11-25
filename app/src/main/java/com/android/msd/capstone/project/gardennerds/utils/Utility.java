@@ -2,7 +2,10 @@ package com.android.msd.capstone.project.gardennerds.utils;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.util.Log;
@@ -16,11 +19,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 
 import com.android.msd.capstone.project.gardennerds.R;
+import com.android.msd.capstone.project.gardennerds.broadcastReceivers.ReminderReceiver;
 import com.android.msd.capstone.project.gardennerds.fragments.HomeFragment;
 import com.android.msd.capstone.project.gardennerds.models.User;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -348,6 +353,42 @@ public class Utility {
                 "HH:mm:ss", Locale.getDefault());
         Date date = new Date();
         return dateFormat.format(date);
+    }
+
+    public static void setAlarmsForFrequency(Context context, int frequency, int reminderType) {
+        String reminderTypeString = Utility.getReminderTypeString(context, reminderType);
+        Calendar calendar = Calendar.getInstance();
+
+        // Start time (e.g., 10 AM)
+        calendar.set(Calendar.HOUR_OF_DAY, 11);  // 10 AM
+        calendar.set(Calendar.MINUTE, 18);
+        calendar.set(Calendar.SECOND, 0);
+
+        // Loop to set alarms based on the frequency
+        for (int i = 0; i < frequency; i++) {
+            // Calculate the time for each alarm
+            Calendar alarmTime = (Calendar) calendar.clone();
+            alarmTime.add(Calendar.HOUR_OF_DAY, i * 2);  // Increment hours by 2 for each frequency
+
+            // Log alarm times (for debugging)
+            Log.d("Alarm", "Setting alarm for: " + alarmTime.getTime());
+
+            // Set the alarm
+            setAlarm(context, alarmTime, i, reminderTypeString);
+        }
+    }
+
+    // Helper method to set a single alarm
+    public static void setAlarm(Context context, Calendar alarmTime, int uniqueCode, String reminderType) {
+        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, uniqueCode, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        // Set the alarm to trigger at the exact time
+        if (alarmManager != null) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
+        }
     }
 
 }

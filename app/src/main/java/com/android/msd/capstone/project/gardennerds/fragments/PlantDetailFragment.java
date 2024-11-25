@@ -195,9 +195,9 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
     public void saveReminder(Reminder reminder) {
         ReminderDataSource reminderDataSource = new ReminderDataSource(requireContext());
         reminder.setPlantId(plant.getPlantId());
-        boolean isInserted = reminderDataSource.insertReminder(reminder);
+        long isInserted = reminderDataSource.insertReminder(reminder);
 
-        if (isInserted) {
+        if (isInserted > 0) {
             List<Reminder> updatedReminders = reminderDataSource.getRemindersByPlantId(plant.getPlantId());
             reminderViewModel.setReminderList(updatedReminders);
             // Update the adapter's list and notify it
