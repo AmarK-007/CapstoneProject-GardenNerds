@@ -35,6 +35,7 @@ import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
 import com.android.msd.capstone.project.gardennerds.db.ReminderDataSource;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
+import com.android.msd.capstone.project.gardennerds.models.SharedViewModel;
 import com.android.msd.capstone.project.gardennerds.viewmodels.PlantViewModel;
 import com.bumptech.glide.Glide;
 
@@ -48,13 +49,14 @@ import java.util.List;
  * Use the {@link AddPlantFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddPlantFragment extends Fragment implements View.OnClickListener, AddReminderFragment.OnReminderAddedListener {
+public class AddPlantFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = AddPlantFragment.class.getSimpleName();
     private FragmentAddPlantBinding addPlantBinding;
     private ReminderAdapter reminderAdapter;
     private List<Reminder> reminderlist = new ArrayList<>();
     private PlantViewModel plantViewModel;
+    private SharedViewModel sharedViewModel;
     private Uri selectedImageUri; // To store the image URI
 
     // TODO: Rename parameter arguments, choose names that match
@@ -105,6 +107,7 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         if (getArguments() != null) {
             gardenId = getArguments().getInt(ARG_PARAM1);
         }
@@ -127,28 +130,44 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
             AppCompatActivity activity = (AppCompatActivity) getActivity();
             activity.getSupportActionBar().setTitle(getString(R.string.text_add_plant));
         }
+
+
+        // Observe the shared ViewModel for new reminders
+        sharedViewModel.getReminder().observe(getViewLifecycleOwner(), reminder -> {
+            if (reminder != null) {
+                reminderlist.add(reminder);
+                reminderAdapter.notifyDataSetChanged();
+                updateNoRemindersMessage();
+            }
+        });
+
+        // Refresh the RecyclerView with the latest reminders list
+        reminderAdapter.notifyDataSetChanged();
+        updateNoRemindersMessage();
     }
 
     private void init() {
+        // Initialize ViewModel
+        plantViewModel = new ViewModelProvider(this).get(PlantViewModel.class);
+        //saving gardenId
+        plantViewModel.setGardenId(gardenId);
+        // Set up adapter and RecyclerView
+        addPlantBinding.recyclerViewReminders.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        reminderAdapter = new ReminderAdapter(reminderlist, requireActivity());
+        addPlantBinding.recyclerViewReminders.setAdapter(reminderAdapter);
+
         addPlantBinding.fabAddReminder.setOnClickListener(this);
         addPlantBinding.fabSavePlant.setOnClickListener(this);
 
-        // Get the ViewModel
-        plantViewModel = new ViewModelProvider(requireActivity()).get(PlantViewModel.class);
 
-        //saving gardenId
-        plantViewModel.setGardenId(gardenId);
+        // Update the visibility of tvNoReminders
+        updateNoRemindersMessage();
 
         // Set listeners
         addPlantBinding.btnUploadPhoto.setOnClickListener(v -> {
             showImageSourceDialog();
         });
 
-        // Setup RecyclerView for reminders
-        RecyclerView recyclerView = addPlantBinding.recyclerViewReminders;
-        reminderAdapter = new ReminderAdapter(reminderlist, requireContext());
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        recyclerView.setAdapter(reminderAdapter);
     }
 
     private void showImageSourceDialog() {
@@ -202,7 +221,7 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
             // Replace the current fragment with AddPlantFragment
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frames, new AddReminderFragment())
+                    .replace(R.id.frames, AddReminderFragment.newInstance(gardenId))
                     .addToBackStack(null)  // Add this transaction to the back stack
                     .commit();
         }
@@ -229,9 +248,9 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
                 Toast.makeText(requireContext(), "Plant added successfully!", Toast.LENGTH_SHORT).show();
 
                 // Save reminders
+                ReminderDataSource reminderDataSource = new ReminderDataSource(requireContext());
                 for (Reminder reminder : reminderlist) {
-                    // Save each reminder to the database or persist
-                    ReminderDataSource reminderDataSource = new ReminderDataSource(requireContext());
+                    reminder.setPlantId(plant.getPlantId());
                     reminderDataSource.insertReminder(reminder);
                 }
                 // Fetch updated list of plants and update ViewModel
@@ -317,6 +336,7 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
      * Till here
      */
 
+
     // Java example
     public boolean validateInputs() {
         String plantName = addPlantBinding.edtPlantName.getText().toString().trim();
@@ -381,11 +401,14 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener, 
         this.reminderlist = reminderlist;
     }
 
-    @Override
-    public void onReminderAdded(Reminder reminder) {
-        reminderlist.add(reminder);
-        reminderAdapter.notifyDataSetChanged();
 
+
+    private void updateNoRemindersMessage() {
+        if (reminderlist.isEmpty()) {
+            addPlantBinding.tvNoReminders.setVisibility(View.VISIBLE);
+        } else {
+            addPlantBinding.tvNoReminders.setVisibility(View.GONE);
+        }
     }
 
     public interface OnPlantAddedListener {

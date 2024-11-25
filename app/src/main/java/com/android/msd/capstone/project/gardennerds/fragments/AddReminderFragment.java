@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentAddReminderBinding;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
+import com.android.msd.capstone.project.gardennerds.models.SharedViewModel;
 import com.android.msd.capstone.project.gardennerds.utils.Constants;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
 
@@ -31,6 +33,7 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
+    private SharedViewModel sharedViewModel;
 
     // TODO: Rename and change types of parameters
     private int plantId;
@@ -59,6 +62,7 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         if (getArguments() != null) {
             plantId = getArguments().getInt(ARG_PARAM1);
         }
@@ -138,15 +142,12 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
             }
             reminder.setDateTime(Utility.getCurrentDateTime());
 
-            PlantDetailFragment parentFragment = (PlantDetailFragment) getTargetFragment();
-            if (parentFragment != null) {
-                parentFragment.saveReminder(reminder);
-            }
+            sharedViewModel.setReminder(reminder);
 
-            // Pass data back to parent activity
+            /*// Pass data back to parent activity
             if (getActivity() instanceof OnReminderAddedListener) {
                 ((OnReminderAddedListener) getActivity()).onReminderAdded(reminder);
-            }
+            }*/
             // move back to previous fragment with reminder object
             getActivity().getSupportFragmentManager().popBackStack();
 

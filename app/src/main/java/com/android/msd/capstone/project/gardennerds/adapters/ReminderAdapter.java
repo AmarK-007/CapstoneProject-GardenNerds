@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.msd.capstone.project.gardennerds.databinding.LayoutItemReminderBinding;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
+import com.android.msd.capstone.project.gardennerds.utils.Constants;
+import com.android.msd.capstone.project.gardennerds.utils.Utility;
 
 import java.util.List;
 
@@ -33,8 +35,30 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
     @Override
     public void onBindViewHolder(@NonNull ReminderViewHolder holder, int position) {
         Reminder reminder = reminderList.get(position);
-        holder.binding.tvMessage.setText(reminder.getMessage());
+
+        // Display reminder type string
+        String reminderTypeString = Utility.getReminderTypeString(context, reminder.getReminderTypeId());
+        holder.binding.tvMessage.setText(reminderTypeString);
         holder.binding.tvDateTime.setText(reminder.getDateTime());
+
+        // Display respective data based on reminder type
+        switch (reminder.getReminderTypeId()) {
+            case Constants.REMINDER_TYPE_WATER:
+                holder.binding.tvDetails.setText("Frequency: " + reminder.getFrequency() + "\nMoisture Level: " + reminder.getMoistureLevel());
+                break;
+            case Constants.REMINDER_TYPE_FERTILIZE:
+                holder.binding.tvDetails.setText("Frequency: " + reminder.getFrequency() + "\nNutrient Required: " + reminder.getNutrientRequired());
+                break;
+            case Constants.REMINDER_TYPE_SUNLIGHT:
+                holder.binding.tvDetails.setText("Frequency: " + reminder.getFrequency() + "\nTemperature Level: " + reminder.getTemperatureLevel() + "\nSunlight Level: " + reminder.getSunlightLevel());
+                break;
+            case Constants.REMINDER_TYPE_CHANGE_SOIL:
+                holder.binding.tvDetails.setText("Frequency: " + reminder.getFrequency());
+                break;
+            default:
+                holder.binding.tvDetails.setText("Unknown reminder type");
+                break;
+        }
     }
 
     @Override
