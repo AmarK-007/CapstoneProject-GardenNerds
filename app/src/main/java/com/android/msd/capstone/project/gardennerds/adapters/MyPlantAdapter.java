@@ -76,6 +76,10 @@ public class MyPlantAdapter extends RecyclerView.Adapter<MyPlantAdapter.PlantVie
         notifyDataSetChanged(); // Notify RecyclerView of data changes
     }
 
+    public Plant getPlantAt(int position) {
+        return plantList.get(position);
+    }
+
     // ViewHolder class
     // ViewHolder class with View Binding
     public static class PlantViewHolder extends RecyclerView.ViewHolder {
