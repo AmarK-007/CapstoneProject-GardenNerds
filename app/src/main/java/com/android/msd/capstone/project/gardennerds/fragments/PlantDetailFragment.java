@@ -123,6 +123,7 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
             // Set data to the views
             plantDetailBinding.textViewPlantName.setText(plant.getPlantName());
             plantDetailBinding.textViewPlantType.setText("Plant Type: " + plant.getPlantType());
+            reminderViewModel.setPlantId(plant.getPlantId());
             //plantDetailBinding.textViewSunlightPreference.setText("Sunlight Required: " + plant.getSunlightLevel());
             //plantDetailBinding.textViewWateringFrequency.setText("Watering Frequency: " + plant.getWateringInterval() + "days");
             //plantDetailBinding.textViewMoistureLevel.setText("Garden Area: " + plant.getMoistureLevel());
@@ -153,6 +154,10 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
             if (reminders != null && !reminders.isEmpty()) {
                 reminderAdapter.setReminders(reminders);
                 reminderAdapter.notifyDataSetChanged();
+                //mann
+
+
+
                 plantDetailBinding.tvNoReminders.setVisibility(View.GONE);
             } else {
                 plantDetailBinding.tvNoReminders.setVisibility(View.VISIBLE);
@@ -185,6 +190,12 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         // Replace the current fragment with AddReminderFragment
+//        Bundle bundle = new Bundle();
+//        bundle.putInt("plantID", plant.getPlantId());
+//
+//        AddReminderFragment fragment = new AddReminderFragment();
+//        fragment.setArguments(bundle);
+
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frames, AddReminderFragment.newInstance(reminderViewModel.getPlantId()))
@@ -195,9 +206,9 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
     public void saveReminder(Reminder reminder) {
         ReminderDataSource reminderDataSource = new ReminderDataSource(requireContext());
         reminder.setPlantId(plant.getPlantId());
-        boolean isInserted = reminderDataSource.insertReminder(reminder);
+        long isInserted = reminderDataSource.insertReminder(reminder);
 
-        if (isInserted) {
+        if (isInserted>0) {//
             List<Reminder> updatedReminders = reminderDataSource.getRemindersByPlantId(plant.getPlantId());
             reminderViewModel.setReminderList(updatedReminders);
             // Update the adapter's list and notify it
