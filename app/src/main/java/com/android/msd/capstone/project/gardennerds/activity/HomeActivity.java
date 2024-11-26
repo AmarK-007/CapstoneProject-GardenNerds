@@ -1,5 +1,6 @@
 package com.android.msd.capstone.project.gardennerds.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -7,6 +8,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +28,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -39,6 +45,7 @@ import com.android.msd.capstone.project.gardennerds.fragments.ScanMeasureGardenF
 import com.android.msd.capstone.project.gardennerds.fragments.MyGardenFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.ProfileFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.SupportFragment;
+import com.android.msd.capstone.project.gardennerds.utils.Constants;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -68,6 +75,7 @@ public class HomeActivity extends AppCompatActivity {
      *
      * @param savedInstanceState
      */
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +83,7 @@ public class HomeActivity extends AppCompatActivity {
         homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         View view = homeBinding.getRoot();
         setContentView(view);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // Initialize the toolbar, drawer layout, and navigation view.
         materialToolbar = homeBinding.homeToolBar;
@@ -110,6 +119,12 @@ public class HomeActivity extends AppCompatActivity {
 //            String reminderType = getIntent().getStringExtra("ReminderType");
 //            showWateringReminderDialog(reminderType);
 //        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.SCHEDULE_EXACT_ALARM) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SCHEDULE_EXACT_ALARM}, Constants.REQUEST_CODE_SCHEDULE_EXACT_ALARM);
+            }
+        }
     }
 
     /**
@@ -452,4 +467,16 @@ public class HomeActivity extends AppCompatActivity {
             getSupportActionBar().setHomeAsUpIndicator(resId);  // Change the icon
         }
     }*/
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == Constants.REQUEST_CODE_SCHEDULE_EXACT_ALARM) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, you can now set exact alarms
+            } else {
+                // Permission denied, handle accordingly
+            }
+        }
+    }
 }

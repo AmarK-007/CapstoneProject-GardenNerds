@@ -13,15 +13,21 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <!-- Image Upload Section -->
-        <ImageView
-            android:id="@+id/iv_garden_photo"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginBottom="16dp"
-            android:contentDescription="Garden Photo"
-            android:scaleType="centerCrop"
-            android:src="@drawable/new_garden_nerds" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+            <!-- Image Upload Section -->
+            <ImageView
+                android:id="@+id/iv_garden_photo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:contentDescription="Garden Photo"
+                android:scaleType="centerCrop"
+                android:src="@drawable/new_garden_nerds" />
+        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/btn_upload_photo"

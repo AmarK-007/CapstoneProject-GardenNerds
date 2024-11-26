@@ -63,7 +63,7 @@ public class ReminderDataSource {
      * @param reminder
      * @return
      */
-    public boolean insertReminder(Reminder reminder) {
+    public long insertReminder(Reminder reminder) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -80,7 +80,7 @@ public class ReminderDataSource {
         long result = db.insert(TABLE_NAME, null, values);
         db.close();
 
-        return result != -1; // Return true if insertion was successful, false otherwise
+        return result;
     }
 
     /**

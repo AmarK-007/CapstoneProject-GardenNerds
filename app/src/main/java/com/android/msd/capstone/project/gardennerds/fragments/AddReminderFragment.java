@@ -1,10 +1,13 @@
 package com.android.msd.capstone.project.gardennerds.fragments;
 
+import android.Manifest;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -47,7 +50,6 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-
      * @return A new instance of fragment AddReminderFragment.
      */
     // TODO: Rename and change types and number of parameters
@@ -92,7 +94,7 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
 
         addReminderBinding.rgReminderType.setOnCheckedChangeListener(this);
         addReminderBinding.fabSaveReminder.setOnClickListener(this);
-
+        requestNotificationPermission();
     }
 
     private void setFormVisibiltyBasedOnSelection(int checkedId) {
@@ -121,7 +123,7 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
 
     private void saveReminder() {
         // Save reminder
-        if(validateReminder()){
+        if (validateReminder()) {
             Reminder reminder = new Reminder();
             if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbWatering.getId()) {
                 reminder.setReminderTypeId(Constants.REMINDER_TYPE_WATER);
@@ -143,6 +145,12 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
             reminder.setDateTime(Utility.getCurrentDateTime());
 
             sharedViewModel.setReminder(reminder);
+            if (plantId > 0) {
+                //this means we are adding reminder from plant detail fragment
+                reminder.setPlantId(plantId);
+                Utility.setAlarmsForFrequency(requireContext(), 0/*reminder.getFrequency()*/, reminder.getReminderTypeId());
+
+            }
 
             /*// Pass data back to parent activity
             if (getActivity() instanceof OnReminderAddedListener) {
@@ -201,5 +209,22 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
 
     public interface OnReminderAddedListener {
         void onReminderAdded(Reminder reminder);
+    }
+
+    // ad permission to postNotification after checking if not available request live
+
+    private void requestNotificationPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.ACCESS_NOTIFICATION_POLICY)) {
+            new AlertDialog.Builder(requireActivity())
+                    .setTitle("Permission needed")
+                    .setMessage("This permission is needed to set reminders for your plants")
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_NOTIFICATION_POLICY}, Constants.REQUEST_CODE_NOTIFICATION_PERMISSION);
+                    })
+                    .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                    .create().show();
+        } else {
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_NOTIFICATION_POLICY}, Constants.REQUEST_CODE_NOTIFICATION_PERMISSION);
+        }
     }
 }

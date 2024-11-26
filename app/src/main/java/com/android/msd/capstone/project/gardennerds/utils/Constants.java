@@ -8,6 +8,7 @@ public class Constants {
     public static final String DATABASE_NAME = "gardenNerds.db";
     public static final int DATABASE_VERSION = 1;
 
+    public static final int REQUEST_CODE_NOTIFICATION_PERMISSION = 1234;
     //Sensor Constants
     public static final String API_KEY = "063f969c-80c5-11ef-ae24-0242ac130003-063f978c-80c5-11ef-ae24-0242ac130003";
 
@@ -45,5 +46,8 @@ public class Constants {
     public static final int REMINDER_TYPE_FERTILIZE = 2;
     public static final int REMINDER_TYPE_SUNLIGHT = 3;
     public static final int REMINDER_TYPE_CHANGE_SOIL = 4;
+
+    public static final int REQUEST_CODE_SCHEDULE_EXACT_ALARM = 1;
+
 
 }

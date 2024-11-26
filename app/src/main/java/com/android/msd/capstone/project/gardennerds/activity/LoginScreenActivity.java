@@ -1,5 +1,6 @@
 package com.android.msd.capstone.project.gardennerds.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -36,6 +37,7 @@ public class LoginScreenActivity extends AppCompatActivity {
      *
      * @param savedInstanceState
      */
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,7 @@ public class LoginScreenActivity extends AppCompatActivity {
         loginScreenBinding = ActivityLoginScreenBinding.inflate(getLayoutInflater());
         View view = loginScreenBinding.getRoot();
         setContentView(view);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         usernameEditText = loginScreenBinding.username;
         passwordEditText = loginScreenBinding.password;
