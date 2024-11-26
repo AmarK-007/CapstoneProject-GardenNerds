@@ -123,11 +123,11 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
             //plantViewModel.setGardenId(plant.getPlantId());
 
             // Set data to the views
-            plantDetailBinding.textViewPlantName.setText(plant.getPlantName());
-            plantDetailBinding.textViewPlantType.setText("Plant Type: " + plant.getPlantType());
-            //plantDetailBinding.textViewSunlightPreference.setText("Sunlight Required: " + plant.getSunlightLevel());
-            //plantDetailBinding.textViewWateringFrequency.setText("Watering Frequency: " + plant.getWateringInterval() + "days");
-            //plantDetailBinding.textViewMoistureLevel.setText("Garden Area: " + plant.getMoistureLevel());
+            plantDetailBinding.textViewPlantName.setText(plant.getPlantName() + " - " + plant.getPlantType());
+            // plantDetailBinding.textViewPlantType.setText("Plant Type: " + plant.getPlantType());
+            plantDetailBinding.textViewSunlightPreference.setText("Sunlight Required: " + plant.getSunlightLevel());
+            plantDetailBinding.textViewWateringFrequency.setText("Watering Frequency: " + plant.getWateringInterval() + "days");
+            plantDetailBinding.textViewMoistureLevel.setText("Garden Area: " + plant.getMoistureLevel());
 
             // Use image loading library like Glide to load the image
             Glide.with(requireActivity())
@@ -135,12 +135,16 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
                     .placeholder(R.drawable.ic_plant)  // default image
                     .into(plantDetailBinding.imageViewGarden);
 
-            loadInitialReminders(plant.getPlantId());
         }
 
         plantDetailBinding.fabAddReminder.setOnClickListener(this);
 
         setReminderAdapter();
+
+        // Load initial reminders after the adapter is set
+        if (plant != null) {
+            loadInitialReminders(plant.getPlantId());
+        }
     }
 
     private void setReminderAdapter() {
@@ -192,6 +196,15 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
         //Fetch reminders from the database for the given plant ID
         ReminderDataSource reminderDataSource = new ReminderDataSource(requireContext());
         List<Reminder> reminders = reminderDataSource.getRemindersByPlantId(plantId);
+        // Clear the adapter before adding new items
+        reminderAdapter.setReminders(new ArrayList<>());
+        reminderAdapter.notifyDataSetChanged();
+
+        // Add new items to the adapter
+        reminderAdapter.setReminders(reminders);
+        reminderAdapter.notifyDataSetChanged();
+
+        // Update the ViewModel
         reminderViewModel.setReminderList(reminders);
     }
 
@@ -210,6 +223,15 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
         ReminderDataSource reminderDataSource = new ReminderDataSource(requireContext());
         reminder.setPlantId(plant.getPlantId());
         long isInserted = reminderDataSource.insertReminder(reminder);
+
+        // Check if the reminder already exists
+        List<Reminder> existingReminders = reminderDataSource.getRemindersByPlantId(plant.getPlantId());
+        for (Reminder existingReminder : existingReminders) {
+            if (existingReminder.equals(reminder)) {
+                // Reminder already exists, do not insert again
+                return;
+            }
+        }
 
         if (isInserted > 0) {
             List<Reminder> updatedReminders = reminderDataSource.getRemindersByPlantId(plant.getPlantId());

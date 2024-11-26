@@ -47,5 +47,7 @@ public class Constants {
     public static final int REMINDER_TYPE_SUNLIGHT = 3;
     public static final int REMINDER_TYPE_CHANGE_SOIL = 4;
 
+    public static final int REQUEST_CODE_SCHEDULE_EXACT_ALARM = 1;
+
 
 }

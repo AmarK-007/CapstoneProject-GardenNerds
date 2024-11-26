@@ -1,7 +1,9 @@
 package com.android.msd.capstone.project.gardennerds.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +42,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
      * It sets the content view and initializes the first name, last name, username, email, password, signup button and login text view.
      *
      */
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
         signUpScreenBinding = ActivitySignUpScreenBinding.inflate(getLayoutInflater());
         View view = signUpScreenBinding.getRoot();
         setContentView(view);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         firstnameEditText = signUpScreenBinding.firstname;
         lastnameEditText = signUpScreenBinding.lastname;

@@ -1,5 +1,6 @@
 package com.android.msd.capstone.project.gardennerds.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     ActivitySplashScreenBinding splashScreenBinding;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
