@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import com.android.msd.capstone.project.gardennerds.models.Garden;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
 import com.android.msd.capstone.project.gardennerds.models.SharedViewModel;
+import com.android.msd.capstone.project.gardennerds.utils.SwipeToDeleteCallback;
 import com.android.msd.capstone.project.gardennerds.viewmodels.ReminderViewModel;
 import com.bumptech.glide.Glide;
 
@@ -147,6 +149,18 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
         reminderAdapter = new ReminderAdapter(new ArrayList<>(), requireActivity());
         plantDetailBinding.recyclerViewReminders.setAdapter(reminderAdapter);
 
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(position -> {
+            Reminder reminderToDelete = reminderAdapter.getReminderAt(position);
+
+            // Delete garden via ViewModel
+            deleteReminder(reminderToDelete);
+
+            // Notify adapter of item removal
+            loadInitialReminders(plant.getPlantId());
+        }));
+
+        itemTouchHelper.attachToRecyclerView(plantDetailBinding.recyclerViewReminders);
+
 
         // Observe the plant list for updates
         reminderViewModel.getReminderList().observe(getViewLifecycleOwner(), reminders -> {
@@ -209,5 +223,11 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
                 plantDetailBinding.tvNoReminders.setVisibility(View.GONE);
             }
         }
+    }
+
+    private void deleteReminder(Reminder reminder) {
+        ReminderDataSource reminderDataSource = new ReminderDataSource(requireActivity());
+        // Delete the reminder itself
+        reminderDataSource.deleteReminder(reminder);
     }
 }

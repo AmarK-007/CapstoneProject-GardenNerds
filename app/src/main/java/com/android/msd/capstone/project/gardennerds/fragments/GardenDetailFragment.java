@@ -10,14 +10,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.adapters.MyPlantAdapter;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentGardenDetailBinding;
 import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
+import com.android.msd.capstone.project.gardennerds.db.ReminderDataSource;
 import com.android.msd.capstone.project.gardennerds.models.Garden;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
+import com.android.msd.capstone.project.gardennerds.utils.SwipeToDeleteCallback;
 import com.android.msd.capstone.project.gardennerds.viewmodels.PlantViewModel;
 import com.bumptech.glide.Glide;
 
@@ -134,6 +137,19 @@ public class GardenDetailFragment extends Fragment implements View.OnClickListen
         plantAdapter = new MyPlantAdapter(new ArrayList<>(),requireActivity());
         gardenDetailBinding.recyclerViewPlants.setAdapter(plantAdapter);
 
+        // Attach the reusable SwipeToDeleteCallback
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(position -> {
+            Plant plantToDelete = plantAdapter.getPlantAt(position);
+
+            // Delete garden via ViewModel
+            deletePlant(plantToDelete);
+
+            // Notify adapter of item removal
+            loadInitialPlants(plantViewModel.getGardenId());
+        }));
+
+        itemTouchHelper.attachToRecyclerView(gardenDetailBinding.recyclerViewPlants);
+
 
         // Observe the plant list for updates
         plantViewModel.getPlantList().observe(getViewLifecycleOwner(), plants -> {
@@ -168,4 +184,17 @@ public class GardenDetailFragment extends Fragment implements View.OnClickListen
         List<Plant> plants = plantDataSource.getPlantsByGardenId(gardenId);
         plantViewModel.setPlantList(plants);
     }
+
+    private void deletePlant(Plant plant) {
+
+        PlantDataSource plantDataSource = new PlantDataSource(requireActivity());
+        ReminderDataSource reminderDataSource = new ReminderDataSource(requireActivity());
+
+        // Delete related reminders
+        reminderDataSource.deleteRemindersByPlantId(plant.getPlantId());
+
+        // Delete the plant itself
+        plantDataSource.deletePlant(plant);
+    }
+
 }

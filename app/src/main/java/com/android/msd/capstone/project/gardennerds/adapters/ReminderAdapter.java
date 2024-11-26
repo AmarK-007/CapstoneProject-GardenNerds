@@ -71,6 +71,10 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
         notifyDataSetChanged();
     }
 
+    public Reminder getReminderAt(int position) {
+        return reminderList.get(position);
+    }
+
 
     public static class ReminderViewHolder extends RecyclerView.ViewHolder {
 
