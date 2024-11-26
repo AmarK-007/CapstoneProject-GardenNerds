@@ -10,13 +10,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.adapters.MyGardenAdapter;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentMyGardenBinding;
 import com.android.msd.capstone.project.gardennerds.db.GardenDataSource;
+import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
+import com.android.msd.capstone.project.gardennerds.db.ReminderDataSource;
 import com.android.msd.capstone.project.gardennerds.models.Garden;
+import com.android.msd.capstone.project.gardennerds.models.Plant;
+import com.android.msd.capstone.project.gardennerds.utils.SwipeToDeleteCallback;
 import com.android.msd.capstone.project.gardennerds.viewmodels.GardenViewModel;
 
 import java.util.ArrayList;
@@ -130,6 +135,19 @@ public class MyGardenFragment extends Fragment implements View.OnClickListener {
 
         gardenAdapter = new MyGardenAdapter(new ArrayList<>(),requireActivity(),gardenViewModel);
         myGardenBinding.recyclerViewGardens.setAdapter(gardenAdapter);
+
+        // Attach the reusable SwipeToDeleteCallback
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(position -> {
+            Garden gardenToDelete = gardenAdapter.getGardenAt(position);
+
+            // Delete garden via ViewModel
+            deleteGarden(gardenToDelete);
+
+            // Notify adapter of item removal
+            loadGardens();
+        }));
+
+        itemTouchHelper.attachToRecyclerView(myGardenBinding.recyclerViewGardens);
     }
 
     private void loadGardens() {
@@ -150,6 +168,21 @@ public class MyGardenFragment extends Fragment implements View.OnClickListener {
                     .addToBackStack("MyGardenFragmentTag")  // Add this transaction to the back stack
                     .commit();
         }
+    }
+
+    private void deleteGarden(Garden garden) {
+        PlantDataSource plantDataSource = new PlantDataSource(requireActivity());
+        ReminderDataSource reminderDataSource = new ReminderDataSource(requireActivity());
+
+        // Delete related plants and their reminders
+        List<Plant> plants = plantDataSource.getPlantsByGardenId(garden.getGardenId());
+        for (Plant plant : plants) {
+            reminderDataSource.deleteRemindersByPlantId(plant.getPlantId());
+            plantDataSource.deletePlant(plant);
+        }
+
+        // Delete the garden itself
+        gardenDataSource.deleteGarden(garden);
     }
 
 }

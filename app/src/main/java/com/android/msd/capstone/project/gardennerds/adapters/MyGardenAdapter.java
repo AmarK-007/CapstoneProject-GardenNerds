@@ -102,6 +102,10 @@ public class MyGardenAdapter extends RecyclerView.Adapter<MyGardenAdapter.MyGard
         notifyDataSetChanged(); // Notify RecyclerView of data changes
     }
 
+    public Garden getGardenAt(int position) {
+        return gardenList.get(position);
+    }
+
     static class MyGardenViewHolder extends RecyclerView.ViewHolder {
 
         private final LayoutItemGardenBinding binding;
