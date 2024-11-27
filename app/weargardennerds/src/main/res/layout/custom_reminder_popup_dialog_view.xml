@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="2dp"
+    android:layout_height="match_parent">
+    <ScrollView
+        app:boxedEdges="all"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<LinearLayout
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:text="Reminder!"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="Don't forget to water plantname!!!!!!!"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:src="@drawable/watering_plants"
+        android:layout_gravity="center"
+        android:layout_width="40pt"
+        android:layout_height="40pt"/>
+
+    <RelativeLayout
+        android:layout_marginVertical="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivSnooze"
+
+
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/snooze"/>
+        <ImageView
+            android:id="@+id/ivCheck"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/check"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
+    </ScrollView>
+</androidx.wear.widget.BoxInsetLayout>

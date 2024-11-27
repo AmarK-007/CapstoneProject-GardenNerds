@@ -16,6 +16,8 @@ import androidx.core.app.NotificationCompat;
 
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.activity.HomeActivity;
+import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
+import com.android.msd.capstone.project.gardennerds.models.Plant;
 
 public class ReminderReceiver extends BroadcastReceiver {
 
@@ -42,10 +44,14 @@ public class ReminderReceiver extends BroadcastReceiver {
         // Create a notification channel (required for API 26+)
         createNotificationChannel(context);
         String reminderType = intent.getStringExtra("ReminderType");
+        int plantId = intent.getIntExtra("PlantID",0);
+        PlantDataSource plantDataSource = new PlantDataSource(context);
+        Plant plant = plantDataSource.getPlant(plantId);
         Log.d("TAG", "Reminder receiver "+ reminderType );
         Intent notificationIntent = new Intent(context, HomeActivity.class);
         notificationIntent.putExtra("showDialog", true); // Pass data to show the dialog
         notificationIntent.putExtra("ReminderType", reminderType); // Pass data to show the dialog
+        notificationIntent.putExtra("PlantID",plantId);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         /**Reminder Type
          * Fertilize
@@ -53,40 +59,91 @@ public class ReminderReceiver extends BroadcastReceiver {
          * Sunlight
          * Change Soil
          * */
+
         assert reminderType != null;
-        switch (reminderType) {
-            case "Fertilize":
-                contentTitle = "Fertilize Your Plants!";
-                contentText = "It's time to fertilize your plants for healthy growth.";
 
-                largeIcon = R.drawable.fertilize;  // Larger icon for notification
+        if (plantId != 0){
+            switch (reminderType) {
+                case "Fertilize":
+                    contentTitle = "Fertilize " + plant.getPlantName() + "!";
+                    contentText = "It's time to fertilize " + plant.getPlantName() + " for healthy growth.";
 
-                notificationText = "Fertilization due! Don't forget to fertilize your plants!";
-                break;
-            case "Watering":
-                contentTitle = "Water Your Plants!";
-                contentText = "It's time to water your plants. Keep them hydrated!";
+                    largeIcon = R.drawable.fertilize;  // Larger icon for notification
 
-                largeIcon = R.drawable.watering_plants;  // Larger icon for notification
+                    notificationText = "Fertilization due! Don't forget to fertilize " + plant.getPlantName() + "!";
+                    break;
 
-                notificationText = "Watering time! Your plants need water.";
-                break;
-            case "Sunlight":
-                contentTitle = "Provide Sunlight to Your Plants!";
-                contentText = "Ensure your plants get the required amount of sunlight.";
+                case "Watering":
+                    contentTitle = "Water " + plant.getPlantName() + "!";
+                    contentText = "It's time to water " + plant.getPlantName() + ". Keep it hydrated!";
 
-                largeIcon = R.drawable.sunlight;  // Larger icon for notification
+                    largeIcon = R.drawable.watering_plants;  // Larger icon for notification
 
-                notificationText = "Sunlight needed! Move your plants to a sunnier spot.";
-                break;
-            case "Change Soil":
-                contentTitle = "Change the Soil!";
-                contentText = "Your plants may need new soil for better growth.";
+                    notificationText = "Watering time! " + plant.getPlantName() + " needs water.";
+                    break;
 
-                largeIcon = R.drawable.soil;  // Larger icon for notification
+                case "Sunlight":
+                    contentTitle = "Give Sunlight to " + plant.getPlantName() + "!";
+                    contentText = "Ensure " + plant.getPlantName() + " gets the required amount of sunlight.";
 
-                notificationText = "Soil change time! Refresh your plants' soil.";
-                break;
+                    largeIcon = R.drawable.sunlight;  // Larger icon for notification
+
+                    notificationText = "Sunlight needed! Move " + plant.getPlantName() + " to a sunnier spot.";
+                    break;
+
+                case "Change Soil":
+                    contentTitle = "Change the Soil for " + plant.getPlantName() + "!";
+                    contentText = "Refresh the soil for " + plant.getPlantName() + " for better growth.";
+
+                    largeIcon = R.drawable.soil;  // Larger icon for notification
+
+                    notificationText = "Soil change time! Give " + plant.getPlantName() + " new soil.";
+                    break;
+
+                default:
+                    contentTitle = "Plant Reminder";
+                    contentText = "Your plant needs attention.";
+                    largeIcon = R.drawable.ic_plant;  // Fallback icon
+                    notificationText = "Don't forget to take care of " + plant.getPlantName() + "!";
+                    break;
+            }
+        }else {
+
+
+            switch (reminderType) {
+                case "Fertilize":
+                    contentTitle = "Fertilize Your Plants!";
+                    contentText = "It's time to fertilize your plants for healthy growth.";
+
+                    largeIcon = R.drawable.fertilize;  // Larger icon for notification
+
+                    notificationText = "Fertilization due! Don't forget to fertilize your plants!";
+                    break;
+                case "Watering":
+                    contentTitle = "Water Your Plants!";
+                    contentText = "It's time to water your plants. Keep them hydrated!";
+
+                    largeIcon = R.drawable.watering_plants;  // Larger icon for notification
+
+                    notificationText = "Watering time! Your plants need water.";
+                    break;
+                case "Sunlight":
+                    contentTitle = "Provide Sunlight to Your Plants!";
+                    contentText = "Ensure your plants get the required amount of sunlight.";
+
+                    largeIcon = R.drawable.sunlight;  // Larger icon for notification
+
+                    notificationText = "Sunlight needed! Move your plants to a sunnier spot.";
+                    break;
+                case "Change Soil":
+                    contentTitle = "Change the Soil!";
+                    contentText = "Your plants may need new soil for better growth.";
+
+                    largeIcon = R.drawable.soil;  // Larger icon for notification
+
+                    notificationText = "Soil change time! Refresh your plants' soil.";
+                    break;
+            }
         }
 
         PendingIntent pendingIntent = PendingIntent.getActivity(

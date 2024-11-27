@@ -147,9 +147,10 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
 
             sharedViewModel.setReminder(reminder);
             if (plantId > 0) {
+                Log.d("AddReminder", "Reminder id " + reminder.getReminderTypeId());
                 //this means we are adding reminder from plant detail fragment
                 reminder.setPlantId(plantId);
-                Utility.setAlarmsForFrequency(requireContext(), 0, Integer.parseInt(reminder.getFrequency()), reminder.getReminderTypeId());
+                //Utility.setAlarmsForFrequency(requireContext(), 0, Integer.parseInt(reminder.getFrequency()), reminder.getReminderTypeId());
 
             }
 
@@ -165,7 +166,7 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
              * Sunlight
              * Change Soil
              * */
-            Utility.setAlarmsForFrequency(requireContext(),1,reminder.getReminderTypeId(),plantId);
+            //Utility.setAlarmsForFrequency(requireContext(),1,reminder.getReminderTypeId(),plantId);
             Log.e("AddReminder",String.valueOf(reminder.getReminderId()) + " Also plantID " +plantId);
 
             if(plantId>0){
