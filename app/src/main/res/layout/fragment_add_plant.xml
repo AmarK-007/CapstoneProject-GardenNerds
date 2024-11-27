@@ -18,15 +18,21 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
             <!-- Image Upload Section -->
             <ImageView
                 android:id="@+id/iv_garden_photo"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginBottom="16dp"
                 android:contentDescription="Garden Photo"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_plant" />
+            </androidx.cardview.widget.CardView>
 
             <Button
                 android:id="@+id/btn_upload_photo"
@@ -203,8 +209,9 @@
                 android:id="@+id/rlTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@color/colorPrimary">
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimary"
+                android:padding="6dp">
 
                 <TextView
                     android:id="@+id/textViewMyPlants"
@@ -235,7 +242,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:gravity="center"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/colorPrimaryDeepDark"
                 android:text="@string/text_no_reminders_added_yet"
                 android:textSize="16sp"
@@ -245,8 +252,7 @@
                 android:id="@+id/recyclerViewReminders"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp" />
+                android:layout_marginTop="10dp" />
         </LinearLayout>
     </ScrollView>
 

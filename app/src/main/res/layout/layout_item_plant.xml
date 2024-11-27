@@ -4,6 +4,9 @@
     android:id="@+id/card_plant"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
@@ -14,6 +17,12 @@
         android:orientation="horizontal"
         android:padding="8dp">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
         <!-- Plant Image -->
         <ImageView
             android:id="@+id/iv_plant_image"
@@ -21,18 +30,53 @@
             android:layout_height="80dp"
             android:scaleType="centerCrop"
             android:src="@drawable/new_garden_nerds" />
+        </androidx.cardview.widget.CardView>
 
-        <!-- Plant Name -->
-        <TextView
-            android:id="@+id/tv_plant_name"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:text="Plant Name"
-            android:textColor="@color/colorPrimaryDeepDark"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:background="@color/card_color"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <!-- Plant Name -->
+            <TextView
+                android:id="@+id/tvPlantName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:text="Plant Name"
+                android:textColor="@color/colorPrimaryDeepDark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Plant SUNLIGHT -->
+            <TextView
+                android:id="@+id/tvPlantSunlight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:paddingTop="8dp"
+                android:layout_weight="1"
+                android:text="Plant Sunlight"
+                android:textColor="@color/colorPrimaryDeepDark"
+                android:textSize="14sp" />
+            <!-- Plant Watering FREQUENCY -->
+            <TextView
+                android:id="@+id/tvPlantWatering"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:paddingTop="4dp"
+                android:layout_weight="1"
+                android:text="Plant Watering"
+                android:textColor="@color/colorPrimaryDeepDark"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

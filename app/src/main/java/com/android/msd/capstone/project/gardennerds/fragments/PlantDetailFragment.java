@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import com.android.msd.capstone.project.gardennerds.models.Garden;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
 import com.android.msd.capstone.project.gardennerds.models.SharedViewModel;
+import com.android.msd.capstone.project.gardennerds.utils.SwipeToDeleteCallback;
 import com.android.msd.capstone.project.gardennerds.viewmodels.ReminderViewModel;
 import com.bumptech.glide.Glide;
 
@@ -121,12 +123,14 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
             //plantViewModel.setGardenId(plant.getPlantId());
 
             // Set data to the views
-            plantDetailBinding.textViewPlantName.setText(plant.getPlantName());
-            plantDetailBinding.textViewPlantType.setText("Plant Type: " + plant.getPlantType());
+
+            plantDetailBinding.textViewPlantName.setText(plant.getPlantName() + " - " + plant.getPlantType());
+            // plantDetailBinding.textViewPlantType.setText("Plant Type: " + plant.getPlantType());
+            plantDetailBinding.textViewSunlightPreference.setText("Sunlight Required: " + plant.getSunlightLevel());
+            plantDetailBinding.textViewWateringFrequency.setText("Watering Frequency: " + plant.getWateringInterval() + "days");
+            plantDetailBinding.textViewMoistureLevel.setText("Garden Area: " + plant.getMoistureLevel());
             reminderViewModel.setPlantId(plant.getPlantId());
-            //plantDetailBinding.textViewSunlightPreference.setText("Sunlight Required: " + plant.getSunlightLevel());
-            //plantDetailBinding.textViewWateringFrequency.setText("Watering Frequency: " + plant.getWateringInterval() + "days");
-            //plantDetailBinding.textViewMoistureLevel.setText("Garden Area: " + plant.getMoistureLevel());
+
 
             // Use image loading library like Glide to load the image
             Glide.with(requireActivity())
@@ -134,12 +138,16 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
                     .placeholder(R.drawable.ic_plant)  // default image
                     .into(plantDetailBinding.imageViewGarden);
 
-            loadInitialReminders(plant.getPlantId());
         }
 
         plantDetailBinding.fabAddReminder.setOnClickListener(this);
 
         setReminderAdapter();
+
+        // Load initial reminders after the adapter is set
+        if (plant != null) {
+            loadInitialReminders(plant.getPlantId());
+        }
     }
 
     private void setReminderAdapter() {
@@ -147,6 +155,18 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
         plantDetailBinding.recyclerViewReminders.setLayoutManager(new LinearLayoutManager(requireActivity()));
         reminderAdapter = new ReminderAdapter(new ArrayList<>(), requireActivity());
         plantDetailBinding.recyclerViewReminders.setAdapter(reminderAdapter);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(position -> {
+            Reminder reminderToDelete = reminderAdapter.getReminderAt(position);
+
+            // Delete garden via ViewModel
+            deleteReminder(reminderToDelete);
+
+            // Notify adapter of item removal
+            loadInitialReminders(plant.getPlantId());
+        }));
+
+        itemTouchHelper.attachToRecyclerView(plantDetailBinding.recyclerViewReminders);
 
 
         // Observe the plant list for updates
@@ -183,6 +203,15 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
         //Fetch reminders from the database for the given plant ID
         ReminderDataSource reminderDataSource = new ReminderDataSource(requireContext());
         List<Reminder> reminders = reminderDataSource.getRemindersByPlantId(plantId);
+        // Clear the adapter before adding new items
+        reminderAdapter.setReminders(new ArrayList<>());
+        reminderAdapter.notifyDataSetChanged();
+
+        // Add new items to the adapter
+        reminderAdapter.setReminders(reminders);
+        reminderAdapter.notifyDataSetChanged();
+
+        // Update the ViewModel
         reminderViewModel.setReminderList(reminders);
     }
 
@@ -208,7 +237,18 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
         reminder.setPlantId(plant.getPlantId());
         long isInserted = reminderDataSource.insertReminder(reminder);
 
-        if (isInserted>0) {//
+
+        // Check if the reminder already exists
+        List<Reminder> existingReminders = reminderDataSource.getRemindersByPlantId(plant.getPlantId());
+        for (Reminder existingReminder : existingReminders) {
+            if (existingReminder.equals(reminder)) {
+                // Reminder already exists, do not insert again
+                return;
+            }
+        }
+
+        if (isInserted > 0) {
+
             List<Reminder> updatedReminders = reminderDataSource.getRemindersByPlantId(plant.getPlantId());
             reminderViewModel.setReminderList(updatedReminders);
             // Update the adapter's list and notify it
@@ -220,5 +260,11 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
                 plantDetailBinding.tvNoReminders.setVisibility(View.GONE);
             }
         }
+    }
+
+    private void deleteReminder(Reminder reminder) {
+        ReminderDataSource reminderDataSource = new ReminderDataSource(requireActivity());
+        // Delete the reminder itself
+        reminderDataSource.deleteReminder(reminder);
     }
 }

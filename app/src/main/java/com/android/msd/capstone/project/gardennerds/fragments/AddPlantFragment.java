@@ -252,11 +252,14 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
                 ReminderDataSource reminderDataSource = new ReminderDataSource(requireContext());
                 for (Reminder reminder : reminderlist) {
                     reminder.setPlantId(plant.getPlantId());
-                   int reminderId = (int) reminderDataSource.insertReminder(reminder);
+
+                   long reminderId = reminderDataSource.insertReminder(reminder);
                    Log.d("Reminderid", String.valueOf(reminderId + " also plant id " +plant.getPlantId()));
 
                    //mann
-                    Utility.setAlarmsForFrequency(1,reminderId,plant.getPlantId(),requireContext());
+                    //Utility.setAlarmsForFrequency(1,reminderId,plant.getPlantId(),requireContext());
+                    Utility.setAlarmsForFrequency(requireContext(), plant.getPlantId(), Integer.parseInt(reminder.getFrequency()), reminder.getReminderTypeId());
+
                 }
                 // Fetch updated list of plants and update ViewModel
                 List<Plant> updatedPlants = plantDataSource.getPlantsByGardenId(plantViewModel.getGardenId());
@@ -276,16 +279,6 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
             }
         }
     }
-
-
-    /**
-     * Mann's code
-     */
-
-
-    /**
-     * Till here
-     */
 
 
     // Java example
@@ -351,7 +344,6 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
     public void setReminderlist(List<Reminder> reminderlist) {
         this.reminderlist = reminderlist;
     }
-
 
 
     private void updateNoRemindersMessage() {

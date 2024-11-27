@@ -22,19 +22,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!-- Garden Image -->
-            <ImageView
-                android:id="@+id/imageViewGarden"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/new_garden_nerds" />
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+                <!-- Garden Image -->
+                <ImageView
+                    android:id="@+id/imageViewGarden"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/new_garden_nerds" />
+            </androidx.cardview.widget.CardView>
 
             <!-- Garden Details -->
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="start"
                 android:orientation="vertical">
 
@@ -43,7 +50,8 @@
                     android:id="@+id/textViewGardenName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:maxLines="1"
                     android:text="Garden Name"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
@@ -55,30 +63,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:maxLines="1"
                     android:text="Garden Description goes here"
                     android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+                    android:textSize="13sp" />
 
                 <!-- Sunlight Preference -->
                 <TextView
                     android:id="@+id/textViewSunlightPreference"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="6dp"
                     android:text="Sunlight: Full Sunlight"
                     android:textColor="@android:color/black"
-                    android:textSize="13sp" />
+                    android:textSize="12sp" />
 
                 <!-- Watering Frequency -->
                 <TextView
                     android:id="@+id/textViewWateringFrequency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="6dp"
                     android:text="Watering Frequency: Every 3 days"
                     android:textColor="@android:color/black"
-                    android:textSize="13sp" />
+                    android:textSize="12sp" />
 
                 <!-- Moisture Level -->
                 <TextView
@@ -87,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:text="Moisture Level: 50%"
                     android:textColor="@android:color/black"
-                    android:textSize="13sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -107,9 +116,9 @@
             android:id="@+id/rlTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:background="@color/colorPrimary"
-            android:paddingStart="8dp"
+            android:padding="6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider">
@@ -148,7 +157,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:text="No plants added yet."
             android:textColor="@color/colorPrimaryDeepDark"
             android:textSize="16sp"
@@ -163,8 +172,7 @@
             android:id="@+id/recyclerViewPlants"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -227,4 +227,10 @@ public class ReminderDataSource {
                 new String[]{String.valueOf(reminder.getReminderId())});
         db.close();
     }
+
+    public void deleteRemindersByPlantId(int plantId) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMN_PLANT_ID + " = ?", new String[]{String.valueOf(plantId)});
+        db.close();
+    }
 }

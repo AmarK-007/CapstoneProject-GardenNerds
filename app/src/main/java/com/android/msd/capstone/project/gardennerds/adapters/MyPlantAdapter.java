@@ -43,6 +43,8 @@ public class MyPlantAdapter extends RecyclerView.Adapter<MyPlantAdapter.PlantVie
 
         // Bind data to the views
         holder.binding.tvPlantName.setText(plant.getPlantName());
+        holder.binding.tvPlantSunlight.setText("Sunlight Required: " + plant.getSunlightLevel());
+        holder.binding.tvPlantWatering.setText("Watering Frequency: " + plant.getWateringInterval() + "days");
 
         // Load plant image using Glide
         Glide.with(context)
@@ -74,6 +76,10 @@ public class MyPlantAdapter extends RecyclerView.Adapter<MyPlantAdapter.PlantVie
         this.plantList.clear();
         this.plantList = newPlantsList;
         notifyDataSetChanged(); // Notify RecyclerView of data changes
+    }
+
+    public Plant getPlantAt(int position) {
+        return plantList.get(position);
     }
 
     // ViewHolder class

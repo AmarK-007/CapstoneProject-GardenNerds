@@ -254,34 +254,18 @@ public class Utility {
      * @param reminderTypeId
      */
     public static String getReminderTypeString(Context context, int reminderTypeId) {
-        String reminderType;
         switch (reminderTypeId) {
             case Constants.REMINDER_TYPE_WATER:
-                reminderType = context.getString(R.string.text_reminder_type_watering);
-                System.out.println("Reminder" +  reminderTypeId +" " +reminderType);
-
                 return context.getString(R.string.text_reminder_type_watering);
             case Constants.REMINDER_TYPE_FERTILIZE:
-                reminderType = context.getString(R.string.text_reminder_type_fertilize);
-
-                System.out.println("Reminder" +  reminderTypeId +" " +reminderType);
-
                 return context.getString(R.string.text_reminder_type_fertilize);
             case Constants.REMINDER_TYPE_SUNLIGHT:
-                reminderType = context.getString(R.string.text_reminder_type_sunlight);
-                System.out.println("Reminder" +  reminderTypeId +" " +reminderType);
                 return context.getString(R.string.text_reminder_type_sunlight);
             case Constants.REMINDER_TYPE_CHANGE_SOIL:
-                reminderType = context.getString(R.string.text_reminder_type_changeSoil);
-                System.out.println("Reminder" +  reminderTypeId +" " +reminderType);
                 return context.getString(R.string.text_reminder_type_changeSoil);
             default:
-                reminderType ="UNKNOWN" ;
-                System.out.println("Reminder" +  reminderTypeId +" " +reminderType);
                 return "UNKNOWN";
-
         }
-
     }
 
     /**
@@ -374,7 +358,6 @@ public class Utility {
         return dateFormat.format(date);
     }
 
-
     /**Mann code*/
     @SuppressLint("MissingPermission")
     public static void setWateringReminder(String reminderType, Context context) {
@@ -399,8 +382,7 @@ public class Utility {
         }
     }
 
-
-    public static void setAlarmsForFrequency(int frequency, int reminderType,int plantId, Context context) {
+    public static void setAlarmsForFrequency(Context context, int plantId, int frequency, int reminderType) {
         String reminderTypeString = Utility.getReminderTypeString(context, reminderType);
         Calendar calendar = Calendar.getInstance();
 
@@ -424,14 +406,14 @@ public class Utility {
 
 
             // Set the alarm
-            setAlarm(alarmTime, i, reminderTypeString,context);
+            setAlarm(context, alarmTime, i, reminderTypeString);
         }
     }
 
     // Helper method to set a single alarm
-    public static void setAlarm(Calendar alarmTime, int uniqueCode, String reminderType, Context context) {
+    public static void setAlarm(Context context, Calendar alarmTime, int uniqueCode, String reminderType) {
         Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, uniqueCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, uniqueCode, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
@@ -440,5 +422,5 @@ public class Utility {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
         }
     }
-    /**Here*/
+
 }
