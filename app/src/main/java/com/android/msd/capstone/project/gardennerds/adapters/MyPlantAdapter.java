@@ -46,6 +46,16 @@ public class MyPlantAdapter extends RecyclerView.Adapter<MyPlantAdapter.PlantVie
         holder.binding.tvPlantSunlight.setText("Sunlight Required: " + plant.getSunlightLevel());
         holder.binding.tvPlantWatering.setText("Watering Frequency: " + plant.getWateringInterval() + "days");
 
+        /* plant.setPlantName(addPlantBinding.edtPlantName.getText().toString());
+            plant.setPlantType(getPlantType());
+            plant.setMoistureLevel(addPlantBinding.edtPlantMoistureLevel.getText().toString());
+            plant.setTemperatureLevel(addPlantBinding.edtPlantTemperature.getText().toString());
+            plant.setWateringInterval(addPlantBinding.edtPlantWateringInterval.getText().toString());
+            plant.setSunlightLevel(getSunlightPreference());
+            plant.setNutrientRequired(addPlantBinding.edtPlantNutritionRequired.getText().toString());
+            plant.setImageUri(getImagePath());
+            plant.setGardenId(plantViewModel.getGardenId());*/
+
         // Load plant image using Glide
         Glide.with(context)
                 .load(plant.getImageUri()) // URI or URL for plant image

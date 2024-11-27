@@ -248,18 +248,12 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
             if (isInserted) {
                 Toast.makeText(requireContext(), "Plant added successfully!", Toast.LENGTH_SHORT).show();
 
-                // Save reminders
-                ReminderDataSource reminderDataSource = new ReminderDataSource(requireContext());
+                // Set reminders alarm
                 for (Reminder reminder : reminderlist) {
                     reminder.setPlantId(plant.getPlantId());
-
-                   long reminderId = reminderDataSource.insertReminder(reminder);
-                   Log.d("Reminderid", String.valueOf(reminderId + " also plant id " +plant.getPlantId()));
-
                    //mann
                     //Utility.setAlarmsForFrequency(1,reminderId,plant.getPlantId(),requireContext());
                     Utility.setAlarmsForFrequency(requireContext(), plant.getPlantId(), Integer.parseInt(reminder.getFrequency()), reminder.getReminderTypeId());
-
                 }
                 // Fetch updated list of plants and update ViewModel
                 List<Plant> updatedPlants = plantDataSource.getPlantsByGardenId(plantViewModel.getGardenId());
@@ -361,7 +355,7 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
     private String getSunlightPreference() {
 
         if (addPlantBinding.rbFullSunlight.isChecked()) return "Full Sunlight";
-        else if (addPlantBinding.rbPartialSunlight.isChecked()) return "PartialSunlight";
+        else if (addPlantBinding.rbPartialSunlight.isChecked()) return "Partial Sunlight";
         else if (addPlantBinding.rbShady.isChecked()) return "Shady";
         else return "";
     }
