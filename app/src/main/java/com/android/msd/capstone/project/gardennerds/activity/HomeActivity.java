@@ -84,6 +84,10 @@ public class HomeActivity extends AppCompatActivity {
         View view = homeBinding.getRoot();
         setContentView(view);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        // Set navigation bar color
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.colorPrimary));
+        }
 
         // Initialize the toolbar, drawer layout, and navigation view.
         materialToolbar = homeBinding.homeToolBar;
