@@ -66,11 +66,14 @@ dependencies {
 
     // ViewPager and Wearable
     implementation(libs.viewpager2)
+    // Data Layer API provided by Google Play services
+    implementation(libs.gms.play.services.wearable)
 
 
     // Testing Libraries
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
 
 }
