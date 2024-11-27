@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.adapters.MyPlantAdapter;
@@ -26,6 +27,7 @@ import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
 import com.android.msd.capstone.project.gardennerds.models.SharedViewModel;
 import com.android.msd.capstone.project.gardennerds.utils.SwipeToDeleteCallback;
+import com.android.msd.capstone.project.gardennerds.utils.Utility;
 import com.android.msd.capstone.project.gardennerds.viewmodels.ReminderViewModel;
 import com.bumptech.glide.Glide;
 
@@ -173,10 +175,6 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
         reminderViewModel.getReminderList().observe(getViewLifecycleOwner(), reminders -> {
             if (reminders != null && !reminders.isEmpty()) {
                 reminderAdapter.setReminders(reminders);
-                reminderAdapter.notifyDataSetChanged();
-                //mann
-
-
 
                 plantDetailBinding.tvNoReminders.setVisibility(View.GONE);
             } else {
@@ -235,25 +233,23 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
     public void saveReminder(Reminder reminder) {
         ReminderDataSource reminderDataSource = new ReminderDataSource(requireContext());
         reminder.setPlantId(plant.getPlantId());
-        long isInserted = reminderDataSource.insertReminder(reminder);
-
 
         // Check if the reminder already exists
         List<Reminder> existingReminders = reminderDataSource.getRemindersByPlantId(plant.getPlantId());
         for (Reminder existingReminder : existingReminders) {
-            if (existingReminder.equals(reminder)) {
+            if (existingReminder.getReminderTypeId() == reminder.getReminderTypeId()) {
                 // Reminder already exists, do not insert again
+               // Toast.makeText(requireContext(), Utility.getReminderTypeString(requireContext(), reminder.getReminderTypeId()) + " Reminder already exists", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
-
+        long isInserted = reminderDataSource.insertReminder(reminder);
         if (isInserted > 0) {
-
             List<Reminder> updatedReminders = reminderDataSource.getRemindersByPlantId(plant.getPlantId());
             reminderViewModel.setReminderList(updatedReminders);
             // Update the adapter's list and notify it
-            reminderAdapter.setReminders(updatedReminders);
-            reminderAdapter.notifyDataSetChanged();
+                reminderAdapter.setReminders(updatedReminders);
+            Utility.setAlarmsForFrequency(requireContext(),plant.getPlantId(),1,reminder.getReminderTypeId());
 
             // Optionally, hide "No Reminders" message if any reminders exist
             if (!updatedReminders.isEmpty()) {

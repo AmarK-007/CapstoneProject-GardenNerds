@@ -3,6 +3,7 @@ package com.android.msd.capstone.project.gardennerds.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -31,6 +32,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         View view = splashScreenBinding.getRoot();
         setContentView(view);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        // Set navigation bar color
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.colorPrimary));
+        }
 
         /*// Set status bar color
         Window window = getWindow();

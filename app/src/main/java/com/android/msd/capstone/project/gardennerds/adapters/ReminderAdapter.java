@@ -1,7 +1,9 @@
 package com.android.msd.capstone.project.gardennerds.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -59,6 +61,15 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
                 holder.binding.tvDetails.setText("Unknown reminder type");
                 break;
         }
+
+        holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String reminderTypeString = Utility.getReminderTypeString(context, reminder.getReminderTypeId());
+                Utility.setSnoozeReminder(reminderTypeString,reminder.getPlantId(),context);
+                Log.d("ReminderAdapter",reminderTypeString+ " reminder type string and plantid " + reminder.getPlantId());
+            }
+        });
     }
 
     @Override

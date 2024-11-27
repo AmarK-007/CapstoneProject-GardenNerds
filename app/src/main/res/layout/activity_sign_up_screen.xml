@@ -78,6 +78,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/firsnameWrapper"
+                style="@style/CustomTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
@@ -86,20 +87,20 @@
 
                 <EditText
                     android:id="@+id/firstname"
+                    style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@fonts/roboto_light"
                     android:hint="@string/first_name"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@color/colorAccent"
                     android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/lastnameWrapper"
+                style="@style/CustomTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
@@ -108,14 +109,13 @@
 
                 <EditText
                     android:id="@+id/lastname"
+                    style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@fonts/roboto_light"
                     android:hint="@string/last_name"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@color/colorAccent"
                     android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -123,6 +123,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/usernameWrapper"
+                style="@style/CustomTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
@@ -131,20 +132,20 @@
 
                 <EditText
                     android:id="@+id/username"
+                    style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@fonts/roboto_light"
                     android:hint="@string/username"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@color/colorAccent"
                     android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailWrapper"
+                style="@style/CustomTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
@@ -153,24 +154,23 @@
 
                 <EditText
                     android:id="@+id/email"
+                    style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@fonts/roboto_light"
                     android:hint="Email"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@color/colorAccent"
                     android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passWordWrapper"
+                style="@style/CustomTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/usernameWrapper"
-                android:layout_marginTop="4dp"
                 android:textColor="@android:color/white"
                 android:textColorHint="@color/colorAccent"
                 app:errorTextAppearance="@style/error_appearance"
@@ -178,14 +178,13 @@
 
                 <EditText
                     android:id="@+id/password"
+                    style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@fonts/roboto_light"
                     android:hint="@string/password"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@color/colorAccent"
                     android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>

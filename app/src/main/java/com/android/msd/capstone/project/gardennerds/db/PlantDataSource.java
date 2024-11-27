@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
@@ -34,8 +35,12 @@ public class PlantDataSource {
     public static final String COLUMN_GARDEN_ID = "garden_id";
     public static final String COLUMN_PLANT_NAME = "plant_name";
     public static final String COLUMN_PLANT_TYPE = "plant_type";
-    public static final String COLUMN_GROWTH_CONDITIONS = "growth_conditions";
-    public static final String COLUMN_IMAGE_PATH = "image";
+    public static final String COLUMN_SUNLIGHT_PREFERENCE = "sunlight_preference";
+    public static final String COLUMN_MOISTURE_LEVEL = "moisture_level";
+    public static final String COLUMN_TEMPERATURE_LEVEL = "temperature_level";
+    public static final String COLUMN_WATERING_INTERVAL = "watering_interval";
+    public static final String COLUMN_NUTRIENT_REQUIRED = "nutrient_required";
+    public static final String COLUMN_IMAGE_PATH = "image_uri";
 
     // Create table SQL query
     public static final String CREATE_TABLE =
@@ -44,7 +49,11 @@ public class PlantDataSource {
                     + COLUMN_GARDEN_ID + " INTEGER,"
                     + COLUMN_PLANT_NAME + " TEXT,"
                     + COLUMN_PLANT_TYPE + " TEXT,"
-                    + COLUMN_GROWTH_CONDITIONS + " TEXT,"
+                    + COLUMN_SUNLIGHT_PREFERENCE + " TEXT,"
+                    + COLUMN_MOISTURE_LEVEL + " TEXT,"
+                    + COLUMN_TEMPERATURE_LEVEL + " TEXT,"
+                    + COLUMN_WATERING_INTERVAL + " TEXT,"
+                    + COLUMN_NUTRIENT_REQUIRED + " TEXT,"
                     + COLUMN_IMAGE_PATH + " TEXT,"
                     + "FOREIGN KEY(" + COLUMN_GARDEN_ID + ") REFERENCES gardens(garden_id)"
                     + ")";
@@ -62,7 +71,11 @@ public class PlantDataSource {
         values.put(COLUMN_GARDEN_ID, plant.getGardenId());
         values.put(COLUMN_PLANT_NAME, plant.getPlantName());
         values.put(COLUMN_PLANT_TYPE, plant.getPlantType());
-        values.put(COLUMN_GROWTH_CONDITIONS, plant.getGrowthConditions());
+        values.put(COLUMN_SUNLIGHT_PREFERENCE, plant.getSunlightLevel());
+        values.put(COLUMN_MOISTURE_LEVEL, plant.getMoistureLevel());
+        values.put(COLUMN_TEMPERATURE_LEVEL, plant.getTemperatureLevel());
+        values.put(COLUMN_WATERING_INTERVAL, plant.getWateringInterval());
+        values.put(COLUMN_NUTRIENT_REQUIRED, plant.getNutrientRequired());
         values.put(COLUMN_IMAGE_PATH,plant.getImageUri());
 
         long plantId = db.insert(TABLE_NAME, null, values);
@@ -76,7 +89,8 @@ public class PlantDataSource {
             ContentValues reminderValues = new ContentValues();
             reminderValues.put(COLUMN_PLANT_ID, plantId);
             // Add reminder details to reminderValues...
-            db.insert(ReminderDataSource.TABLE_NAME, null, reminderValues);
+            long reminderId = db.insert(ReminderDataSource.TABLE_NAME, null, reminderValues);
+            Log.d("Reminderid", String.valueOf(reminderId + " also plant id " +plant.getPlantId()));
         }
         db.close();
 
@@ -105,7 +119,12 @@ public class PlantDataSource {
             plant.setGardenId(cursor.getInt(cursor.getColumnIndex(COLUMN_GARDEN_ID)));
             plant.setPlantName(cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_NAME)));
             plant.setPlantType(cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_TYPE)));
-            plant.setGrowthConditions(cursor.getString(cursor.getColumnIndex(COLUMN_GROWTH_CONDITIONS)));
+            plant.setSunlightLevel(cursor.getString(cursor.getColumnIndex(COLUMN_SUNLIGHT_PREFERENCE)));
+            plant.setMoistureLevel(cursor.getString(cursor.getColumnIndex(COLUMN_MOISTURE_LEVEL)));
+            plant.setTemperatureLevel(cursor.getString(cursor.getColumnIndex(COLUMN_TEMPERATURE_LEVEL)));
+            plant.setWateringInterval(cursor.getString(cursor.getColumnIndex(COLUMN_WATERING_INTERVAL)));
+            plant.setNutrientRequired(cursor.getString(cursor.getColumnIndex(COLUMN_NUTRIENT_REQUIRED)));
+            plant.setImageUri(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_PATH)));
 
             cursor.close();
             return plant;
@@ -134,7 +153,12 @@ public class PlantDataSource {
                 plant.setGardenId(cursor.getInt(cursor.getColumnIndex(COLUMN_GARDEN_ID)));
                 plant.setPlantName(cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_NAME)));
                 plant.setPlantType(cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_TYPE)));
-                plant.setGrowthConditions(cursor.getString(cursor.getColumnIndex(COLUMN_GROWTH_CONDITIONS)));
+                plant.setSunlightLevel(cursor.getString(cursor.getColumnIndex(COLUMN_SUNLIGHT_PREFERENCE)));
+                plant.setMoistureLevel(cursor.getString(cursor.getColumnIndex(COLUMN_MOISTURE_LEVEL)));
+                plant.setTemperatureLevel(cursor.getString(cursor.getColumnIndex(COLUMN_TEMPERATURE_LEVEL)));
+                plant.setWateringInterval(cursor.getString(cursor.getColumnIndex(COLUMN_WATERING_INTERVAL)));
+                plant.setNutrientRequired(cursor.getString(cursor.getColumnIndex(COLUMN_NUTRIENT_REQUIRED)));
+                plant.setImageUri(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_PATH)));
 
                 plants.add(plant);
             } while (cursor.moveToNext());
@@ -165,7 +189,11 @@ public class PlantDataSource {
                 plant.setGardenId(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_GARDEN_ID)));
                 plant.setPlantName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PLANT_NAME)));
                 plant.setPlantType(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PLANT_TYPE)));
-                plant.setGrowthConditions(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GROWTH_CONDITIONS)));
+                plant.setSunlightLevel(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SUNLIGHT_PREFERENCE)));
+                plant.setMoistureLevel(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MOISTURE_LEVEL)));
+                plant.setTemperatureLevel(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TEMPERATURE_LEVEL)));
+                plant.setWateringInterval(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_WATERING_INTERVAL)));
+                plant.setNutrientRequired(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NUTRIENT_REQUIRED)));
                 plant.setImageUri(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IMAGE_PATH)));
 
                 // Get reminders for the plant
@@ -211,7 +239,12 @@ public class PlantDataSource {
         values.put(COLUMN_GARDEN_ID, plant.getGardenId());
         values.put(COLUMN_PLANT_NAME, plant.getPlantName());
         values.put(COLUMN_PLANT_TYPE, plant.getPlantType());
-        values.put(COLUMN_GROWTH_CONDITIONS, plant.getGrowthConditions());
+        values.put(COLUMN_SUNLIGHT_PREFERENCE, plant.getSunlightLevel());
+        values.put(COLUMN_MOISTURE_LEVEL, plant.getMoistureLevel());
+        values.put(COLUMN_TEMPERATURE_LEVEL, plant.getTemperatureLevel());
+        values.put(COLUMN_WATERING_INTERVAL, plant.getWateringInterval());
+        values.put(COLUMN_NUTRIENT_REQUIRED, plant.getNutrientRequired());
+        values.put(COLUMN_IMAGE_PATH, plant.getImageUri());
 
         return db.update(TABLE_NAME, values, COLUMN_PLANT_ID + " = ?",
                 new String[]{String.valueOf(plant.getPlantId())});

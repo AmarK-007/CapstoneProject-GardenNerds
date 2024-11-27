@@ -35,10 +35,13 @@ android {
 
 dependencies {
 
+    // Data Layer API provided by Google Play services
     implementation(libs.play.services.wearable)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.wear)
+    implementation(libs.wearable)
+
 }

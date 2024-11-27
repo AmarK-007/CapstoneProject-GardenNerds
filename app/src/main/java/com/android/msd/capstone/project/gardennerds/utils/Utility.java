@@ -18,7 +18,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.broadcastReceivers.ReminderReceiver;
 import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
@@ -38,6 +37,8 @@ import java.util.regex.Pattern;
  * Utility class
  */
 public class Utility {
+
+    private static final String TAG = Utility.class.getSimpleName();
     private static final String EMAIL_PATTERN = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
     private static final String SYMBOL_PATTERN = "[^a-z0-9 ]";
     private static Pattern pattern = Pattern.compile(EMAIL_PATTERN);
@@ -358,13 +359,16 @@ public class Utility {
         return dateFormat.format(date);
     }
 
-    /**Mann code*/
+    /**
+     * Mann code
+     */
     @SuppressLint("MissingPermission")
-    public static void setWateringReminder(String reminderType, Context context) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.SECOND, 20); // Set reminder for 1 minute later (adjust as needed)
+    public static void setSnoozeReminder(String reminderType,int plantId, Context context) {
 
-        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.SECOND, 10); // Set reminder for 1 minute later (adjust as needed)
+
+        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType).putExtra("PlantID",plantId);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
@@ -388,31 +392,34 @@ public class Utility {
 
         PlantDataSource plantDataSource = new PlantDataSource(context);
         Plant plant = plantDataSource.getPlant(plantId);
+        if (plant != null) {
+            Log.d("Reminder", reminderTypeString + " Also plant name is " + plant.getPlantName());
+            // Start time (e.g., 10 AM)
+            calendar.set(Calendar.HOUR_OF_DAY, 10);  // 10 AM
+            calendar.set(Calendar.MINUTE, 47);
+            calendar.set(Calendar.SECOND, 0);
 
-        Log.d("Reminder", reminderTypeString + " Also plant name is "+plant.getPlantName() );
-        // Start time (e.g., 10 AM)
-        calendar.set(Calendar.HOUR_OF_DAY, 5);  // 10 AM
-        calendar.set(Calendar.MINUTE, 56);
-        calendar.set(Calendar.SECOND, 0);
+            // Loop to set alarms based on the frequency
+            for (int i = 0; i < frequency; i++) {
+                // Calculate the time for each alarm
+                Calendar alarmTime = (Calendar) calendar.clone();
+                alarmTime.add(Calendar.HOUR_OF_DAY, i * 2);  // Increment hours by 2 for each frequency
 
-        // Loop to set alarms based on the frequency
-        for (int i = 0; i < frequency; i++) {
-            // Calculate the time for each alarm
-            Calendar alarmTime = (Calendar) calendar.clone();
-            alarmTime.add(Calendar.HOUR_OF_DAY, i * 2);  // Increment hours by 2 for each frequency
-
-            // Log alarm times (for debugging)
-            Log.d("Alarm", "Setting alarm for: " + alarmTime.getTime());
+                // Log alarm times (for debugging)
+                Log.d("Alarm", "Setting alarm for: " + alarmTime.getTime());
 
 
-            // Set the alarm
-            setAlarm(context, alarmTime, i, reminderTypeString);
+                // Set the alarm
+                setAlarm(context, alarmTime, i, reminderTypeString,plantId);
+            }
+        } else {
+            Log.v(TAG, "setAlarmsForFrequency: Plant obj is null, hence ignored here.");
         }
     }
 
     // Helper method to set a single alarm
-    public static void setAlarm(Context context, Calendar alarmTime, int uniqueCode, String reminderType) {
-        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType);
+    public static void setAlarm(Context context, Calendar alarmTime, int uniqueCode, String reminderType,int plantId) {
+        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType).putExtra("PlantID",plantId);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, uniqueCode, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

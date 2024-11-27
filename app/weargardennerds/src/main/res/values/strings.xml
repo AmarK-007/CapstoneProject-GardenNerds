@@ -38,4 +38,6 @@
     <string name="frequency">Frequency</string>
     <string name="type">Type</string>
 
+    <string name="msg_login_using_phone">Please log in using your phone.</string>
+
 </resources>
