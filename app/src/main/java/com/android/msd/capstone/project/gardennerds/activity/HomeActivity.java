@@ -39,12 +39,14 @@ import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.broadcastReceivers.ReminderReceiver;
 import com.android.msd.capstone.project.gardennerds.databinding.ActivityHomeBinding;
 import com.android.msd.capstone.project.gardennerds.databinding.MenuDrawerHeaderBinding;
+import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
 import com.android.msd.capstone.project.gardennerds.fragments.AboutFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.HomeFragment;
-import com.android.msd.capstone.project.gardennerds.fragments.ScanMeasureGardenFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.MyGardenFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.ProfileFragment;
+import com.android.msd.capstone.project.gardennerds.fragments.ScanMeasureGardenFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.SupportFragment;
+import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.utils.Constants;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -58,6 +60,7 @@ import java.util.Calendar;
  * It also handles the toolbar and the back press.
  */
 public class HomeActivity extends AppCompatActivity {
+    private static final String TAG = HomeActivity.class.getSimpleName();
     ActionBarDrawerToggle toggle;
     MaterialToolbar materialToolbar;
     DrawerLayout drawerLayout;
@@ -66,8 +69,7 @@ public class HomeActivity extends AppCompatActivity {
     MenuDrawerHeaderBinding navHeaderBinding;
     TextView userName;
     ActivityHomeBinding homeBinding;
-
-    private static final String TAG = HomeActivity.class.getSimpleName();
+    AlertDialog.Builder alertDialog;
 
     /**
      * This method is called when the activity is first created.
@@ -117,7 +119,8 @@ public class HomeActivity extends AppCompatActivity {
         /**MAnn's code*/
         if (getIntent().getBooleanExtra("showDialog", false)) {
             String reminderType = getIntent().getStringExtra("ReminderType");
-            showWateringReminderDialog(reminderType);
+            int plantId = getIntent().getIntExtra("PlantID", 0);
+            showWateringReminderDialog(reminderType, plantId);
         }
 //        if (getIntent().getBooleanExtra("showPopUP", false)) {
 //            String reminderType = getIntent().getStringExtra("ReminderType");
@@ -155,6 +158,20 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * This method inflates the menu for the toolbar.
+     *
+     * @param menu
+     * @return
+     */
+    /**Mann commented code*/
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.appbar_menu, menu);
+//
+//        return super.onCreateOptionsMenu(menu);
+//    }
+
     private void setBottomNavigation() {
         homeBinding.bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
@@ -173,20 +190,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
-
-    /**
-     * This method inflates the menu for the toolbar.
-     *
-     * @param menu
-     * @return
-     */
-    /**Mann commented code*/
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.appbar_menu, menu);
-//
-//        return super.onCreateOptionsMenu(menu);
-//    }
 
     /**
      * This method handles the selection of items in the toolbar.
@@ -296,8 +299,6 @@ public class HomeActivity extends AppCompatActivity {
         builder.show();
     }
 
-    AlertDialog.Builder alertDialog;
-
     /**
      * This method shows an alert dialog to confirm the exit of the application.
      *
@@ -362,11 +363,14 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Mann's Code
      */
-    private void showWateringReminderDialog(String reminderType) {
+    private void showWateringReminderDialog(String reminderType, int plantID) {
 
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = inflater.inflate(R.layout.custom_dialog_reminder, null);
+
+        PlantDataSource plantDataSource = new PlantDataSource(this);
+        Plant plant = plantDataSource.getPlant(plantID);
 
         // Initialize UI elements from the custom dialog layout
         Button snoozeBtn = dialogView.findViewById(R.id.btnSnooze);
@@ -378,35 +382,66 @@ public class HomeActivity extends AppCompatActivity {
 //        if (Objects.equals(reminderType, "Fertilizer")){
 //            image.setImageResource(R.drawable.fertilize);
 //        }
-
         assert reminderType != null;
-        switch (reminderType) {
-            case "Fertilize":
-                reminderTitle.setText("Fertilize Your Plants!");
-                reminderMessage.setText("It's time to fertilize your plants for healthy growth.");
-                image.setImageResource(R.drawable.fertilize);
-                break;
-            case "Watering":
+        if (plantID != 0) {
+            switch (reminderType) {
+                case "Fertilize":
+                    reminderTitle.setText("Fertilize " + plant.getPlantName() + "!");
+                    reminderMessage.setText("It's time to fertilize " + plant.getPlantName() + " for healthy growth.");
+                    image.setImageResource(R.drawable.fertilize);
+                    break;
+                case "Watering":
+                    reminderTitle.setText("Water " + plant.getPlantName() + "!");
+                    reminderMessage.setText("It's time to water " + plant.getPlantName() + ". Keep it hydrated!");
+                    image.setImageResource(R.drawable.watering_plants);
+                    break;
+                case "Sunlight":
+                    reminderTitle.setText("Provide Sunlight to " + plant.getPlantName() + "!");
+                    reminderMessage.setText("Ensure " + plant.getPlantName() + " gets the required amount of sunlight.");
+                    image.setImageResource(R.drawable.sunlight);
+                    break;
+                case "Change Soil":
+                    reminderTitle.setText("Change the Soil for " + plant.getPlantName() + "!");
+                    reminderMessage.setText(plant.getPlantName() + " may need new soil for better growth.");
+                    image.setImageResource(R.drawable.soil);
+                    break;
+                default:
+                    reminderTitle.setText("Reminder for " + plant.getPlantName() + "!");
+                    reminderMessage.setText("Don't forget to take care of " + plant.getPlantName() + "!");
+                    image.setImageResource(R.drawable.ic_plant); // Use a generic image
+                    break;
+            }
+        } else {
+
+            switch (reminderType) {
+                case "Fertilize":
+                    reminderTitle.setText("Fertilize Your Plants!");
+                    reminderMessage.setText("It's time to fertilize your plants for healthy growth.");
+                    image.setImageResource(R.drawable.fertilize);
+                    break;
+                case "Watering":
 
 
-                reminderTitle.setText("Water Your Plants!");
-                reminderMessage.setText("It's time to water your plants. Keep them hydrated!");
-                image.setImageResource(R.drawable.watering_plants);
-                break;
-            case "Sunlight":
+                    reminderTitle.setText("Water Your Plants!");
+                    reminderMessage.setText("It's time to water your plants. Keep them hydrated!");
+                    image.setImageResource(R.drawable.watering_plants);
+                    break;
+                case "Sunlight":
 
-                reminderTitle.setText("Provide Sunlight to Your Plants!");
-                reminderMessage.setText("Ensure your plants get the required amount of sunlight.");
-                image.setImageResource(R.drawable.sunlight);
+                    reminderTitle.setText("Provide Sunlight to Your Plants!");
+                    reminderMessage.setText("Ensure your plants get the required amount of sunlight.");
+                    image.setImageResource(R.drawable.sunlight);
 
-                break;
-            case "Change Soil":
+                    break;
+                case "Change Soil":
 
-                reminderTitle.setText("Change the Soil!");
-                reminderMessage.setText("Your plants may need new soil for better growth.");
-                image.setImageResource(R.drawable.soil);
+                    reminderTitle.setText("Change the Soil!");
+                    reminderMessage.setText("Your plants may need new soil for better growth.");
+                    image.setImageResource(R.drawable.soil);
 
-                break;
+                    break;
+            }
+
         }
 
         // Create the dialog
@@ -426,7 +461,8 @@ public class HomeActivity extends AppCompatActivity {
         snoozeBtn.setOnClickListener(v -> {
 //            String inputText = inputEditText.getText().toString();
             // Do something with the input text
-            setSnoozeReminder(reminderType);
+//            setSnoozeReminder(reminderType);
+            Utility.setSnoozeReminder(reminderType,plantID,this);
             Toast.makeText(this, "Snooze: Reminder set for 5 Minutes", Toast.LENGTH_SHORT).show();
             // Dismiss the dialog
             dialog.dismiss();

@@ -248,7 +248,8 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
             List<Reminder> updatedReminders = reminderDataSource.getRemindersByPlantId(plant.getPlantId());
             reminderViewModel.setReminderList(updatedReminders);
             // Update the adapter's list and notify it
-            reminderAdapter.setReminders(updatedReminders);
+                reminderAdapter.setReminders(updatedReminders);
+            Utility.setAlarmsForFrequency(requireContext(),plant.getPlantId(),1,reminder.getReminderTypeId());
 
             // Optionally, hide "No Reminders" message if any reminders exist
             if (!updatedReminders.isEmpty()) {

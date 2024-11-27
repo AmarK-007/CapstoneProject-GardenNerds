@@ -33,6 +33,7 @@ import com.android.msd.capstone.project.gardennerds.broadcastReceivers.ReminderR
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentAddPlantBinding;
 import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
 import com.android.msd.capstone.project.gardennerds.db.ReminderDataSource;
+import com.android.msd.capstone.project.gardennerds.db.ReminderTypeDataSource;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
 import com.android.msd.capstone.project.gardennerds.models.SharedViewModel;
@@ -253,7 +254,9 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
                     reminder.setPlantId(plant.getPlantId());
                    //mann
                     //Utility.setAlarmsForFrequency(1,reminderId,plant.getPlantId(),requireContext());
-                    Utility.setAlarmsForFrequency(requireContext(), plant.getPlantId(), Integer.parseInt(reminder.getFrequency()), reminder.getReminderTypeId());
+//                    Utility.setAlarmsForFrequency(requireContext(), plant.getPlantId(), Integer.parseInt(reminder.getFrequency()), reminder.getReminderTypeId());
+                    String reminderTypeString = Utility.getReminderTypeString(requireContext(), reminder.getReminderTypeId());
+                    Utility.setSnoozeReminder(reminderTypeString,plant.getPlantId(),requireContext());
                 }
                 // Fetch updated list of plants and update ViewModel
                 List<Plant> updatedPlants = plantDataSource.getPlantsByGardenId(plantViewModel.getGardenId());
