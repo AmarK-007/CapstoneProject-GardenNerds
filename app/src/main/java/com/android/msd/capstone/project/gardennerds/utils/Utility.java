@@ -2,6 +2,7 @@ package com.android.msd.capstone.project.gardennerds.utils;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -20,7 +21,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.broadcastReceivers.ReminderReceiver;
+import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
 import com.android.msd.capstone.project.gardennerds.fragments.HomeFragment;
+import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.User;
 import com.google.gson.Gson;
 
@@ -355,13 +358,41 @@ public class Utility {
         return dateFormat.format(date);
     }
 
-    public static void setAlarmsForFrequency(Context context, int frequency, int reminderType) {
+    /**Mann code*/
+    @SuppressLint("MissingPermission")
+    public static void setWateringReminder(String reminderType, Context context) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.SECOND, 20); // Set reminder for 1 minute later (adjust as needed)
+
+        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager != null) {
+
+            alarmManager.setExact(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.getTimeInMillis(),
+                    pendingIntent
+            );
+
+
+        }
+    }
+
+    public static void setAlarmsForFrequency(Context context, int plantId, int frequency, int reminderType) {
         String reminderTypeString = Utility.getReminderTypeString(context, reminderType);
         Calendar calendar = Calendar.getInstance();
 
+        PlantDataSource plantDataSource = new PlantDataSource(context);
+        Plant plant = plantDataSource.getPlant(plantId);
+
+        Log.d("Reminder", reminderTypeString + " Also plant name is "+plant.getPlantName() );
         // Start time (e.g., 10 AM)
-        calendar.set(Calendar.HOUR_OF_DAY, 11);  // 10 AM
-        calendar.set(Calendar.MINUTE, 18);
+        calendar.set(Calendar.HOUR_OF_DAY, 5);  // 10 AM
+        calendar.set(Calendar.MINUTE, 56);
         calendar.set(Calendar.SECOND, 0);
 
         // Loop to set alarms based on the frequency
@@ -372,6 +403,7 @@ public class Utility {
 
             // Log alarm times (for debugging)
             Log.d("Alarm", "Setting alarm for: " + alarmTime.getTime());
+
 
             // Set the alarm
             setAlarm(context, alarmTime, i, reminderTypeString);

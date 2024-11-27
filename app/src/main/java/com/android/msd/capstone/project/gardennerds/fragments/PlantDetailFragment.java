@@ -123,11 +123,14 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
             //plantViewModel.setGardenId(plant.getPlantId());
 
             // Set data to the views
+
             plantDetailBinding.textViewPlantName.setText(plant.getPlantName() + " - " + plant.getPlantType());
             // plantDetailBinding.textViewPlantType.setText("Plant Type: " + plant.getPlantType());
             plantDetailBinding.textViewSunlightPreference.setText("Sunlight Required: " + plant.getSunlightLevel());
             plantDetailBinding.textViewWateringFrequency.setText("Watering Frequency: " + plant.getWateringInterval() + "days");
             plantDetailBinding.textViewMoistureLevel.setText("Garden Area: " + plant.getMoistureLevel());
+            reminderViewModel.setPlantId(plant.getPlantId());
+
 
             // Use image loading library like Glide to load the image
             Glide.with(requireActivity())
@@ -171,6 +174,10 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
             if (reminders != null && !reminders.isEmpty()) {
                 reminderAdapter.setReminders(reminders);
                 reminderAdapter.notifyDataSetChanged();
+                //mann
+
+
+
                 plantDetailBinding.tvNoReminders.setVisibility(View.GONE);
             } else {
                 plantDetailBinding.tvNoReminders.setVisibility(View.VISIBLE);
@@ -212,6 +219,12 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         // Replace the current fragment with AddReminderFragment
+//        Bundle bundle = new Bundle();
+//        bundle.putInt("plantID", plant.getPlantId());
+//
+//        AddReminderFragment fragment = new AddReminderFragment();
+//        fragment.setArguments(bundle);
+
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frames, AddReminderFragment.newInstance(reminderViewModel.getPlantId()))
@@ -224,6 +237,7 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
         reminder.setPlantId(plant.getPlantId());
         long isInserted = reminderDataSource.insertReminder(reminder);
 
+
         // Check if the reminder already exists
         List<Reminder> existingReminders = reminderDataSource.getRemindersByPlantId(plant.getPlantId());
         for (Reminder existingReminder : existingReminders) {
@@ -234,6 +248,7 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
         }
 
         if (isInserted > 0) {
+
             List<Reminder> updatedReminders = reminderDataSource.getRemindersByPlantId(plant.getPlantId());
             reminderViewModel.setReminderList(updatedReminders);
             // Update the adapter's list and notify it

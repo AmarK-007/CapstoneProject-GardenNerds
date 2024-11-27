@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -148,7 +149,7 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
             if (plantId > 0) {
                 //this means we are adding reminder from plant detail fragment
                 reminder.setPlantId(plantId);
-                Utility.setAlarmsForFrequency(requireContext(), 0/*reminder.getFrequency()*/, reminder.getReminderTypeId());
+                Utility.setAlarmsForFrequency(requireContext(), 0, Integer.parseInt(reminder.getFrequency()), reminder.getReminderTypeId());
 
             }
 
@@ -157,6 +158,19 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
                 ((OnReminderAddedListener) getActivity()).onReminderAdded(reminder);
             }*/
             // move back to previous fragment with reminder object
+            //mann
+            /**Reminder Type
+             * Fertilize
+             * Watering
+             * Sunlight
+             * Change Soil
+             * */
+            Utility.setAlarmsForFrequency(requireContext(),1,reminder.getReminderTypeId(),plantId);
+            Log.e("AddReminder",String.valueOf(reminder.getReminderId()) + " Also plantID " +plantId);
+
+            if(plantId>0){
+                //which means flow is from plantdetailsfragment
+            }
             getActivity().getSupportFragmentManager().popBackStack();
 
         }

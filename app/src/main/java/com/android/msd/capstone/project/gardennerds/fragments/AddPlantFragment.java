@@ -252,8 +252,14 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
                 ReminderDataSource reminderDataSource = new ReminderDataSource(requireContext());
                 for (Reminder reminder : reminderlist) {
                     reminder.setPlantId(plant.getPlantId());
-                    long reminderId = reminderDataSource.insertReminder(reminder);
-                    Utility.setAlarmsForFrequency(requireContext(), Integer.parseInt(reminder.getFrequency()), reminder.getReminderTypeId());
+
+                   long reminderId = reminderDataSource.insertReminder(reminder);
+                   Log.d("Reminderid", String.valueOf(reminderId + " also plant id " +plant.getPlantId()));
+
+                   //mann
+                    //Utility.setAlarmsForFrequency(1,reminderId,plant.getPlantId(),requireContext());
+                    Utility.setAlarmsForFrequency(requireContext(), plant.getPlantId(), Integer.parseInt(reminder.getFrequency()), reminder.getReminderTypeId());
+
                 }
                 // Fetch updated list of plants and update ViewModel
                 List<Plant> updatedPlants = plantDataSource.getPlantsByGardenId(plantViewModel.getGardenId());
@@ -261,6 +267,8 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
 
                 /**Mann's Code*/
 //            setWateringReminder();
+//                setAlarmsForFrequency(1,"Fertilize");
+//                Utility.setAlarmsForFrequency(1,r,requireContext());
                 /**till here*/
                 // Pass data back to GardenDetailsFragment
                 if (getParentFragment() instanceof OnPlantAddedListener) {
@@ -271,37 +279,6 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
             }
         }
     }
-
-
-    /**
-     * Mann's code
-     */
-    private void setWateringReminder(String reminderType) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.SECOND, 20); // Set reminder for 1 minute later (adjust as needed)
-
-        Intent intent = new Intent(requireActivity(), ReminderReceiver.class).putExtra("ReminderType", reminderType);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                requireContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-        );
-
-        AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
-        if (alarmManager != null) {
-
-            alarmManager.setExact(
-                    AlarmManager.RTC_WAKEUP,
-                    calendar.getTimeInMillis(),
-                    pendingIntent
-            );
-
-
-        }
-    }
-
-
-    /**
-     * Till here
-     */
 
 
     // Java example
