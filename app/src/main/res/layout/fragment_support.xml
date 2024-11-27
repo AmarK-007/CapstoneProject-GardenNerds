@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fragment_background"
+    android:backgroundTint="@color/fragment_background"
     tools:context=".fragments.SupportFragment">
 
     <LinearLayout
@@ -13,53 +15,48 @@
         android:padding="16dp">
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/CustomTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:textColorHint="@color/colorAccent"
             app:errorTextAppearance="@style/error_appearance">
 
             <EditText
                 android:id="@+id/supportName"
+                style="@style/CustomTextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@fonts/roboto_light"
                 android:hint="@string/name"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
-                android:textColor="@android:color/white"
-                android:textColorHint="@color/colorAccent"
                 android:textSize="15sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/CustomTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@color/colorAccent"
             app:errorTextAppearance="@style/error_appearance">
 
             <EditText
                 android:id="@+id/supportEmail"
+                style="@style/CustomTextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@fonts/roboto_light"
                 android:hint="@string/email"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
-                android:textColor="@android:color/white"
-                android:textColorHint="@color/colorAccent"
                 android:textSize="15sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/CustomTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="Your Reviews or Queries Here"
-            android:textColor="@android:color/white"
-            android:textColorHint="@color/colorAccent"
             app:errorTextAppearance="@style/error_appearance">
 
             <com.google.android.material.textfield.TextInputEditText

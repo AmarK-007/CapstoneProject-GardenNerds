@@ -1,9 +1,10 @@
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/fragment_background"
+    android:backgroundTint="@color/fragment_background"
     android:padding="16dp"
     tools:context=".fragments.AddReminderFragment">
 
@@ -29,48 +30,48 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">-->
 
-                    <RadioButton
-                        android:id="@+id/rbWatering"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:buttonTint="@color/colorPrimary"
-                        android:checked="true"
-                        android:text="@string/text_reminder_type_watering"
-                        android:textColor="@color/colorPrimary" />
-
-                    <RadioButton
-                        android:id="@+id/rbFertilize"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="@string/text_reminder_type_fertilize"
-                        android:textColor="@color/colorPrimary" />
-               <!-- </LinearLayout>-->
-
-               <!-- <LinearLayout
+                <RadioButton
+                    android:id="@+id/rbWatering"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">-->
+                    android:layout_weight="1"
+                    android:buttonTint="@color/colorPrimary"
+                    android:checked="true"
+                    android:text="@string/text_reminder_type_watering"
+                    android:textColor="@color/colorPrimary" />
 
-                    <RadioButton
-                        android:id="@+id/rbSunlight"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="@string/text_reminder_type_sunlight"
-                        android:textColor="@color/colorPrimary" />
+                <RadioButton
+                    android:id="@+id/rbFertilize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/colorPrimary"
+                    android:text="@string/text_reminder_type_fertilize"
+                    android:textColor="@color/colorPrimary" />
+                <!-- </LinearLayout>-->
 
-                    <RadioButton
-                        android:id="@+id/rbChangeSoil"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:buttonTint="@color/colorPrimary"
-                        android:text="@string/text_reminder_type_changeSoil"
-                        android:textColor="@color/colorPrimary" />
+                <!-- <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="horizontal">-->
+
+                <RadioButton
+                    android:id="@+id/rbSunlight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/colorPrimary"
+                    android:text="@string/text_reminder_type_sunlight"
+                    android:textColor="@color/colorPrimary" />
+
+                <RadioButton
+                    android:id="@+id/rbChangeSoil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/colorPrimary"
+                    android:text="@string/text_reminder_type_changeSoil"
+                    android:textColor="@color/colorPrimary" />
                 <!--</LinearLayout>-->
             </RadioGroup>
             <!-- CardView for Reminder Details -->

@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fragment_background"
+    android:backgroundTint="@color/fragment_background"
     tools:context=".fragments.ProfileFragment">
 
     <LinearLayout
@@ -32,6 +34,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@fonts/roboto_light"
                     android:text="First Name:"
+                    android:textColor="@color/colorPrimaryDeepDark"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
@@ -42,6 +45,7 @@
                     android:layout_marginStart="15dp"
                     android:fontFamily="@fonts/roboto_light"
                     android:text="Admin"
+                    android:textColor="@color/colorPrimaryDeepDark"
                     android:textSize="18dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -67,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@fonts/roboto_light"
                     android:text="Last Name:"
+                    android:textColor="@color/colorPrimaryDeepDark"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
@@ -77,6 +82,7 @@
                     android:layout_marginStart="15dp"
                     android:fontFamily="@fonts/roboto_light"
                     android:text="Admin"
+                    android:textColor="@color/colorPrimaryDeepDark"
                     android:textSize="18dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -102,6 +108,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@fonts/roboto_light"
                     android:text="Email:"
+                    android:textColor="@color/colorPrimaryDeepDark"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
@@ -112,6 +119,7 @@
                     android:layout_marginStart="15dp"
                     android:fontFamily="@fonts/roboto_light"
                     android:text="admin@gmail.com"
+                    android:textColor="@color/colorPrimaryDeepDark"
                     android:textSize="18dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -143,6 +151,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@fonts/roboto_light"
                         android:text="Address"
+                        android:textColor="@color/colorPrimaryDeepDark"
                         android:textSize="18dp"
                         android:textStyle="bold" />
 
@@ -174,6 +183,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@fonts/roboto_light"
                         android:text="123 King Street"
+                        android:textColor="@color/colorPrimaryDeepDark"
                         android:textSize="18dp" />
 
                     <TextView
@@ -182,6 +192,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@fonts/roboto_light"
                         android:text="University Ave. East"
+                        android:textColor="@color/colorPrimaryDeepDark"
                         android:textSize="18dp" />
 
                     <LinearLayout
@@ -195,6 +206,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@fonts/roboto_light"
                             android:text="Waterloo"
+                            android:textColor="@color/colorPrimaryDeepDark"
                             android:textSize="18dp" />
 
                         <TextView
@@ -204,6 +216,7 @@
                             android:layout_marginStart="10dp"
                             android:fontFamily="@fonts/roboto_light"
                             android:text="N2N 0K9"
+                            android:textColor="@color/colorPrimaryDeepDark"
                             android:textSize="18dp" />
                     </LinearLayout>
 
@@ -213,6 +226,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@fonts/roboto_light"
                         android:text="Ontario"
+                        android:textColor="@color/colorPrimaryDeepDark"
                         android:textSize="18dp" />
                 </LinearLayout>
 
