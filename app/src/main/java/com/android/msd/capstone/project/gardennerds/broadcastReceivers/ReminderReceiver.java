@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.widget.CalendarView;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
@@ -18,6 +20,9 @@ import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.activity.HomeActivity;
 import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
+import com.android.msd.capstone.project.gardennerds.utils.Utility;
+
+import java.util.Calendar;
 
 public class ReminderReceiver extends BroadcastReceiver {
 
@@ -27,7 +32,7 @@ public class ReminderReceiver extends BroadcastReceiver {
     private int largeIcon;
     private String notificationText;
 
-    @SuppressLint("NotificationPermission")
+    @SuppressLint({"NotificationPermission", "UnsafeProtectedBroadcastReceiver"})
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -42,11 +47,26 @@ public class ReminderReceiver extends BroadcastReceiver {
 //            showPopup(context);
 //        }
         // Create a notification channel (required for API 26+)
+
+
         createNotificationChannel(context);
-        String reminderType = intent.getStringExtra("ReminderType");
+        int reminderType = intent.getIntExtra("ReminderType",-1);
+        int reminderId = intent.getIntExtra("reminderId", -1);
+        if (reminderId != -1) {
+            // Handle the alarm (e.g., show a toast or send a notification)
+            Toast.makeText(context, "Reminder triggered! Reminder ID: " + reminderId, Toast.LENGTH_SHORT).show();
+        }
         int plantId = intent.getIntExtra("PlantID",0);
         PlantDataSource plantDataSource = new PlantDataSource(context);
         Plant plant = plantDataSource.getPlant(plantId);
+
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.MINUTE,1);
+//        Log.d("Recursion", calendar + "<time unique code>  " + Utility.generateUniqueRequestCode(plantId,reminderId) + " remidID> " + reminderId + " plantId> "+ plantId);
+//        Utility.setAlarm(context,calendar,Utility.generateUniqueRequestCode(plantId,reminderId),reminderId,plantId,1);
+
+
+
         Log.d("TAG", "Reminder receiver "+ reminderType );
         Intent notificationIntent = new Intent(context, HomeActivity.class);
         notificationIntent.putExtra("showDialog", true); // Pass data to show the dialog
@@ -59,11 +79,13 @@ public class ReminderReceiver extends BroadcastReceiver {
          * Sunlight
          * Change Soil
          * */
+        String reminderTypeString = Utility.getReminderTypeString(context, reminderType);
 
-        assert reminderType != null;
+
+        assert reminderTypeString != null;
 
         if (plantId != 0){
-            switch (reminderType) {
+            switch (reminderTypeString) {
                 case "Fertilize":
                     contentTitle = "Fertilize " + plant.getPlantName() + "!";
                     contentText = "It's time to fertilize " + plant.getPlantName() + " for healthy growth.";
@@ -110,7 +132,7 @@ public class ReminderReceiver extends BroadcastReceiver {
         }else {
 
 
-            switch (reminderType) {
+            switch (reminderTypeString) {
                 case "Fertilize":
                     contentTitle = "Fertilize Your Plants!";
                     contentText = "It's time to fertilize your plants for healthy growth.";
@@ -149,9 +171,10 @@ public class ReminderReceiver extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(
                 context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
+        int notificationID = generateUniqueNotificationId(plantId,reminderTypeString);
 
-        Intent dismissIntent = new Intent(context, NotificationDismissReceiver.class);
-        PendingIntent dismissPendingIntent = PendingIntent.getBroadcast(context, 0, dismissIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent dismissIntent = new Intent(context, NotificationDismissReceiver.class).putExtra("notificationID",notificationID);
+        PendingIntent dismissPendingIntent = PendingIntent.getBroadcast(context, 0, dismissIntent, PendingIntent.FLAG_UPDATE_CURRENT |  PendingIntent.FLAG_IMMUTABLE);
 
 
         // Build the notification
@@ -168,11 +191,16 @@ public class ReminderReceiver extends BroadcastReceiver {
                 .addAction(R.drawable.search_end, "View", pendingIntent)
                 .setAutoCancel(true);
 
+
         // Show the notification
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (notificationManager != null) {
-            notificationManager.notify(1, builder.build());
+            notificationManager.notify(notificationID, builder.build());
         }
+    }
+
+    private int generateUniqueNotificationId(int plantId, String reminderType) {
+        return (plantId + reminderType.hashCode()) & 0x7FFFFFFF; // Ensure non-negative value
     }
 
     private void createNotificationChannel(Context context) {

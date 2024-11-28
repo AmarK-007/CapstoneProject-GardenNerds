@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.adapters.MyPlantAdapter;
 import com.android.msd.capstone.project.gardennerds.adapters.ReminderAdapter;
+import com.android.msd.capstone.project.gardennerds.broadcastReceivers.newReminder.ReminderManager;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentGardenDetailBinding;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentPlantDetailBinding;
 import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
@@ -249,8 +250,9 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
             reminderViewModel.setReminderList(updatedReminders);
             // Update the adapter's list and notify it
                 reminderAdapter.setReminders(updatedReminders);
-            Utility.setAlarmsForFrequency(requireContext(),plant.getPlantId(),1,reminder.getReminderTypeId());
-
+//            Utility.setAlarmsForFrequency(requireContext(),plant.getPlantId(),Integer.parseInt(reminder.getFrequency()),reminder.getReminderTypeId());
+            ReminderManager reminderManager = new ReminderManager(requireContext());
+            reminderManager.startReminder(reminder.getReminderId());
             // Optionally, hide "No Reminders" message if any reminders exist
             if (!updatedReminders.isEmpty()) {
                 plantDetailBinding.tvNoReminders.setVisibility(View.GONE);
@@ -258,8 +260,11 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
         }
     }
 
+
+
     private void deleteReminder(Reminder reminder) {
         ReminderDataSource reminderDataSource = new ReminderDataSource(requireActivity());
+        Utility.cancelReminder(requireContext(),reminder.getReminderTypeId(),reminder.getPlantId());
         // Delete the reminder itself
         reminderDataSource.deleteReminder(reminder);
     }

@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.adapters.ReminderAdapter;
 import com.android.msd.capstone.project.gardennerds.broadcastReceivers.ReminderReceiver;
+import com.android.msd.capstone.project.gardennerds.broadcastReceivers.newReminder.ReminderManager;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentAddPlantBinding;
 import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
 import com.android.msd.capstone.project.gardennerds.db.ReminderDataSource;
@@ -255,18 +256,14 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
                    //mann
                     //Utility.setAlarmsForFrequency(1,reminderId,plant.getPlantId(),requireContext());
 //                    Utility.setAlarmsForFrequency(requireContext(), plant.getPlantId(), Integer.parseInt(reminder.getFrequency()), reminder.getReminderTypeId());
-                    String reminderTypeString = Utility.getReminderTypeString(requireContext(), reminder.getReminderTypeId());
-                    Utility.setSnoozeReminder(reminderTypeString,plant.getPlantId(),requireContext());
+                    ReminderManager reminderManager = new ReminderManager(requireContext());
+                    reminderManager.startReminder(reminder.getReminderId());
+//                    String reminderTypeString = Utility.getReminderTypeString(requireContext(), reminder.getReminderTypeId());
+//                    Utility.setSnoozeReminder(reminderTypeString,plant.getPlantId(),requireContext());
                 }
                 // Fetch updated list of plants and update ViewModel
                 List<Plant> updatedPlants = plantDataSource.getPlantsByGardenId(plantViewModel.getGardenId());
                 plantViewModel.setPlantList(updatedPlants);
-
-                /**Mann's Code*/
-//            setWateringReminder();
-//                setAlarmsForFrequency(1,"Fertilize");
-//                Utility.setAlarmsForFrequency(1,r,requireContext());
-                /**till here*/
                 // Pass data back to GardenDetailsFragment
                 if (getParentFragment() instanceof OnPlantAddedListener) {
                     ((OnPlantAddedListener) getParentFragment()).onPlantAdded(plant);

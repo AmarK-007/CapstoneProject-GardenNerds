@@ -363,14 +363,14 @@ public class Utility {
      * Mann code
      */
     @SuppressLint("MissingPermission")
-    public static void setSnoozeReminder(String reminderType,int plantId, Context context) {
+    public static void setSnoozeReminder(String reminderType, int plantId, Context context) {
 
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.SECOND, 10); // Set reminder for 1 minute later (adjust as needed)
 
-        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType).putExtra("PlantID",plantId);
+        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType).putExtra("PlantID", plantId);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+                context, 0, intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT
         );
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -386,48 +386,97 @@ public class Utility {
         }
     }
 
+    public static int generateUniqueRequestCode(int plantId, int reminderType) {
+        return plantId * 1000 + reminderType; // Combine plantId and reminderType to create a unique code
+    }
+
     public static void setAlarmsForFrequency(Context context, int plantId, int frequency, int reminderType) {
         String reminderTypeString = Utility.getReminderTypeString(context, reminderType);
         Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.SECOND, 30);
 
         PlantDataSource plantDataSource = new PlantDataSource(context);
         Plant plant = plantDataSource.getPlant(plantId);
+        int uniqueRequestCode = generateUniqueRequestCode(plantId,reminderType);
         if (plant != null) {
-            Log.d("Reminder", reminderTypeString + " Also plant name is " + plant.getPlantName());
+            Log.d("Reminder", reminderTypeString + " Also plant name is " + plant.getPlantName() + "HAs reminder id =  "+reminderType + " Unique req code is = " + uniqueRequestCode);
             // Start time (e.g., 10 AM)
-            calendar.set(Calendar.HOUR_OF_DAY, 10);  // 10 AM
-            calendar.set(Calendar.MINUTE, 47);
+
+            /**to be uncommented*/
+            calendar.set(Calendar.HOUR_OF_DAY, 20);  // 10 AM
+            calendar.set(Calendar.MINUTE, 23);
             calendar.set(Calendar.SECOND, 0);
 
-            // Loop to set alarms based on the frequency
-            for (int i = 0; i < frequency; i++) {
-                // Calculate the time for each alarm
-                Calendar alarmTime = (Calendar) calendar.clone();
-                alarmTime.add(Calendar.HOUR_OF_DAY, i * 2);  // Increment hours by 2 for each frequency
+            /**up to here*/
 
-                // Log alarm times (for debugging)
-                Log.d("Alarm", "Setting alarm for: " + alarmTime.getTime());
+            // Set the alarm
 
-
-                // Set the alarm
-                setAlarm(context, alarmTime, i, reminderTypeString,plantId);
-            }
+            setAlarm(context, calendar, uniqueRequestCode, reminderType, plantId,frequency);
         } else {
             Log.v(TAG, "setAlarmsForFrequency: Plant obj is null, hence ignored here.");
         }
     }
 
     // Helper method to set a single alarm
-    public static void setAlarm(Context context, Calendar alarmTime, int uniqueCode, String reminderType,int plantId) {
-        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType).putExtra("PlantID",plantId);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, uniqueCode, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-
+    public static void setAlarm(Context context, Calendar alarmTime, int uniqueCode, int reminderType, int plantId,int frequency) {
+        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType).putExtra("PlantID", plantId);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, uniqueCode, intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+        Log.d("Recursion", alarmTime + "<time unique code>  " + uniqueCode + " remidID> " + reminderType + " plantId> "+ plantId);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Log.e("DateTime" ,"Date" + sdf.format(alarmTime.getTime()));
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
+
+//        alarmTime.add(Calendar.DAY_OF_YEAR, -1);
+        Log.e("DateTime" ,"Date" + sdf.format(alarmTime.getTime()));
         // Set the alarm to trigger at the exact time
         if (alarmManager != null) {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
+//            long intervalMillis = (long) frequency * 60 * 1000;
+            long intervalMillis = frequency * 24 * 60 * 60 * 1000L;
+//            alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
+            // Set the repeating alarm
+            alarmManager.setRepeating(
+                    AlarmManager.RTC_WAKEUP,       // Wake up the device if it's asleep
+                    alarmTime.getTimeInMillis(),   // Start time for the alarm
+                    intervalMillis,                // Repeat interval (every frequency days)
+                    pendingIntent                  // The PendingIntent to trigger the receiver
+            );
         }
     }
+
+
+    public static void cancelReminder(Context context, int reminderId, int plantId) {
+        // Create the intent with the same reminder ID
+        Intent intent = new Intent(context, ReminderReceiver.class);
+        intent.putExtra("reminderId", reminderId);
+        int uniqueRequestCode = generateUniqueRequestCode(plantId,reminderId);
+
+        Log.d("DELETE REMINDER", reminderId + " unique code = " + uniqueRequestCode);
+
+        // Pass the reminder ID if needed
+
+
+
+        // Create the PendingIntent using the same reminder ID
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                context,
+                uniqueRequestCode,  // Same request code (reminder ID)
+                intent,
+                PendingIntent.FLAG_IMMUTABLE  // Use FLAG_IMMUTABLE or FLAG_MUTABLE depending on your needs
+        );
+
+        // Get the AlarmManager system service
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager != null) {
+            // Cancel the alarm by passing the same PendingIntent
+            alarmManager.cancel(pendingIntent);
+        }
+    }
+
+
+
+
+
+
 
 }
