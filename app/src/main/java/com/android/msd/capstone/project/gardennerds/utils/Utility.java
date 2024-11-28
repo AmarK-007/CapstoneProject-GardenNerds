@@ -3,15 +3,19 @@ package com.android.msd.capstone.project.gardennerds.utils;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -363,12 +367,12 @@ public class Utility {
      * Mann code
      */
     @SuppressLint("MissingPermission")
-    public static void setSnoozeReminder(String reminderType,int plantId, Context context) {
+    public static void setSnoozeReminder(String reminderType, int plantId, Context context) {
 
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.SECOND, 10); // Set reminder for 1 minute later (adjust as needed)
 
-        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType).putExtra("PlantID",plantId);
+        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType).putExtra("PlantID", plantId);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
@@ -410,7 +414,7 @@ public class Utility {
 
 
                 // Set the alarm
-                setAlarm(context, alarmTime, i, reminderTypeString,plantId);
+                setAlarm(context, alarmTime, i, reminderTypeString, plantId);
             }
         } else {
             Log.v(TAG, "setAlarmsForFrequency: Plant obj is null, hence ignored here.");
@@ -418,8 +422,8 @@ public class Utility {
     }
 
     // Helper method to set a single alarm
-    public static void setAlarm(Context context, Calendar alarmTime, int uniqueCode, String reminderType,int plantId) {
-        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType).putExtra("PlantID",plantId);
+    public static void setAlarm(Context context, Calendar alarmTime, int uniqueCode, String reminderType, int plantId) {
+        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType).putExtra("PlantID", plantId);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, uniqueCode, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -427,6 +431,16 @@ public class Utility {
         // Set the alarm to trigger at the exact time
         if (alarmManager != null) {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
+        }
+    }
+
+    public static void setNavigationAndStatusBarColor(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(activity.getResources().getColor(R.color.colorPrimaryDark));
+            window.setNavigationBarColor(activity.getResources().getColor(R.color.colorPrimary));
         }
     }
 

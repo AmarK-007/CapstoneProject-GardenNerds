@@ -44,14 +44,14 @@ public class ReminderReceiver extends BroadcastReceiver {
         // Create a notification channel (required for API 26+)
         createNotificationChannel(context);
         String reminderType = intent.getStringExtra("ReminderType");
-        int plantId = intent.getIntExtra("PlantID",0);
+        int plantId = intent.getIntExtra("PlantID", 0);
         PlantDataSource plantDataSource = new PlantDataSource(context);
         Plant plant = plantDataSource.getPlant(plantId);
-        Log.d("TAG", "Reminder receiver "+ reminderType );
+        Log.d("TAG", "Reminder receiver " + reminderType);
         Intent notificationIntent = new Intent(context, HomeActivity.class);
         notificationIntent.putExtra("showDialog", true); // Pass data to show the dialog
         notificationIntent.putExtra("ReminderType", reminderType); // Pass data to show the dialog
-        notificationIntent.putExtra("PlantID",plantId);
+        notificationIntent.putExtra("PlantID", plantId);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         /**Reminder Type
          * Fertilize
@@ -62,7 +62,7 @@ public class ReminderReceiver extends BroadcastReceiver {
 
         assert reminderType != null;
 
-        if (plantId != 0){
+        if (plantId != 0) {
             switch (reminderType) {
                 case "Fertilize":
                     contentTitle = "Fertilize " + plant.getPlantName() + "!";
@@ -107,7 +107,7 @@ public class ReminderReceiver extends BroadcastReceiver {
                     notificationText = "Don't forget to take care of " + plant.getPlantName() + "!";
                     break;
             }
-        }else {
+        } else {
 
 
             switch (reminderType) {
@@ -151,7 +151,7 @@ public class ReminderReceiver extends BroadcastReceiver {
         );
 
         Intent dismissIntent = new Intent(context, NotificationDismissReceiver.class);
-        PendingIntent dismissPendingIntent = PendingIntent.getBroadcast(context, 0, dismissIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent dismissPendingIntent = PendingIntent.getBroadcast(context, 0, dismissIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
 
         // Build the notification
@@ -164,7 +164,7 @@ public class ReminderReceiver extends BroadcastReceiver {
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(notificationText)) // Description
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
-                .addAction(R.drawable.check_mark,"Dismiss", dismissPendingIntent) // Dismiss button
+                .addAction(R.drawable.check_mark, "Dismiss", dismissPendingIntent) // Dismiss button
                 .addAction(R.drawable.search_end, "View", pendingIntent)
                 .setAutoCancel(true);
 

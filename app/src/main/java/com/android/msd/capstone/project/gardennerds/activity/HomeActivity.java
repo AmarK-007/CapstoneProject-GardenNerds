@@ -86,10 +86,9 @@ public class HomeActivity extends AppCompatActivity {
         View view = homeBinding.getRoot();
         setContentView(view);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        // Set navigation bar color
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.colorPrimary));
-        }
+        // Set navigation bar and status bar color
+        Utility.setNavigationAndStatusBarColor(this);
+
 
         // Initialize the toolbar, drawer layout, and navigation view.
         materialToolbar = homeBinding.homeToolBar;
@@ -164,14 +163,15 @@ public class HomeActivity extends AppCompatActivity {
      * @param menu
      * @return
      */
-    /**Mann commented code*/
+    /**
+     * Mann commented code
+     */
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.appbar_menu, menu);
 //
 //        return super.onCreateOptionsMenu(menu);
 //    }
-
     private void setBottomNavigation() {
         homeBinding.bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
@@ -261,10 +261,22 @@ public class HomeActivity extends AppCompatActivity {
 
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-        fragmentTransaction.replace(homeBinding.frames.getId(), fragment);
-        if (!(fragment instanceof ScanMeasureGardenFragment))
-            fragmentTransaction.addToBackStack(null); // Add this line
-        fragmentTransaction.commit();
+
+        // Check if the fragment is already in the stack
+        String fragmentTag = fragment.getClass().getSimpleName();
+        Fragment existingFragment = supportFragmentManager.findFragmentByTag(fragmentTag);
+
+        if (existingFragment != null) {
+            // If the fragment is already in the stack, pop back to it
+            supportFragmentManager.popBackStack(fragmentTag, 0);
+
+        } else {
+            // If the fragment is not in the stack, add it
+            fragmentTransaction.replace(homeBinding.frames.getId(), fragment, fragmentTag);
+            if (!(fragment instanceof ScanMeasureGardenFragment))
+                fragmentTransaction.addToBackStack(fragmentTag);
+            fragmentTransaction.commit();
+        }
         drawerLayout.closeDrawers();
     }
 
@@ -462,7 +474,7 @@ public class HomeActivity extends AppCompatActivity {
 //            String inputText = inputEditText.getText().toString();
             // Do something with the input text
 //            setSnoozeReminder(reminderType);
-            Utility.setSnoozeReminder(reminderType,plantID,this);
+            Utility.setSnoozeReminder(reminderType, plantID, this);
             Toast.makeText(this, "Snooze: Reminder set for 5 Minutes", Toast.LENGTH_SHORT).show();
             // Dismiss the dialog
             dialog.dismiss();
