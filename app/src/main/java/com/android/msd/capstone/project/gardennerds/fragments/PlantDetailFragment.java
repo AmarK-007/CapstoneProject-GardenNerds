@@ -131,6 +131,7 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
             plantDetailBinding.textViewSunlightPreference.setText("Sunlight Required: " + plant.getSunlightLevel());
             plantDetailBinding.textViewWateringFrequency.setText("Watering Frequency: " + plant.getWateringInterval() + "days");
             plantDetailBinding.textViewMoistureLevel.setText("Garden Area: " + plant.getMoistureLevel());
+            plantDetailBinding.textViewNutrientLevel.setText("Nutrient Level: " + plant.getNutrientRequired());
             reminderViewModel.setPlantId(plant.getPlantId());
 
 
