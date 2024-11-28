@@ -137,7 +137,7 @@
         <item name="colorControlNormal">@color/colorGrayLight</item>
         <item name="colorControlActivated">@color/colorGrayLight</item>
         <item name="colorControlHighlight">@color/colorGrayLight</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/teal_700</item>
         <item name="android:textColorHint">@color/colorGrayLight</item>
         <item name="android:backgroundTint">@color/colorGrayLight</item>
         <item name="android:textSize">14sp</item>
