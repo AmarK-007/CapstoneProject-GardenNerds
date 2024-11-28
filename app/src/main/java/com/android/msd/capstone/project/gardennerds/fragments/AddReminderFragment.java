@@ -194,18 +194,20 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
                 return false;
             } else if (Integer.parseInt(addReminderBinding.edtFrequency.getText().toString()) < 1 || Integer.parseInt(addReminderBinding.edtFrequency.getText().toString()) > 30) {
                 Toast.makeText(getContext(), "Please enter Frequency between 1 - 30", Toast.LENGTH_SHORT).show();
+                addReminderBinding.edtFrequency.setError("Please enter Frequency between 1 - 30");
                 return false;
             } else if (Integer.parseInt(addReminderBinding.edtMoistureLevel.getText().toString()) < 1 || Integer.parseInt(addReminderBinding.edtMoistureLevel.getText().toString()) > 100) {
                 Toast.makeText(getContext(), "Please enter Moisture Level between 1 - 100", Toast.LENGTH_SHORT).show();
+                addReminderBinding.edtMoistureLevel.setError("Please enter Moisture Level between 1 - 100");
                 return false;
             }
-
         } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbFertilize.getId()) {
             if (addReminderBinding.edtFrequency.getText().toString().isEmpty() || addReminderBinding.edtNutritionRequired.getText().toString().isEmpty()) {
                 Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
                 return false;
             } else if (Integer.parseInt(addReminderBinding.edtFrequency.getText().toString()) < 1 || Integer.parseInt(addReminderBinding.edtFrequency.getText().toString()) > 90) {
                 Toast.makeText(getContext(), "Please enter Frequency between 1 - 90", Toast.LENGTH_SHORT).show();
+                addReminderBinding.edtFrequency.setError("Please enter Frequency between 1 - 90");
                 return false;
             }
         } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbSunlight.getId()) {
@@ -214,12 +216,15 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
                 return false;
             } else if (Integer.parseInt(addReminderBinding.edtFrequency.getText().toString()) < 1 || Integer.parseInt(addReminderBinding.edtFrequency.getText().toString()) > 30) {
                 Toast.makeText(getContext(), "Please enter Frequency between 1 - 30", Toast.LENGTH_SHORT).show();
+                addReminderBinding.edtFrequency.setError("Please enter Frequency between 1 - 30");
                 return false;
             } else if (Integer.parseInt(addReminderBinding.edtTemperature.getText().toString()) < 1 || Integer.parseInt(addReminderBinding.edtTemperature.getText().toString()) > 50) {
                 Toast.makeText(getContext(), "Please enter Temperature between 1 - 50", Toast.LENGTH_SHORT).show();
+                addReminderBinding.edtTemperature.setError("Please enter Temperature between 1 - 50");
                 return false;
             } else if (Integer.parseInt(addReminderBinding.edtSunlightRequired.getText().toString()) < 1 || Integer.parseInt(addReminderBinding.edtSunlightRequired.getText().toString()) > 24) {
                 Toast.makeText(getContext(), "Please enter Sunlight Required between 1 - 24", Toast.LENGTH_SHORT).show();
+                addReminderBinding.edtSunlightRequired.setError("Please enter Sunlight Required between 1 - 24");
                 return false;
             }
         } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbChangeSoil.getId()) {
@@ -228,6 +233,7 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
                 return false;
             } else if (Integer.parseInt(addReminderBinding.edtFrequency.getText().toString()) < 1 || Integer.parseInt(addReminderBinding.edtFrequency.getText().toString()) > 365) {
                 Toast.makeText(getContext(), "Please enter Frequency between 1 - 365", Toast.LENGTH_SHORT).show();
+                addReminderBinding.edtFrequency.setError("Please enter Frequency between 1 - 365");
                 return false;
             }
         }

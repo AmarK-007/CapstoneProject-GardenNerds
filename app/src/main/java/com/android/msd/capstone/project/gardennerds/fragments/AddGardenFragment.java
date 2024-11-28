@@ -365,6 +365,14 @@ public class AddGardenFragment extends Fragment {
         if (name.isEmpty() || description.isEmpty() || areaMeasurement.isEmpty() || sunlightPreference.isEmpty() || wateringFrequency.isEmpty()) {
             Toast.makeText(requireContext(), "Please fill in all fields!", Toast.LENGTH_SHORT).show();
             return;
+        } else if (Integer.parseInt(wateringFrequency) < 1 || Integer.parseInt(wateringFrequency) > 30) {
+            Toast.makeText(requireContext(), "Please enter a valid watering interval (1 - 30 days)!", Toast.LENGTH_SHORT).show();
+            addGardenBinding.etWateringInterval.setError("Enter a valid watering interval (1 - 30 days)");
+            return;
+        } else if (Integer.parseInt(areaMeasurement) < 1 || Integer.parseInt(areaMeasurement) > 100) {
+            Toast.makeText(requireContext(), "Please enter a valid garden area (1 - 100 sq. ft.)!", Toast.LENGTH_SHORT).show();
+            addGardenBinding.etGardenArea.setError("Enter a valid garden area (1 - 100 sq. ft.)");
+            return;
         }
 
         // Get latitude and longitude (already fetched or default to 0.0 if not available)
