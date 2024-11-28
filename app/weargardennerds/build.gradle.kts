@@ -44,4 +44,6 @@ dependencies {
     implementation(libs.wear)
     implementation(libs.wearable)
 
+    implementation(libs.glide)
+
 }
