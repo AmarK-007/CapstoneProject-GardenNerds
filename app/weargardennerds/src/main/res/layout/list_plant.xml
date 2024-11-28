@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:backgroundTint="@android:color/white"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/card_color"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+                <!-- Garden Image -->
+                <ImageView
+                    android:id="@+id/ivPlantImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_plant_default" />
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight=".72"
+                android:layout_height="wrap_content"
+                android:background="@color/card_color"
+                android:orientation="vertical">
+                <!-- Plant Name -->
+                <TextView
+                    android:id="@+id/tvPlantName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="Plant Name"
+                    android:textColor="@color/colorPrimaryDeepDark"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <!-- Plant SUNLIGHT -->
+                <TextView
+                    android:id="@+id/tvPlantSunlight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:layout_marginTop="4dp"
+                    android:text="Plant Sunlight"
+                    android:textColor="@color/colorPrimaryDeepDark"
+                    android:textSize="8sp" />
+                <!-- Plant Watering FREQUENCY -->
+                <TextView
+                    android:id="@+id/tvPlantWatering"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="Plant Watering"
+                    android:textColor="@color/colorPrimaryDeepDark"
+                    android:textSize="8sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight=".28"
+                android:layout_height="wrap_content"
+                android:background="@color/card_color"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnMyGarden"
+                    style="@style/Widget.MaterialComponents.Button.IconOnly"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:contentDescription="@string/btn_title_my_garden"
+                    app:icon="@drawable/ic_reminder"
+                    app:iconTint="@color/colorAccent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

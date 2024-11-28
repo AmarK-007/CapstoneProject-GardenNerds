@@ -10,9 +10,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.msd.capstone.project.wear.gardennerds.R;
-import com.android.msd.capstone.project.wear.gardennerds.adaptes.RemindersListAdapter;
+import com.android.msd.capstone.project.wear.gardennerds.adapters.RemindersListAdapter;
 import com.android.msd.capstone.project.wear.gardennerds.databinding.ActivityReminderListBinding;
-import com.android.msd.capstone.project.wear.gardennerds.models.Reminder;
 import com.android.msd.capstone.project.wear.gardennerds.models.tempModels.Reminders;
 
 import java.util.ArrayList;
