@@ -1,8 +1,7 @@
-package com.android.msd.capstone.project.wear.gardennerds.adaptes;
+package com.android.msd.capstone.project.wear.gardennerds.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -25,7 +24,7 @@ public class RemindersListAdapter extends RecyclerView.Adapter<RemindersListAdap
     @NonNull
     @Override
     public RemindersListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(CustomReminderListItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
+        return new MyViewHolder(CustomReminderListItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
