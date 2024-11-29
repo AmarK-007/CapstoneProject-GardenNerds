@@ -26,6 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bonanza - BundleGalore's Booth"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold" />
 
             <TextView
@@ -33,6 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Price: $613.79 + $19.99 shipping"
+                android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />
 
             <TextView
@@ -41,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Buy Now"
-                android:textColor="@color/category_text_color" />
+                android:textColor="@color/purple_500" />
         </LinearLayout>
     </LinearLayout>
 

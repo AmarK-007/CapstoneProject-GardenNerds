@@ -35,19 +35,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:buttonTint="@color/colorPrimary"
+                    android:buttonTint="@color/text_color"
                     android:checked="true"
                     android:text="@string/text_reminder_type_watering"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/text_color" />
 
                 <RadioButton
                     android:id="@+id/rbFertilize"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:buttonTint="@color/colorPrimary"
+                    android:buttonTint="@color/text_color"
                     android:text="@string/text_reminder_type_fertilize"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/text_color" />
                 <!-- </LinearLayout>-->
 
                 <!-- <LinearLayout
@@ -60,18 +60,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:buttonTint="@color/colorPrimary"
+                    android:buttonTint="@color/text_color"
                     android:text="@string/text_reminder_type_sunlight"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/text_color" />
 
                 <RadioButton
                     android:id="@+id/rbChangeSoil"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:buttonTint="@color/colorPrimary"
+                    android:buttonTint="@color/text_color"
                     android:text="@string/text_reminder_type_changeSoil"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/text_color" />
                 <!--</LinearLayout>-->
             </RadioGroup>
             <!-- CardView for Reminder Details -->

@@ -43,6 +43,7 @@
     <string name="text_enter_moisture_level">Enter Moisture Level (1 – 100) %</string>
     <string name="text_enter_temperature">Enter Temperature (1 – 50) °C</string>
     <string name="text_enter_watering_interval">Enter Watering Interval (1 – 30) days</string>
+    <string name="text_enter_sunlight_preference">Sunlight Preference:</string>
     <string name="text_enter_sunlight_required">Sunlight Preference: (1 – 24) hours</string>
     <string name="text_enter_nutrition_required">Enter Nutrition Required</string>
     <string name="text_reminders">Reminders</string>

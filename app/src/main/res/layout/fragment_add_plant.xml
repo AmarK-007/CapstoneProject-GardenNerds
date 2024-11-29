@@ -118,7 +118,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:layout_marginBottom="8dp"
-                        android:text="@string/text_enter_sunlight_required"
+                        android:text="@string/text_enter_sunlight_preference"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -250,7 +250,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="@string/text_no_reminders_added_yet"
-                android:textColor="@color/colorPrimaryDeepDark"
+                android:textColor="@color/text_color"
                 android:textSize="16sp"
                 android:visibility="gone" />
 

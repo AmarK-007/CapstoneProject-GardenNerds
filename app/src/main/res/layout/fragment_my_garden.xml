@@ -18,7 +18,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="24dp"
         android:text="No gardens added yet."
-        android:textColor="@color/colorPrimaryDeepDark"
+        android:textColor="@color/text_color"
         android:textSize="16sp"
         android:visibility="gone" />
 
