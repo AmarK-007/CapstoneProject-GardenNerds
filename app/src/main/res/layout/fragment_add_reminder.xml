@@ -157,6 +157,17 @@
                         android:textColor="@color/white"
                         android:theme="@style/CustomEditText" />
 
+                    <!-- select Time to trigger based on frequency entered-->
+                    <EditText
+                        android:id="@+id/edtTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="@string/text_enter_reminder_time"
+                        android:inputType="time"
+                        android:textColor="@color/white"
+                        android:theme="@style/CustomEditText" />
+
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

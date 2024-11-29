@@ -97,6 +97,8 @@ public class PlantDataSource {
             reminderValues.put(ReminderDataSource.COLUMN_TEMPERATURE_LEVEL, reminder.getTemperatureLevel());
             reminderValues.put(ReminderDataSource.COLUMN_SUNLIGHT_LEVEL, reminder.getSunlightLevel());
             reminderValues.put(ReminderDataSource.COLUMN_NUTRIENT_REQUIRED, reminder.getNutrientRequired());
+            reminderValues.put(ReminderDataSource.COLUMN_REMINDER_TIME, reminder.getReminderTime());
+            reminderValues.put(ReminderDataSource.COLUMN_REMINDER_ID, reminder.getReminderId());
 
             long reminderId = db.insert(ReminderDataSource.TABLE_NAME, null, reminderValues);
             reminder.setReminderId((int) reminderId);
@@ -246,6 +248,8 @@ public class PlantDataSource {
                 reminder.setTemperatureLevel(cursor.getString(cursor.getColumnIndex(ReminderDataSource.COLUMN_TEMPERATURE_LEVEL)));
                 reminder.setSunlightLevel(cursor.getString(cursor.getColumnIndex(ReminderDataSource.COLUMN_SUNLIGHT_LEVEL)));
                 reminder.setNutrientRequired(cursor.getString(cursor.getColumnIndex(ReminderDataSource.COLUMN_NUTRIENT_REQUIRED)));
+                reminder.setReminderTime(cursor.getString(cursor.getColumnIndex(ReminderDataSource.COLUMN_REMINDER_TIME)));
+
                 reminders.add(reminder);
             } while (cursor.moveToNext());
             cursor.close();

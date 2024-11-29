@@ -255,7 +255,7 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
                     reminder.setPlantId(plant.getPlantId());
                     //mann
                     //Utility.setSnoozeReminder(1,reminderId,plant.getPlantId(),requireContext());
-                    Utility.setSnoozeReminder(Utility.getReminderTypeString(requireContext(), reminder.getReminderTypeId()), plant.getPlantId(), requireContext());
+                    Utility.setSnoozeReminder(requireContext(), false, reminder);
                     /**Above method is working amar  below method has bugs*/
 //                    ReminderManager reminderManager = new ReminderManager(requireContext());
 ////                    reminderManager.startReminder(reminder.getReminderId());

@@ -242,19 +242,19 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
         for (Reminder existingReminder : existingReminders) {
             if (existingReminder.getReminderTypeId() == reminder.getReminderTypeId()) {
                 // Reminder already exists, do not insert again
-               // Toast.makeText(requireContext(), Utility.getReminderTypeString(requireContext(), reminder.getReminderTypeId()) + " Reminder already exists", Toast.LENGTH_SHORT).show();
+                 Toast.makeText(requireContext(), Utility.getReminderTypeString(requireContext(), reminder.getReminderTypeId()) + " Reminder already exists", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
-        Log.d("ReminderID", reminder.getReminderId() +" Actual reminder ID");
+        Log.d("ReminderID", reminder.getReminderId() + " Actual reminder ID");
         long isInserted = reminderDataSource.insertReminder(reminder);
         if (isInserted > 0) {
             List<Reminder> updatedReminders = reminderDataSource.getRemindersByPlantId(plant.getPlantId());
             reminderViewModel.setReminderList(updatedReminders);
             // Update the adapter's list and notify it
-                reminderAdapter.setReminders(updatedReminders);
-            Utility.setSnoozeReminder(Utility.getReminderTypeString(requireContext(), reminder.getReminderTypeId()), plant.getPlantId(), requireContext());
- /**Above method is working amar  below method has bugs*/
+            reminderAdapter.setReminders(updatedReminders);
+            Utility.setSnoozeReminder(requireContext(), false, reminder);
+            /**Above method is working amar  below method has bugs*/
 //            ReminderManager reminderManager = new ReminderManager(requireContext());
 //            reminderManager.startReminder(reminder.getReminderId());
             /**it is till here, its new one that requires all things for reminder*/
@@ -266,10 +266,9 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
     }
 
 
-
     private void deleteReminder(Reminder reminder) {
         ReminderDataSource reminderDataSource = new ReminderDataSource(requireActivity());
-        Utility.cancelReminder(requireContext(),reminder.getReminderTypeId(),reminder.getPlantId());
+        Utility.cancelReminder(requireContext(), reminder.getReminderTypeId(), reminder.getPlantId());
         // Delete the reminder itself
         reminderDataSource.deleteReminder(reminder);
     }

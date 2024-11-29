@@ -41,7 +41,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
         // Display reminder type string
         String reminderTypeString = Utility.getReminderTypeString(context, reminder.getReminderTypeId());
         holder.binding.tvMessage.setText(reminderTypeString);
-        holder.binding.tvDateTime.setText(reminder.getDateTime());
+        holder.binding.tvDateTime.setText("AT " + reminder.getReminderTime());
 
         // Display respective data based on reminder type
         switch (reminder.getReminderTypeId()) {
@@ -66,8 +66,8 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
             @Override
             public void onClick(View v) {
                 String reminderTypeString = Utility.getReminderTypeString(context, reminder.getReminderTypeId());
-                Utility.setSnoozeReminder(reminderTypeString,reminder.getPlantId(),context);
-                Log.d("ReminderAdapter",reminderTypeString+ " reminder type string and plantid " + reminder.getPlantId());
+                Utility.setSnoozeReminder(context, false, reminder);
+                Log.d("ReminderAdapter", reminderTypeString + " reminder type string and plantid " + reminder.getPlantId());
             }
         });
     }

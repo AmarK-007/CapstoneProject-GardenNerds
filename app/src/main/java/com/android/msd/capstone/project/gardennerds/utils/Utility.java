@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +17,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -25,8 +27,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.broadcastReceivers.ReminderReceiver;
 import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
+import com.android.msd.capstone.project.gardennerds.db.ReminderDataSource;
 import com.android.msd.capstone.project.gardennerds.fragments.HomeFragment;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
+import com.android.msd.capstone.project.gardennerds.models.Reminder;
 import com.android.msd.capstone.project.gardennerds.models.User;
 import com.google.gson.Gson;
 
@@ -128,6 +132,23 @@ public class Utility {
      */
     public static boolean validateEmail(String email) {
         Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    /**
+     * isValidTime method
+     *
+     * @param time
+     * @return
+     */
+    public static boolean isValidTime(String time) {
+        if (time == null || time.isEmpty()) {
+            return false;
+        }
+        // Regular expression for HH:MM AM/PM (12-hour clock)
+        String timePattern = "^([1]?[0-2]|[0]?[1-9]):[0-5][0-9] ([AaPp][Mm])$";
+        Pattern pattern = Pattern.compile(timePattern);
+        Matcher matcher = pattern.matcher(time);
         return matcher.matches();
     }
 
@@ -368,12 +389,34 @@ public class Utility {
      * Mann code
      */
     @SuppressLint("MissingPermission")
-    public static void setSnoozeReminder(String reminderType, int plantId, Context context) {
+    public static void setSnoozeReminder(Context context, boolean isForSnooze, Reminder reminder) {
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.SECOND, 10); // Set reminder for 1 minute later (adjust as needed)
+        calendar.add(Calendar.SECOND, Constants.SET_REMINDER_SNOOZE); // Set reminder for 10 secs
+        /** Amar code*/
+       /* if (isForSnooze) {
+            calendar.add(Calendar.SECOND, Constants.SET_REMINDER_SNOOZE); // Set reminder for 1 minute later (adjust as needed)
+        } else {
+            String[] time = reminder.getReminderTime().split(" ");
+            String[] hourMinute = time[0].split(":");
+            int hour = Integer.parseInt(hourMinute[0]);
+            int minute = Integer.parseInt(hourMinute[1]);
+            if (time[1].equalsIgnoreCase("PM") && hour != 12) {
+                hour += 12;
+            } else if (time[1].equalsIgnoreCase("AM") && hour == 12) {
+                hour = 0;
+            }
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
+            calendar.set(Calendar.MINUTE, minute);
+            calendar.set(Calendar.SECOND, 0);
 
-        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType).putExtra("PlantID", plantId);
+            int frequency = Integer.parseInt(reminder.getFrequency());
+            // Add the frequency in days to the current time
+            calendar.add(Calendar.DAY_OF_YEAR, frequency);
+        }*/
+        /** Amar code ends*/
+
+        Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderInstance", reminder);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context, 0, intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT
         );
@@ -386,8 +429,24 @@ public class Utility {
                     calendar.getTimeInMillis(),
                     pendingIntent
             );
-
-
+            /** Amar code*/
+           /* if (isForSnooze) {
+                alarmManager.setExact(
+                        AlarmManager.RTC_WAKEUP,
+                        calendar.getTimeInMillis(),
+                        pendingIntent
+                );
+            } else {
+                int frequency = Integer.parseInt(reminder.getFrequency());
+                long intervalMillis = frequency * 24 * 60 * 60 * 1000L; // Frequency in days converted to milliseconds
+                alarmManager.setRepeating(
+                        AlarmManager.RTC_WAKEUP,
+                        calendar.getTimeInMillis(),
+                        intervalMillis,
+                        pendingIntent
+                );
+            }*/
+            /** Amar code ends*/
         }
     }
 
@@ -402,9 +461,9 @@ public class Utility {
 
         PlantDataSource plantDataSource = new PlantDataSource(context);
         Plant plant = plantDataSource.getPlant(plantId);
-        int uniqueRequestCode = generateUniqueRequestCode(plantId,reminderType);
+        int uniqueRequestCode = generateUniqueRequestCode(plantId, reminderType);
         if (plant != null) {
-            Log.d("Reminder", reminderTypeString + " Also plant name is " + plant.getPlantName() + "HAs reminder id =  "+reminderType + " Unique req code is = " + uniqueRequestCode);
+            Log.d(TAG, "setAlarmsForFrequency: " + reminderTypeString + " Also plant name is " + plant.getPlantName() + "HAs reminder id =  " + reminderType + " Unique req code is = " + uniqueRequestCode);
             // Start time (e.g., 10 AM)
 
             /**to be uncommented*/
@@ -428,24 +487,24 @@ public class Utility {
 
             // Set the alarm
 
-            setAlarm(context, calendar, uniqueRequestCode, reminderType, plantId,frequency);
+            setAlarm(context, calendar, uniqueRequestCode, reminderType, plantId, frequency);
         } else {
             Log.v(TAG, "setAlarmsForFrequency: Plant obj is null, hence ignored here.");
         }
     }
 
     // Helper method to set a single alarm
-    public static void setAlarm(Context context, Calendar alarmTime, int uniqueCode, int reminderType, int plantId,int frequency) {
+    public static void setAlarm(Context context, Calendar alarmTime, int uniqueCode, int reminderType, int plantId, int frequency) {
         Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderType", reminderType).putExtra("PlantID", plantId);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, uniqueCode, intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-        Log.d("Recursion", alarmTime + "<time unique code>  " + uniqueCode + " remidID> " + reminderType + " plantId> "+ plantId);
+        Log.d("Recursion", alarmTime + "<time unique code>  " + uniqueCode + " remidID> " + reminderType + " plantId> " + plantId);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Log.e("DateTime" ,"Date" + sdf.format(alarmTime.getTime()));
+        Log.e("DateTime", "Date" + sdf.format(alarmTime.getTime()));
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
 
 //        alarmTime.add(Calendar.DAY_OF_YEAR, -1);
-        Log.e("DateTime" ,"Date" + sdf.format(alarmTime.getTime()));
+        Log.e("DateTime", "Date" + sdf.format(alarmTime.getTime()));
         // Set the alarm to trigger at the exact time
         if (alarmManager != null) {
 //            long intervalMillis = (long) frequency * 60 * 1000;
@@ -466,12 +525,11 @@ public class Utility {
         // Create the intent with the same reminder ID
         Intent intent = new Intent(context, ReminderReceiver.class);
         intent.putExtra("reminderId", reminderId);
-        int uniqueRequestCode = generateUniqueRequestCode(plantId,reminderId);
+        int uniqueRequestCode = generateUniqueRequestCode(plantId, reminderId);
 
         Log.d("DELETE REMINDER", reminderId + " unique code = " + uniqueRequestCode);
 
         // Pass the reminder ID if needed
-
 
 
         // Create the PendingIntent using the same reminder ID
@@ -491,9 +549,23 @@ public class Utility {
     }
 
 
+    public static void showTimePickerDialog(Context context, EditText editText) {
+        // Get the current time as the default values for the picker
+        final Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
 
+        // Create a new instance of TimePickerDialog and return it
+        TimePickerDialog timePickerDialog = new TimePickerDialog(context, (view, hourOfDay, minuteOfHour) -> {
+            // Convert 24-hour format to 12-hour format with AM/PM
+            String amPm = (hourOfDay >= 12) ? "PM" : "AM";
+            int hourIn12Format = (hourOfDay > 12) ? hourOfDay - 12 : (hourOfDay == 0 ? 12 : hourOfDay);
+            String time = String.format("%02d:%02d %s", hourIn12Format, minuteOfHour, amPm);
+            editText.setText(time);
+        }, hour, minute, false); // Use 12-hour format
 
-
+        timePickerDialog.show();
+    }
 
 
     public static void setNavigationAndStatusBarColor(Activity activity) {

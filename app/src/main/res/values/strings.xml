@@ -46,6 +46,7 @@
     <string name="text_enter_sunlight_preference">Sunlight Preference:</string>
     <string name="text_enter_sunlight_required">Sunlight Preference: (1 – 24) hours</string>
     <string name="text_enter_nutrition_required">Enter Nutrition Required</string>
+    <string name="text_enter_reminder_time">Enter Reminder Time in HH:MM format</string>
     <string name="text_reminders">Reminders</string>
     <string name="text_enter_frequency">Enter Frequency (in days)</string>
     <string name="text_reminder_type_watering">Watering</string>

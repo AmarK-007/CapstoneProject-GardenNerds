@@ -20,6 +20,7 @@ import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.activity.HomeActivity;
 import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
+import com.android.msd.capstone.project.gardennerds.models.Reminder;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
 
 import java.util.Calendar;
@@ -37,164 +38,124 @@ public class ReminderReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
 
-//        Intent popupIntent = new Intent("SHOW_POPUP");
-//        popupIntent.putExtra("showPopUP", true);
-//        popupIntent.putExtra("message", "Time to water your plants!");
-//        popupIntent.putExtra("ReminderType", "Fertilize");
-//        context.sendBroadcast(popupIntent);
-//        if (isAppInForeground(context)) {
-//            // If the app is in the foreground, show the alert dialog
-//            showPopup(context);
-//        }
-        // Create a notification channel (required for API 26+)
-
 
         createNotificationChannel(context);
-        String reminderType = intent.getStringExtra("ReminderType");
-        int reminderId = intent.getIntExtra("reminderId", -1);
-        if (reminderId != -1) {
+        Reminder reminder = intent.getParcelableExtra("ReminderInstance");
+        if (reminder != null && reminder.getReminderId() != -1) {
             // Handle the alarm (e.g., show a toast or send a notification)
-            Toast.makeText(context, "Reminder triggered! Reminder ID: " + reminderId, Toast.LENGTH_SHORT).show();
-        }
-        int plantId = intent.getIntExtra("PlantID",0);
-        PlantDataSource plantDataSource = new PlantDataSource(context);
-        Plant plant = plantDataSource.getPlant(plantId);
+            Toast.makeText(context, "Reminder triggered! Reminder ID: " + reminder.getReminderId(), Toast.LENGTH_SHORT).show();
+
+            /**Reminder Type
+             * Fertilize
+             * Watering
+             * Sunlight
+             * Change Soil
+             * */
+            String reminderTypeString = Utility.getReminderTypeString(context, reminder.getReminderTypeId());
+            Log.d("TAG", "Reminder receiver " + reminderTypeString);
+            PlantDataSource plantDataSource = new PlantDataSource(context);
+            Plant plant = plantDataSource.getPlant(reminder.getPlantId());
 
 //        Calendar calendar = Calendar.getInstance();
 //        calendar.add(Calendar.MINUTE,1);
 //        Log.d("Recursion", calendar + "<time unique code>  " + Utility.generateUniqueRequestCode(plantId,reminderId) + " remidID> " + reminderId + " plantId> "+ plantId);
 //        Utility.setAlarm(context,calendar,Utility.generateUniqueRequestCode(plantId,reminderId),reminderId,plantId,1);
 
+            Intent notificationIntent = new Intent(context, HomeActivity.class);
+            notificationIntent.putExtra("showDialog", true); // Pass data to show the dialog
+            notificationIntent.putExtra("ReminderInstance", reminder);
+            notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
+            if (reminderTypeString != null)
+                if (reminder.getPlantId() != 0) {
+                    switch (reminderTypeString) {
+                        case "Fertilize":
+                            contentTitle = "Fertilize " + plant.getPlantName() + "!";
+                            contentText = "It's time to fertilize " + plant.getPlantName() + " for healthy growth.";
+                            largeIcon = R.drawable.fertilize;  // Larger icon for notification
+                            notificationText = "Fertilization due! Don't forget to fertilize " + plant.getPlantName() + "!";
+                            break;
+                        case "Watering":
+                            contentTitle = "Water " + plant.getPlantName() + "!";
+                            contentText = "It's time to water " + plant.getPlantName() + ". Keep it hydrated!";
+                            largeIcon = R.drawable.watering_plants;  // Larger icon for notification
+                            notificationText = "Watering time! " + plant.getPlantName() + " needs water.";
+                            break;
+                        case "Sunlight":
+                            contentTitle = "Give Sunlight to " + plant.getPlantName() + "!";
+                            contentText = "Ensure " + plant.getPlantName() + " gets the required amount of sunlight.";
+                            largeIcon = R.drawable.sunlight;  // Larger icon for notification
+                            notificationText = "Sunlight needed! Move " + plant.getPlantName() + " to a sunnier spot.";
+                            break;
+                        case "Change Soil":
+                            contentTitle = "Change the Soil for " + plant.getPlantName() + "!";
+                            contentText = "Refresh the soil for " + plant.getPlantName() + " for better growth.";
+                            largeIcon = R.drawable.soil;  // Larger icon for notification
+                            notificationText = "Soil change time! Give " + plant.getPlantName() + " new soil.";
+                            break;
+                        default:
+                            contentTitle = "Plant Reminder";
+                            contentText = "Your plant needs attention.";
+                            largeIcon = R.drawable.ic_plant;  // Fallback icon
+                            notificationText = "Don't forget to take care of " + plant.getPlantName() + "!";
+                            break;
+                    }
+                } else {
+                    switch (reminderTypeString) {
+                        case "Fertilize":
+                            contentTitle = "Fertilize Your Plants!";
+                            contentText = "It's time to fertilize your plants for healthy growth.";
+                            largeIcon = R.drawable.fertilize;  // Larger icon for notification
+                            notificationText = "Fertilization due! Don't forget to fertilize your plants!";
+                            break;
+                        case "Watering":
+                            contentTitle = "Water Your Plants!";
+                            contentText = "It's time to water your plants. Keep them hydrated!";
+                            largeIcon = R.drawable.watering_plants;  // Larger icon for notification
+                            notificationText = "Watering time! Your plants need water.";
+                            break;
+                        case "Sunlight":
+                            contentTitle = "Provide Sunlight to Your Plants!";
+                            contentText = "Ensure your plants get the required amount of sunlight.";
+                            largeIcon = R.drawable.sunlight;  // Larger icon for notification
+                            notificationText = "Sunlight needed! Move your plants to a sunnier spot.";
+                            break;
+                        case "Change Soil":
+                            contentTitle = "Change the Soil!";
+                            contentText = "Your plants may need new soil for better growth.";
+                            largeIcon = R.drawable.soil;  // Larger icon for notification
+                            notificationText = "Soil change time! Refresh your plants' soil.";
+                            break;
+                    }
+                }
 
-        Log.d("TAG", "Reminder receiver "+ reminderType );
-        Intent notificationIntent = new Intent(context, HomeActivity.class);
-        notificationIntent.putExtra("showDialog", true); // Pass data to show the dialog
-        notificationIntent.putExtra("ReminderType", reminderType); // Pass data to show the dialog
-        notificationIntent.putExtra("PlantID", plantId);
-        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        /**Reminder Type
-         * Fertilize
-         * Watering
-         * Sunlight
-         * Change Soil
-         * */
-        //String reminderTypeString = Utility.getReminderTypeString(context, reminderType);
+            PendingIntent pendingIntent = PendingIntent.getActivity(
+                    context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+            );
+            int notificationID = generateUniqueNotificationId(reminder.getPlantId(), reminderTypeString);
 
+            Intent dismissIntent = new Intent(context, NotificationDismissReceiver.class).putExtra("notificationID", notificationID);
+            PendingIntent dismissPendingIntent = PendingIntent.getBroadcast(context, 0, dismissIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-        assert reminderType != null;
-        if (plantId != 0){
-            switch (reminderType) {
-                case "Fertilize":
-                    contentTitle = "Fertilize " + plant.getPlantName() + "!";
-                    contentText = "It's time to fertilize " + plant.getPlantName() + " for healthy growth.";
+            // Build the notification
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.watering_plants) // Replace with your notification icon
+                    .setContentTitle(contentTitle)
+                    .setContentText(contentText)
+                    .setSmallIcon(R.drawable.notification_plant)
+                    .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), largeIcon))
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(notificationText)) // Description
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setContentIntent(pendingIntent)
+                    .addAction(R.drawable.check_mark, "Dismiss", dismissPendingIntent) // Dismiss button
+                    .addAction(R.drawable.search_end, "View", pendingIntent)
+                    .setAutoCancel(true);
 
-                    largeIcon = R.drawable.fertilize;  // Larger icon for notification
-
-                    notificationText = "Fertilization due! Don't forget to fertilize " + plant.getPlantName() + "!";
-                    break;
-
-                case "Watering":
-                    contentTitle = "Water " + plant.getPlantName() + "!";
-                    contentText = "It's time to water " + plant.getPlantName() + ". Keep it hydrated!";
-
-                    largeIcon = R.drawable.watering_plants;  // Larger icon for notification
-
-                    notificationText = "Watering time! " + plant.getPlantName() + " needs water.";
-                    break;
-
-                case "Sunlight":
-                    contentTitle = "Give Sunlight to " + plant.getPlantName() + "!";
-                    contentText = "Ensure " + plant.getPlantName() + " gets the required amount of sunlight.";
-
-                    largeIcon = R.drawable.sunlight;  // Larger icon for notification
-
-                    notificationText = "Sunlight needed! Move " + plant.getPlantName() + " to a sunnier spot.";
-                    break;
-
-                case "Change Soil":
-                    contentTitle = "Change the Soil for " + plant.getPlantName() + "!";
-                    contentText = "Refresh the soil for " + plant.getPlantName() + " for better growth.";
-
-                    largeIcon = R.drawable.soil;  // Larger icon for notification
-
-                    notificationText = "Soil change time! Give " + plant.getPlantName() + " new soil.";
-                    break;
-
-                default:
-                    contentTitle = "Plant Reminder";
-                    contentText = "Your plant needs attention.";
-                    largeIcon = R.drawable.ic_plant;  // Fallback icon
-                    notificationText = "Don't forget to take care of " + plant.getPlantName() + "!";
-                    break;
+            // Show the notification
+            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            if (notificationManager != null) {
+                notificationManager.notify(notificationID, builder.build());
             }
-        }else {
-
-
-            switch (reminderType) {
-                case "Fertilize":
-                    contentTitle = "Fertilize Your Plants!";
-                    contentText = "It's time to fertilize your plants for healthy growth.";
-
-                    largeIcon = R.drawable.fertilize;  // Larger icon for notification
-
-                    notificationText = "Fertilization due! Don't forget to fertilize your plants!";
-                    break;
-                case "Watering":
-                    contentTitle = "Water Your Plants!";
-                    contentText = "It's time to water your plants. Keep them hydrated!";
-
-                    largeIcon = R.drawable.watering_plants;  // Larger icon for notification
-
-                    notificationText = "Watering time! Your plants need water.";
-                    break;
-                case "Sunlight":
-                    contentTitle = "Provide Sunlight to Your Plants!";
-                    contentText = "Ensure your plants get the required amount of sunlight.";
-
-                    largeIcon = R.drawable.sunlight;  // Larger icon for notification
-
-                    notificationText = "Sunlight needed! Move your plants to a sunnier spot.";
-                    break;
-                case "Change Soil":
-                    contentTitle = "Change the Soil!";
-                    contentText = "Your plants may need new soil for better growth.";
-
-                    largeIcon = R.drawable.soil;  // Larger icon for notification
-
-                    notificationText = "Soil change time! Refresh your plants' soil.";
-                    break;
-            }
-        }
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(
-                context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-        );
-        int notificationID = generateUniqueNotificationId(plantId,reminderType);
-
-        Intent dismissIntent = new Intent(context, NotificationDismissReceiver.class).putExtra("notificationID",notificationID);
-        PendingIntent dismissPendingIntent = PendingIntent.getBroadcast(context, 0, dismissIntent, PendingIntent.FLAG_UPDATE_CURRENT |  PendingIntent.FLAG_IMMUTABLE);
-
-
-        // Build the notification
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.watering_plants) // Replace with your notification icon
-                .setContentTitle(contentTitle)
-                .setContentText(contentText)
-                .setSmallIcon(R.drawable.notification_plant)
-                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), largeIcon))
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(notificationText)) // Description
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setContentIntent(pendingIntent)
-                .addAction(R.drawable.check_mark,"Dismiss", dismissPendingIntent) // Dismiss button
-                .addAction(R.drawable.search_end, "View", pendingIntent)
-                .setAutoCancel(true);
-
-
-        // Show the notification
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (notificationManager != null) {
-            notificationManager.notify(notificationID, builder.build());
         }
     }
 
