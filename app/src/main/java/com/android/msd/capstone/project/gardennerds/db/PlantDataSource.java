@@ -87,10 +87,20 @@ public class PlantDataSource {
         // Insert reminders
         for (Reminder reminder : plant.getReminders()) {
             ContentValues reminderValues = new ContentValues();
+
+            reminderValues.put(ReminderDataSource.COLUMN_MESSAGE, reminder.getMessage());
+            reminderValues.put(ReminderDataSource.COLUMN_DATE_TIME, reminder.getDateTime());
             reminderValues.put(COLUMN_PLANT_ID, plantId);
-            // Add reminder details to reminderValues...
+            reminderValues.put(ReminderDataSource.COLUMN_REMINDER_TYPE_ID, reminder.getReminderTypeId());
+            reminderValues.put(ReminderDataSource.COLUMN_FREQUENCY, reminder.getFrequency());
+            reminderValues.put(ReminderDataSource.COLUMN_MOISTURE_LEVEL, reminder.getMoistureLevel());
+            reminderValues.put(ReminderDataSource.COLUMN_TEMPERATURE_LEVEL, reminder.getTemperatureLevel());
+            reminderValues.put(ReminderDataSource.COLUMN_SUNLIGHT_LEVEL, reminder.getSunlightLevel());
+            reminderValues.put(ReminderDataSource.COLUMN_NUTRIENT_REQUIRED, reminder.getNutrientRequired());
+
             long reminderId = db.insert(ReminderDataSource.TABLE_NAME, null, reminderValues);
             Log.d("Reminderid", String.valueOf(reminderId + " also plant id " +plant.getPlantId()));
+            reminder.setReminderId((int) reminderId);
         }
         db.close();
 
