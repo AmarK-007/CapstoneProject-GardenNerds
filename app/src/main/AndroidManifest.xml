@@ -17,8 +17,9 @@
     <!-- Permission for scheduling alarms -->
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 
     <!--permission for post notification-->
@@ -77,9 +78,10 @@
 
         <receiver
             android:name=".broadcastReceivers.ReminderReceiver"
+            android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.ACTION_REMINDER" />
             </intent-filter>
         </receiver>
 
@@ -95,6 +97,21 @@
         <meta-data
             android:name="com.google.ar.core"
             android:value="required" />
+
+
+        <receiver android:name=".broadcastReceivers.newReminder.AlarmReceiver"
+            android:enabled="true" />
+
+        <!-- Declare the BootReceiver -->
+        <receiver
+            android:name=".broadcastReceivers.newReminder.BootReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

@@ -99,6 +99,7 @@ public class PlantDataSource {
             reminderValues.put(ReminderDataSource.COLUMN_NUTRIENT_REQUIRED, reminder.getNutrientRequired());
 
             long reminderId = db.insert(ReminderDataSource.TABLE_NAME, null, reminderValues);
+            reminder.setReminderId((int) reminderId);
             Log.d("Reminderid", String.valueOf(reminderId + " also plant id " +plant.getPlantId()));
             reminder.setReminderId((int) reminderId);
         }

@@ -37,6 +37,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.broadcastReceivers.ReminderReceiver;
+import com.android.msd.capstone.project.gardennerds.broadcastReceivers.newReminder.ReminderManager;
 import com.android.msd.capstone.project.gardennerds.databinding.ActivityHomeBinding;
 import com.android.msd.capstone.project.gardennerds.databinding.MenuDrawerHeaderBinding;
 import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
@@ -88,6 +89,7 @@ public class HomeActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         // Set navigation bar and status bar color
         Utility.setNavigationAndStatusBarColor(this);
+
 
 
         // Initialize the toolbar, drawer layout, and navigation view.
