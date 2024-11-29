@@ -91,7 +91,6 @@ public class HomeActivity extends AppCompatActivity {
         Utility.setNavigationAndStatusBarColor(this);
 
 
-
         // Initialize the toolbar, drawer layout, and navigation view.
         materialToolbar = homeBinding.homeToolBar;
         drawerLayout = homeBinding.drawerMenu;
@@ -457,6 +456,7 @@ public class HomeActivity extends AppCompatActivity {
             }
 
         }
+        
 
         // Create the dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

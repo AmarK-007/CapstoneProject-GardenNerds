@@ -50,7 +50,7 @@ public class ReminderReceiver extends BroadcastReceiver {
 
 
         createNotificationChannel(context);
-        int reminderType = intent.getIntExtra("ReminderType",-1);
+        String reminderType = intent.getStringExtra("ReminderType");
         int reminderId = intent.getIntExtra("reminderId", -1);
         if (reminderId != -1) {
             // Handle the alarm (e.g., show a toast or send a notification)
@@ -79,13 +79,12 @@ public class ReminderReceiver extends BroadcastReceiver {
          * Sunlight
          * Change Soil
          * */
-        String reminderTypeString = Utility.getReminderTypeString(context, reminderType);
+        //String reminderTypeString = Utility.getReminderTypeString(context, reminderType);
 
 
-        assert reminderTypeString != null;
-
+        assert reminderType != null;
         if (plantId != 0){
-            switch (reminderTypeString) {
+            switch (reminderType) {
                 case "Fertilize":
                     contentTitle = "Fertilize " + plant.getPlantName() + "!";
                     contentText = "It's time to fertilize " + plant.getPlantName() + " for healthy growth.";
@@ -132,7 +131,7 @@ public class ReminderReceiver extends BroadcastReceiver {
         }else {
 
 
-            switch (reminderTypeString) {
+            switch (reminderType) {
                 case "Fertilize":
                     contentTitle = "Fertilize Your Plants!";
                     contentText = "It's time to fertilize your plants for healthy growth.";
@@ -171,7 +170,7 @@ public class ReminderReceiver extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(
                 context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
-        int notificationID = generateUniqueNotificationId(plantId,reminderTypeString);
+        int notificationID = generateUniqueNotificationId(plantId,reminderType);
 
         Intent dismissIntent = new Intent(context, NotificationDismissReceiver.class).putExtra("notificationID",notificationID);
         PendingIntent dismissPendingIntent = PendingIntent.getBroadcast(context, 0, dismissIntent, PendingIntent.FLAG_UPDATE_CURRENT |  PendingIntent.FLAG_IMMUTABLE);
