@@ -57,6 +57,9 @@ public class ProfileFragment extends Fragment {
                 // Use view binding for the dialog's layout
                 UpdateAddressDialogBinding dialogBinding = UpdateAddressDialogBinding.inflate(getLayoutInflater());
                 updateDialog.setContentView(dialogBinding.getRoot());
+                //set layout params to be in center
+                updateDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                updateDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
 
                 String[] provinces = getResources().getStringArray(R.array.canadian_provinces);
@@ -102,6 +105,7 @@ public class ProfileFragment extends Fragment {
                         updateDialog.dismiss();
                     }
                 });
+
 
                 // Show the dialog
                 updateDialog.show();

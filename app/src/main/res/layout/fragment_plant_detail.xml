@@ -56,7 +56,7 @@
                     android:layout_marginBottom="8dp"
                     android:text="Plant Name"
                     android:maxLines="1"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/text_color"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -78,7 +78,7 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="6dp"
                     android:text="Sunlight: Full Sunlight"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/text_color"
                     android:textSize="12sp" />
 
                 <!-- Watering Frequency -->
@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:text="Watering Frequency: Every 3 days"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/text_color"
                     android:textSize="12sp" />
 
                 <!-- Moisture Level -->
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:text="Moisture Level: 50%"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/text_color"
                     android:textSize="12sp" />
 
                 <!-- Nutrient Level -->
@@ -107,7 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nutrient Level: 15%"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/text_color"
                     android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
@@ -171,7 +171,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:text="No Reminders added yet."
-            android:textColor="@color/colorPrimaryDeepDark"
+            android:textColor="@color/text_color"
             android:textSize="16sp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"

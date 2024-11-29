@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="350dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimaryDark"
+    android:layout_margin="10dp"
+    android:background="@color/fragment_background"
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="16dp"
         android:layout_marginBottom="20dp"
         android:fontFamily="@fonts/roboto_light"
         android:text="@string/update_address"
         android:textColor="@color/colorAccent"
-        android:textSize="18dp" />
+        android:textSize="18sp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/updateAddressOneWrapper"
+        style="@style/CustomTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -29,6 +32,7 @@
 
         <EditText
             android:id="@+id/updateAddress1"
+            style="@style/CustomTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@fonts/roboto_light"
@@ -44,6 +48,7 @@
     <!-- Address 2 -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/updateAddressTwoWrapper"
+        style="@style/CustomTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -54,6 +59,7 @@
 
         <EditText
             android:id="@+id/updateAddress2"
+            style="@style/CustomTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@fonts/roboto_light"
@@ -69,6 +75,7 @@
     <!-- Postal Code -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/updatePostalCodeWrapper"
+        style="@style/CustomTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -79,6 +86,7 @@
 
         <EditText
             android:id="@+id/updatePostalCode"
+            style="@style/CustomTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@fonts/roboto_light"
@@ -94,6 +102,7 @@
     <!-- City -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/updateCityWrapper"
+        style="@style/CustomTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -104,6 +113,7 @@
 
         <EditText
             android:id="@+id/updateCity"
+            style="@style/CustomTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@fonts/roboto_light"
@@ -118,6 +128,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/updateProvinceSpinnerWrapper"
+        style="@style/CustomTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"

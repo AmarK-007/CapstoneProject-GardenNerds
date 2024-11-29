@@ -82,7 +82,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="0°C"
-                android:textColor="@color/black"
+                android:textColor="@color/colorPrimaryDeepDark"
                 android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>

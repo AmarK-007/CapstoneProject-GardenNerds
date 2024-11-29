@@ -33,6 +33,7 @@
             android:layout_marginBottom="8dp"
             android:text="Sony PlayStation 5 - Digital Edition"
             android:textSize="14sp"
+            android:textColor="@color/text_color"
             android:textStyle="bold" />
 
         <!--        <ImageView-->
@@ -88,7 +89,7 @@
             android:layout_height="wrap_content"
             app:tabIndicatorColor="@color/card_color"
             app:tabIndicatorHeight="4dp"
-            app:tabSelectedTextColor="@color/category_text_color"
+            app:tabSelectedTextColor="@color/grey"
             app:tabGravity="center"
             app:tabMode="auto"
             android:layout_gravity="center_horizontal" />
@@ -101,7 +102,7 @@
             android:layout_below="@id/product_image"
             android:layout_marginTop="8dp"
             android:text="$613.79"
-            android:textColor="@android:color/holo_green_dark"
+            android:textColor="@color/text_price_color"
             android:textSize="20sp" />
 
         <TextView
@@ -111,6 +112,7 @@
             android:layout_below="@id/product_price"
             android:layout_marginTop="4dp"
             android:text="Rating: 4.7 ★"
+            android:textColor="@color/text_color"
             android:textSize="16sp" />
 
         <TextView
@@ -119,7 +121,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/product_rating"
             android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
             android:text="17816 Reviews"
+            android:textColor="@color/text_color"
             android:textSize="14sp" />
 
         <androidx.cardview.widget.CardView
@@ -144,6 +148,7 @@
                   android:layout_toStartOf="@id/iv_more_description"
                   android:layout_centerVertical="true"
                   android:layout_width="match_parent"
+                  android:textColor="@color/colorPrimary"
                   android:layout_height="wrap_content"/>
                   <ImageView
                       android:layout_margin="10dp"
@@ -159,6 +164,7 @@
                   android:layout_margin="10dp"
                   android:id="@+id/tv_description"
                   android:layout_width="match_parent"
+                  android:textColor="@color/colorPrimary"
                   android:layout_height="wrap_content"/>
               <TextView
                   android:id="@+id/product_highlights"
@@ -166,6 +172,7 @@
                   android:layout_height="wrap_content"
                   android:layout_below="@id/cv_description"
                   android:layout_margin="10dp"
+                  android:textColor="@color/colorPrimary"
                   android:text="Highlights: Lightning Speed, Stunning Games..."
                   android:textSize="14sp" />
 
@@ -197,6 +204,7 @@
             android:layout_below="@id/product_highlights"
             android:layout_marginTop="16dp"
             android:text="@string/available_sellers"
+            android:textColor="@color/text_color"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -212,6 +220,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Related Products"
+            android:textColor="@color/text_color"
             android:textSize="20sp"
             android:textStyle="bold" />
 
