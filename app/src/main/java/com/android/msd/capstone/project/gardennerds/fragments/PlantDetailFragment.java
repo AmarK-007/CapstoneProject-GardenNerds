@@ -254,8 +254,10 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
             // Update the adapter's list and notify it
                 reminderAdapter.setReminders(updatedReminders);
             Utility.setAlarmsForFrequency(requireContext(),plant.getPlantId(),Integer.parseInt(reminder.getFrequency()),reminder.getReminderTypeId());
+ /**Above method is working amar  below method has bugs*/
 //            ReminderManager reminderManager = new ReminderManager(requireContext());
 //            reminderManager.startReminder(reminder.getReminderId());
+            /**it is till here, its new one that requires all things for reminder*/
             // Optionally, hide "No Reminders" message if any reminders exist
             if (!updatedReminders.isEmpty()) {
                 plantDetailBinding.tvNoReminders.setVisibility(View.GONE);

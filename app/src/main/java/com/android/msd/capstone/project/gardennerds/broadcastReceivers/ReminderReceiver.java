@@ -71,7 +71,7 @@ public class ReminderReceiver extends BroadcastReceiver {
         Intent notificationIntent = new Intent(context, HomeActivity.class);
         notificationIntent.putExtra("showDialog", true); // Pass data to show the dialog
         notificationIntent.putExtra("ReminderType", reminderType); // Pass data to show the dialog
-        notificationIntent.putExtra("PlantID",plantId);
+        notificationIntent.putExtra("PlantID", plantId);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         /**Reminder Type
          * Fertilize
