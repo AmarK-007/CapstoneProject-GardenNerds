@@ -35,19 +35,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:buttonTint="@color/colorPrimary"
+                    android:buttonTint="@color/text_color"
                     android:checked="true"
                     android:text="@string/text_reminder_type_watering"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/text_color" />
 
                 <RadioButton
                     android:id="@+id/rbFertilize"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:buttonTint="@color/colorPrimary"
+                    android:buttonTint="@color/text_color"
                     android:text="@string/text_reminder_type_fertilize"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/text_color" />
                 <!-- </LinearLayout>-->
 
                 <!-- <LinearLayout
@@ -60,18 +60,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:buttonTint="@color/colorPrimary"
+                    android:buttonTint="@color/text_color"
                     android:text="@string/text_reminder_type_sunlight"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/text_color" />
 
                 <RadioButton
                     android:id="@+id/rbChangeSoil"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:buttonTint="@color/colorPrimary"
+                    android:buttonTint="@color/text_color"
                     android:text="@string/text_reminder_type_changeSoil"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/text_color" />
                 <!--</LinearLayout>-->
             </RadioGroup>
             <!-- CardView for Reminder Details -->
@@ -98,7 +98,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:hint="@string/text_enter_frequency"
-                        android:inputType="time"
+                        android:inputType="number"
+                        android:textColor="@color/white"
                         android:theme="@style/CustomEditText" />
 
                     <!-- Moisture Level -->
@@ -109,6 +110,7 @@
                         android:layout_marginBottom="16dp"
                         android:hint="@string/text_enter_moisture_level"
                         android:inputType="numberDecimal"
+                        android:textColor="@color/white"
                         android:theme="@style/CustomEditText" />
 
                     <!--&lt;!&ndash; Watering Interval &ndash;&gt;
@@ -129,6 +131,7 @@
                         android:layout_marginBottom="16dp"
                         android:hint="@string/text_enter_temperature"
                         android:inputType="number"
+                        android:textColor="@color/white"
                         android:theme="@style/CustomEditText" />
 
 
@@ -140,6 +143,7 @@
                         android:layout_marginBottom="16dp"
                         android:hint="@string/text_enter_sunlight_required"
                         android:inputType="number"
+                        android:textColor="@color/white"
                         android:theme="@style/CustomEditText" />
 
                     <!-- Nutrition Required -->
@@ -150,6 +154,7 @@
                         android:layout_marginBottom="16dp"
                         android:hint="@string/text_enter_nutrition_required"
                         android:inputType="text"
+                        android:textColor="@color/white"
                         android:theme="@style/CustomEditText" />
 
 

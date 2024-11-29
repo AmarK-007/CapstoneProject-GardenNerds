@@ -1,66 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/custom_card"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
     <LinearLayout
-        android:padding="10dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/tvReminderTitle"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="Reminder"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Reminder"
+            android:textColor="@color/text_color"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvReminderMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="It's time to water your plant"
-            android:gravity="center"
             android:layout_marginTop="20dp"
-            android:textSize="15sp"/>
+            android:gravity="center"
+            android:text="It's time to water your plant."
+            android:textColor="@color/text_color"
+            android:textSize="15sp" />
 
         <ImageView
             android:id="@+id/ivReminderType"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center"
-            android:src="@drawable/watering_plants"
             android:layout_width="200dp"
-            android:layout_height="200dp"/>
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/watering_plants" />
 
         <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
+
             <Button
                 android:id="@+id/btnSnooze"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                android:text="Snooze"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:text="Snooze" />
+
             <Button
                 android:id="@+id/btnDone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
-                android:text="Okay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:text="Okay" />
         </LinearLayout>
 
 
-
     </LinearLayout>
-
 
 
 </androidx.cardview.widget.CardView>

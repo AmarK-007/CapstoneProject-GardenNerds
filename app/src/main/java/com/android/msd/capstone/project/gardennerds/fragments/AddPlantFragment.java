@@ -289,46 +289,77 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
         String wateringInterval = addPlantBinding.edtPlantWateringInterval.getText().toString().trim();
         String nutritionRequired = addPlantBinding.edtPlantNutritionRequired.getText().toString().trim();
 
+
         // Validate Plant Name
         if (plantName.isEmpty()) {
+            Toast.makeText(getContext(), "Plant name is required", Toast.LENGTH_SHORT).show();
             addPlantBinding.edtPlantName.setError("Plant name is required");
             return false;
         }
 
-        // Validate Moisture Level (Decimal number)
+        // Validate Moisture Level (Decimal number between 1 and 100)
         if (moistureLevel.isEmpty()) {
+            Toast.makeText(getContext(), "Moisture level is required", Toast.LENGTH_SHORT).show();
             addPlantBinding.edtPlantMoistureLevel.setError("Moisture level is required");
             return false;
         } else {
             try {
-                Double.parseDouble(moistureLevel);
+                double moisture = Double.parseDouble(moistureLevel);
+                if (moisture < 1 || moisture > 100) {
+                    Toast.makeText(getContext(), "Moisture level must be between 1 and 100", Toast.LENGTH_SHORT).show();
+                    addPlantBinding.edtPlantMoistureLevel.setError("Moisture level must be between 1 and 100");
+                    return false;
+                }
             } catch (NumberFormatException e) {
+                Toast.makeText(getContext(), "Invalid moisture level", Toast.LENGTH_SHORT).show();
                 addPlantBinding.edtPlantMoistureLevel.setError("Invalid moisture level");
                 return false;
             }
         }
 
-        // Validate Temperature (Integer number)
+        // Validate Temperature (Integer number between 1 and 50)
         if (temperature.isEmpty()) {
+            Toast.makeText(getContext(), "Temperature is required", Toast.LENGTH_SHORT).show();
             addPlantBinding.edtPlantTemperature.setError("Temperature is required");
             return false;
         } else {
             try {
-                Integer.parseInt(temperature);
+                int temp = Integer.parseInt(temperature);
+                if (temp < 1 || temp > 50) {
+                    Toast.makeText(getContext(), "Temperature must be between 1 and 50", Toast.LENGTH_SHORT).show();
+                    addPlantBinding.edtPlantTemperature.setError("Temperature must be between 1 and 50");
+                    return false;
+                }
             } catch (NumberFormatException e) {
+                Toast.makeText(getContext(), "Invalid temperature", Toast.LENGTH_SHORT).show();
                 addPlantBinding.edtPlantTemperature.setError("Invalid temperature");
                 return false;
             }
         }
 
-        // Validate Watering Interval (Time format)
+        // Validate Watering Interval (Integer number between 1 and 30)
         if (wateringInterval.isEmpty()) {
+            Toast.makeText(getContext(), "Watering interval is required", Toast.LENGTH_SHORT).show();
             addPlantBinding.edtPlantWateringInterval.setError("Watering interval is required");
             return false;
+        } else {
+            try {
+                int interval = Integer.parseInt(wateringInterval);
+                if (interval < 1 || interval > 30) {
+                    Toast.makeText(getContext(), "Watering interval must be between 1 and 30 days", Toast.LENGTH_SHORT).show();
+                    addPlantBinding.edtPlantWateringInterval.setError("Watering interval must be between 1 and 30 days");
+                    return false;
+                }
+            } catch (NumberFormatException e) {
+                Toast.makeText(getContext(), "Invalid watering interval", Toast.LENGTH_SHORT).show();
+                addPlantBinding.edtPlantWateringInterval.setError("Invalid watering interval");
+                return false;
+            }
         }
 
         // Validate Nutrition Requirement
         if (nutritionRequired.isEmpty()) {
+            Toast.makeText(getContext(), "Nutrition required is required", Toast.LENGTH_SHORT).show();
             addPlantBinding.edtPlantNutritionRequired.setError("Nutrition required is required");
             return false;
         }
