@@ -8,6 +8,7 @@ import android.os.Build;
 
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
 
+import java.time.LocalTime;
 import java.util.Calendar;
 
 public class ReminderManager {
@@ -22,13 +23,23 @@ public class ReminderManager {
 
     // Start a reminder to trigger daily at the specified time
     public void startReminder( int reminderId) {
-        int hour =22;
-        int minute=40;
+        int hour =17;
+        int minute=8;
+
+        LocalTime currentTime = LocalTime.now();
+
+        // Add 2 minutes to the current time
+        LocalTime newTime = currentTime.plusMinutes(3);
+
+        // Extract the new hour and minute
+        int newHour = newTime.getHour();
+        int newMinute = newTime.getMinute();
+
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.HOUR_OF_DAY, newHour);
+        calendar.set(Calendar.MINUTE, newMinute);
         calendar.set(Calendar.SECOND, 0);
 
         // If the time already passed for today, set the alarm for the next day

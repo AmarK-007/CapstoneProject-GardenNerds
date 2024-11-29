@@ -90,6 +90,7 @@ public class PlantDataSource {
             reminderValues.put(COLUMN_PLANT_ID, plantId);
             // Add reminder details to reminderValues...
             long reminderId = db.insert(ReminderDataSource.TABLE_NAME, null, reminderValues);
+            reminder.setReminderId((int) reminderId);
             Log.d("Reminderid", String.valueOf(reminderId + " also plant id " +plant.getPlantId()));
         }
         db.close();
@@ -127,6 +128,10 @@ public class PlantDataSource {
             plant.setImageUri(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_PATH)));
 
             cursor.close();
+            //get reminders by plant id
+            ArrayList<Reminder> reminders = getRemindersByPlantId(plant.getPlantId());
+            plant.setReminders(reminders);
+
             return plant;
         } else {
             return null;
@@ -160,6 +165,9 @@ public class PlantDataSource {
                 plant.setNutrientRequired(cursor.getString(cursor.getColumnIndex(COLUMN_NUTRIENT_REQUIRED)));
                 plant.setImageUri(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_PATH)));
 
+                //get reminders by plant id
+                ArrayList<Reminder> reminders = getRemindersByPlantId(plant.getPlantId());
+                plant.setReminders(reminders);
                 plants.add(plant);
             } while (cursor.moveToNext());
         }
@@ -209,6 +217,7 @@ public class PlantDataSource {
         return plants;
     }
 
+    @SuppressLint("Range")
     private ArrayList<Reminder> getRemindersByPlantId(long plantId) {
         ArrayList<Reminder> reminders = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -217,7 +226,16 @@ public class PlantDataSource {
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 Reminder reminder = new Reminder();
-                // Set reminder details from cursor...
+                reminder.setReminderId(cursor.getInt(cursor.getColumnIndex(ReminderDataSource.COLUMN_REMINDER_ID)));
+                reminder.setMessage(cursor.getString(cursor.getColumnIndex(ReminderDataSource.COLUMN_MESSAGE)));
+                reminder.setDateTime(cursor.getString(cursor.getColumnIndex(ReminderDataSource.COLUMN_DATE_TIME)));
+                reminder.setPlantId(cursor.getInt(cursor.getColumnIndex(ReminderDataSource.COLUMN_PLANT_ID)));
+                reminder.setReminderTypeId(cursor.getInt(cursor.getColumnIndex(ReminderDataSource.COLUMN_REMINDER_TYPE_ID)));
+                reminder.setFrequency(cursor.getString(cursor.getColumnIndex(ReminderDataSource.COLUMN_FREQUENCY)));
+                reminder.setMoistureLevel(cursor.getString(cursor.getColumnIndex(ReminderDataSource.COLUMN_MOISTURE_LEVEL)));
+                reminder.setTemperatureLevel(cursor.getString(cursor.getColumnIndex(ReminderDataSource.COLUMN_TEMPERATURE_LEVEL)));
+                reminder.setSunlightLevel(cursor.getString(cursor.getColumnIndex(ReminderDataSource.COLUMN_SUNLIGHT_LEVEL)));
+                reminder.setNutrientRequired(cursor.getString(cursor.getColumnIndex(ReminderDataSource.COLUMN_NUTRIENT_REQUIRED)));
                 reminders.add(reminder);
             } while (cursor.moveToNext());
             cursor.close();

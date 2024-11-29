@@ -27,6 +27,7 @@ import com.android.msd.capstone.project.gardennerds.models.User;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -403,8 +404,20 @@ public class Utility {
             // Start time (e.g., 10 AM)
 
             /**to be uncommented*/
-            calendar.set(Calendar.HOUR_OF_DAY, 20);  // 10 AM
-            calendar.set(Calendar.MINUTE, 23);
+//
+
+
+            LocalTime currentTime = LocalTime.now();
+
+            // Add 2 minutes to the current time
+            LocalTime newTime = currentTime.plusMinutes(2);
+
+            // Extract the new hour and minute
+            int newHour = newTime.getHour();
+            int newMinute = newTime.getMinute();
+
+            calendar.set(Calendar.HOUR_OF_DAY, newHour);  // 10 AM
+            calendar.set(Calendar.MINUTE, newMinute);
             calendar.set(Calendar.SECOND, 0);
 
             /**up to here*/

@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -132,6 +133,7 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
             plantDetailBinding.textViewSunlightPreference.setText("Sunlight Required: " + plant.getSunlightLevel());
             plantDetailBinding.textViewWateringFrequency.setText("Watering Frequency: " + plant.getWateringInterval() + "days");
             plantDetailBinding.textViewMoistureLevel.setText("Garden Area: " + plant.getMoistureLevel());
+            plantDetailBinding.textViewNutrientLevel.setText("Nutrient Level: " + plant.getNutrientRequired());
             reminderViewModel.setPlantId(plant.getPlantId());
 
 
@@ -244,15 +246,16 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
                 return;
             }
         }
+        Log.d("ReminderID", reminder.getReminderId() +" Actual reminder ID");
         long isInserted = reminderDataSource.insertReminder(reminder);
         if (isInserted > 0) {
             List<Reminder> updatedReminders = reminderDataSource.getRemindersByPlantId(plant.getPlantId());
             reminderViewModel.setReminderList(updatedReminders);
             // Update the adapter's list and notify it
                 reminderAdapter.setReminders(updatedReminders);
-//            Utility.setAlarmsForFrequency(requireContext(),plant.getPlantId(),Integer.parseInt(reminder.getFrequency()),reminder.getReminderTypeId());
-            ReminderManager reminderManager = new ReminderManager(requireContext());
-            reminderManager.startReminder(reminder.getReminderId());
+            Utility.setAlarmsForFrequency(requireContext(),plant.getPlantId(),Integer.parseInt(reminder.getFrequency()),reminder.getReminderTypeId());
+//            ReminderManager reminderManager = new ReminderManager(requireContext());
+//            reminderManager.startReminder(reminder.getReminderId());
             // Optionally, hide "No Reminders" message if any reminders exist
             if (!updatedReminders.isEmpty()) {
                 plantDetailBinding.tvNoReminders.setVisibility(View.GONE);

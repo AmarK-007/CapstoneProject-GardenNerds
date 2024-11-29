@@ -57,7 +57,7 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = AddPlantFragment.class.getSimpleName();
     private FragmentAddPlantBinding addPlantBinding;
     private ReminderAdapter reminderAdapter;
-    private List<Reminder> reminderlist = new ArrayList<>();
+    private ArrayList<Reminder> reminderlist = new ArrayList<>();
     private PlantViewModel plantViewModel;
     private SharedViewModel sharedViewModel;
     private Uri selectedImageUri; // To store the image URI
@@ -242,7 +242,7 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
             plant.setNutrientRequired(addPlantBinding.edtPlantNutritionRequired.getText().toString());
             plant.setImageUri(getImagePath());
             plant.setGardenId(plantViewModel.getGardenId());
-
+            plant.setReminders(reminderlist);
             // Insert into the database
             PlantDataSource plantDataSource = new PlantDataSource(requireContext());
             boolean isInserted = plantDataSource.insertPlant(plant);
@@ -253,11 +253,13 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
                 // Set reminders alarm
                 for (Reminder reminder : reminderlist) {
                     reminder.setPlantId(plant.getPlantId());
-                   //mann
+                    //mann
                     //Utility.setAlarmsForFrequency(1,reminderId,plant.getPlantId(),requireContext());
-//                    Utility.setAlarmsForFrequency(requireContext(), plant.getPlantId(), Integer.parseInt(reminder.getFrequency()), reminder.getReminderTypeId());
-                    ReminderManager reminderManager = new ReminderManager(requireContext());
-                    reminderManager.startReminder(reminder.getReminderId());
+                    Utility.setAlarmsForFrequency(requireContext(), plant.getPlantId(), Integer.parseInt(reminder.getFrequency()), reminder.getReminderTypeId());
+//                    String reminderTypeString = Utility.getReminderTypeString(requireContext(), reminder.getReminderTypeId());
+//                    Utility.setSnoozeReminder(reminderTypeString, plant.getPlantId(), requireContext());
+//                    ReminderManager reminderManager = new ReminderManager(requireContext());
+//                    reminderManager.startReminder(reminder.getReminderId());
 //                    String reminderTypeString = Utility.getReminderTypeString(requireContext(), reminder.getReminderTypeId());
 //                    Utility.setSnoozeReminder(reminderTypeString,plant.getPlantId(),requireContext());
                 }
@@ -335,7 +337,7 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
         return reminderlist;
     }
 
-    public void setReminderlist(List<Reminder> reminderlist) {
+    public void setReminderlist(ArrayList<Reminder> reminderlist) {
         this.reminderlist = reminderlist;
     }
 
