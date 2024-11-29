@@ -254,9 +254,9 @@ public class AddPlantFragment extends Fragment implements View.OnClickListener {
                 for (Reminder reminder : reminderlist) {
                     reminder.setPlantId(plant.getPlantId());
                     //mann
-                    //Utility.setAlarmsForFrequency(1,reminderId,plant.getPlantId(),requireContext());
-                    Utility.setAlarmsForFrequency(requireContext(), plant.getPlantId(), Integer.parseInt(reminder.getFrequency()), reminder.getReminderTypeId());
-                   /**Above method is working amar  below method has bugs*/
+                    //Utility.setSnoozeReminder(1,reminderId,plant.getPlantId(),requireContext());
+                    Utility.setSnoozeReminder(Utility.getReminderTypeString(requireContext(), reminder.getReminderTypeId()), plant.getPlantId(), requireContext());
+                    /**Above method is working amar  below method has bugs*/
 //                    ReminderManager reminderManager = new ReminderManager(requireContext());
 ////                    reminderManager.startReminder(reminder.getReminderId());
                     /**it is till here, its new one that requires all things for reminder*/

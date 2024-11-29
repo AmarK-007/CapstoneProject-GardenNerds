@@ -253,7 +253,7 @@ public class PlantDetailFragment extends Fragment implements View.OnClickListene
             reminderViewModel.setReminderList(updatedReminders);
             // Update the adapter's list and notify it
                 reminderAdapter.setReminders(updatedReminders);
-            Utility.setAlarmsForFrequency(requireContext(),plant.getPlantId(),Integer.parseInt(reminder.getFrequency()),reminder.getReminderTypeId());
+            Utility.setSnoozeReminder(Utility.getReminderTypeString(requireContext(), reminder.getReminderTypeId()), plant.getPlantId(), requireContext());
  /**Above method is working amar  below method has bugs*/
 //            ReminderManager reminderManager = new ReminderManager(requireContext());
 //            reminderManager.startReminder(reminder.getReminderId());
