@@ -95,7 +95,6 @@
                     android:hint="@string/username"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
-                    android:text="admin"
                     android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -118,7 +117,6 @@
                     android:hint="@string/password"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
-                    android:text="admin123"
                     android:textSize="15sp" />
 
 
