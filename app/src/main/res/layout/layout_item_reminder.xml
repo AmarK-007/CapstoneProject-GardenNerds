@@ -4,9 +4,9 @@
     android:id="@+id/card_plant"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="4dp"
     android:layout_marginTop="2dp"
     android:layout_marginBottom="2dp"
-    android:layout_margin="4dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
@@ -57,9 +57,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Date and Time"
+                    android:paddingTop="4dp"
                     android:textColor="@color/colorPrimaryDeepDark"
                     android:textSize="12sp"
-                    android:textStyle="italic" />
+                    android:textStyle="bold|italic" />
             </LinearLayout>
             <!-- TextView for the reminder Details -->
             <TextView

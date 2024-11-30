@@ -94,6 +94,7 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
         // Initialize views
 
         addReminderBinding.rgReminderType.setOnCheckedChangeListener(this);
+        addReminderBinding.edtTime.setOnClickListener(this);
         addReminderBinding.fabSaveReminder.setOnClickListener(this);
         setFormVisibiltyBasedOnSelection(addReminderBinding.rgReminderType.getCheckedRadioButtonId());
         requestNotificationPermission();
@@ -101,27 +102,25 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
 
     private void setFormVisibiltyBasedOnSelection(int checkedId) {
 
-        addReminderBinding.edtFrequency.setVisibility(View.GONE);
         addReminderBinding.edtMoistureLevel.setVisibility(View.GONE);
         addReminderBinding.edtTemperature.setVisibility(View.GONE);
         addReminderBinding.edtSunlightRequired.setVisibility(View.GONE);
         addReminderBinding.edtNutritionRequired.setVisibility(View.GONE);
 
+        addReminderBinding.edtFrequency.setVisibility(View.VISIBLE);
+        addReminderBinding.edtTime.setVisibility(View.VISIBLE);
+        addReminderBinding.edtTime.setHint("Please enter time in HH:MM format");
         if (checkedId == addReminderBinding.rbWatering.getId()) {
-            addReminderBinding.edtFrequency.setVisibility(View.VISIBLE);
             addReminderBinding.edtMoistureLevel.setVisibility(View.VISIBLE);
             addReminderBinding.edtFrequency.setHint("Please enter Frequency between 1 - 30 in days");
         } else if (checkedId == addReminderBinding.rbFertilize.getId()) {
-            addReminderBinding.edtFrequency.setVisibility(View.VISIBLE);
             addReminderBinding.edtNutritionRequired.setVisibility(View.VISIBLE);
             addReminderBinding.edtFrequency.setHint("Please enter Frequency between 1 - 90 in days");
         } else if (checkedId == addReminderBinding.rbSunlight.getId()) {
-            addReminderBinding.edtFrequency.setVisibility(View.VISIBLE);
             addReminderBinding.edtTemperature.setVisibility(View.VISIBLE);
             addReminderBinding.edtSunlightRequired.setVisibility(View.VISIBLE);
             addReminderBinding.edtFrequency.setHint("Please enter Frequency between 1 - 30 in days");
         } else if (checkedId == addReminderBinding.rbChangeSoil.getId()) {
-            addReminderBinding.edtFrequency.setVisibility(View.VISIBLE);
             addReminderBinding.edtFrequency.setHint("Please enter Frequency between 1 - 365 in days");
         }
     }
@@ -135,18 +134,22 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
                 reminder.setReminderTypeId(Constants.REMINDER_TYPE_WATER);
                 reminder.setFrequency(addReminderBinding.edtFrequency.getText().toString());
                 reminder.setMoistureLevel(addReminderBinding.edtMoistureLevel.getText().toString());
+                reminder.setReminderTime(addReminderBinding.edtTime.getText().toString());
             } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbFertilize.getId()) {
                 reminder.setReminderTypeId(Constants.REMINDER_TYPE_FERTILIZE);
                 reminder.setFrequency(addReminderBinding.edtFrequency.getText().toString());
                 reminder.setNutrientRequired(addReminderBinding.edtNutritionRequired.getText().toString());
+                reminder.setReminderTime(addReminderBinding.edtTime.getText().toString());
             } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbSunlight.getId()) {
                 reminder.setReminderTypeId(Constants.REMINDER_TYPE_SUNLIGHT);
                 reminder.setFrequency(addReminderBinding.edtFrequency.getText().toString());
                 reminder.setTemperatureLevel(addReminderBinding.edtTemperature.getText().toString());
                 reminder.setSunlightLevel(addReminderBinding.edtSunlightRequired.getText().toString());
+                reminder.setReminderTime(addReminderBinding.edtTime.getText().toString());
             } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbChangeSoil.getId()) {
                 reminder.setReminderTypeId(Constants.REMINDER_TYPE_CHANGE_SOIL);
                 reminder.setFrequency(addReminderBinding.edtFrequency.getText().toString());
+                reminder.setReminderTime(addReminderBinding.edtTime.getText().toString());
             }
             reminder.setDateTime(Utility.getCurrentDateTime());
 
@@ -189,7 +192,8 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
             Toast.makeText(getContext(), "Please select a reminder type", Toast.LENGTH_SHORT).show();
             return false;
         } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbWatering.getId()) {
-            if (addReminderBinding.edtFrequency.getText().toString().isEmpty() || addReminderBinding.edtMoistureLevel.getText().toString().isEmpty()) {
+            if (addReminderBinding.edtFrequency.getText().toString().isEmpty() || addReminderBinding.edtMoistureLevel.getText().toString().isEmpty()
+                    || addReminderBinding.edtTime.getText().toString().isEmpty()) {
                 Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
                 return false;
             } else if (Integer.parseInt(addReminderBinding.edtFrequency.getText().toString()) < 1 || Integer.parseInt(addReminderBinding.edtFrequency.getText().toString()) > 30) {
@@ -200,6 +204,10 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
                 Toast.makeText(getContext(), "Please enter Moisture Level between 1 - 100", Toast.LENGTH_SHORT).show();
                 addReminderBinding.edtMoistureLevel.setError("Please enter Moisture Level between 1 - 100");
                 return false;
+            } else if (!Utility.isValidTime(addReminderBinding.edtTime.getText().toString())) {
+                Toast.makeText(getContext(), "Please enter valid time in HH:MM format", Toast.LENGTH_SHORT).show();
+                addReminderBinding.edtTime.setError("Please enter valid time in HH:MM format");
+                return false;
             }
         } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbFertilize.getId()) {
             if (addReminderBinding.edtFrequency.getText().toString().isEmpty() || addReminderBinding.edtNutritionRequired.getText().toString().isEmpty()) {
@@ -208,6 +216,10 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
             } else if (Integer.parseInt(addReminderBinding.edtFrequency.getText().toString()) < 1 || Integer.parseInt(addReminderBinding.edtFrequency.getText().toString()) > 90) {
                 Toast.makeText(getContext(), "Please enter Frequency between 1 - 90", Toast.LENGTH_SHORT).show();
                 addReminderBinding.edtFrequency.setError("Please enter Frequency between 1 - 90");
+                return false;
+            } else if (!Utility.isValidTime(addReminderBinding.edtTime.getText().toString())) {
+                Toast.makeText(getContext(), "Please enter valid time in HH:MM format", Toast.LENGTH_SHORT).show();
+                addReminderBinding.edtTime.setError("Please enter valid time in HH:MM format");
                 return false;
             }
         } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbSunlight.getId()) {
@@ -226,6 +238,10 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
                 Toast.makeText(getContext(), "Please enter Sunlight Required between 1 - 24", Toast.LENGTH_SHORT).show();
                 addReminderBinding.edtSunlightRequired.setError("Please enter Sunlight Required between 1 - 24");
                 return false;
+            } else if (!Utility.isValidTime(addReminderBinding.edtTime.getText().toString())) {
+                Toast.makeText(getContext(), "Please enter valid time in HH:MM format", Toast.LENGTH_SHORT).show();
+                addReminderBinding.edtTime.setError("Please enter valid time in HH:MM format");
+                return false;
             }
         } else if (addReminderBinding.rgReminderType.getCheckedRadioButtonId() == addReminderBinding.rbChangeSoil.getId()) {
             if (addReminderBinding.edtFrequency.getText().toString().isEmpty()) {
@@ -234,6 +250,10 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
             } else if (Integer.parseInt(addReminderBinding.edtFrequency.getText().toString()) < 1 || Integer.parseInt(addReminderBinding.edtFrequency.getText().toString()) > 365) {
                 Toast.makeText(getContext(), "Please enter Frequency between 1 - 365", Toast.LENGTH_SHORT).show();
                 addReminderBinding.edtFrequency.setError("Please enter Frequency between 1 - 365");
+                return false;
+            } else if (!Utility.isValidTime(addReminderBinding.edtTime.getText().toString())) {
+                Toast.makeText(getContext(), "Please enter valid time in HH:MM format", Toast.LENGTH_SHORT).show();
+                addReminderBinding.edtTime.setError("Please enter valid time in HH:MM format");
                 return false;
             }
         }
@@ -252,6 +272,8 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         if (v.getId() == addReminderBinding.fabSaveReminder.getId()) {
             saveReminder();
+        } else if (v.getId() == addReminderBinding.edtTime.getId()) {
+            Utility.showTimePickerDialog(requireContext(), addReminderBinding.edtTime);
         }
     }
 
@@ -262,17 +284,17 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
     // ad permission to postNotification after checking if not available request live
 
     private void requestNotificationPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.ACCESS_NOTIFICATION_POLICY)) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.POST_NOTIFICATIONS)) {
             new AlertDialog.Builder(requireActivity())
                     .setTitle("Permission needed")
                     .setMessage("This permission is needed to set reminders for your plants")
                     .setPositiveButton("OK", (dialog, which) -> {
-                        ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_NOTIFICATION_POLICY}, Constants.REQUEST_CODE_NOTIFICATION_PERMISSION);
+                        ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.POST_NOTIFICATIONS}, Constants.REQUEST_CODE_NOTIFICATION_PERMISSION);
                     })
                     .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
                     .create().show();
         } else {
-            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_NOTIFICATION_POLICY}, Constants.REQUEST_CODE_NOTIFICATION_PERMISSION);
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.POST_NOTIFICATIONS}, Constants.REQUEST_CODE_NOTIFICATION_PERMISSION);
         }
     }
 }
