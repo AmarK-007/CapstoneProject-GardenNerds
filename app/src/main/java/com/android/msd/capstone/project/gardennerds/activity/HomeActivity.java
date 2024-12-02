@@ -49,6 +49,7 @@ import com.android.msd.capstone.project.gardennerds.fragments.SupportFragment;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
 import com.android.msd.capstone.project.gardennerds.utils.Constants;
+import com.android.msd.capstone.project.gardennerds.utils.DataSyncUtil;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -129,6 +130,12 @@ public class HomeActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SCHEDULE_EXACT_ALARM}, Constants.REQUEST_CODE_SCHEDULE_EXACT_ALARM);
             }
         }
+
+        // Example user data
+        String userData = "example_user_data";
+
+        // Send user data to wearable
+        DataSyncUtil.sendUserDataToWear(this, userData);
     }
 
     /**

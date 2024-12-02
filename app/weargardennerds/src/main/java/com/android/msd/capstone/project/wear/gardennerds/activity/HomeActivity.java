@@ -22,7 +22,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.wear.activity.ConfirmationActivity;
 
-import com.android.msd.capstone.project.gardennerds.utils.DataRequestUtil;
+import com.android.msd.capstone.project.wear.gardennerds.utils.DataRequestUtil;
 import com.android.msd.capstone.project.wear.gardennerds.R;
 import com.android.msd.capstone.project.wear.gardennerds.databinding.ActivityHomeBinding;
 import com.android.msd.capstone.project.wear.gardennerds.databinding.CustomDialogLayoutBinding;
