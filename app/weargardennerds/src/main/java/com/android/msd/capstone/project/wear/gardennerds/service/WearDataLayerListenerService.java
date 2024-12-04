@@ -17,6 +17,7 @@ import com.google.android.gms.wearable.DataEvent;
 import com.google.android.gms.wearable.DataEventBuffer;
 import com.google.android.gms.wearable.DataMap;
 import com.google.android.gms.wearable.DataMapItem;
+import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;
 
 public class WearDataLayerListenerService extends WearableListenerService {
@@ -39,6 +40,18 @@ public class WearDataLayerListenerService extends WearableListenerService {
                 }
             }
         }
+    }
+
+    @Override
+    public void onMessageReceived(MessageEvent messageEvent) {
+        String path = messageEvent.getPath();
+        byte[] messageBytes = messageEvent.getData();
+        String receivedMessage = new String(messageBytes);
+
+        Log.d("Wear", "Received message: " + receivedMessage + " on path: " + path);
+
+        // Handle the received message
+        // You can update the UI or perform other actions based on the message content
     }
 
     private void handleUserData(String action, String typeOfData, String userData) {

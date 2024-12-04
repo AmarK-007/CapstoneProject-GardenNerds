@@ -94,7 +94,7 @@ public class HomeActivity extends AppCompatActivity {
         if (!isLoggedIn()) {
             // Show the login dialog
             showLoginDialog();
-            DataRequestUtil.requestUserDataFromPhone(this, "login", "userName", "");
+            //DataRequestUtil.requestUserDataFromPhone(this, "login", "userName", "");
         } else {
             // User is logged in
             // Proceed with the app
