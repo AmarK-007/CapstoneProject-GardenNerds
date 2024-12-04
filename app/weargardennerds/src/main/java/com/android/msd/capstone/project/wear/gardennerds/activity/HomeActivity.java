@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -25,6 +26,7 @@ import androidx.wear.activity.ConfirmationActivity;
 import com.android.msd.capstone.project.wear.gardennerds.db.GardenDataSource;
 import com.android.msd.capstone.project.wear.gardennerds.db.PlantDataSource;
 import com.android.msd.capstone.project.wear.gardennerds.db.ReminderDataSource;
+import com.android.msd.capstone.project.wear.gardennerds.receiver.DataReceiver;
 import com.android.msd.capstone.project.wear.gardennerds.utils.DataRequestUtil;
 import com.android.msd.capstone.project.wear.gardennerds.R;
 import com.android.msd.capstone.project.wear.gardennerds.databinding.ActivityHomeBinding;
@@ -35,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding activityHomeBinding;
 
     private Dialog loginDialog;
+    DataReceiver dataReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void checkLoginStatus() {
+
+        // Register the receiver
+         dataReceiver = new DataReceiver();
+        IntentFilter filter = new IntentFilter("com.example.ACTION_SEND_DATA");
+        registerReceiver(dataReceiver, filter, Context.RECEIVER_EXPORTED);
         // Check if the user is logged in
         if (!isLoggedIn()) {
             // Show the login dialog
@@ -140,6 +148,8 @@ public class HomeActivity extends AppCompatActivity {
         if (loginDialog != null && loginDialog.isShowing()) {
             loginDialog.dismiss();
         }
+        // Unregister the receiver
+        unregisterReceiver(dataReceiver);
         super.onDestroy();
     }
 }

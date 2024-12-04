@@ -123,7 +123,8 @@ public class LoginScreenActivity extends AppCompatActivity {
                 Utility.storeUser(userDataSource.getUser(username, password), this);
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
-                // send username data to wearableDataSyncUtil.sendUserDataToWear(this, "login", "userName", username);
+                // send username data to wearable
+                 DataSyncUtil.sendUserDataToWear(this, "login", "userName", username);
                 finish();
             } else {
                 Toast.makeText(LoginScreenActivity.this, getString(R.string.msg_login_failed), Toast.LENGTH_SHORT).show();

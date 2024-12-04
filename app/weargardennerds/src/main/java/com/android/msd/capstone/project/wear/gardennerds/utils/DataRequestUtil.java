@@ -1,6 +1,7 @@
 package com.android.msd.capstone.project.wear.gardennerds.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.google.android.gms.tasks.Task;
@@ -27,5 +28,12 @@ public class DataRequestUtil {
         Task<DataItem> putDataTask = dataClient.putDataItem(putDataMapRequest.asPutDataRequest());
         putDataTask.addOnSuccessListener(dataItem -> Log.d(TAG, "Data sent successfully: " + dataItem))
                 .addOnFailureListener(e -> Log.e(TAG, "Failed to send data", e));
+
+
+//        Intent intent = new Intent("com.example.ACTION_SEND_DATA");
+//        intent.putExtra("action", action);
+//        intent.putExtra("type_of_data", typeOfData);
+//        intent.putExtra("user_data", userData);
+//        context.sendBroadcast(intent);
     }
 }

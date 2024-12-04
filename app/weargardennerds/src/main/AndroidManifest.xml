@@ -59,6 +59,13 @@
                     tools:ignore="WearableBindListener" />
             </intent-filter>
         </service>
+
+        <receiver android:name=".receiver.DataReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.example.ACTION_SEND_DATA" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

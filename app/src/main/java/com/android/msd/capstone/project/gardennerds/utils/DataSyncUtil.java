@@ -1,6 +1,7 @@
 package com.android.msd.capstone.project.gardennerds.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.google.android.gms.tasks.Tasks;
@@ -24,5 +25,11 @@ public class DataSyncUtil {
         dataClient.putDataItem(putDataMapRequest.asPutDataRequest())
                 .addOnSuccessListener(dataItem -> Log.d(TAG, "Successfully sent user data to wear" + dataItem))
                 .addOnFailureListener(e -> Log.e(TAG, "Failed to send user data to wear", e));
+
+        Intent intent = new Intent("com.example.ACTION_SEND_DATA");
+        intent.putExtra("action", action);
+        intent.putExtra("type_of_data", typeOfData);
+        intent.putExtra("user_data", userData);
+        context.sendBroadcast(intent);
     }
 }
