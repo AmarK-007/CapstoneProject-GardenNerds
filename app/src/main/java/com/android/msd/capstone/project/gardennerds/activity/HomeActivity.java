@@ -131,11 +131,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
 
-        // Example user data
-        String userData = "example_user_data";
-
-        // Send user data to wearable
-        DataSyncUtil.sendUserDataToWear(this, userData);
     }
 
     /**

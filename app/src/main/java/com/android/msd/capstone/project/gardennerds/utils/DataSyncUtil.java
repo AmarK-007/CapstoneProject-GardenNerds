@@ -13,13 +13,16 @@ public class DataSyncUtil {
     private static final String TAG = "DataSyncUtil";
     private static final String DATA_PATH = "/user_data";
 
-    public static void sendUserDataToWear(Context context, String userData) {
+    public static void sendUserDataToWear(Context context, String action, String typeOfData, String userData) {
+        Log.d(TAG, "Preparing to send data to wear: action=" + action + ", typeOfData=" + typeOfData + ", userData=" + userData);
         DataClient dataClient = Wearable.getDataClient(context);
         PutDataMapRequest putDataMapRequest = PutDataMapRequest.create(DATA_PATH);
         DataMap dataMap = putDataMapRequest.getDataMap();
+        dataMap.putString("action", action);
+        dataMap.putString("type_of_data", typeOfData);
         dataMap.putString("user_data", userData);
         dataClient.putDataItem(putDataMapRequest.asPutDataRequest())
-                .addOnSuccessListener(dataItem -> Log.d(TAG, "Successfully sent user data to wear"))
+                .addOnSuccessListener(dataItem -> Log.d(TAG, "Successfully sent user data to wear" + dataItem))
                 .addOnFailureListener(e -> Log.e(TAG, "Failed to send user data to wear", e));
     }
 }

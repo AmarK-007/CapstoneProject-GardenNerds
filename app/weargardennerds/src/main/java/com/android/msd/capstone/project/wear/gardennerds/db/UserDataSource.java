@@ -1,14 +1,13 @@
-package com.android.msd.capstone.project.gardennerds.db;
+package com.android.msd.capstone.project.wear.gardennerds.db;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import com.android.msd.capstone.project.gardennerds.models.User;
-import com.android.msd.capstone.project.gardennerds.utils.DataSyncUtil;
+
+import com.android.msd.capstone.project.wear.gardennerds.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class UserDataSource {
      */
     public UserDataSource(Context context) {
         this.context = context;
-        this.dbHelper = DBHelper.getInstance(context);
+        dbHelper = DBHelper.getInstance(context);
     }
 
     // User table name
@@ -86,7 +85,6 @@ public class UserDataSource {
         db.close();
 
         if (result != -1) {
-            sendUserDataToWear("insert", user);
             return true; // Insertion successful
         } else {
             return false; // Insertion failed
@@ -128,6 +126,21 @@ public class UserDataSource {
             return user;
         } else {
             return null;
+        }
+    }
+    //check user exists
+    public boolean checkUser(String username) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME,
+                null,
+                COLUMN_USERNAME + "=?",
+                new String[]{username},
+                null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -193,7 +206,6 @@ public class UserDataSource {
         db.close();
 
         if (result > 0) {
-            sendUserDataToWear("update", user);
         }
 
         return result;
@@ -211,7 +223,6 @@ public class UserDataSource {
                 new String[]{String.valueOf(user.getUserId())});
         db.close();
 
-        sendUserDataToWear("delete", user);
     }
 
     /**
@@ -235,24 +246,5 @@ public class UserDataSource {
         return cursorCount > 0;
     }
 
-    /**
-     * Send user data to wearable
-     */
-    private void sendUserDataToWear(String operation, User user) {
-        StringBuilder userData = new StringBuilder();
-        userData.append("Operation: ").append(operation).append(", ")
-                .append("User: ").append(user.getUserId()).append(", ")
-                .append(user.getName()).append(", ")
-                .append(user.getEmail()).append(", ")
-                .append(user.getPassword()).append(", ")
-                .append(user.getUsername()).append(", ")
-                .append(user.getPurchaseHistory()).append(", ")
-                .append(user.getShippingAddress1()).append(", ")
-                .append(user.getShippingAddress2()).append(", ")
-                .append(user.getCity()).append(", ")
-                .append(user.getProvince()).append(", ")
-                .append(user.getPincode()).append("\n");
 
-        DataSyncUtil.sendUserDataToWear(context, operation, TABLE_NAME, userData.toString());
-    }
 }

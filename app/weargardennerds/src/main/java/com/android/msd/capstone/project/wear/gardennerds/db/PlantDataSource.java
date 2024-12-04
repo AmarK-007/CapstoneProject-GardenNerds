@@ -1,4 +1,4 @@
-package com.android.msd.capstone.project.gardennerds.db;
+package com.android.msd.capstone.project.wear.gardennerds.db;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -7,10 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.android.msd.capstone.project.gardennerds.models.Plant;
-import com.android.msd.capstone.project.gardennerds.models.Reminder;
-import com.android.msd.capstone.project.gardennerds.utils.DataSyncUtil;
-
+import com.android.msd.capstone.project.wear.gardennerds.models.Plant;
+import com.android.msd.capstone.project.wear.gardennerds.models.Reminder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +17,6 @@ import java.util.List;
  */
 public class PlantDataSource {
     private DBHelper dbHelper;
-    private Context context;
 
     /**
      * Constructor for PlantDataSource
@@ -28,9 +25,7 @@ public class PlantDataSource {
      * @return
      */
     public PlantDataSource(Context context) {
-
-        this.context = context;
-        this.dbHelper = DBHelper.getInstance(context);
+        dbHelper = DBHelper.getInstance(context);
     }
 
     // Plant table name
@@ -80,12 +75,12 @@ public class PlantDataSource {
         values.put(COLUMN_TEMPERATURE_LEVEL, plant.getTemperatureLevel());
         values.put(COLUMN_WATERING_INTERVAL, plant.getWateringInterval());
         values.put(COLUMN_NUTRIENT_REQUIRED, plant.getNutrientRequired());
-        values.put(COLUMN_IMAGE_PATH, plant.getImageUri());
+        values.put(COLUMN_IMAGE_PATH,plant.getImageUri());
 
         long plantId = db.insert(TABLE_NAME, null, values);
 
-        if (plantId != -1) {
-            sendPlantDataToWear("insert", plant);
+        if (plantId == -1) {
+            return false;
         }
 
         // Insert reminders
@@ -106,10 +101,8 @@ public class PlantDataSource {
 
             long reminderId = db.insert(ReminderDataSource.TABLE_NAME, null, reminderValues);
             reminder.setReminderId((int) reminderId);
-            if (reminderId != -1) {
-                sendReminderDataToWear("insert", reminder);
-            }
-            Log.d("Reminderid", String.valueOf(reminderId + " also plant id " + plant.getPlantId()));
+            Log.d("Reminderid", String.valueOf(reminderId + " also plant id " +plant.getPlantId()));
+            reminder.setReminderId((int) reminderId);
         }
         db.close();
 
@@ -284,15 +277,8 @@ public class PlantDataSource {
         values.put(COLUMN_NUTRIENT_REQUIRED, plant.getNutrientRequired());
         values.put(COLUMN_IMAGE_PATH, plant.getImageUri());
 
-        int rowsAffected = db.update(TABLE_NAME, values, COLUMN_PLANT_ID + " = ?",
+        return db.update(TABLE_NAME, values, COLUMN_PLANT_ID + " = ?",
                 new String[]{String.valueOf(plant.getPlantId())});
-        db.close();
-
-        if (rowsAffected > 0) {
-            sendPlantDataToWear("update", plant);
-        }
-
-        return rowsAffected;
     }
 
     /**
@@ -303,60 +289,8 @@ public class PlantDataSource {
      */
     public void deletePlant(Plant plant) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int rowsAffected = db.delete(TABLE_NAME, COLUMN_PLANT_ID + " = ?",
+        db.delete(TABLE_NAME, COLUMN_PLANT_ID + " = ?",
                 new String[]{String.valueOf(plant.getPlantId())});
         db.close();
-
-        if (rowsAffected > 0) {
-            sendPlantDataToWear("delete", plant);
-        }
-    }
-
-    /**
-     * sendPlantDataToWear method
-     *
-     * @return
-     */
-    private void sendPlantDataToWear(String operation, Plant plant) {
-        StringBuilder data = new StringBuilder();
-
-        data.append("Operation: ").append(operation).append(", ")
-                .append("Plant: ").append(plant.getPlantId()).append(", ")
-                .append(plant.getPlantName()).append(", ")
-                .append(plant.getPlantType()).append(", ")
-                .append(plant.getSunlightLevel()).append(", ")
-                .append(plant.getMoistureLevel()).append(", ")
-                .append(plant.getTemperatureLevel()).append(", ")
-                .append(plant.getWateringInterval()).append(", ")
-                .append(plant.getNutrientRequired()).append(", ")
-                .append(plant.getImageUri()).append(", ")
-                .append(plant.getGardenId()).append("\n");
-
-        DataSyncUtil.sendUserDataToWear(context, operation, TABLE_NAME, data.toString());
-    }
-
-    /**
-     * sendReminderDataToWear method
-     *
-     * @param reminder
-     * @return
-     */
-    private void sendReminderDataToWear(String operation, Reminder reminder) {
-        StringBuilder data = new StringBuilder();
-
-        data.append("Operation: ").append(operation).append(", ")
-                .append("Reminder: ").append(reminder.getReminderId()).append(", ")
-                .append(reminder.getMessage()).append(", ")
-                .append(reminder.getDateTime()).append(", ")
-                .append(reminder.getPlantId()).append(", ")
-                .append(reminder.getReminderTypeId()).append(", ")
-                .append(reminder.getFrequency()).append(", ")
-                .append(reminder.getMoistureLevel()).append(", ")
-                .append(reminder.getTemperatureLevel()).append(", ")
-                .append(reminder.getSunlightLevel()).append(", ")
-                .append(reminder.getNutrientRequired()).append(", ")
-                .append(reminder.getReminderTime()).append("\n");
-
-        DataSyncUtil.sendUserDataToWear(context, operation, TABLE_NAME, data.toString());
     }
 }

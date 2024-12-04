@@ -19,6 +19,7 @@ public class Reminder implements Parcelable {
     private String temperatureLevel;
     private String sunlightLevel;
     private String nutrientRequired;
+    private String reminderTime;
 
     /**
      * Constructor for Reminder
@@ -108,6 +109,14 @@ public class Reminder implements Parcelable {
         this.nutrientRequired = nutrientRequired;
     }
 
+    public String getReminderTime() {
+        return reminderTime;
+    }
+
+    public void setReminderTime(String reminderTime) {
+        this.reminderTime = reminderTime;
+    }
+
     /**
      * Constructor for Reminder
      */
@@ -122,6 +131,7 @@ public class Reminder implements Parcelable {
         temperatureLevel = in.readString();
         sunlightLevel = in.readString();
         nutrientRequired = in.readString();
+        reminderTime = in.readString();
     }
 
     /**
@@ -162,5 +172,6 @@ public class Reminder implements Parcelable {
         parcel.writeString(temperatureLevel);
         parcel.writeString(sunlightLevel);
         parcel.writeString(nutrientRequired);
+        parcel.writeString(reminderTime);
     }
 }

@@ -16,13 +16,16 @@ public class DataRequestUtil {
     private static final String TAG = "DataRequestUtil";
     private static final String DATA_PATH = "/user_data";
 
-    public static void requestUserDataFromPhone(Context context) {
-        PutDataMapRequest putDataMapRequest = PutDataMapRequest.create("/user_data");
+    public static void requestUserDataFromPhone(Context context, String action, String typeOfData, String userData) {
+        DataClient dataClient = Wearable.getDataClient(context);
+        PutDataMapRequest putDataMapRequest = PutDataMapRequest.create(DATA_PATH);
         DataMap dataMap = putDataMapRequest.getDataMap();
-        dataMap.putString("user_data", "example_user_data"); // Replace with actual user data
+        dataMap.putString("action", action);
+        dataMap.putString("type_of_data", typeOfData);
+        dataMap.putString("user_data", userData);
 
-        Task<DataItem> putDataTask = Wearable.getDataClient(context).putDataItem(putDataMapRequest.asPutDataRequest());
-        putDataTask.addOnSuccessListener(dataItem -> Log.d("DataRequestUtil", "Data sent successfully: " + dataItem))
-                .addOnFailureListener(e -> Log.e("DataRequestUtil", "Failed to send data", e));
+        Task<DataItem> putDataTask = dataClient.putDataItem(putDataMapRequest.asPutDataRequest());
+        putDataTask.addOnSuccessListener(dataItem -> Log.d(TAG, "Data sent successfully: " + dataItem))
+                .addOnFailureListener(e -> Log.e(TAG, "Failed to send data", e));
     }
 }

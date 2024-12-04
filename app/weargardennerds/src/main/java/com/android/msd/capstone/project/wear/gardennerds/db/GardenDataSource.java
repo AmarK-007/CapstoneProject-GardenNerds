@@ -1,4 +1,4 @@
-package com.android.msd.capstone.project.gardennerds.db;
+package com.android.msd.capstone.project.wear.gardennerds.db;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -6,8 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.msd.capstone.project.gardennerds.models.Garden;
-import com.android.msd.capstone.project.gardennerds.utils.DataSyncUtil;
+
+import com.android.msd.capstone.project.wear.gardennerds.models.Garden;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class GardenDataSource {
     private DBHelper dbHelper;
-    private Context context;
 
     /**
      * Constructor for GardenDataSource
@@ -26,8 +25,7 @@ public class GardenDataSource {
      * @return
      */
     public GardenDataSource(Context context) {
-        this.context = context;
-        this.dbHelper = DBHelper.getInstance(context);
+        dbHelper = DBHelper.getInstance(context);
     }
 
     // Garden table name
@@ -84,9 +82,6 @@ public class GardenDataSource {
         long result = db.insert(TABLE_NAME, null, values);
         db.close();
 
-        if (result != -1) {
-            sendUserDataToWear("insert", garden);
-        }
         return result != -1; // Return true if insertion was successful, false otherwise
     }
 
@@ -181,15 +176,8 @@ public class GardenDataSource {
         values.put(COLUMN_IMAGE_URI, garden.getImageUri());
         values.put(COLUMN_USER_ID, 1);
 
-        int rowsAffected = db.update(TABLE_NAME, values, COLUMN_GARDEN_ID + " = ?",
+        return db.update(TABLE_NAME, values, COLUMN_GARDEN_ID + " = ?",
                 new String[]{String.valueOf(garden.getGardenId())});
-        db.close();
-
-        if (rowsAffected > 0) {
-            sendUserDataToWear("update", garden);
-        }
-
-        return rowsAffected;
     }
 
     /**
@@ -200,35 +188,8 @@ public class GardenDataSource {
      */
     public void deleteGarden(Garden garden) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int rowsAffected = db.delete(TABLE_NAME, COLUMN_GARDEN_ID + " = ?",
+        db.delete(TABLE_NAME, COLUMN_GARDEN_ID + " = ?",
                 new String[]{String.valueOf(garden.getGardenId())});
         db.close();
-
-        if (rowsAffected > 0) {
-            sendUserDataToWear("delete", garden);
-        }
-    }
-
-    /**
-     * sendUserDataToWear method
-     *
-     * @return
-     */
-    private void sendUserDataToWear(String operation, Garden garden) {
-        StringBuilder data = new StringBuilder();
-
-        data.append("Operation: ").append(operation).append(", ")
-                .append("Garden: ").append(garden.getGardenId()).append(", ")
-                .append(garden.getName()).append(", ")
-                .append(garden.getDescription()).append(", ")
-                .append(garden.getGardenArea()).append(", ")
-                .append(garden.getGardenLatitude()).append(", ")
-                .append(garden.getGardenLongitude()).append(", ")
-                .append(garden.getSunlightPreference()).append(", ")
-                .append(garden.getWateringFrequency()).append(", ")
-                .append(garden.getImageUri()).append(", ")
-                .append(garden.getUserId()).append("\n");
-
-        DataSyncUtil.sendUserDataToWear(context, operation, TABLE_NAME, data.toString());
     }
 }

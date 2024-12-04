@@ -1,4 +1,4 @@
-package com.android.msd.capstone.project.gardennerds.db;
+package com.android.msd.capstone.project.wear.gardennerds.db;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -6,8 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.msd.capstone.project.gardennerds.models.Reminder;
-import com.android.msd.capstone.project.gardennerds.utils.DataSyncUtil;
+
+import com.android.msd.capstone.project.wear.gardennerds.models.Reminder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class ReminderDataSource {
     private DBHelper dbHelper;
-    private Context context;
 
     /**
      * Constructor for ReminderDataSource
@@ -26,9 +25,7 @@ public class ReminderDataSource {
      * @return
      */
     public ReminderDataSource(Context context) {
-
-        this.context = context;
-        this.dbHelper = DBHelper.getInstance(context);
+        dbHelper = DBHelper.getInstance(context);
     }
 
     // Reminder table name
@@ -87,9 +84,6 @@ public class ReminderDataSource {
         long result = db.insert(TABLE_NAME, null, values);
         db.close();
 
-        if (result != -1) {
-            sendReminderDataToWear("insert", reminder);
-        }
         return result;
     }
 
@@ -225,15 +219,8 @@ public class ReminderDataSource {
         values.put(COLUMN_NUTRIENT_REQUIRED, reminder.getNutrientRequired());
         values.put(COLUMN_REMINDER_TIME, reminder.getReminderTime());
 
-
-        int rowsAffected = db.update(TABLE_NAME, values, COLUMN_REMINDER_ID + " = ?",
+        return db.update(TABLE_NAME, values, COLUMN_REMINDER_ID + " = ?",
                 new String[]{String.valueOf(reminder.getReminderId())});
-        db.close();
-
-        if (rowsAffected > 0) {
-            sendReminderDataToWear("update", reminder);
-        }
-        return rowsAffected;
     }
 
     /**
@@ -244,66 +231,14 @@ public class ReminderDataSource {
      */
     public void deleteReminder(Reminder reminder) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int rowsAffected = db.delete(TABLE_NAME, COLUMN_REMINDER_ID + " = ?",
+        db.delete(TABLE_NAME, COLUMN_REMINDER_ID + " = ?",
                 new String[]{String.valueOf(reminder.getReminderId())});
         db.close();
-
-        if (rowsAffected > 0) {
-            sendReminderDataToWear("delete", reminder);
-        }
     }
 
-    @SuppressLint("Range")
     public void deleteRemindersByPlantId(int plantId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, null, COLUMN_PLANT_ID + " = ?", new String[]{String.valueOf(plantId)}, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Reminder reminder = new Reminder();
-                reminder.setReminderId(cursor.getInt(cursor.getColumnIndex(COLUMN_REMINDER_ID)));
-                reminder.setMessage(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE)));
-                reminder.setDateTime(cursor.getString(cursor.getColumnIndex(COLUMN_DATE_TIME)));
-                reminder.setPlantId(cursor.getInt(cursor.getColumnIndex(COLUMN_PLANT_ID)));
-                reminder.setReminderTypeId(cursor.getInt(cursor.getColumnIndex(COLUMN_REMINDER_TYPE_ID)));
-                reminder.setFrequency(cursor.getString(cursor.getColumnIndex(COLUMN_FREQUENCY)));
-                reminder.setMoistureLevel(cursor.getString(cursor.getColumnIndex(COLUMN_MOISTURE_LEVEL)));
-                reminder.setTemperatureLevel(cursor.getString(cursor.getColumnIndex(COLUMN_TEMPERATURE_LEVEL)));
-                reminder.setSunlightLevel(cursor.getString(cursor.getColumnIndex(COLUMN_SUNLIGHT_LEVEL)));
-                reminder.setNutrientRequired(cursor.getString(cursor.getColumnIndex(COLUMN_NUTRIENT_REQUIRED)));
-                reminder.setReminderTime(cursor.getString(cursor.getColumnIndex(COLUMN_REMINDER_TIME)));
-
-                sendReminderDataToWear("delete", reminder);
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
         db.delete(TABLE_NAME, COLUMN_PLANT_ID + " = ?", new String[]{String.valueOf(plantId)});
         db.close();
-    }
-
-    /**
-     * sendReminderDataToWear method
-     *
-     * @param reminder
-     * @return
-     */
-    private void sendReminderDataToWear(String operation, Reminder reminder) {
-        StringBuilder data = new StringBuilder();
-
-        data.append("Operation: ").append(operation).append(", ")
-                .append("Reminder: ").append(reminder.getReminderId()).append(", ")
-                .append(reminder.getMessage()).append(", ")
-                .append(reminder.getDateTime()).append(", ")
-                .append(reminder.getPlantId()).append(", ")
-                .append(reminder.getReminderTypeId()).append(", ")
-                .append(reminder.getFrequency()).append(", ")
-                .append(reminder.getMoistureLevel()).append(", ")
-                .append(reminder.getTemperatureLevel()).append(", ")
-                .append(reminder.getSunlightLevel()).append(", ")
-                .append(reminder.getNutrientRequired()).append(", ")
-                .append(reminder.getReminderTime()).append("\n");
-
-        DataSyncUtil.sendUserDataToWear(context, operation, TABLE_NAME, data.toString());
     }
 }

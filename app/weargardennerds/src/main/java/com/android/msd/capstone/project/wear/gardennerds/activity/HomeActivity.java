@@ -22,6 +22,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.wear.activity.ConfirmationActivity;
 
+import com.android.msd.capstone.project.wear.gardennerds.db.GardenDataSource;
+import com.android.msd.capstone.project.wear.gardennerds.db.PlantDataSource;
+import com.android.msd.capstone.project.wear.gardennerds.db.ReminderDataSource;
 import com.android.msd.capstone.project.wear.gardennerds.utils.DataRequestUtil;
 import com.android.msd.capstone.project.wear.gardennerds.R;
 import com.android.msd.capstone.project.wear.gardennerds.databinding.ActivityHomeBinding;
@@ -30,6 +33,8 @@ import com.android.msd.capstone.project.wear.gardennerds.databinding.CustomDialo
 public class HomeActivity extends AppCompatActivity {
 
     private ActivityHomeBinding activityHomeBinding;
+
+    private Dialog loginDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(view);
 
         // Request user data from phone
-        DataRequestUtil.requestUserDataFromPhone(this);
+       //requestUserDataFromPhone();
 
         checkLoginStatus();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -48,6 +53,18 @@ public class HomeActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    private void requestUserDataFromPhone() {
+        // Request user data from phone
+        DataRequestUtil.requestUserDataFromPhone(this, "login", "userName", "");
+        // Request garden data from phone
+        DataRequestUtil.requestUserDataFromPhone(this, "request", GardenDataSource.TABLE_NAME, "");
+        // Request plant data from phone
+        DataRequestUtil.requestUserDataFromPhone(this, "request", PlantDataSource.TABLE_NAME, "");
+        // Request reminder data from phone
+        DataRequestUtil.requestUserDataFromPhone(this, "request", ReminderDataSource.TABLE_NAME, "");
+
     }
 
     private boolean isLoggedIn() {
@@ -69,6 +86,7 @@ public class HomeActivity extends AppCompatActivity {
         if (!isLoggedIn()) {
             // Show the login dialog
             showLoginDialog();
+            DataRequestUtil.requestUserDataFromPhone(this, "login", "userName", "");
         } else {
             // User is logged in
             // Proceed with the app
@@ -83,6 +101,7 @@ public class HomeActivity extends AppCompatActivity {
         intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE, context.getString(R.string.msg_login_using_phone));
         context.startActivity(intent);
     }
+
     // Show a failure activity
     public static void showFailureActivity(Context context) {
         Intent intent = new Intent(context, ConfirmationActivity.class);
@@ -94,14 +113,14 @@ public class HomeActivity extends AppCompatActivity {
     private void showLoginDialog() {
         CustomDialogLayoutBinding dialogBinding = CustomDialogLayoutBinding.inflate(getLayoutInflater());
 
-        Dialog dialog = new WearableDialogHelper.DialogBuilder(this)
+        loginDialog = new WearableDialogHelper.DialogBuilder(this)
                 .setView(dialogBinding.getRoot())
                 .setCancelable(false)
                 .create();
         //setcolor and layoutparams
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(getColor(R.color.colorGrayLight)));
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.show();
+        loginDialog.getWindow().setBackgroundDrawable(new ColorDrawable(getColor(R.color.colorGrayLight)));
+        loginDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        loginDialog.show();
 
         dialogBinding.dialogButtonOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,5 +133,13 @@ public class HomeActivity extends AppCompatActivity {
 
     private void init() {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (loginDialog != null && loginDialog.isShowing()) {
+            loginDialog.dismiss();
+        }
+        super.onDestroy();
     }
 }
