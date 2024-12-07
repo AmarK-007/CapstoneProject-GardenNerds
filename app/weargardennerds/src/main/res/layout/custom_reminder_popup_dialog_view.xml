@@ -17,6 +17,7 @@
 
 
     <TextView
+        android:id="@+id/tvReminderTitle"
         android:text="Reminder!"
         android:gravity="center"
         android:textStyle="bold"
@@ -24,12 +25,14 @@
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/tvReminderMessage"
         android:text="Don't forget to water plantname!!!!!!!"
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="wrap_content"/>
 
     <ImageView
+        android:id="@+id/ivReminderType"
         android:src="@drawable/watering_plants"
         android:layout_gravity="center"
         android:layout_width="40pt"

@@ -40,6 +40,14 @@
 
         </activity>
         <activity
+            android:name="com.android.msd.capstone.project.wear.gardennerds.activity.WearDetailActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.msd.capstone.project.wear.gardennerds.OPEN_DETAIL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".activity.HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.Wearable.GardenNerdsApp"
@@ -70,6 +78,18 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="com.example.ACTION_SEND_DATA" />
+            </intent-filter>
+        </receiver>
+
+
+        <receiver android:name=".receiver.NotificationDismissReceiver"
+            android:enabled="true"/>
+        <receiver
+            android:name=".receiver.ReminderReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_REMINDER" />
             </intent-filter>
         </receiver>
     </application>

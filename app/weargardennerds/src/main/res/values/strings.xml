@@ -38,6 +38,10 @@
     <string name="reminders">Reminders</string>
     <string name="frequency">Frequency</string>
     <string name="type">Type</string>
+    <string name="text_reminder_type_watering">Watering</string>
+    <string name="text_reminder_type_fertilize">Fertilize</string>
+    <string name="text_reminder_type_sunlight">Sunlight</string>
+    <string name="text_reminder_type_changeSoil">Change Soil</string>
 
     <string name="msg_login_using_phone">Please log in using your phone.</string>
 
