@@ -1,4 +1,6 @@
-package com.android.msd.capstone.project.gardennerds.broadcastReceivers;
+package com.android.msd.capstone.project.wear.gardennerds.receiver;
+
+
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
@@ -15,12 +17,13 @@ import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
-import com.android.msd.capstone.project.gardennerds.R;
-import com.android.msd.capstone.project.gardennerds.activity.HomeActivity;
-import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
-import com.android.msd.capstone.project.gardennerds.models.Plant;
-import com.android.msd.capstone.project.gardennerds.models.Reminder;
-import com.android.msd.capstone.project.gardennerds.utils.Utility;
+import com.android.msd.capstone.project.wear.gardennerds.R;
+import com.android.msd.capstone.project.wear.gardennerds.activity.HomeActivity;
+import com.android.msd.capstone.project.wear.gardennerds.db.PlantDataSource;
+import com.android.msd.capstone.project.wear.gardennerds.models.Plant;
+import com.android.msd.capstone.project.wear.gardennerds.models.Reminder;
+import com.android.msd.capstone.project.wear.gardennerds.utils.Utility;
+
 
 public class ReminderReceiver extends BroadcastReceiver {
 
@@ -134,27 +137,6 @@ public class ReminderReceiver extends BroadcastReceiver {
             Intent dismissIntent = new Intent(context, NotificationDismissReceiver.class).putExtra("notificationID", notificationID);
             PendingIntent dismissPendingIntent = PendingIntent.getBroadcast(context, 0, dismissIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-
-            // In ReminderReceiver.java
-            NotificationCompat.WearableExtender wearableExtender = new NotificationCompat.WearableExtender();
-
-// Create intent with the correct action
-            Intent wearableIntent = new Intent()
-                    .setAction("com.android.msd.capstone.project.wear.gardennerds.OPEN_DETAIL")
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    .putExtra("reminder_id", reminder.getReminderId())  // Pass any needed data
-                    .putExtra("plant_id", reminder.getPlantId());
-
-// Create pending intent for wear
-            PendingIntent wearablePendingIntent = PendingIntent.getActivity(
-                    context,
-                    0,
-                    wearableIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-            );
-
-
-
             // Build the notification
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                     .setSmallIcon(R.drawable.watering_plants) // Replace with your notification icon
@@ -167,14 +149,7 @@ public class ReminderReceiver extends BroadcastReceiver {
                     .setContentIntent(pendingIntent)
                     .addAction(R.drawable.check_mark, "Dismiss", dismissPendingIntent) // Dismiss button
                     .addAction(R.drawable.search_end, "View", pendingIntent)
-//                    .addAction(R.drawable.search_end, "View Wear", wearablePendingIntent)
                     .setAutoCancel(true);
-//            .extend(new NotificationCompat.WearableExtender()
-//                    .addAction(new NotificationCompat.Action.Builder(
-//                            R.drawable.search_end,
-//                            "View",
-//                            wearablePendingIntent
-//                    ).build()));
 
             // Show the notification
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
