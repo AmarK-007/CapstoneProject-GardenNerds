@@ -48,6 +48,7 @@ import com.android.msd.capstone.project.gardennerds.fragments.ScanMeasureGardenF
 import com.android.msd.capstone.project.gardennerds.fragments.SupportFragment;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
+import com.android.msd.capstone.project.gardennerds.models.User;
 import com.android.msd.capstone.project.gardennerds.utils.Constants;
 import com.android.msd.capstone.project.gardennerds.utils.DataSyncUtil;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
@@ -504,9 +505,17 @@ public class HomeActivity extends AppCompatActivity implements MessageClient.OnM
     @Override
     public void onMessageReceived(@NonNull MessageEvent messageEvent) {
         if (messageEvent.getPath().equals(DataSyncUtil.UPDATE_DATA_PATH)) {
-            Utility.showToast(getBaseContext(),"In onMessageReceived");
+            Utility.showToast(getBaseContext(), "In onMessageReceived");
             byte[] bytes = messageEvent.getData();
             Log.v(TAG, "Message from wear Received. :::: " + Arrays.toString(bytes));
+            if (Arrays.toString(bytes).contains(DataSyncUtil.LOGIN_USER)) {
+                //read current user data
+                User user = Utility.getUser(this);
+                if (user != null) {
+                    //send user data to wear
+                    DataSyncUtil.sendUserDataToWear(this, "login", "userName", user.getUsername());
+                }
+            }
         }
     }
 }

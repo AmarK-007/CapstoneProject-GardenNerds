@@ -20,12 +20,24 @@ public class Reminder implements Parcelable {
     private String sunlightLevel;
     private String nutrientRequired;
     private String reminderTime;
+    private String plantName;
 
     /**
      * Constructor for Reminder
      */
     public Reminder() {
     }
+
+    public Reminder(String plantName, String frequency, int reminderTypeID, String reminderTime) {
+        this.plantName = plantName;
+        this.frequency = frequency;
+        reminderTypeId = reminderTypeID;
+        this.reminderTime = reminderTime;
+    }
+
+    /**
+     * Constructor for Reminder
+     */
 
 
     // Getters and Setters
@@ -117,6 +129,13 @@ public class Reminder implements Parcelable {
         this.reminderTime = reminderTime;
     }
 
+    public String getPlantName() {
+        return plantName;
+    }
+
+    public void setPlantName(String plantName) {
+        this.plantName = plantName;
+    }
     /**
      * Constructor for Reminder
      */
@@ -132,6 +151,7 @@ public class Reminder implements Parcelable {
         sunlightLevel = in.readString();
         nutrientRequired = in.readString();
         reminderTime = in.readString();
+        plantName = in.readString();
     }
 
     /**
@@ -173,5 +193,6 @@ public class Reminder implements Parcelable {
         parcel.writeString(sunlightLevel);
         parcel.writeString(nutrientRequired);
         parcel.writeString(reminderTime);
+        parcel.writeString(plantName);
     }
 }

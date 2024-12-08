@@ -21,6 +21,7 @@ import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.Wearable;
 
 import java.util.Set;
+
 import com.android.msd.capstone.project.wear.gardennerds.receiver.ReminderReceiver;
 
 import java.util.Calendar;
@@ -41,16 +42,13 @@ public class Utility {
 //        editor.commit();
 //
 //    }
-
-
     public static void showToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
     public static boolean isLoggedIn(Context context) {
         // Check if the user is logged in
-        SharedPreferences sharedPreferences = context.getSharedPreferences("Login_Username", Context.MODE_PRIVATE);
-        String username = sharedPreferences.getString("userName", null);
+        String username = DataRequestUtil.readUserDataFromPreference(context);
 
         if (username == null) {
             // User is not logged in, show a popup dialog
@@ -60,6 +58,7 @@ public class Utility {
             return true;
         }
     }
+
 
     public static String getReminderTypeString(Context context, int reminderTypeId) {
         switch (reminderTypeId) {

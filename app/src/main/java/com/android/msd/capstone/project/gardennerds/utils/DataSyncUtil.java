@@ -1,25 +1,14 @@
 package com.android.msd.capstone.project.gardennerds.utils;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 import com.google.android.gms.wearable.CapabilityClient;
 import com.google.android.gms.wearable.CapabilityInfo;
-import com.google.android.gms.wearable.DataClient;
-import com.google.android.gms.wearable.DataMap;
-import com.google.android.gms.wearable.MessageClient;
 import com.google.android.gms.wearable.Node;
-import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.Wearable;
 
-import java.util.List;
 import java.util.Set;
 
 public class DataSyncUtil {
@@ -36,8 +25,10 @@ public class DataSyncUtil {
     public static final String DB_DATA_REMINDER = "db_data_reminder";
 
 
-   public static void sendUserDataToWear(Context context, String action, String typeOfData, String userData) {
+    public static void sendUserDataToWear(Context context, String action, String typeOfData, String userData) {
         Log.d(TAG, "Preparing to send data to wear: action=" + action + ", typeOfData=" + typeOfData + ", userData=" + userData);
+        findCapabilityClient(context, action, typeOfData, userData);
+
        /* DataClient dataClient = Wearable.getDataClient(context);
         PutDataMapRequest putDataMapRequest = PutDataMapRequest.create("");
         DataMap dataMap = putDataMapRequest.getDataMap();
@@ -48,7 +39,8 @@ public class DataSyncUtil {
                 .addOnSuccessListener(dataItem -> Log.d(TAG, "Successfully sent user data to wear" + dataItem))
                 .addOnFailureListener(e -> Log.e(TAG, "Failed to send user data to wear", e));*/
 
-           }
+
+    }
 /*
     public static void sendMessageToWear(Context context, String wearDeviceID, String path, String message) {
         // The path is used to route the message on the Wear OS side
@@ -72,20 +64,20 @@ public class DataSyncUtil {
 
 
     // MessageClient Implementation
-    public static void findCapabilityClient(Activity activity) {
-        Wearable.getCapabilityClient(activity)
+    public static void findCapabilityClient(Context context, String action, String typeOfData, String userData) {
+        Wearable.getCapabilityClient(context)
                 .getCapability(DATA_CAPABILITY_NAME, CapabilityClient.FILTER_REACHABLE)
                 .addOnSuccessListener(capabilityInfo -> {
                     if (capabilityInfo != null) {
                         Log.d("CapabilityClient", "Capability found: " + capabilityInfo.getName());
-                        findNodeForGraphGeneration(activity, capabilityInfo);
+                        findNodeForDataTransfer(context, capabilityInfo, action, typeOfData, userData);
                     }
                 }).addOnFailureListener(e -> {
-                    Utility.showToast(activity, "Failed to get capabilities");
+                    Utility.showToast(context, "Failed to get capabilities");
                 });
     }
 
-    private static void findNodeForGraphGeneration(Activity activity, CapabilityInfo capabilityInfo) {
+    private static void findNodeForDataTransfer(Context context, CapabilityInfo capabilityInfo, String action, String typeOfData, String userData) {
         String graphNode = null;
         Set<Node> connectedNodes = capabilityInfo.getNodes();
         Log.d("NodeDiscovery", "Connected nodes: " + connectedNodes.size());
@@ -94,30 +86,30 @@ public class DataSyncUtil {
         }
         graphNode = pickBestNodeId(connectedNodes);
         if (graphNode == null) {
-            Utility.showToast(activity, "No node found for graph generation");
+            Utility.showToast(context, "No node found for data transfer");
         } else {
             try {
-                Utility.showToast(activity, "Sending data to the nodeID: " + graphNode);
-                byte[] dataBytes = LOGIN_USER.toString().getBytes();
-                sendDataToPhone(activity, graphNode, dataBytes);
+                Utility.showToast(context, "Sending data to the nodeID: " + graphNode);
+                byte[] dataBytes = loadUserData(action, typeOfData, userData).getBytes();
+                sendDataToPhone(context, graphNode, dataBytes);
             } catch (Exception e) {
                 e.printStackTrace();
-                Utility.showToast(activity, "Failed to send data to the node");
+                Utility.showToast(context, "Failed to send data to the node");
             }
         }
     }
 
-    private static void sendDataToPhone(Activity activity, String graphNodeId, byte[] dataToSend) {
+    private static void sendDataToPhone(Context context, String graphNodeId, byte[] dataToSend) {
         if (graphNodeId != null) {
 
-            Task<Integer> sendTask = Wearable.getMessageClient(activity).sendMessage(graphNodeId, UPDATE_DATA_PATH, dataToSend);
+            Task<Integer> sendTask = Wearable.getMessageClient(context).sendMessage(graphNodeId, UPDATE_DATA_PATH, dataToSend);
             sendTask.addOnSuccessListener(statusInfo -> {
-                Utility.showToast(activity, "Data sent successfully");
+                Utility.showToast(context, "Data sent successfully");
             }).addOnFailureListener(e -> {
-                Utility.showToast(activity, "Failed to send data");
+                Utility.showToast(context, "Failed to send data");
             });
         } else {
-            Utility.showToast(activity, "No node found for graph generation");
+            Utility.showToast(context, "No node found for data transfer");
         }
     }
 
@@ -131,6 +123,16 @@ public class DataSyncUtil {
             bestNodeId = node.getId();
         }
         return bestNodeId;
+    }
+
+    private static String loadUserData(String action, String typeOfData, String userData) {
+        // Load user data from the database based on the action
+        if (action.equals("login") || action.equals("insert") || action.equals("update") || action.equals("delete")) {
+            return action + " :~:" + typeOfData + " :~: " + userData;
+        } else {
+            Log.w(TAG, "Unknown action: " + action);
+        }
+        return null;
     }
 
 }
