@@ -1,7 +1,6 @@
 package com.android.msd.capstone.project.wear.gardennerds.receiver;
 
 
-
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -24,7 +23,9 @@ import com.android.msd.capstone.project.wear.gardennerds.models.Plant;
 import com.android.msd.capstone.project.wear.gardennerds.models.Reminder;
 import com.android.msd.capstone.project.wear.gardennerds.utils.Utility;
 
-
+/**
+ * BroadcastReceiver for handling plant reminder alarms.
+ */
 public class ReminderReceiver extends BroadcastReceiver {
 
     private static final String CHANNEL_ID = "PlantWateringReminder";
@@ -33,13 +34,17 @@ public class ReminderReceiver extends BroadcastReceiver {
     private int largeIcon;
     private String notificationText;
 
+
+    /**
+     * Receives and handles the alarm broadcast.
+     */
     @SuppressLint({"NotificationPermission", "UnsafeProtectedBroadcastReceiver"})
     @Override
     public void onReceive(Context context, Intent intent) {
 
-
-
+// Create the notification channel (for Android Oreo and above)
         createNotificationChannel(context);
+        // Get the reminder data from the intent
         Reminder reminder = intent.getParcelableExtra("ReminderInstance");
         if (reminder != null && reminder.getReminderId() != -1) {
             // Handle the alarm (e.g., show a toast or send a notification)
@@ -53,6 +58,8 @@ public class ReminderReceiver extends BroadcastReceiver {
              * */
             String reminderTypeString = Utility.getReminderTypeString(context, reminder.getReminderTypeId());
             Log.d("TAG", "Reminder receiver " + reminderTypeString);
+
+            // Get plant details from the database
             PlantDataSource plantDataSource = new PlantDataSource(context);
             Plant plant = plantDataSource.getPlant(reminder.getPlantId());
 
@@ -66,6 +73,7 @@ public class ReminderReceiver extends BroadcastReceiver {
             notificationIntent.putExtra("ReminderInstance", reminder);
             notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
+            // Set notification content based on reminder type and plant details
             if (reminderTypeString != null)
                 if (reminder.getPlantId() != 0) {
                     switch (reminderTypeString) {
@@ -129,11 +137,15 @@ public class ReminderReceiver extends BroadcastReceiver {
                     }
                 }
 
+            // Create a PendingIntent to launch the HomeActivity when the notification is clicked
             PendingIntent pendingIntent = PendingIntent.getActivity(
                     context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
             );
+
+            // Generate a unique notification ID
             int notificationID = generateUniqueNotificationId(reminder.getPlantId(), reminderTypeString);
 
+            // Create a PendingIntent for dismissing the notification
             Intent dismissIntent = new Intent(context, NotificationDismissReceiver.class).putExtra("notificationID", notificationID);
             PendingIntent dismissPendingIntent = PendingIntent.getBroadcast(context, 0, dismissIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 

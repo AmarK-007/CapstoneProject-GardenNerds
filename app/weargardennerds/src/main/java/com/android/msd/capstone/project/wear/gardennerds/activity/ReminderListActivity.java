@@ -32,14 +32,18 @@ public class ReminderListActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        // Initialize and set up the RecyclerView
         setRecyclerView();
 
 
     }
-
+    /**
+     * Sets up the RecyclerView with reminder data and adapter.
+     */
     public void setRecyclerView(){
+        // Create a list of reminder items
         ArrayList<Reminders> remindersArrayList = new ArrayList<>();
+        // Set the LayoutManager and Adapter for the RecyclerView
         remindersArrayList.add(new Reminders("Jade","2","Watering"));
         remindersArrayList.add(new Reminders("Rose","1","Fertilize"));
         remindersArrayList.add(new Reminders("Basil","3","Sun Light"));
