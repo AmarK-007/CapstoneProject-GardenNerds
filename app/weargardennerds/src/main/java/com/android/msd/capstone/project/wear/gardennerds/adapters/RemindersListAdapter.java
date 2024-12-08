@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.msd.capstone.project.wear.gardennerds.databinding.CustomReminderListItemBinding;
 import com.android.msd.capstone.project.wear.gardennerds.models.Reminder;
-import com.android.msd.capstone.project.wear.gardennerds.models.tempModels.Reminders;
 import com.android.msd.capstone.project.wear.gardennerds.utils.Utility;
 
 import java.util.ArrayList;
