@@ -10,12 +10,15 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.wearable.view.WearableDialogHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -31,13 +34,24 @@ import com.android.msd.capstone.project.wear.gardennerds.utils.DataRequestUtil;
 import com.android.msd.capstone.project.wear.gardennerds.R;
 import com.android.msd.capstone.project.wear.gardennerds.databinding.ActivityHomeBinding;
 import com.android.msd.capstone.project.wear.gardennerds.databinding.CustomDialogLayoutBinding;
+import com.android.msd.capstone.project.wear.gardennerds.utils.Utility;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.wearable.CapabilityClient;
+import com.google.android.gms.wearable.CapabilityInfo;
+import com.google.android.gms.wearable.MessageClient;
+import com.google.android.gms.wearable.MessageEvent;
+import com.google.android.gms.wearable.Node;
+import com.google.android.gms.wearable.Wearable;
 
-public class HomeActivity extends AppCompatActivity {
+import java.util.Arrays;
+import java.util.Set;
 
+public class HomeActivity extends AppCompatActivity implements MessageClient.OnMessageReceivedListener{
+
+    private static final String TAG = HomeActivity.class.getSimpleName();
     private ActivityHomeBinding activityHomeBinding;
 
     private Dialog loginDialog;
-    DataReceiver dataReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +61,8 @@ public class HomeActivity extends AppCompatActivity {
         View view = activityHomeBinding.getRoot();
         setContentView(view);
 
-        // Request user data from phone
-       //requestUserDataFromPhone();
+        init();
 
-        checkLoginStatus();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -58,47 +70,70 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    private void requestUserDataFromPhone() {
-        // Request user data from phone
-        DataRequestUtil.requestUserDataFromPhone(this, "login", "userName", "");
-        // Request garden data from phone
-        DataRequestUtil.requestUserDataFromPhone(this, "request", GardenDataSource.TABLE_NAME, "");
-        // Request plant data from phone
-        DataRequestUtil.requestUserDataFromPhone(this, "request", PlantDataSource.TABLE_NAME, "");
-        // Request reminder data from phone
-        DataRequestUtil.requestUserDataFromPhone(this, "request", ReminderDataSource.TABLE_NAME, "");
-
+    private void init() {
+        Wearable.getMessageClient(this).addListener(this);
+        checkLoginStatus();
     }
 
-    private boolean isLoggedIn() {
-        // Check if the user is logged in
-        SharedPreferences sharedPreferences = getSharedPreferences("Login_Username", Context.MODE_PRIVATE);
-        String username = sharedPreferences.getString("userName", null);
-
-        if (username == null) {
-            // User is not logged in, show a popup dialog
-            return false;
-        } else {
-            // User is logged in, proceed with the main activity
-            return true;
+    @Override
+    protected void onDestroy() {
+        if (loginDialog != null && loginDialog.isShowing()) {
+            loginDialog.dismiss();
         }
+        // Unregister the receiver
+        super.onDestroy();
+    }
+
+    @Override
+    public void onMessageReceived(@NonNull MessageEvent messageEvent) {
+        if (messageEvent.getPath().equals(DataRequestUtil.UPDATE_DATA_PATH)) {
+            Utility.showToast(getBaseContext(),"In onMessageReceived");
+            byte[] bytes = messageEvent.getData();
+            Log.v(TAG, "Message from Phone Recieved. :::: " + Arrays.toString(bytes));
+            if(bytes != null) {
+                String data = new String(bytes);
+                if(!data.equals(DataRequestUtil.LOGIN_USER.toString())) {
+                    showSuccessActivity(this);
+                } else {
+                    showFailureActivity(this);
+                }
+            }
+
+        }
+    }
+
+    private void requestUserDataFromPhone() {
+        DataRequestUtil.findCapabilityClient(this);
     }
 
     private void checkLoginStatus() {
 
-        // Register the receiver
-         dataReceiver = new DataReceiver();
-        IntentFilter filter = new IntentFilter("com.example.ACTION_SEND_DATA");
-        registerReceiver(dataReceiver, filter, Context.RECEIVER_EXPORTED);
         // Check if the user is logged in
-        if (!isLoggedIn()) {
+        if (!Utility.isLoggedIn(this)) {
             // Show the login dialog
             showLoginDialog();
-            //DataRequestUtil.requestUserDataFromPhone(this, "login", "userName", "");
+            // Request user data from phone
+            requestUserDataFromPhone();
         } else {
             // User is logged in
             // Proceed with the app
         }
+
+        activityHomeBinding.btnMyGarden.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = new Intent(HomeActivity.this, MyGardenActivity.class);
+                startActivity(mIntent);
+            }
+        });
+
+        activityHomeBinding.btnReminders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = new Intent(HomeActivity.this, ReminderListActivity.class);
+                startActivity(mIntent);
+            }
+        });
     }
 
 
@@ -134,22 +169,11 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Close the app
-                finish();
+                //finish();
+                loginDialog.dismiss();
             }
         });
     }
 
-    private void init() {
 
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (loginDialog != null && loginDialog.isShowing()) {
-            loginDialog.dismiss();
-        }
-        // Unregister the receiver
-        unregisterReceiver(dataReceiver);
-        super.onDestroy();
-    }
 }

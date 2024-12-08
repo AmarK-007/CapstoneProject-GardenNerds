@@ -51,17 +51,21 @@ import com.android.msd.capstone.project.gardennerds.models.Reminder;
 import com.android.msd.capstone.project.gardennerds.utils.Constants;
 import com.android.msd.capstone.project.gardennerds.utils.DataSyncUtil;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
+import com.google.android.gms.wearable.MessageClient;
+import com.google.android.gms.wearable.MessageEvent;
+import com.google.android.gms.wearable.Wearable;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Arrays;
 import java.util.Calendar;
 
 /**
  * This is the main activity for the application. It manages the navigation drawer and the fragments that are displayed within the activity.
  * It also handles the toolbar and the back press.
  */
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements MessageClient.OnMessageReceivedListener {
     private static final String TAG = HomeActivity.class.getSimpleName();
     ActionBarDrawerToggle toggle;
     MaterialToolbar materialToolbar;
@@ -91,6 +95,12 @@ public class HomeActivity extends AppCompatActivity {
         // Set navigation bar and status bar color
         Utility.setNavigationAndStatusBarColor(this);
 
+        init();
+
+    }
+
+    private void init() {
+        Wearable.getMessageClient(this).addListener(this);
 
         // Initialize the toolbar, drawer layout, and navigation view.
         materialToolbar = homeBinding.homeToolBar;
@@ -130,7 +140,6 @@ public class HomeActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SCHEDULE_EXACT_ALARM}, Constants.REQUEST_CODE_SCHEDULE_EXACT_ALARM);
             }
         }
-
     }
 
     /**
@@ -480,7 +489,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -490,6 +498,15 @@ public class HomeActivity extends AppCompatActivity {
             } else {
                 // Permission denied, handle accordingly
             }
+        }
+    }
+
+    @Override
+    public void onMessageReceived(@NonNull MessageEvent messageEvent) {
+        if (messageEvent.getPath().equals(DataSyncUtil.UPDATE_DATA_PATH)) {
+            Utility.showToast(getBaseContext(),"In onMessageReceived");
+            byte[] bytes = messageEvent.getData();
+            Log.v(TAG, "Message from wear Received. :::: " + Arrays.toString(bytes));
         }
     }
 }
