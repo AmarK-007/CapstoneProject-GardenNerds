@@ -8,13 +8,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
+        android:layout_margin="@dimen/_6dp"
+        android:layout_marginTop="@dimen/_2dp"
+        android:layout_marginBottom="@dimen/_2dp"
         android:backgroundTint="@android:color/white"
         android:foreground="?attr/selectableItemBackground"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp">
+        app:cardCornerRadius="@dimen/_8dp"
+        app:cardElevation="@dimen/_4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,20 +22,20 @@
             android:background="@color/card_color"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="@dimen/_8dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                app:cardCornerRadius="8dp"
-                android:layout_marginStart="8dp"
-                app:cardElevation="4dp">
+                android:layout_marginEnd="@dimen/_16dp"
+                app:cardCornerRadius="@dimen/_8dp"
+                android:layout_marginStart="@dimen/_8dp"
+                app:cardElevation="@dimen/_4dp">
                 <!-- Garden Image -->
                 <ImageView
                     android:id="@+id/imageViewGarden"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/_40dp"
+                    android:layout_height="@dimen/_40dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_launcher_round" />
             </androidx.cardview.widget.CardView>
@@ -44,7 +44,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="@dimen/_8dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -52,18 +52,18 @@
                     android:id="@+id/textViewGardenName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Garden Name"
+                    android:text="@string/garden_name"
                     android:textColor="@color/colorPrimaryDeepDark"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/_10sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textViewGardenArea"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Area: 0 sq ft"
+                    android:text="@string/area_0_sq_ft"
                     android:textColor="@color/colorPrimaryDeepDark"
-                    android:textSize="9sp" />
+                    android:textSize="@dimen/_9sp" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

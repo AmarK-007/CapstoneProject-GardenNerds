@@ -44,5 +44,16 @@
     <string name="text_reminder_type_changeSoil">Change Soil</string>
 
     <string name="msg_login_using_phone">Please log in using your phone.</string>
+    <string name="garden_name">Garden Name</string>
+    <string name="garden_description_goes_here">Garden Description goes here</string>
+    <string name="sunlight_full_sunlight">Sunlight: Full Sunlight</string>
+    <string name="watering_frequency_every_3_days">Watering Frequency: Every 3 days</string>
+    <string name="moisture_level_50">Moisture Level: 50%</string>
+    <string name="reminder">Reminder!</string>
+    <string name="don_t_forget_to_water_plantname">Don\'t forget to water plantname!!!!!!!</string>
+    <string name="area_0_sq_ft">Area: 0 sq ft</string>
+    <string name="plant_name">Plant Name</string>
+    <string name="plant_sunlight">Plant Sunlight</string>
+    <string name="plant_watering">Plant Watering</string>
 
 </resources>

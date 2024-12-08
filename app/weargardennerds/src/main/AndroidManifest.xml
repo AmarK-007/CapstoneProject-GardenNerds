@@ -14,9 +14,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -36,33 +35,22 @@
         <activity
             android:name=".activity.ReminderListActivity"
             android:exported="true"
-            android:theme="@style/Theme.Wearable.GardenNerdsApp">
+            android:theme="@style/Theme.Wearable.GardenNerdsApp"></activity>
 
-        </activity>
-        <activity
-            android:name="com.android.msd.capstone.project.wear.gardennerds.activity.WearDetailActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.android.msd.capstone.project.wear.gardennerds.OPEN_DETAIL" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".activity.HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.Wearable.GardenNerdsApp"
             tools:ignore="WearRecents">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="androidx.wear.activity.ConfirmationActivity" />
-
-       <!-- <service
+        <!--
+ <service
             android:name=".service.WearDataLayerListenerService"
             android:exported="true">
            &lt;!&ndash; <intent-filter>
@@ -80,11 +68,11 @@
                 <action android:name="com.example.ACTION_SEND_DATA" />
             </intent-filter>
 
-        </receiver>-->
-
-
-        <receiver android:name=".receiver.NotificationDismissReceiver"
-            android:enabled="true"/>
+        </receiver>
+        -->
+        <receiver
+            android:name=".receiver.NotificationDismissReceiver"
+            android:enabled="true" />
         <receiver
             android:name=".receiver.ReminderReceiver"
             android:enabled="true"
