@@ -1,26 +1,14 @@
 package com.android.msd.capstone.project.wear.gardennerds.utils;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.msd.capstone.project.wear.gardennerds.R;
 import com.android.msd.capstone.project.wear.gardennerds.models.Reminder;
-import com.android.msd.capstone.project.wear.gardennerds.models.User;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.wearable.CapabilityClient;
-import com.google.android.gms.wearable.CapabilityInfo;
-import com.google.android.gms.wearable.Node;
-import com.google.android.gms.wearable.Wearable;
-
-import java.util.Set;
 
 import com.android.msd.capstone.project.wear.gardennerds.receiver.ReminderReceiver;
 
@@ -48,7 +36,7 @@ public class Utility {
 
     public static boolean isLoggedIn(Context context) {
         // Check if the user is logged in
-        String username = DataRequestUtil.readUserDataFromPreference(context);
+        String username = WearDataSyncUtil.readUserDataFromPreference(context);
 
         if (username == null) {
             // User is not logged in, show a popup dialog

@@ -2,8 +2,6 @@ package com.android.msd.capstone.project.gardennerds.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,7 +34,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.msd.capstone.project.gardennerds.R;
-import com.android.msd.capstone.project.gardennerds.broadcastReceivers.ReminderReceiver;
 import com.android.msd.capstone.project.gardennerds.databinding.ActivityHomeBinding;
 import com.android.msd.capstone.project.gardennerds.databinding.MenuDrawerHeaderBinding;
 import com.android.msd.capstone.project.gardennerds.db.PlantDataSource;
@@ -50,7 +47,7 @@ import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
 import com.android.msd.capstone.project.gardennerds.models.User;
 import com.android.msd.capstone.project.gardennerds.utils.Constants;
-import com.android.msd.capstone.project.gardennerds.utils.DataSyncUtil;
+import com.android.msd.capstone.project.gardennerds.utils.PhoneDataSyncUtil;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
 import com.google.android.gms.wearable.MessageClient;
 import com.google.android.gms.wearable.MessageEvent;
@@ -60,7 +57,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Arrays;
-import java.util.Calendar;
 
 /**
  * This is the main activity for the application. It manages the navigation drawer and the fragments that are displayed within the activity.
@@ -504,16 +500,16 @@ public class HomeActivity extends AppCompatActivity implements MessageClient.OnM
 
     @Override
     public void onMessageReceived(@NonNull MessageEvent messageEvent) {
-        if (messageEvent.getPath().equals(DataSyncUtil.UPDATE_DATA_PATH)) {
+        if (messageEvent.getPath().equals(PhoneDataSyncUtil.UPDATE_DATA_PATH)) {
             Utility.showToast(getBaseContext(), "In onMessageReceived");
             byte[] bytes = messageEvent.getData();
             Log.v(TAG, "Message from wear Received. :::: " + Arrays.toString(bytes));
-            if (Arrays.toString(bytes).contains(DataSyncUtil.LOGIN_USER)) {
+            if (Arrays.toString(bytes).contains(PhoneDataSyncUtil.LOGIN_USER)) {
                 //read current user data
                 User user = Utility.getUser(this);
                 if (user != null) {
                     //send user data to wear
-                    DataSyncUtil.sendUserDataToWear(this, "login", "userName", user.getUsername());
+                    PhoneDataSyncUtil.sendUserDataToWear(this, "login", "userName", user.getUsername());
                 }
             }
         }

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.android.msd.capstone.project.wear.gardennerds.db.DBHelper;
 import com.android.msd.capstone.project.wear.gardennerds.db.GardenDataSource;
 import com.android.msd.capstone.project.wear.gardennerds.db.PlantDataSource;
 import com.android.msd.capstone.project.wear.gardennerds.db.ReminderDataSource;
@@ -22,10 +21,10 @@ import com.google.android.gms.wearable.Wearable;
 
 import java.util.Set;
 
-public class DataRequestUtil {
+public class WearDataSyncUtil {
     public static final String DATA_CAPABILITY_NAME = "data_transfer";
     public static final String UPDATE_DATA_PATH = "/update_db_data";
-    private static final String TAG = DataRequestUtil.class.getSimpleName();
+    private static final String TAG = WearDataSyncUtil.class.getSimpleName();
 
 
     // get user data Capabilities Keys

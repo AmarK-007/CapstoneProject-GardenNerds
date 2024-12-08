@@ -9,7 +9,7 @@ import android.util.Log;
 
 import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
-import com.android.msd.capstone.project.gardennerds.utils.DataSyncUtil;
+import com.android.msd.capstone.project.gardennerds.utils.PhoneDataSyncUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -332,7 +332,7 @@ public class PlantDataSource {
                 .append(plant.getImageUri()).append(", ")
                 .append(plant.getGardenId()).append("\n");
 
-        DataSyncUtil.sendUserDataToWear(context, operation, TABLE_NAME, data.toString());
+        PhoneDataSyncUtil.sendUserDataToWear(context, operation, TABLE_NAME, data.toString());
     }
 
     /**
@@ -357,6 +357,6 @@ public class PlantDataSource {
                 .append(reminder.getNutrientRequired()).append(", ")
                 .append(reminder.getReminderTime()).append("\n");
 
-        DataSyncUtil.sendUserDataToWear(context, operation, TABLE_NAME, data.toString());
+        PhoneDataSyncUtil.sendUserDataToWear(context, operation, TABLE_NAME, data.toString());
     }
 }

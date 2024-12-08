@@ -5,10 +5,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.android.msd.capstone.project.gardennerds.models.User;
-import com.android.msd.capstone.project.gardennerds.utils.DataSyncUtil;
+import com.android.msd.capstone.project.gardennerds.utils.PhoneDataSyncUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -253,6 +252,6 @@ public class UserDataSource {
                 .append(user.getProvince()).append(", ")
                 .append(user.getPincode()).append("\n");
 
-        DataSyncUtil.sendUserDataToWear(context, operation, TABLE_NAME, userData.toString());
+        PhoneDataSyncUtil.sendUserDataToWear(context, operation, TABLE_NAME, userData.toString());
     }
 }

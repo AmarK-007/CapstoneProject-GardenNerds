@@ -15,14 +15,11 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.databinding.ActivityLoginScreenBinding;
 import com.android.msd.capstone.project.gardennerds.db.UserDataSource;
-import com.android.msd.capstone.project.gardennerds.utils.DataSyncUtil;
+import com.android.msd.capstone.project.gardennerds.utils.PhoneDataSyncUtil;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
 
 public class LoginScreenActivity extends AppCompatActivity {
@@ -124,7 +121,7 @@ public class LoginScreenActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
                 // send username data to wearable
-                 DataSyncUtil.sendUserDataToWear(this, "login", "userName", username);
+                 PhoneDataSyncUtil.sendUserDataToWear(this, "login", "userName", username);
                 finish();
             } else {
                 Toast.makeText(LoginScreenActivity.this, getString(R.string.msg_login_failed), Toast.LENGTH_SHORT).show();

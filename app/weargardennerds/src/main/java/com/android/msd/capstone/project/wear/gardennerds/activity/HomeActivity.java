@@ -2,11 +2,7 @@ package com.android.msd.capstone.project.wear.gardennerds.activity;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.wearable.view.WearableDialogHelper;
@@ -29,27 +25,19 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.wear.activity.ConfirmationActivity;
 
-import com.android.msd.capstone.project.wear.gardennerds.db.GardenDataSource;
 import com.android.msd.capstone.project.wear.gardennerds.db.PlantDataSource;
-import com.android.msd.capstone.project.wear.gardennerds.db.ReminderDataSource;
 import com.android.msd.capstone.project.wear.gardennerds.models.Plant;
 import com.android.msd.capstone.project.wear.gardennerds.models.Reminder;
-import com.android.msd.capstone.project.wear.gardennerds.receiver.DataReceiver;
-import com.android.msd.capstone.project.wear.gardennerds.utils.DataRequestUtil;
+import com.android.msd.capstone.project.wear.gardennerds.utils.WearDataSyncUtil;
 import com.android.msd.capstone.project.wear.gardennerds.R;
 import com.android.msd.capstone.project.wear.gardennerds.databinding.ActivityHomeBinding;
 import com.android.msd.capstone.project.wear.gardennerds.databinding.CustomDialogLayoutBinding;
 import com.android.msd.capstone.project.wear.gardennerds.utils.Utility;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.wearable.CapabilityClient;
-import com.google.android.gms.wearable.CapabilityInfo;
 import com.google.android.gms.wearable.MessageClient;
 import com.google.android.gms.wearable.MessageEvent;
-import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.Wearable;
 
 import java.util.Arrays;
-import java.util.Set;
 
 public class HomeActivity extends AppCompatActivity implements MessageClient.OnMessageReceivedListener {
 
@@ -206,14 +194,14 @@ public class HomeActivity extends AppCompatActivity implements MessageClient.OnM
 
     @Override
     public void onMessageReceived(@NonNull MessageEvent messageEvent) {
-        if (messageEvent.getPath().equals(DataRequestUtil.UPDATE_DATA_PATH)) {
+        if (messageEvent.getPath().equals(WearDataSyncUtil.UPDATE_DATA_PATH)) {
             Utility.showToast(getBaseContext(), "In onMessageReceived");
             byte[] bytes = messageEvent.getData();
             if (bytes != null) {
                 Log.v(TAG, "Message from Phone Recieved. :::: " + Arrays.toString(bytes));
                 String dataReceived = Arrays.toString(bytes);
                 if (dataReceived != null && !dataReceived.isEmpty()) {
-                    DataRequestUtil.handleDataRequest(this, dataReceived);
+                    WearDataSyncUtil.handleDataRequest(this, dataReceived);
                 } else {
                     Log.e(TAG, "Data received is null or empty");
                 }
@@ -223,7 +211,7 @@ public class HomeActivity extends AppCompatActivity implements MessageClient.OnM
     }
 
     private void requestUserDataFromPhone() {
-        DataRequestUtil.findCapabilityClient(this);
+        WearDataSyncUtil.findCapabilityClient(this);
     }
 
     private void checkLoginStatus() {

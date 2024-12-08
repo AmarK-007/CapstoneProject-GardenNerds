@@ -11,10 +11,10 @@ import com.google.android.gms.wearable.Wearable;
 
 import java.util.Set;
 
-public class DataSyncUtil {
+public class PhoneDataSyncUtil {
     public static final String DATA_CAPABILITY_NAME = "data_transfer";
     public static final String UPDATE_DATA_PATH = "/update_db_data";
-    private static final String TAG = DataSyncUtil.class.getSimpleName();
+    private static final String TAG = PhoneDataSyncUtil.class.getSimpleName();
 
 
     // get user data Capabilities Keys
