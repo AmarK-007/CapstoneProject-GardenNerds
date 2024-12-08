@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="25dp"
+    android:padding="@dimen/_25dp"
     tools:context=".activity.GardenDetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp">
+        android:padding="@dimen/_8dp">
 
         <!-- Top section with garden image and details -->
         <LinearLayout
             android:id="@+id/linearLayoutGardenDetails"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginBottom="16dp"
+            android:layout_height="@dimen/_100dp"
+            android:layout_marginBottom="@dimen/_16dp"
             android:gravity="start|center_vertical"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,14 +27,14 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
+                android:layout_marginEnd="@dimen/_8dp"
+                app:cardCornerRadius="@dimen/_8dp"
+                app:cardElevation="@dimen/_4dp">
                 <!-- Garden Image -->
                 <ImageView
                     android:id="@+id/imageViewGarden"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/_50dp"
+                    android:layout_height="@dimen/_50dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_launcher_round" />
@@ -52,11 +52,11 @@
                     android:id="@+id/textViewGardenName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
+                    android:layout_marginBottom="@dimen/_4dp"
                     android:maxLines="1"
-                    android:text="Garden Name"
+                    android:text="@string/garden_name"
                     android:textColor="@android:color/black"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/_10sp"
                     android:textStyle="bold" />
 
                 <!-- Description -->
@@ -64,50 +64,50 @@
                     android:id="@+id/textViewDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="@dimen/_8dp"
                     android:maxLines="2"
-                    android:text="Garden Description goes here"
+                    android:text="@string/garden_description_goes_here"
                     android:textColor="@android:color/black"
-                    android:textSize="9sp" />
+                    android:textSize="@dimen/_9sp" />
 
                 <!-- Sunlight Preference -->
                 <TextView
                     android:id="@+id/textViewSunlightPreference"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Sunlight: Full Sunlight"
+                    android:layout_marginTop="@dimen/_4dp"
+                    android:text="@string/sunlight_full_sunlight"
                     android:textColor="@android:color/black"
-                    android:textSize="7sp" />
+                    android:textSize="@dimen/_7sp" />
 
                 <!-- Watering Frequency -->
                 <TextView
                     android:id="@+id/textViewWateringFrequency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="Watering Frequency: Every 3 days"
+                    android:layout_marginTop="@dimen/_2dp"
+                    android:text="@string/watering_frequency_every_3_days"
                     android:textColor="@android:color/black"
-                    android:textSize="7sp" />
+                    android:textSize="@dimen/_7sp" />
 
                 <!-- Moisture Level -->
                 <TextView
                     android:id="@+id/textViewMoistureLevel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="Moisture Level: 50%"
+                    android:layout_marginTop="@dimen/_2dp"
+                    android:text="@string/moisture_level_50"
                     android:textColor="@android:color/black"
-                    android:textSize="7sp" />
+                    android:textSize="@dimen/_7sp" />
             </LinearLayout>
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGoToPlants"
             style="@style/Widget.MaterialComponents.Button.IconOnly"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="12dp"
+            android:layout_width="@dimen/_50dp"
+            android:layout_height="@dimen/_50dp"
+            android:layout_margin="@dimen/_12dp"
             android:contentDescription="@string/btn_title_my_garden"
             app:icon="@drawable/ic_plant"
             app:iconTint="@color/colorAccent"

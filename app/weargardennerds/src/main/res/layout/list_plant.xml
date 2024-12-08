@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center">
@@ -8,13 +9,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
+        android:layout_margin="@dimen/_6dp"
+        android:layout_marginTop="@dimen/_2dp"
+        android:layout_marginBottom="@dimen/_2dp"
         android:backgroundTint="@android:color/white"
         android:foreground="?attr/selectableItemBackground"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp">
+        app:cardCornerRadius="@dimen/_8dp"
+        app:cardElevation="@dimen/_4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,20 +23,20 @@
             android:background="@color/card_color"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="@dimen/_8dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
+                android:layout_marginStart="@dimen/_8dp"
+                android:layout_marginEnd="@dimen/_8dp"
+                app:cardCornerRadius="@dimen/_8dp"
+                app:cardElevation="@dimen/_4dp">
                 <!-- Garden Image -->
                 <ImageView
                     android:id="@+id/ivPlantImage"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/_40dp"
+                    android:layout_height="@dimen/_40dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_plant_default" />
             </androidx.cardview.widget.CardView>
@@ -53,9 +54,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:text="Plant Name"
+                    android:text="@string/plant_name"
                     android:textColor="@color/colorPrimaryDeepDark"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/_10sp"
                     android:textStyle="bold" />
 
                 <!-- Plant SUNLIGHT -->
@@ -65,10 +66,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:layout_marginTop="4dp"
-                    android:text="Plant Sunlight"
+                    android:layout_marginTop="@dimen/_4dp"
+                    android:text="@string/plant_sunlight"
                     android:textColor="@color/colorPrimaryDeepDark"
-                    android:textSize="8sp" />
+                    android:textSize="@dimen/_8sp" />
                 <!-- Plant Watering FREQUENCY -->
                 <TextView
                     android:id="@+id/tvPlantWatering"
@@ -76,9 +77,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:text="Plant Watering"
+                    android:text="@string/plant_watering"
                     android:textColor="@color/colorPrimaryDeepDark"
-                    android:textSize="8sp" />
+                    android:textSize="@dimen/_8sp" />
 
 
             </LinearLayout>
@@ -93,8 +94,8 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnMyGarden"
                     style="@style/Widget.MaterialComponents.Button.IconOnly"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/_25dp"
+                    android:layout_height="@dimen/_25dp"
                     android:contentDescription="@string/btn_title_my_garden"
                     app:icon="@drawable/ic_reminder"
                     app:iconTint="@color/colorAccent"

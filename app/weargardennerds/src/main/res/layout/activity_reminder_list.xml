@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="3dp"
+    android:padding="@dimen/_3dp"
     tools:context=".activity.ReminderListActivity">
     <LinearLayout
         android:orientation="vertical"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/tvName"
-                android:padding="1dp"
+                android:padding="@dimen/_1dp"
                 android:layout_weight="1"
                 android:text="@string/name"
                 android:autoSizeTextType="uniform"
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/tvFrequency"
-                android:padding="1dp"
+                android:padding="@dimen/_1dp"
                 android:layout_weight="1"
                 android:text="@string/frequency"
                 android:autoSizeTextType="uniform"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/tvType"
-                android:padding="1dp"
+                android:padding="@dimen/_1dp"
                 android:autoSizePresetSizes=""
                 android:layout_weight="0.5"
                 android:text="@string/type"

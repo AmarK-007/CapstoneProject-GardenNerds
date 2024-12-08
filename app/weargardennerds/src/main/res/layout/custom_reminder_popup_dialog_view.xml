@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:padding="2dp"
+    android:padding="@dimen/_2dp"
     android:layout_height="match_parent">
     <ScrollView
         app:boxedEdges="all"
@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/tvReminderTitle"
-        android:text="Reminder!"
+        android:text="@string/reminder"
         android:gravity="center"
         android:textStyle="bold"
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
 
     <TextView
         android:id="@+id/tvReminderMessage"
-        android:text="Don't forget to water plantname!!!!!!!"
+        android:text="@string/don_t_forget_to_water_plantname"
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="wrap_content"/>
@@ -35,11 +35,11 @@
         android:id="@+id/ivReminderType"
         android:src="@drawable/watering_plants"
         android:layout_gravity="center"
-        android:layout_width="40pt"
-        android:layout_height="40pt"/>
+        android:layout_width="@dimen/_40pt"
+        android:layout_height="@dimen/_40pt"/>
 
     <RelativeLayout
-        android:layout_marginVertical="5dp"
+        android:layout_marginVertical="@dimen/_5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -48,16 +48,16 @@
 
 
             android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_marginStart="@dimen/_20dp"
+            android:layout_width="@dimen/_40dp"
+            android:layout_height="@dimen/_40dp"
             android:src="@drawable/snooze"/>
         <ImageView
             android:id="@+id/ivCheck"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="20dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_marginEnd="@dimen/_20dp"
+            android:layout_width="@dimen/_40dp"
+            android:layout_height="@dimen/_40dp"
             android:src="@drawable/check"/>
 
     </RelativeLayout>

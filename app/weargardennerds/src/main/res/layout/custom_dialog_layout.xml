@@ -21,13 +21,13 @@
             android:fontFamily="sans-serif-condensed"
             android:gravity="center"
             android:text="@string/msg_login_using_phone"
-            android:textSize="14sp" />
+            android:textSize="@dimen/_14sp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/dialogButtonOk"
             style="@style/Widget.MaterialComponents.Button.IconOnly"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/_40dp"
+            android:layout_height="@dimen/_40dp"
             android:layout_marginTop="@dimen/screen_percentage_10"
             android:layout_gravity="center"
             android:contentDescription="@string/btn_title_reminders"
