@@ -8,37 +8,51 @@ import android.os.Parcelable;
  */
 public class Reminder implements Parcelable {
 
-    // Reminder fields...
+    // Unique identifier for the reminder
     private int reminderId;
+    // Message for the reminder
     private String message;
+    // Date and time for the reminder
     private String dateTime;
+    // Identifier for the plant associated with the reminder
     private int plantId;
+    // Identifier for the type of reminder
     private int reminderTypeId;
+    // Frequency of the reminder
     private String frequency;
+    // Moisture level required for the plant
     private String moistureLevel;
+    // Temperature level required for the plant
     private String temperatureLevel;
+    // Sunlight level required for the plant
     private String sunlightLevel;
+    // Nutrients required for the plant
     private String nutrientRequired;
+    // Time for the reminder
     private String reminderTime;
+    // Name of the plant associated with the reminder
     private String plantName;
 
     /**
-     * Constructor for Reminder
+     * Default constructor for Reminder
      */
     public Reminder() {
     }
 
-    public Reminder(String plantName, String frequency, int reminderTypeID, String reminderTime) {
+    /**
+     * Constructor for Reminder with specific attributes
+     *
+     * @param plantName        Name of the plant
+     * @param frequency        Frequency of the reminder
+     * @param reminderTypeId   Type of the reminder
+     * @param reminderTime     Time for the reminder
+     */
+    public Reminder(String plantName, String frequency, int reminderTypeId, String reminderTime) {
         this.plantName = plantName;
         this.frequency = frequency;
-        reminderTypeId = reminderTypeID;
+        this.reminderTypeId = reminderTypeId;
         this.reminderTime = reminderTime;
     }
-
-    /**
-     * Constructor for Reminder
-     */
-
 
     // Getters and Setters
     public int getReminderId() {
@@ -136,8 +150,11 @@ public class Reminder implements Parcelable {
     public void setPlantName(String plantName) {
         this.plantName = plantName;
     }
+
     /**
-     * Constructor for Reminder
+     * Constructor for Reminder from Parcel
+     *
+     * @param in Parcel containing the Reminder data
      */
     protected Reminder(Parcel in) {
         reminderId = in.readInt();
@@ -170,7 +187,9 @@ public class Reminder implements Parcelable {
     };
 
     /**
-     * describeContents method
+     * Describe the contents of the parcel
+     *
+     * @return int
      */
     @Override
     public int describeContents() {
@@ -178,7 +197,10 @@ public class Reminder implements Parcelable {
     }
 
     /**
-     * writeToParcel method
+     * Write the Reminder data to the parcel
+     *
+     * @param parcel Parcel to write the data to
+     * @param i      Additional flags
      */
     @Override
     public void writeToParcel(Parcel parcel, int i) {

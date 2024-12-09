@@ -7,23 +7,51 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a Garden entity with various attributes and implements Parcelable for easy
+ * passing between Android components.
+ */
 public class Garden implements Parcelable {
 
+    // Unique identifier for the garden
     private int gardenId = -1;
+    // Name of the garden
     private String name;
+    // Description of the garden
     private String description;
+    // Area of the garden
     private String gardenArea;
+    // Latitude coordinate of the garden
     private String gardenLatitude;
+    // Longitude coordinate of the garden
     private String gardenLongitude;
+    // Sunlight preference for the garden
     private String sunlightPreference;
+    // Watering frequency for the garden
     private String wateringFrequency;
-    private String imageUri;  // URL or URI to the garden image
+    // URI to the garden image
+    private String imageUri;
+    // User ID associated with the garden
     private int userId = -1;
 
+    // List of plants in the garden
     private ArrayList<Plant> plants;
 
+    /**
+     * Constructor to initialize a Garden with all attributes.
+     *
+     * @param name               Name of the garden
+     * @param description        Description of the garden
+     * @param gardenArea         Area of the garden
+     * @param gardenLatitude     Latitude coordinate of the garden
+     * @param gardenLongitude    Longitude coordinate of the garden
+     * @param sunlightPreference Sunlight preference for the garden
+     * @param wateringFrequency  Watering frequency for the garden
+     * @param imageUri           URI to the garden image
+     * @param userId             User ID associated with the garden
+     * @param plants             List of plants in the garden
+     */
     public Garden(String name, String description, String gardenArea, String gardenLatitude, String gardenLongitude, String sunlightPreference, String wateringFrequency, String imageUri, int userId, ArrayList<Plant> plants) {
-
         this.name = name;
         this.description = (description != null && !description.isEmpty()) ? description : "Description";
         this.gardenArea = gardenArea;
@@ -34,20 +62,34 @@ public class Garden implements Parcelable {
         this.imageUri = imageUri;
         this.userId = userId;
         this.plants = plants;
-
     }
 
-    public Garden(String name, String description,String gardenArea){
+    /**
+     * Constructor to initialize a Garden with minimal attributes.
+     *
+     * @param name        Name of the garden
+     * @param description Description of the garden
+     * @param gardenArea  Area of the garden
+     */
+    public Garden(String name, String description, String gardenArea) {
         this.name = name;
         this.description = (description != null && !description.isEmpty()) ? description : "Description";
         this.gardenArea = gardenArea;
         this.plants = new ArrayList<>();
     }
 
+    /**
+     * Default constructor to initialize an empty Garden.
+     */
     public Garden() {
         this.plants = new ArrayList<>();
     }
 
+    /**
+     * Constructor to create a Garden from a Parcel.
+     *
+     * @param in Parcel containing the Garden data
+     */
     protected Garden(Parcel in) {
         gardenId = in.readInt();
         name = in.readString();
@@ -62,6 +104,7 @@ public class Garden implements Parcelable {
         plants = in.createTypedArrayList(Plant.CREATOR);
     }
 
+    // Getters and setters for the Garden attributes
     public int getGardenId() {
         return gardenId;
     }
@@ -159,6 +202,12 @@ public class Garden implements Parcelable {
         return 0;
     }
 
+    /**
+     * Write the Garden data to a Parcel
+     *
+     * @param dest  Parcel to write the Garden data
+     * @param flags Additional flags about how the object should be written
+     */
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(gardenId);
@@ -174,6 +223,14 @@ public class Garden implements Parcelable {
         dest.writeTypedList(plants);
     }
 
+    /**
+     * Creator for Garden
+     * Required for Parcelable
+     * Creates a Garden from a Parcel
+     *
+     * @param in Parcel containing the Garden data
+     * @return Garden
+     */
     public static final Creator<Garden> CREATOR = new Creator<Garden>() {
         @Override
         public Garden createFromParcel(Parcel in) {
@@ -185,5 +242,4 @@ public class Garden implements Parcelable {
             return new Garden[size];
         }
     };
-
 }

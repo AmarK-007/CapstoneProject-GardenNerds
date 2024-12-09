@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.android.msd.capstone.project.wear.gardennerds.R;
 import com.android.msd.capstone.project.wear.gardennerds.models.Reminder;
-
 import com.android.msd.capstone.project.wear.gardennerds.receiver.ReminderReceiver;
 
 import java.util.Calendar;
@@ -17,23 +16,21 @@ import java.util.Calendar;
 public class Utility {
 
     /**
-     * storeUser method
+     * Displays a toast message.
      *
-     * @param context
+     * @param context The context in which the toast should be shown.
+     * @param message The message to be displayed in the toast.
      */
-    //    storing employee inside shared preferences
-//    public static void storeUser(User user, Context context) {
-//
-//        SharedPreferences sp = context.getSharedPreferences("MySharedPref", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sp.edit();
-//        editor.putString("user", new Gson().toJson(user));
-//        editor.commit();
-//
-//    }
     public static void showToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Checks if the user is logged in.
+     *
+     * @param context The context to access shared preferences.
+     * @return True if the user is logged in, false otherwise.
+     */
     public static boolean isLoggedIn(Context context) {
         // Check if the user is logged in
         String username = WearDataSyncUtil.readUserDataFromPreference(context);
@@ -47,7 +44,13 @@ public class Utility {
         }
     }
 
-
+    /**
+     * Returns the reminder type string based on the reminder type ID.
+     *
+     * @param context The context to access resources.
+     * @param reminderTypeId The ID of the reminder type.
+     * @return The reminder type string.
+     */
     public static String getReminderTypeString(Context context, int reminderTypeId) {
         switch (reminderTypeId) {
             case Constants.REMINDER_TYPE_WATER:
@@ -64,35 +67,16 @@ public class Utility {
     }
 
     /**
-     * Mann code
+     * Sets a snooze reminder.
+     *
+     * @param context The context to access system services.
+     * @param isForSnooze Indicates if the reminder is for snooze.
+     * @param reminder The reminder object containing reminder details.
      */
     @SuppressLint("MissingPermission")
     public static void setSnoozeReminder(Context context, boolean isForSnooze, Reminder reminder) {
-
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.SECOND, Constants.SET_REMINDER_SNOOZE); // Set reminder for 10 secs
-        /** Amar code*/
-       /* if (isForSnooze) {
-            calendar.add(Calendar.SECOND, Constants.SET_REMINDER_SNOOZE); // Set reminder for 1 minute later (adjust as needed)
-        } else {
-            String[] time = reminder.getReminderTime().split(" ");
-            String[] hourMinute = time[0].split(":");
-            int hour = Integer.parseInt(hourMinute[0]);
-            int minute = Integer.parseInt(hourMinute[1]);
-            if (time[1].equalsIgnoreCase("PM") && hour != 12) {
-                hour += 12;
-            } else if (time[1].equalsIgnoreCase("AM") && hour == 12) {
-                hour = 0;
-            }
-            calendar.set(Calendar.HOUR_OF_DAY, hour);
-            calendar.set(Calendar.MINUTE, minute);
-            calendar.set(Calendar.SECOND, 0);
-
-            int frequency = Integer.parseInt(reminder.getFrequency());
-            // Add the frequency in days to the current time
-            calendar.add(Calendar.DAY_OF_YEAR, frequency);
-        }*/
-        /** Amar code ends*/
 
         Intent intent = new Intent(context, ReminderReceiver.class).putExtra("ReminderInstance", reminder);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -101,30 +85,11 @@ public class Utility {
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (alarmManager != null) {
-
             alarmManager.setExact(
                     AlarmManager.RTC_WAKEUP,
                     calendar.getTimeInMillis(),
                     pendingIntent
             );
-            /** Amar code*/
-           /* if (isForSnooze) {
-                alarmManager.setExact(
-                        AlarmManager.RTC_WAKEUP,
-                        calendar.getTimeInMillis(),
-                        pendingIntent
-                );
-            } else {
-                int frequency = Integer.parseInt(reminder.getFrequency());
-                long intervalMillis = frequency * 24 * 60 * 60 * 1000L; // Frequency in days converted to milliseconds
-                alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP,
-                        calendar.getTimeInMillis(),
-                        intervalMillis,
-                        pendingIntent
-                );
-            }*/
-            /** Amar code ends*/
         }
     }
 }

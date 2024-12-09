@@ -5,62 +5,77 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/_3dp"
+    android:background="@color/colorGrayLight"
     tools:context=".activity.ReminderListActivity">
+
     <LinearLayout
-        android:orientation="vertical"
-        app:boxedEdges="all"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="top|center"
+        android:orientation="vertical">
 
         <TextView
-            android:text="@string/reminders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:textSize="@dimen/_12sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:padding="@dimen/activity_small_margin"
+            android:text="@string/reminders" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10dp"
+            android:paddingStart="@dimen/_25dp"
+            android:paddingEnd="@dimen/_25dp">
+
             <TextView
                 android:id="@+id/tvName"
-                android:padding="@dimen/_1dp"
-                android:layout_weight="1"
-                android:text="@string/name"
-                android:autoSizeTextType="uniform"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autoSizeTextType="uniform"
+                android:padding="@dimen/_1dp"
+                android:text="@string/name" />
+
             <TextView
                 android:id="@+id/tvFrequency"
-                android:padding="@dimen/_1dp"
-                android:layout_weight="1"
-                android:text="@string/frequency"
-                android:autoSizeTextType="uniform"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autoSizeTextType="uniform"
+                android:padding="@dimen/_1dp"
+                android:text="@string/frequency" />
+
             <TextView
                 android:id="@+id/tvType"
-                android:padding="@dimen/_1dp"
-                android:autoSizePresetSizes=""
-                android:layout_weight="0.5"
-                android:text="@string/type"
-                android:autoSizeTextType="uniform"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:autoSizePresetSizes=""
+                android:autoSizeTextType="uniform"
+                android:padding="@dimen/_1dp"
+                android:text="@string/type" />
         </LinearLayout>
+
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12dp"
+            android:paddingEnd="@dimen/_12dp"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvReminders"
-            tools:listitem="@layout/custom_reminder_list_item"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/_25dp"
+            android:paddingEnd="@dimen/_25dp"
+            android:paddingBottom="@dimen/_25dp"
+            tools:listitem="@layout/custom_reminder_list_item" />
     </LinearLayout>
-
 
 
 </androidx.wear.widget.BoxInsetLayout>

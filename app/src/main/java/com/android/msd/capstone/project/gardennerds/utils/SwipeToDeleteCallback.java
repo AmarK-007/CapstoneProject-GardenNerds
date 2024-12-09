@@ -18,24 +18,45 @@ import com.android.msd.capstone.project.gardennerds.models.Reminder;
 
 import java.util.List;
 
+/**
+ * Callback class for handling swipe-to-delete actions in a RecyclerView.
+ */
 public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
     private final SwipeToDeleteListener listener;
 
+    /**
+     * Constructor for SwipeToDeleteCallback.
+     *
+     * @param listener The listener to notify when an item is swiped.
+     */
     public SwipeToDeleteCallback(SwipeToDeleteListener listener) {
         super(0, ItemTouchHelper.LEFT); // Configure swipe directions
         this.listener = listener;
     }
 
+    /**
+     * Called when an item is moved. Not used in this implementation.
+     *
+     * @param recyclerView The RecyclerView.
+     * @param viewHolder The ViewHolder being moved.
+     * @param target The target ViewHolder.
+     * @return Always returns false as move operations are not handled.
+     */
     @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
         return false; // We don't handle move operations here
     }
 
+    /**
+     * Called when an item is swiped.
+     *
+     * @param viewHolder The ViewHolder being swiped.
+     * @param direction The direction of the swipe.
+     */
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
         int position = viewHolder.getAdapterPosition();
-        //listener.onSwiped(position); // Notify the listener when an item is swiped
 
         // Show confirmation dialog
         new AlertDialog.Builder(viewHolder.itemView.getContext())
@@ -59,8 +80,10 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
                 .show();
     }
 
+    /**
+     * Interface for notifying when an item is swiped.
+     */
     public interface SwipeToDeleteListener {
         void onSwiped(int position);
     }
 }
-

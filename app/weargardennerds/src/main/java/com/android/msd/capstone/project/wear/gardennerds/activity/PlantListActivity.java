@@ -41,24 +41,30 @@ public class PlantListActivity extends AppCompatActivity {
      * and creates the PlantListAdapter to display the data.
      */
     private void init() {
+        //receive garden_object from intent
+        Garden garden = getIntent().getParcelableExtra("garden_object");
+
+
         // Initialize adapter with an empty list
         plantListBinding.wrcPlantList.setLayoutManager(new LinearLayoutManager(this));
-        loadPlants();
+        loadPlants(garden.getGardenId());
         plantAdapter = new PlantListAdapter(plantList, this);
         plantListBinding.wrcPlantList.setAdapter(plantAdapter);
     }
-
-
     /**
      * Loads plant data from the database.
      * This method retrieves all plants from the PlantDataSource and adds them to the plantList.
      * If no plants are found, it adds demo plants to the list.
      */
-    private void loadPlants() {
+    private void loadPlants(int gardenId) {
         PlantDataSource gardenDataSource = new PlantDataSource(this);
         plantList.clear();
-        plantList.addAll(gardenDataSource.getAllPlants());
-        if (plantList == null || plantList.isEmpty()) {
+        if (gardenId > 0) {
+            plantList.addAll(gardenDataSource.getPlantsByGardenId(gardenId));
+            if (plantList == null || plantList.isEmpty()) {
+                addDemoPlants();
+            }
+        } else {
             addDemoPlants();
         }
     }
@@ -70,8 +76,8 @@ public class PlantListActivity extends AppCompatActivity {
      */
     private void addDemoPlants() {
         // Add default values
-        plantList.add(new Plant("Red Anthrium","shady","6"));
-        plantList.add(new Plant("Indoor Orchid","shady","6"));
+        plantList.add(new Plant("Red Anthrium", "shady", "6"));
+        plantList.add(new Plant("Jade plant", "shady", "6"));
         //plantList.add(new Plant("Tulips"));
 
     }

@@ -16,54 +16,45 @@ import android.view.ViewGroup;
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.databinding.FragmentSubscriptionBinding;
 
-
+/**
+ * DialogFragment for handling subscription options.
+ */
 public class SubscriptionFragment extends DialogFragment {
 
-  FragmentSubscriptionBinding binding;
-
+    private FragmentSubscriptionBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentSubscriptionBinding.inflate(inflater,container,false);
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentSubscriptionBinding.inflate(inflater, container, false);
 
-
-
+        // Set click listener for monthly subscription option
         binding.layMonthly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                binding.layYearly.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.outline_background));
+                binding.layMonthly.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.outline_background_selected));
             }
         });
 
+        // Set click listener for yearly subscription option
         binding.layYearly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.layMonthly.setBackground(ContextCompat.getDrawable(requireContext(),R.drawable.outline_background));
-                binding.layYearly.setBackground(ContextCompat.getDrawable(requireContext(),R.drawable.outline_background_selected));
+                binding.layMonthly.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.outline_background));
+                binding.layYearly.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.outline_background_selected));
             }
         });
 
-        binding.layMonthly.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                binding.layYearly.setBackground(ContextCompat.getDrawable(requireContext(),R.drawable.outline_background));
-                binding.layMonthly.setBackground(ContextCompat.getDrawable(requireContext(),R.drawable.outline_background_selected));
-
-            }
-        });
-
+        // Set click listener for the buy now button
         binding.btnBuyNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String appPackageName = requireContext().getPackageName(); // getPackageName() from Context or Activity object
+                final String appPackageName = requireContext().getPackageName();
                 try {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
                 } catch (android.content.ActivityNotFoundException anfe) {
@@ -71,8 +62,7 @@ public class SubscriptionFragment extends DialogFragment {
                 }
             }
         });
+
         return binding.getRoot();
-
-
     }
 }

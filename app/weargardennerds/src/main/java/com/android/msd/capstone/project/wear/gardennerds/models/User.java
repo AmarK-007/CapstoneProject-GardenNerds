@@ -8,24 +8,49 @@ import android.os.Parcelable;
  */
 public class User implements Parcelable {
 
-    // User fields...
+    // Unique identifier for the user
     private int userId;
+    // Name of the user
     private String name;
+    // Email address of the user
     private String email;
+    // Password for the user's account
     private String password;
+    // Username for the user's account
     private String username;
+    // Purchase history of the user
     private String purchaseHistory;
+    // First line of the user's shipping address
     private String shippingAddress1;
+    // Second line of the user's shipping address
     private String shippingAddress2;
+    // City of the user's shipping address
     private String city;
+    // Province of the user's shipping address
     private String province;
+    // Pincode of the user's shipping address
     private String pincode;
 
+    /**
+     * Default constructor for User
+     */
     public User() {
     }
 
     /**
-     * Constructor for User
+     * Constructor for User with specific attributes
+     *
+     * @param userId           Unique identifier for the user
+     * @param name             Name of the user
+     * @param email            Email address of the user
+     * @param password         Password for the user's account
+     * @param username         Username for the user's account
+     * @param purchaseHistory  Purchase history of the user
+     * @param shippingAddress1 First line of the user's shipping address
+     * @param shippingAddress2 Second line of the user's shipping address
+     * @param city             City of the user's shipping address
+     * @param province         Province of the user's shipping address
+     * @param pincode          Pincode of the user's shipping address
      */
     public User(int userId, String name, String email, String password, String username, String purchaseHistory, String shippingAddress1, String shippingAddress2, String city, String province, String pincode) {
         this.userId = userId;
@@ -131,7 +156,9 @@ public class User implements Parcelable {
     }
 
     /**
-     * Constructor for User
+     * Constructor for User from Parcel
+     *
+     * @param in Parcel containing the User data
      */
     protected User(Parcel in) {
         userId = in.readInt();
@@ -163,7 +190,9 @@ public class User implements Parcelable {
     };
 
     /**
-     * describeContents method
+     * Describe the contents of the parcel
+     *
+     * @return int
      */
     @Override
     public int describeContents() {
@@ -171,7 +200,10 @@ public class User implements Parcelable {
     }
 
     /**
-     * writeToParcel method
+     * Write the User data to the parcel
+     *
+     * @param parcel Parcel to write the data to
+     * @param i      Additional flags
      */
     @Override
     public void writeToParcel(Parcel parcel, int i) {

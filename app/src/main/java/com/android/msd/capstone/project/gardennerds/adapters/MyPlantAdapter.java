@@ -12,19 +12,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.databinding.LayoutItemPlantBinding;
-import com.android.msd.capstone.project.gardennerds.fragments.GardenDetailFragment;
 import com.android.msd.capstone.project.gardennerds.fragments.PlantDetailFragment;
 import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+/**
+ * Adapter class for displaying a list of plants in a RecyclerView.
+ */
 public class MyPlantAdapter extends RecyclerView.Adapter<MyPlantAdapter.PlantViewHolder> {
 
     private final Context context;
     private List<Plant> plantList;
 
-    // Constructor
+    /**
+     * Constructor for MyPlantAdapter.
+     *
+     * @param plantList List of plants to display.
+     * @param context   Context in which the adapter is used.
+     */
     public MyPlantAdapter(List<Plant> plantList, Context context) {
         this.context = context;
         this.plantList = plantList;
@@ -44,17 +51,7 @@ public class MyPlantAdapter extends RecyclerView.Adapter<MyPlantAdapter.PlantVie
         // Bind data to the views
         holder.binding.tvPlantName.setText(plant.getPlantName());
         holder.binding.tvPlantSunlight.setText("Sunlight Required: " + plant.getSunlightLevel());
-        holder.binding.tvPlantWatering.setText("Watering Frequency: " + plant.getWateringInterval() + "days");
-
-        /* plant.setPlantName(addPlantBinding.edtPlantName.getText().toString());
-            plant.setPlantType(getPlantType());
-            plant.setMoistureLevel(addPlantBinding.edtPlantMoistureLevel.getText().toString());
-            plant.setTemperatureLevel(addPlantBinding.edtPlantTemperature.getText().toString());
-            plant.setWateringInterval(addPlantBinding.edtPlantWateringInterval.getText().toString());
-            plant.setSunlightLevel(getSunlightPreference());
-            plant.setNutrientRequired(addPlantBinding.edtPlantNutritionRequired.getText().toString());
-            plant.setImageUri(getImagePath());
-            plant.setGardenId(plantViewModel.getGardenId());*/
+        holder.binding.tvPlantWatering.setText("Watering Frequency: " + plant.getWateringInterval() + " days");
 
         // Load plant image using Glide
         Glide.with(context)
@@ -65,7 +62,7 @@ public class MyPlantAdapter extends RecyclerView.Adapter<MyPlantAdapter.PlantVie
         // Handle item click
         holder.itemView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putParcelable("plant", plant); // Pass the garden object to the detail fragment
+            bundle.putParcelable("plant", plant); // Pass the plant object to the detail fragment
             PlantDetailFragment fragment = new PlantDetailFragment();
             fragment.setArguments(bundle);
 
@@ -82,21 +79,38 @@ public class MyPlantAdapter extends RecyclerView.Adapter<MyPlantAdapter.PlantVie
         return plantList.size();
     }
 
+    /**
+     * Updates the dataset of the adapter.
+     *
+     * @param newPlantsList New list of plants to display.
+     */
     public void updateDataset(List<Plant> newPlantsList) {
         this.plantList.clear();
         this.plantList = newPlantsList;
         notifyDataSetChanged(); // Notify RecyclerView of data changes
     }
 
+    /**
+     * Returns the plant at the specified position.
+     *
+     * @param position Position of the plant in the list.
+     * @return The plant at the specified position.
+     */
     public Plant getPlantAt(int position) {
         return plantList.get(position);
     }
 
-    // ViewHolder class
-    // ViewHolder class with View Binding
+    /**
+     * ViewHolder class for MyPlantAdapter.
+     */
     public static class PlantViewHolder extends RecyclerView.ViewHolder {
         final LayoutItemPlantBinding binding;
 
+        /**
+         * Constructor for PlantViewHolder.
+         *
+         * @param binding Binding object for the view.
+         */
         public PlantViewHolder(@NonNull LayoutItemPlantBinding binding) {
             super(binding.getRoot());
             this.binding = binding;

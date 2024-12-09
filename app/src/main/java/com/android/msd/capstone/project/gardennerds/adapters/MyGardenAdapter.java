@@ -22,13 +22,22 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Adapter class for displaying a list of gardens in a RecyclerView.
+ */
 public class MyGardenAdapter extends RecyclerView.Adapter<MyGardenAdapter.MyGardenViewHolder> {
 
     private List<Garden> gardenList;
     private Context context;
-
     private GardenViewModel gardenViewModel;
 
+    /**
+     * Constructor for MyGardenAdapter.
+     *
+     * @param gardenList      List of gardens to display.
+     * @param context         Context in which the adapter is used.
+     * @param gardenViewModel ViewModel for fetching weather data.
+     */
     public MyGardenAdapter(List<Garden> gardenList, Context context, GardenViewModel gardenViewModel) {
         this.gardenList = gardenList;
         this.context = context;
@@ -49,7 +58,7 @@ public class MyGardenAdapter extends RecyclerView.Adapter<MyGardenAdapter.MyGard
         holder.binding.textViewGardenName.setText(garden.getName());
         holder.binding.textViewGardenArea.setText("Area: " + garden.getGardenArea() + " sq ft");
 
-        // Use Glide or another library to load the garden image (lazy loading)
+        // Use Glide to load the garden image (lazy loading)
         Glide.with(context)
                 .load(garden.getImageUri())  // replace with image URL if available
                 .placeholder(R.drawable.new_garden_nerds)  // default image
@@ -69,7 +78,7 @@ public class MyGardenAdapter extends RecyclerView.Adapter<MyGardenAdapter.MyGard
             transaction.commit();
         });
 
-        Log.e("Location", "Lat:" + getRoundedValue(garden.getGardenLatitude()) + "Long:" + getRoundedValue(garden.getGardenLongitude()));
+        Log.e("Location", "Lat:" + getRoundedValue(garden.getGardenLatitude()) + " Long:" + getRoundedValue(garden.getGardenLongitude()));
         // Fetch weather data for the garden's location
         gardenViewModel.getWeatherData(getRoundedValue(garden.getGardenLatitude()), getRoundedValue(garden.getGardenLongitude()))
                 .observeForever(weather -> {
@@ -86,8 +95,8 @@ public class MyGardenAdapter extends RecyclerView.Adapter<MyGardenAdapter.MyGard
                 });
     }
 
-    private double getRoundedValue(String value){
-        return Double.parseDouble(String.format("%.2f",Double.parseDouble(value)));
+    private double getRoundedValue(String value) {
+        return Double.parseDouble(String.format("%.2f", Double.parseDouble(value)));
     }
 
     @Override
@@ -106,10 +115,18 @@ public class MyGardenAdapter extends RecyclerView.Adapter<MyGardenAdapter.MyGard
         return gardenList.get(position);
     }
 
+    /**
+     * ViewHolder class for MyGardenAdapter.
+     */
     static class MyGardenViewHolder extends RecyclerView.ViewHolder {
 
         private final LayoutItemGardenBinding binding;
 
+        /**
+         * Constructor for MyGardenViewHolder.
+         *
+         * @param binding Binding object for the view.
+         */
         MyGardenViewHolder(LayoutItemGardenBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
