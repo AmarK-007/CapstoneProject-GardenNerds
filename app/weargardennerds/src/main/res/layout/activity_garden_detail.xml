@@ -12,6 +12,24 @@
         android:layout_height="match_parent"
         android:padding="@dimen/_8dp">
 
+        <!-- Garden Name -->
+        <TextView
+            android:id="@+id/textViewGardenName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/_4dp"
+            android:background="@drawable/title_background"
+            android:maxLines="1"
+            android:padding="@dimen/_5dp"
+            android:text="@string/garden_name"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_10sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <!-- Top section with garden image and details -->
         <LinearLayout
             android:id="@+id/linearLayoutGardenDetails"
@@ -22,7 +40,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/textViewGardenName">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
@@ -46,18 +64,6 @@
                 android:layout_height="match_parent"
                 android:gravity="start"
                 android:orientation="vertical">
-
-                <!-- Garden Name -->
-                <TextView
-                    android:id="@+id/textViewGardenName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_4dp"
-                    android:maxLines="1"
-                    android:text="@string/garden_name"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_10sp"
-                    android:textStyle="bold" />
 
                 <!-- Description -->
                 <TextView
@@ -111,10 +117,10 @@
             android:contentDescription="@string/btn_title_my_garden"
             app:icon="@drawable/ic_plant"
             app:iconTint="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayoutGardenDetails"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

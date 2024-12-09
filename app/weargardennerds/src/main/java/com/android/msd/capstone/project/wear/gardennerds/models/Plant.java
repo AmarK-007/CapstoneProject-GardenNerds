@@ -34,8 +34,10 @@ public class Plant implements Parcelable {
 
 
     // Getters and Setters
-    public Plant(String plantName){
+    public Plant(String plantName, String sunlightLevel, String wateringInterval){
         this.plantName = plantName;
+        this.sunlightLevel = sunlightLevel;
+        this.wateringInterval = wateringInterval;
     }
 
     public int getPlantId() {
