@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.msd.capstone.project.wear.gardennerds.databinding.ActivityGardenDetailBinding;
 import com.android.msd.capstone.project.wear.gardennerds.models.Garden;
 
+/**
+ * Activity to display details of a specific garden.
+ */
 public class GardenDetailActivity extends AppCompatActivity {
 
     private ActivityGardenDetailBinding detailBinding;
@@ -22,10 +25,17 @@ public class GardenDetailActivity extends AppCompatActivity {
         init();
     }
 
+
+    /**
+     * Initializes the activity by retrieving garden data and setting up UI elements.
+     * This method retrieves the Garden object from the intent, sets the garden details in the UI,
+     * and sets up the OnClickListener for the "Go to Plants" button.
+     */
     private void init() {
         // Get the Garden object
         Garden garden = getIntent().getParcelableExtra("garden_object");
 
+        // If the garden object is not null, set the garden details in the UI
         if (garden != null) {
             detailBinding.textViewGardenName.setText(garden.getName());
             detailBinding.textViewDescription.setText(garden.getDescription());

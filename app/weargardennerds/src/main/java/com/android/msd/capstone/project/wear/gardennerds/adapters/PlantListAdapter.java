@@ -17,6 +17,10 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+
+/**
+ * Adapter for displaying a list of plants in a RecyclerView.
+ */
 public class PlantListAdapter extends RecyclerView.Adapter<PlantListAdapter.PlantViewHolder> {
 
     private final Context context;
@@ -35,6 +39,10 @@ public class PlantListAdapter extends RecyclerView.Adapter<PlantListAdapter.Plan
         return new PlantViewHolder(binding);
     }
 
+    /**
+     * Binds data to the ViewHolder at the specified position.
+     * This method is called by RecyclerView to display the data at the specified position.
+     */
     @Override
     public void onBindViewHolder(@NonNull PlantViewHolder holder, int position) {
         Plant plant = plantList.get(position);

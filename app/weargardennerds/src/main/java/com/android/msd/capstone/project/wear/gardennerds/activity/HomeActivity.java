@@ -41,6 +41,9 @@ import com.google.android.gms.wearable.Wearable;
 
 import java.util.Arrays;
 
+/**
+ * Main activity of the Wear OS app, displaying the home screen.
+ */
 public class HomeActivity extends AppCompatActivity implements MessageClient.OnMessageReceivedListener {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
@@ -75,6 +78,12 @@ public class HomeActivity extends AppCompatActivity implements MessageClient.OnM
 
     /**
      * Mann's Code
+     */
+
+    /**
+     * Shows a dialog for reminder notifications.
+     * This method creates and displays a dialog with reminder details,
+     * allowing the user to snooze or mark the reminder as done.
      */
     private void showReminderNotificationDialog(Reminder reminder) {
 
@@ -181,6 +190,11 @@ public class HomeActivity extends AppCompatActivity implements MessageClient.OnM
         dialog.show();
     }
 
+    /**
+     * Initializes the activity by setting up message listener and checking login status.
+     * This method registers the activity as a listener for messages from the Wearable API
+     * and checks if the user is logged in.
+     */
     private void init() {
         Wearable.getMessageClient(this).addListener(this);
         checkLoginStatus();
@@ -195,6 +209,12 @@ public class HomeActivity extends AppCompatActivity implements MessageClient.OnM
         super.onDestroy();
     }
 
+
+    /**
+     * Called when a message is received from the Wearable API.
+     * Handles data updates received from the phone.
+     *
+     */
     @Override
     public void onMessageReceived(@NonNull MessageEvent messageEvent) {
         if (messageEvent.getPath().equals(WearDataSyncUtil.UPDATE_DATA_PATH)) {
@@ -213,10 +233,19 @@ public class HomeActivity extends AppCompatActivity implements MessageClient.OnM
         }
     }
 
+    /**
+     * Requests user data from the connected phone.
+     * This method initiates a data request to the phone to retrieve user data.
+     */
     private void requestUserDataFromPhone() {
         WearDataSyncUtil.findCapabilityClient(this);
     }
 
+    /**
+     * Checks the login status of the user.
+     * If the user is not logged in, shows a login dialog and requests user data from the phone.
+     * If the user is logged in, proceeds with the app.
+     */
     private void checkLoginStatus() {
 
         // Check if the user is logged in
@@ -264,6 +293,11 @@ public class HomeActivity extends AppCompatActivity implements MessageClient.OnM
         context.startActivity(intent);
     }
 
+    /**
+     * Shows a dialog prompting the user to log in using their phone.
+     * This method creates and displays a dialog informing the user that they need to log in
+     * using their phone and provides a button to dismiss the dialog.
+     */
     private void showLoginDialog() {
         CustomDialogLayoutBinding dialogBinding = CustomDialogLayoutBinding.inflate(getLayoutInflater());
 
@@ -275,6 +309,7 @@ public class HomeActivity extends AppCompatActivity implements MessageClient.OnM
         loginDialog.getWindow().setBackgroundDrawable(new ColorDrawable(getColor(R.color.colorGrayLight)));
         loginDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         loginDialog.show();
+
 
         dialogBinding.dialogButtonOk.setOnClickListener(new View.OnClickListener() {
             @Override

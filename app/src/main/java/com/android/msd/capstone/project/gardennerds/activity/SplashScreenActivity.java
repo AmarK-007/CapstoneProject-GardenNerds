@@ -30,6 +30,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         splashScreenBinding = ActivitySplashScreenBinding.inflate(getLayoutInflater());
         View view = splashScreenBinding.getRoot();
+        // Set the content view
         setContentView(view);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         // Set navigation bar color

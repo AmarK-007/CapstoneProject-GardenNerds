@@ -16,16 +16,28 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+/**
+ * Adapter for displaying a list of gardens in a RecyclerView.
+ */
 public class GardenListAdapter extends RecyclerView.Adapter<GardenListAdapter.MyGardenViewHolder> {
 
     private List<Garden> gardenList;
     private Context context;
 
+    /**
+     * Constructor for the GardenListAdapter.
+
+     */
     public GardenListAdapter(List<Garden> gardenList, Context context) {
         this.gardenList = gardenList;
         this.context = context;
     }
 
+
+    /**
+     * Creates and returns a new ViewHolder instance.
+     * This method is called when the RecyclerView needs a new ViewHolder to represent an item.
+     */
     @NonNull
     @Override
     public MyGardenViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,6 +45,7 @@ public class GardenListAdapter extends RecyclerView.Adapter<GardenListAdapter.My
         ListGardenBinding binding = ListGardenBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new MyGardenViewHolder(binding);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull MyGardenViewHolder holder, int position) {
@@ -62,11 +75,19 @@ public class GardenListAdapter extends RecyclerView.Adapter<GardenListAdapter.My
         return Double.parseDouble(String.format("%.2f", Double.parseDouble(value)));
     }
 
+    /**
+     * Returns the total number of items in the data set held by the adapter.
+     *
+     * @return The total number of items in this adapter.
+     */
     @Override
     public int getItemCount() {
         return gardenList.size();
     }
 
+    /**
+     * ViewHolder class for holding and displaying garden data.
+     */
     static class MyGardenViewHolder extends RecyclerView.ViewHolder {
 
         private final ListGardenBinding binding;

@@ -17,6 +17,9 @@ import com.android.msd.capstone.project.wear.gardennerds.models.Reminder;
 
 import java.util.ArrayList;
 
+/**
+ * Activity to display a list of reminders.
+ */
 public class ReminderListActivity extends AppCompatActivity {
 
     ActivityReminderListBinding binding;
@@ -39,6 +42,12 @@ public class ReminderListActivity extends AppCompatActivity {
 
     }
 
+
+    /**
+     * Sets up the RecyclerView to display the list of reminders.
+     * This method loads reminders from the database, sets the LayoutManager,
+     * and creates the RemindersListAdapter to display the data.
+     */
     public void setRecyclerView() {
 
 
@@ -48,6 +57,11 @@ public class ReminderListActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Loads reminders from the database.
+     * This method retrieves all reminders from the ReminderDataSource and adds them to the remindersArrayList.
+     * If no reminders are found, it adds demo reminders to the list.
+     */
     private void loadreminders() {
         ReminderDataSource reminderDataSource = new ReminderDataSource(this);
         remindersArrayList.clear();
@@ -57,6 +71,11 @@ public class ReminderListActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Adds demo reminders to the reminders list.
+     * This method is called when no reminders are found in the database.
+     * It adds pre-defined demo reminders to the list for display.
+     */
     private void addDemoReminders() {
         remindersArrayList.add(new Reminder("Jade", "2", 1, "12:00AM"));
         remindersArrayList.add(new Reminder("Rose", "1", 2, "12:00AM"));
