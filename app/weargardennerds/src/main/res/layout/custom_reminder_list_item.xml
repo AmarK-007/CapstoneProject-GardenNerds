@@ -9,7 +9,9 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/_5dp"
+        android:paddingEnd="@dimen/_5dp">
         <TextView
             android:id="@+id/tvName"
             android:padding="@dimen/_1dp"
