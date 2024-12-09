@@ -10,36 +10,53 @@ import java.util.ArrayList;
  */
 public class Plant implements Parcelable {
 
-    // Plant fields...
+    // Unique identifier for the plant
     private int plantId;
+    // Identifier for the garden to which the plant belongs
     private int gardenId;
+    // Name of the plant
     private String plantName;
+    // Type of the plant
     private String plantType;
+    // Growth conditions required for the plant
     private String growthConditions;
+    // Moisture level required for the plant
     private String moistureLevel;
+    // Watering interval for the plant
     private String wateringInterval;
+    // Temperature level required for the plant
     private String temperatureLevel;
+    // Sunlight level required for the plant
     private String sunlightLevel;
+    // Nutrients required for the plant
     private String nutrientRequired;
-    private String imageUri;  // URL or URI to the garden image
+    // URI to the plant image
+    private String imageUri;
 
+    // List of reminders associated with the plant
     private ArrayList<Reminder> reminders;
 
     /**
-     * Constructor for Plant
+     * Default constructor for Plant
      */
     public Plant() {
         this.reminders = new ArrayList<>();
     }
 
-
-    // Getters and Setters
-    public Plant(String plantName, String sunlightLevel, String wateringInterval){
+    /**
+     * Constructor for Plant with specific attributes
+     *
+     * @param plantName        Name of the plant
+     * @param sunlightLevel    Sunlight level required for the plant
+     * @param wateringInterval Watering interval for the plant
+     */
+    public Plant(String plantName, String sunlightLevel, String wateringInterval) {
         this.plantName = plantName;
         this.sunlightLevel = sunlightLevel;
         this.wateringInterval = wateringInterval;
     }
 
+    // Getters and Setters
     public int getPlantId() {
         return plantId;
     }
@@ -141,7 +158,9 @@ public class Plant implements Parcelable {
     }
 
     /**
-     * Constructor for Plant
+     * Constructor for Plant from Parcel
+     *
+     * @param in Parcel containing the Plant data
      */
     protected Plant(Parcel in) {
         plantId = in.readInt();
@@ -174,7 +193,9 @@ public class Plant implements Parcelable {
     };
 
     /**
-     * describeContents method
+     * Describe the contents of the parcel
+     *
+     * @return int
      */
     @Override
     public int describeContents() {
@@ -182,7 +203,10 @@ public class Plant implements Parcelable {
     }
 
     /**
-     * writeToParcel method
+     * Write the Plant data to the parcel
+     *
+     * @param parcel Parcel to write the data to
+     * @param i      Additional flags
      */
     @Override
     public void writeToParcel(Parcel parcel, int i) {

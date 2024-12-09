@@ -11,16 +11,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.msd.capstone.project.gardennerds.R;
 import com.android.msd.capstone.project.gardennerds.models.productResponses.Media;
-import com.google.android.material.transition.Hold;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+/**
+ * Adapter class for displaying a list of media items in a RecyclerView for an image slider.
+ */
 public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.MyViewHolder> {
 
     private final ArrayList<Media> mediaList;
     private final Context context;
 
+    /**
+     * Constructor for ImageSliderAdapter.
+     *
+     * @param mediaList List of media items to display.
+     * @param context   Context in which the adapter is used.
+     */
     public ImageSliderAdapter(ArrayList<Media> mediaList, Context context) {
         this.mediaList = mediaList;
         this.context = context;
@@ -43,8 +51,17 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
         return mediaList.size();
     }
 
+    /**
+     * ViewHolder class for ImageSliderAdapter.
+     */
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
+
+        /**
+         * Constructor for MyViewHolder.
+         *
+         * @param itemView The view of the item.
+         */
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);

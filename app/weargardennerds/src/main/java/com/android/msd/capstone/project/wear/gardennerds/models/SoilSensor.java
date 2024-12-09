@@ -8,20 +8,37 @@ import android.os.Parcelable;
  */
 public class SoilSensor implements Parcelable {
 
-    // SoilSensor fields...
+    // Unique identifier for the soil sensor
     private int sensorId;
+    // Moisture level measured by the sensor
     private float moistureLevel;
+    // Nutrients level measured by the sensor
     private float nutrientsLevel;
+    // Temperature level measured by the sensor
     private float temperatureLevel;
+    // Salinity level measured by the sensor
     private float salinityLevel;
+    // Identifier for the garden associated with the sensor
     private int gardenId;
+    // API identifier for the sensor
     private int apiId;
 
+    /**
+     * Default constructor for SoilSensor
+     */
     public SoilSensor() {
     }
 
     /**
-     * Constructor for SoilSensor
+     * Constructor for SoilSensor with specific attributes
+     *
+     * @param sensorId         Unique identifier for the sensor
+     * @param moistureLevel    Moisture level measured by the sensor
+     * @param nutrientsLevel   Nutrients level measured by the sensor
+     * @param temperatureLevel Temperature level measured by the sensor
+     * @param salinityLevel    Salinity level measured by the sensor
+     * @param gardenId         Identifier for the garden associated with the sensor
+     * @param apiId            API identifier for the sensor
      */
     public SoilSensor(int sensorId, float moistureLevel, float nutrientsLevel, float temperatureLevel, float salinityLevel, int gardenId, int apiId) {
         this.sensorId = sensorId;
@@ -91,7 +108,9 @@ public class SoilSensor implements Parcelable {
     }
 
     /**
-     * Constructor for SoilSensor
+     * Constructor for SoilSensor from Parcel
+     *
+     * @param in Parcel containing the SoilSensor data
      */
     protected SoilSensor(Parcel in) {
         sensorId = in.readInt();
@@ -119,7 +138,9 @@ public class SoilSensor implements Parcelable {
     };
 
     /**
-     * describeContents method
+     * Describe the contents of the parcel
+     *
+     * @return int
      */
     @Override
     public int describeContents() {
@@ -127,7 +148,10 @@ public class SoilSensor implements Parcelable {
     }
 
     /**
-     * writeToParcel method
+     * Write the SoilSensor data to the parcel
+     *
+     * @param parcel Parcel to write the data to
+     * @param i      Additional flags
      */
     @Override
     public void writeToParcel(Parcel parcel, int i) {

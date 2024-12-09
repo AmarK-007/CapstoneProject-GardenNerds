@@ -1,6 +1,5 @@
 package com.android.msd.capstone.project.wear.gardennerds.receiver;
 
-
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -34,28 +33,22 @@ public class ReminderReceiver extends BroadcastReceiver {
     private int largeIcon;
     private String notificationText;
 
-
     /**
      * Receives and handles the alarm broadcast.
      */
     @SuppressLint({"NotificationPermission", "UnsafeProtectedBroadcastReceiver"})
     @Override
     public void onReceive(Context context, Intent intent) {
-
-// Create the notification channel (for Android Oreo and above)
+        // Create the notification channel (for Android Oreo and above)
         createNotificationChannel(context);
+
         // Get the reminder data from the intent
         Reminder reminder = intent.getParcelableExtra("ReminderInstance");
         if (reminder != null && reminder.getReminderId() != -1) {
             // Handle the alarm (e.g., show a toast or send a notification)
             Toast.makeText(context, "Reminder triggered! Reminder ID: " + reminder.getReminderId(), Toast.LENGTH_SHORT).show();
 
-            /**Reminder Type
-             * Fertilize
-             * Watering
-             * Sunlight
-             * Change Soil
-             * */
+            // Get the reminder type string
             String reminderTypeString = Utility.getReminderTypeString(context, reminder.getReminderTypeId());
             Log.d("TAG", "Reminder receiver " + reminderTypeString);
 
@@ -63,18 +56,14 @@ public class ReminderReceiver extends BroadcastReceiver {
             PlantDataSource plantDataSource = new PlantDataSource(context);
             Plant plant = plantDataSource.getPlant(reminder.getPlantId());
 
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.add(Calendar.MINUTE,1);
-//        Log.d("Recursion", calendar + "<time unique code>  " + Utility.generateUniqueRequestCode(plantId,reminderId) + " remidID> " + reminderId + " plantId> "+ plantId);
-//        Utility.setAlarm(context,calendar,Utility.generateUniqueRequestCode(plantId,reminderId),reminderId,plantId,1);
-
+            // Create an intent for the notification
             Intent notificationIntent = new Intent(context, HomeActivity.class);
             notificationIntent.putExtra("showDialog", true); // Pass data to show the dialog
             notificationIntent.putExtra("ReminderInstance", reminder);
             notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
             // Set notification content based on reminder type and plant details
-            if (reminderTypeString != null)
+            if (reminderTypeString != null) {
                 if (reminder.getPlantId() != 0) {
                     switch (reminderTypeString) {
                         case "Fertilize":
@@ -136,6 +125,7 @@ public class ReminderReceiver extends BroadcastReceiver {
                             break;
                     }
                 }
+            }
 
             // Create a PendingIntent to launch the HomeActivity when the notification is clicked
             PendingIntent pendingIntent = PendingIntent.getActivity(
@@ -171,10 +161,22 @@ public class ReminderReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * Generates a unique notification ID based on plant ID and reminder type.
+     *
+     * @param plantId       The ID of the plant.
+     * @param reminderType  The type of reminder.
+     * @return A unique notification ID.
+     */
     private int generateUniqueNotificationId(int plantId, String reminderType) {
         return (plantId + reminderType.hashCode()) & 0x7FFFFFFF; // Ensure non-negative value
     }
 
+    /**
+     * Creates a notification channel for plant watering reminders.
+     *
+     * @param context The context in which the channel is created.
+     */
     private void createNotificationChannel(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
@@ -190,6 +192,11 @@ public class ReminderReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * Shows a popup dialog to remind the user to water their plants.
+     *
+     * @param context The context in which the dialog is shown.
+     */
     private void showPopup(Context context) {
         // Make sure this is called only in MainActivity or the correct activity
         if (context instanceof HomeActivity) {
@@ -207,7 +214,12 @@ public class ReminderReceiver extends BroadcastReceiver {
         }
     }
 
-    // Check if the app is in the foreground
+    /**
+     * Checks if the app is in the foreground.
+     *
+     * @param context The context in which the check is performed.
+     * @return True if the app is in the foreground, false otherwise.
+     */
     private boolean isAppInForeground(Context context) {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         if (activityManager != null) {

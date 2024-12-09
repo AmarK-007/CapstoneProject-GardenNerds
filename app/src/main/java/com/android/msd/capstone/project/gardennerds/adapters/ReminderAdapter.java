@@ -10,18 +10,26 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.msd.capstone.project.gardennerds.databinding.LayoutItemReminderBinding;
-import com.android.msd.capstone.project.gardennerds.models.Plant;
 import com.android.msd.capstone.project.gardennerds.models.Reminder;
 import com.android.msd.capstone.project.gardennerds.utils.Constants;
 import com.android.msd.capstone.project.gardennerds.utils.Utility;
 
 import java.util.List;
 
+/**
+ * Adapter class for displaying a list of reminders in a RecyclerView.
+ */
 public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ReminderViewHolder> {
 
     private final Context context;
     private List<Reminder> reminderList;
 
+    /**
+     * Constructor for ReminderAdapter.
+     *
+     * @param reminderList List of reminders to display.
+     * @param context      Context in which the adapter is used.
+     */
     public ReminderAdapter(List<Reminder> reminderList, Context context) {
         this.context = context;
         this.reminderList = reminderList;
@@ -62,13 +70,10 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
                 break;
         }
 
-        holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String reminderTypeString = Utility.getReminderTypeString(context, reminder.getReminderTypeId());
-                Utility.setSnoozeReminder(context, false, reminder);
-                Log.d("ReminderAdapter", reminderTypeString + " reminder type string and plantid " + reminder.getPlantId());
-            }
+        // Handle item click
+        holder.binding.getRoot().setOnClickListener(v -> {
+            Utility.setSnoozeReminder(context, false, reminder);
+            Log.d("ReminderAdapter", reminderTypeString + " reminder type string and plantid " + reminder.getPlantId());
         });
     }
 
@@ -77,24 +82,41 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
         return reminderList.size();
     }
 
+    /**
+     * Updates the dataset of the adapter.
+     *
+     * @param newReminderList New list of reminders to display.
+     */
     public void setReminders(List<Reminder> newReminderList) {
         this.reminderList = newReminderList;
-        notifyDataSetChanged();
+        notifyDataSetChanged(); // Notify RecyclerView of data changes
     }
 
+    /**
+     * Returns the reminder at the specified position.
+     *
+     * @param position Position of the reminder in the list.
+     * @return The reminder at the specified position.
+     */
     public Reminder getReminderAt(int position) {
         return reminderList.get(position);
     }
 
-
+    /**
+     * ViewHolder class for ReminderAdapter.
+     */
     public static class ReminderViewHolder extends RecyclerView.ViewHolder {
 
         final LayoutItemReminderBinding binding;
 
+        /**
+         * Constructor for ReminderViewHolder.
+         *
+         * @param binding Binding object for the view.
+         */
         public ReminderViewHolder(@NonNull LayoutItemReminderBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
     }
-
 }

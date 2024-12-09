@@ -22,19 +22,23 @@ import com.google.android.gms.wearable.Wearable;
 import java.util.Set;
 
 public class WearDataSyncUtil {
+    // Constants for capability and data paths
     public static final String DATA_CAPABILITY_NAME = "data_transfer";
     public static final String UPDATE_DATA_PATH = "/update_db_data";
     private static final String TAG = WearDataSyncUtil.class.getSimpleName();
 
-
-    // get user data Capabilities Keys
+    // Capability keys for user data
     public static final String LOGIN_USER = "login_user";
     public static final String DB_DATA_USER = "db_data_user";
     public static final String DB_DATA_GARDEN = "db_data_garden";
     public static final String DB_DATA_PLANT = "db_data_plant";
     public static final String DB_DATA_REMINDER = "db_data_reminder";
 
-
+    /**
+     * Finds the capability client for data transfer.
+     *
+     * @param activity The activity context.
+     */
     public static void findCapabilityClient(Activity activity) {
         Wearable.getCapabilityClient(activity)
                 .getCapability(DATA_CAPABILITY_NAME, CapabilityClient.FILTER_REACHABLE)
@@ -44,11 +48,16 @@ public class WearDataSyncUtil {
                         findNodeForDataTransfer(activity, capabilityInfo);
                     }
                 }).addOnFailureListener(e -> {
-                    //Utility.showToast(activity, "Failed to get capabilities");
                     Log.v(TAG, "Failed to get capabilities");
                 });
     }
 
+    /**
+     * Finds the best node for data transfer.
+     *
+     * @param activity The activity context.
+     * @param capabilityInfo The capability information.
+     */
     private static void findNodeForDataTransfer(Activity activity, CapabilityInfo capabilityInfo) {
         String graphNode = null;
         Set<Node> connectedNodes = capabilityInfo.getNodes();
@@ -58,40 +67,45 @@ public class WearDataSyncUtil {
         }
         graphNode = pickBestNodeId(connectedNodes);
         if (graphNode == null) {
-            //Utility.showToast(activity, "No node found for data transfer");
             Log.v(TAG, "No node found for data transfer");
         } else {
             try {
                 Log.v(TAG, "Sending data to the nodeID: " + graphNode);
-                //Utility.showToast(activity, "Sending data to the nodeID: " + graphNode);
                 byte[] dataBytes = LOGIN_USER.toString().getBytes();
                 sendDataToPhone(activity, graphNode, dataBytes);
             } catch (Exception e) {
                 e.printStackTrace();
-                //Utility.showToast(activity, "Failed to send data to the node");
                 Log.v(TAG, "Failed to send data to the node");
             }
         }
     }
 
+    /**
+     * Sends data to the phone.
+     *
+     * @param activity The activity context.
+     * @param graphNodeId The node ID to send data to.
+     * @param dataToSend The data to send.
+     */
     private static void sendDataToPhone(Activity activity, String graphNodeId, byte[] dataToSend) {
         if (graphNodeId != null) {
-
             Task<Integer> sendTask = Wearable.getMessageClient(activity).sendMessage(graphNodeId, UPDATE_DATA_PATH, dataToSend);
             sendTask.addOnSuccessListener(statusInfo -> {
-                //Utility.showToast(activity, "Data sent successfully");
                 Log.v(TAG, "Data sent successfully");
             }).addOnFailureListener(e -> {
-                //Utility.showToast(activity, "Failed to send data");
                 Log.v(TAG, "Failed to send data");
             });
         } else {
-            //Utility.showToast(activity, "No node found for data transfer");
             Log.v(TAG, "No node found for data transfer");
         }
     }
 
-
+    /**
+     * Picks the best node ID from the connected nodes.
+     *
+     * @param connectedNodes The set of connected nodes.
+     * @return The best node ID.
+     */
     private static String pickBestNodeId(Set<Node> connectedNodes) {
         String bestNodeId = null;
         for (Node node : connectedNodes) {
@@ -103,6 +117,12 @@ public class WearDataSyncUtil {
         return bestNodeId;
     }
 
+    /**
+     * Handles data request received from the phone.
+     *
+     * @param context The context.
+     * @param messageReceived The message received.
+     */
     public static void handleDataRequest(Context context, String messageReceived) {
         String[] messageParts = messageReceived.split(" :~: ");
         if (messageParts != null && messageParts.length == 3) {
@@ -115,6 +135,14 @@ public class WearDataSyncUtil {
         }
     }
 
+    /**
+     * Handles user data based on the action and type of data.
+     *
+     * @param context The context.
+     * @param action The action to perform (insert, update, delete).
+     * @param typeOfData The type of data (user, garden, plant, reminder).
+     * @param userData The user data.
+     */
     private static void handleUserData(Context context, String action, String typeOfData, String userData) {
         Log.d(TAG, "Handling user data: action=" + action + ", typeOfData=" + typeOfData + ", userData=" + userData);
 
@@ -241,7 +269,6 @@ public class WearDataSyncUtil {
             boolean isUserExists = userDataSource.checkUser(userData);
             Log.d(TAG, "User exists: " + isUserExists);
             if (isUserExists) {
-                //send user data to wear
                 saveUserDataInPreference(context, userData);
             }
         } else {
@@ -249,20 +276,27 @@ public class WearDataSyncUtil {
         }
     }
 
+    /**
+     * Saves user data in shared preferences.
+     *
+     * @param context The context.
+     * @param username The username to save.
+     */
     private static void saveUserDataInPreference(Context context, String username) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("Login_Username", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("userName", username);
         editor.apply();
-        //Utility.storeUser(userDataSource.getUser(username, password), context);
     }
 
-    //read user data from shared preference
+    /**
+     * Reads user data from shared preferences.
+     *
+     * @param context The context.
+     * @return The username.
+     */
     public static String readUserDataFromPreference(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("Login_Username", Context.MODE_PRIVATE);
         return sharedPreferences.getString("userName", null);
     }
-
-
-
 }
