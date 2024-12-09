@@ -35,11 +35,12 @@
         <!-- Top section with garden image and details -->
         <LinearLayout
             android:id="@+id/linearLayoutGardenDetails"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/_100dp"
             android:layout_marginBottom="@dimen/_16dp"
             android:gravity="start|center_vertical"
             android:orientation="horizontal"
+            android:background="@color/colorPrimaryDark"
             android:padding="@dimen/_25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
