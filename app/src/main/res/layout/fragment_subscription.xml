@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Choose Plan"
+                android:text="@string/choose_plan"
                 android:textColor="@color/text_color"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/ivTrueAr"
-                    android:text="Easy Measurements with Camera"
+                    android:text="@string/easy_measurements_with_camera"
                     android:textColor="@color/text_color"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/ivTrueProductSuggestions"
-                    android:text="Customized Product Suggestions"
+                    android:text="@string/customized_product_suggestions"
                     android:textColor="@color/text_color"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -101,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/ivTrueNoti"
-                    android:text="Smart Reminders &amp; Notifications"
+                    android:text="@string/smart_reminders_notifications"
                     android:textColor="@color/text_color"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/ivTruePersonalizedGarden"
-                    android:text="Personalized Garden"
+                    android:text="@string/personalized_garden"
                     android:textColor="@color/text_color"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -159,7 +159,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="$12"
+                            android:text="@string/_12"
                             android:textColor="@color/purple_500"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -167,7 +167,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1 Month"
+                            android:text="@string/_1_month"
                             android:textColor="@color/purple_500"
                             android:textSize="15sp"
                             android:textStyle="bold" />
@@ -195,7 +195,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="$100"
+                            android:text="@string/_100"
                             android:textColor="@color/purple_500"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -203,7 +203,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1 Year"
+                            android:text="@string/_1_year"
                             android:textColor="@color/purple_500"
                             android:textSize="15sp"
                             android:textStyle="bold" />
@@ -222,7 +222,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Your subscription will be renew at the end of every billing cycle.You can cancle your subscription anytime from the My Subscription page on Garden Nerds App."
+                android:text="@string/your_subscription_will_be_renew_at_the_end_of_every_billing_cycle_you_can_cancle_your_subscription_anytime_from_the_my_subscription_page_on_garden_nerds_app"
                 android:textColor="@color/text_color"
                 android:textSize="12sp" />
 
@@ -231,7 +231,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Buy Now" />
+                android:text="@string/buy_now" />
 
 
         </LinearLayout>

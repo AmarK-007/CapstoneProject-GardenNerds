@@ -30,7 +30,7 @@
                     android:id="@+id/iv_garden_photo"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:contentDescription="Garden Photo"
+                    android:contentDescription="@string/garden_photo"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_plant" />
             </androidx.cardview.widget.CardView>
@@ -43,7 +43,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="24dp"
                 android:fontFamily="@fonts/roboto_light"
-                android:text="Upload Photo"
+                android:text="@string/upload_photo"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:layout_marginBottom="8dp"
-                        android:text="Plant Type:"
+                        android:text="@string/plant_type"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -136,7 +136,7 @@
                             android:layout_weight="1"
                             android:buttonTint="@color/white"
                             android:checked="true"
-                            android:text="Shady"
+                            android:text="@string/shady"
                             android:textColor="@color/white" />
 
                         <RadioButton
@@ -145,7 +145,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:buttonTint="@color/white"
-                            android:text="Partial Sunlight"
+                            android:text="@string/partial_sunlight"
                             android:textColor="@color/white" />
 
                         <RadioButton
@@ -154,7 +154,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:buttonTint="@color/white"
-                            android:text="Full Sunlight"
+                            android:text="@string/full_sunlight"
                             android:textColor="@color/white" />
                     </RadioGroup>
 

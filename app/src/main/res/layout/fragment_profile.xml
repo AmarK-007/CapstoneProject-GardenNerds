@@ -33,7 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@fonts/roboto_light"
-                    android:text="First Name:"
+                    android:text="@string/first_name"
                     android:textColor="@color/colorPrimaryDeepDark"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:fontFamily="@fonts/roboto_light"
-                    android:text="Admin"
+                    android:text="@string/admin"
                     android:textColor="@color/colorPrimaryDeepDark"
                     android:textSize="18dp" />
             </LinearLayout>
@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@fonts/roboto_light"
-                    android:text="Last Name:"
+                    android:text="@string/last_name"
                     android:textColor="@color/colorPrimaryDeepDark"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:fontFamily="@fonts/roboto_light"
-                    android:text="Admin"
+                    android:text="@string/admin"
                     android:textColor="@color/colorPrimaryDeepDark"
                     android:textSize="18dp" />
             </LinearLayout>
@@ -107,7 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@fonts/roboto_light"
-                    android:text="Email:"
+                    android:text="@string/email"
                     android:textColor="@color/colorPrimaryDeepDark"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -118,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:fontFamily="@fonts/roboto_light"
-                    android:text="admin@gmail.com"
+                    android:text="@string/admin_gmail_com"
                     android:textColor="@color/colorPrimaryDeepDark"
                     android:textSize="18dp" />
             </LinearLayout>
@@ -150,7 +150,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@fonts/roboto_light"
-                        android:text="Address"
+                        android:text="@string/address"
                         android:textColor="@color/colorPrimaryDeepDark"
                         android:textSize="18dp"
                         android:textStyle="bold" />
@@ -182,7 +182,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@fonts/roboto_light"
-                        android:text="123 King Street"
+                        android:text="@string/_123_king_street"
                         android:textColor="@color/colorPrimaryDeepDark"
                         android:textSize="18dp" />
 
@@ -191,7 +191,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@fonts/roboto_light"
-                        android:text="University Ave. East"
+                        android:text="@string/university_ave_east"
                         android:textColor="@color/colorPrimaryDeepDark"
                         android:textSize="18dp" />
 
@@ -205,7 +205,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@fonts/roboto_light"
-                            android:text="Waterloo"
+                            android:text="@string/waterloo"
                             android:textColor="@color/colorPrimaryDeepDark"
                             android:textSize="18dp" />
 
@@ -215,7 +215,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:fontFamily="@fonts/roboto_light"
-                            android:text="N2N 0K9"
+                            android:text="@string/n2n_0k9"
                             android:textColor="@color/colorPrimaryDeepDark"
                             android:textSize="18dp" />
                     </LinearLayout>
@@ -225,7 +225,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@fonts/roboto_light"
-                        android:text="Ontario"
+                        android:text="@string/ontario"
                         android:textColor="@color/colorPrimaryDeepDark"
                         android:textSize="18dp" />
                 </LinearLayout>

@@ -46,7 +46,7 @@
                 android:id="@+id/textViewGardenName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Garden Name"
+                android:text="@string/garden_name"
                 android:textColor="@color/colorPrimaryDeepDark"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -55,7 +55,7 @@
                 android:id="@+id/textViewGardenArea"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Area: 0 sq ft"
+                android:text="@string/area_0_sq_ft"
                 android:textColor="@color/colorPrimaryDeepDark"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="0°C"
+                android:text="@string/_0_c"
                 android:textColor="@color/colorPrimaryDeepDark"
                 android:textSize="14sp" />
         </LinearLayout>

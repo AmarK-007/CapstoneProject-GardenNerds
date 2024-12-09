@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:maxLines="1"
-                    android:text="Garden Name"
+                    android:text="@string/garden_name"
                     android:textColor="@color/text_color"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:maxLines="1"
-                    android:text="Garden Description goes here"
+                    android:text="@string/garden_description_goes_here"
                     android:textColor="@color/text_color"
                     android:textSize="13sp" />
 
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="6dp"
-                    android:text="Sunlight: Full Sunlight"
+                    android:text="@string/sunlight_full_sunlight"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
 
@@ -88,7 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
-                    android:text="Watering Frequency: Every 3 days"
+                    android:text="@string/watering_frequency_every_3_days"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
 
@@ -97,7 +97,7 @@
                     android:id="@+id/textViewMoistureLevel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Moisture Level: 50%"
+                    android:text="@string/moisture_level_50"
                     android:textColor="@color/text_color"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -134,7 +134,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginBottom="8dp"
-                android:text="My Plants"
+                android:text="@string/my_plants"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -148,7 +148,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/colorAccent"
-                android:contentDescription="Add Plant"
+                android:contentDescription="@string/add_plant"
                 android:src="@drawable/ic_add"
                 app:fabSize="mini" />
         </RelativeLayout>
@@ -161,7 +161,7 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:text="No plants added yet."
+            android:text="@string/no_plants_added_yet"
             android:textColor="@color/text_color"
             android:textSize="16sp"
             android:visibility="gone"

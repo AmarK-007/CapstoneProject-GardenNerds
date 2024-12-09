@@ -4,5 +4,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_full_margin">20dp</dimen>
+    <dimen name="_10sp">10sp</dimen>
+    <dimen name="_16dp">16dp</dimen>
     <integer name="anim_duration_long">400</integer>
 </resources>

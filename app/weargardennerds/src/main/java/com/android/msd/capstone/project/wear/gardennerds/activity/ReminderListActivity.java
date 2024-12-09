@@ -33,7 +33,7 @@ public class ReminderListActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        // Initialize and set up the RecyclerView
         setRecyclerView();
 
 

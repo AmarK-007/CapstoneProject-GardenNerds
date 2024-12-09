@@ -25,6 +25,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.wear.activity.ConfirmationActivity;
 
+import com.android.msd.capstone.project.wear.gardennerds.databinding.CustomReminderPopupDialogViewBinding;
+import com.android.msd.capstone.project.wear.gardennerds.db.GardenDataSource;
 import com.android.msd.capstone.project.wear.gardennerds.db.PlantDataSource;
 import com.android.msd.capstone.project.wear.gardennerds.models.Plant;
 import com.android.msd.capstone.project.wear.gardennerds.models.Reminder;
@@ -77,17 +79,18 @@ public class HomeActivity extends AppCompatActivity implements MessageClient.OnM
     private void showReminderNotificationDialog(Reminder reminder) {
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View dialogView = inflater.inflate(R.layout.custom_reminder_popup_dialog_view, null);
+        CustomReminderPopupDialogViewBinding dialogViewBinding = CustomReminderPopupDialogViewBinding.inflate(getLayoutInflater());
+//        View dialogView = inflater.inflate(R.layout.custom_reminder_popup_dialog_view, null);
 
         PlantDataSource plantDataSource = new PlantDataSource(this);
         Plant plant = plantDataSource.getPlant(reminder.getPlantId());
 
         // Initialize UI elements from the custom dialog layout
-        Button snoozeBtn = dialogView.findViewById(R.id.ivSnooze);
-        Button doneBtn = dialogView.findViewById(R.id.ivCheck);
-        ImageView image = dialogView.findViewById(R.id.ivReminderType);
-        TextView reminderTitle = dialogView.findViewById(R.id.tvReminderTitle);
-        TextView reminderMessage = dialogView.findViewById(R.id.tvReminderMessage);
+        ImageView snoozeBtn = dialogViewBinding.ivSnooze;
+        ImageView doneBtn = dialogViewBinding.ivCheck;
+        ImageView image = dialogViewBinding.ivReminderType;
+        TextView reminderTitle = dialogViewBinding.tvReminderTitle;
+        TextView reminderMessage = dialogViewBinding.tvReminderMessage;
 
 //        if (Objects.equals(reminderType, "Fertilizer")){
 //            image.setImageResource(R.drawable.fertilize);
@@ -149,7 +152,7 @@ public class HomeActivity extends AppCompatActivity implements MessageClient.OnM
 
         // Create the dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(dialogView)
+        builder.setView(dialogViewBinding.getRoot())
                 .setCancelable(true);
         AlertDialog dialog = builder.create();
         // Handle button click

@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.util.Log;
 
 public class DataReceiver extends BroadcastReceiver {
+    // Tag for logging messages
     private static final String TAG = "DataReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        // Check if the received intent matches the expected action
         if ("com.example.ACTION_SEND_DATA".equals(intent.getAction())) {
             String action = intent.getStringExtra("action");
             String typeOfData = intent.getStringExtra("type_of_data");
