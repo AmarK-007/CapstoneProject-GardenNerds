@@ -69,11 +69,12 @@ public class PhoneDataSyncUtil {
                 .getCapability(DATA_CAPABILITY_NAME, CapabilityClient.FILTER_REACHABLE)
                 .addOnSuccessListener(capabilityInfo -> {
                     if (capabilityInfo != null) {
-                        Log.d("CapabilityClient", "Capability found: " + capabilityInfo.getName());
+                        Log.v("CapabilityClient", "Capability found: " + capabilityInfo.getName());
                         findNodeForDataTransfer(context, capabilityInfo, action, typeOfData, userData);
                     }
                 }).addOnFailureListener(e -> {
-                    Utility.showToast(context, "Failed to get capabilities");
+                    //Utility.showToast(context, "Failed to get capabilities");
+                    Log.e(TAG, "Failed to get capabilities", e);
                 });
     }
 
@@ -82,19 +83,22 @@ public class PhoneDataSyncUtil {
         Set<Node> connectedNodes = capabilityInfo.getNodes();
         Log.d("NodeDiscovery", "Connected nodes: " + connectedNodes.size());
         for (Node node : connectedNodes) {
-            Log.d("NodeDiscovery", "Node ID: " + node.getId() + ", Nearby: " + node.isNearby());
+            Log.v("NodeDiscovery", "Node ID: " + node.getId() + ", Nearby: " + node.isNearby());
         }
         graphNode = pickBestNodeId(connectedNodes);
         if (graphNode == null) {
-            Utility.showToast(context, "No node found for data transfer");
+            //Utility.showToast(context, "No node found for data transfer");
+            Log.v(TAG, "No node found for data transfer");
         } else {
             try {
-                Utility.showToast(context, "Sending data to the nodeID: " + graphNode);
+                //Utility.showToast(context, "Sending data to the nodeID: " + graphNode);
+                Log.v(TAG, "Sending data to the nodeID: " + graphNode);
                 byte[] dataBytes = loadUserData(action, typeOfData, userData).getBytes();
                 sendDataToPhone(context, graphNode, dataBytes);
             } catch (Exception e) {
                 e.printStackTrace();
-                Utility.showToast(context, "Failed to send data to the node");
+                //Utility.showToast(context, "Failed to send data to the node");
+                Log.e(TAG, "Failed to send data to the node", e);
             }
         }
     }
@@ -104,12 +108,15 @@ public class PhoneDataSyncUtil {
 
             Task<Integer> sendTask = Wearable.getMessageClient(context).sendMessage(graphNodeId, UPDATE_DATA_PATH, dataToSend);
             sendTask.addOnSuccessListener(statusInfo -> {
-                Utility.showToast(context, "Data sent successfully");
+                //Utility.showToast(context, "Data sent successfully");
+                Log.v(TAG, "Data sent successfully");
             }).addOnFailureListener(e -> {
-                Utility.showToast(context, "Failed to send data");
+                //Utility.showToast(context, "Failed to send data");
+                Log.e(TAG, "Failed to send data", e);
             });
         } else {
-            Utility.showToast(context, "No node found for data transfer");
+            //Utility.showToast(context, "No node found for data transfer");
+            Log.v(TAG, "No node found for data transfer");
         }
     }
 

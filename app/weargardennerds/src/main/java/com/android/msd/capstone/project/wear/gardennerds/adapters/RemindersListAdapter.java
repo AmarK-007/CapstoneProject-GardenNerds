@@ -80,7 +80,7 @@ public class RemindersListAdapter extends RecyclerView.Adapter<RemindersListAdap
         }
 
         public void bind(Reminder reminders) {
-            binding.tvName.setText(reminders.getPlantId());
+            binding.tvName.setText(reminders.getPlantName());
             binding.tvFrequency.setText(reminders.getFrequency());
             binding.tvType.setText(Utility.getReminderTypeString(context, reminders.getReminderTypeId()));
         }

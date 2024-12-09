@@ -49,10 +49,10 @@ public class PlantListActivity extends AppCompatActivity {
     }
 
     private void addDemoPlants() {
-        // Add demo plants (URL is null for placeholder image)
-        plantList.add(new Plant("Sunflower"));
-        plantList.add(new Plant("Dalia"));
-        plantList.add(new Plant("Tulips"));
+        // Add default values
+        plantList.add(new Plant("Red Anthrium","shady","6"));
+        plantList.add(new Plant("Indoor Orchid","shady","6"));
+        //plantList.add(new Plant("Tulips"));
 
     }
 }

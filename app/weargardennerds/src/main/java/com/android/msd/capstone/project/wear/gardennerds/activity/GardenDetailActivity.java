@@ -29,6 +29,9 @@ public class GardenDetailActivity extends AppCompatActivity {
         if (garden != null) {
             detailBinding.textViewGardenName.setText(garden.getName());
             detailBinding.textViewDescription.setText(garden.getDescription());
+            detailBinding.textViewSunlightPreference.setText("Sunlight Required: " + garden.getSunlightPreference());
+            detailBinding.textViewWateringFrequency.setText("Watering Frequency: " + garden.getWateringFrequency() + "days");
+            //detailBinding.textViewMoistureLevel.setText("Garden Area: " + garden.getGardenArea());
         }
 
         // Set the OnClickListener

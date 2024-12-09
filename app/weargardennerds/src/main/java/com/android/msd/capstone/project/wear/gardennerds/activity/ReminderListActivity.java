@@ -62,5 +62,7 @@ public class ReminderListActivity extends AppCompatActivity {
         remindersArrayList.add(new Reminder("Rose", "1", 2, "12:00AM"));
         remindersArrayList.add(new Reminder("Basil", "3", 3, "12:00AM"));
         remindersArrayList.add(new Reminder("Lavender", "4", 4, "12:00AM"));
+        remindersArrayList.add(new Reminder("Mint", "5", 1, "12:00AM"));
+        remindersArrayList.add(new Reminder("Tomato", "6", 2, "12:00AM"));
     }
 }
