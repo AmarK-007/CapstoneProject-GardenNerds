@@ -40,7 +40,7 @@
             android:layout_marginBottom="@dimen/_16dp"
             android:gravity="start|center_vertical"
             android:orientation="horizontal"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/card_color"
             android:padding="@dimen/_25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

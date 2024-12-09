@@ -49,8 +49,8 @@ public class PlantListAdapter extends RecyclerView.Adapter<PlantListAdapter.Plan
 
         // Bind data to the views
         holder.binding.tvPlantName.setText(plant.getPlantName());
-        //holder.binding.tvPlantSunlight.setText("Sunlight Required: " + plant.getSunlightLevel());
-        //holder.binding.tvPlantWatering.setText("Watering Frequency: " + plant.getWateringInterval() + "days");
+        holder.binding.tvPlantSunlight.setText("Sunlight Required: " + plant.getSunlightLevel());
+        holder.binding.tvPlantWatering.setText("Watering Frequency: " + plant.getWateringInterval() + "days");
 
         // Load plant image using Glide
         Glide.with(context)

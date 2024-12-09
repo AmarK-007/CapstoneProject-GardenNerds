@@ -71,10 +71,12 @@ public class Garden implements Parcelable {
      * @param description Description of the garden
      * @param gardenArea  Area of the garden
      */
-    public Garden(String name, String description, String gardenArea) {
+    public Garden(String name, String description, String gardenArea, String sunlightPreference, String wateringFrequency) {
         this.name = name;
         this.description = (description != null && !description.isEmpty()) ? description : "Description";
         this.gardenArea = gardenArea;
+        this.sunlightPreference = (sunlightPreference != null && !sunlightPreference.isEmpty()) ? sunlightPreference : "";
+        this.wateringFrequency = (wateringFrequency != null && !wateringFrequency.isEmpty()) ? wateringFrequency : "";
         this.plants = new ArrayList<>();
     }
 

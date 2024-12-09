@@ -74,9 +74,9 @@ public class MyGardenActivity extends AppCompatActivity {
      */
     private void addDemoGardens() {
         // Add demo gardens (URL is null for placeholder image)
-        gardenList.add(new Garden("Indoor Garden", "This is my Indoor Garden", "5"));
-        gardenList.add(new Garden("Outdoor Garden", "This is my Outdoor Garden", "20"));
-        gardenList.add(new Garden("Back yard Garden", "The is my Back yard Garden", "30"));
-        gardenList.add(new Garden("Balcony Garden", "The is my Balcony Garden", "10"));
+        gardenList.add(new Garden("Indoor Garden", "This is my Indoor Garden", "5", "50%", "6"));
+        gardenList.add(new Garden("Outdoor Garden", "This is my Outdoor Garden", "20", "50%", "6"));
+        gardenList.add(new Garden("Back yard Garden", "The is my Back yard Garden", "30", "50%", "6"));
+        gardenList.add(new Garden("Balcony Garden", "The is my Balcony Garden", "10", "50%", "6"));
     }
 }
