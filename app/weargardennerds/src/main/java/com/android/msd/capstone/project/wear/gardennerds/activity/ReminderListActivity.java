@@ -77,11 +77,6 @@ public class ReminderListActivity extends AppCompatActivity {
      * It adds pre-defined demo reminders to the list for display.
      */
     private void addDemoReminders() {
-        remindersArrayList.add(new Reminder("Red Anthrium", "6", 1, "12:00AM"));
-        remindersArrayList.add(new Reminder("Red Anthrium", "60", 2, "12:00AM"));
-        remindersArrayList.add(new Reminder("Red Anthrium", "6", 3, "12:00AM"));
-        remindersArrayList.add(new Reminder("Red Anthrium", "60", 4, "12:00AM"));
-        remindersArrayList.add(new Reminder("Pine", "6", 1, "12:00AM"));
-        remindersArrayList.add(new Reminder("Pine", "60", 2, "12:00AM"));
+        remindersArrayList.add(new Reminder("Red Anthrium", "6", 1, "12:00PM"));
     }
 }

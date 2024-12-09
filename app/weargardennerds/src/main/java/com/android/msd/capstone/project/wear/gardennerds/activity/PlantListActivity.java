@@ -77,8 +77,6 @@ public class PlantListActivity extends AppCompatActivity {
     private void addDemoPlants() {
         // Add default values
         plantList.add(new Plant("Red Anthrium", "shady", "6"));
-        plantList.add(new Plant("Jade plant", "shady", "6"));
-        //plantList.add(new Plant("Tulips"));
 
     }
 }

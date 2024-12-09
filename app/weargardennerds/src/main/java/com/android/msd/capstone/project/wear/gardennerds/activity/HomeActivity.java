@@ -251,7 +251,7 @@ public class HomeActivity extends AppCompatActivity implements MessageClient.OnM
         // Check if the user is logged in
         if (!Utility.isLoggedIn(this)) {
             // Show the login dialog
-            showLoginDialog();
+            //showLoginDialog();
             // Request user data from phone
             requestUserDataFromPhone();
         } else {
