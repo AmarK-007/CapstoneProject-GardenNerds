@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@fonts/roboto_light"
-                android:text="Version 1.0"
+                android:text="@string/version_1_0"
                 android:textAlignment="center"
                 android:textColor="@color/colorAccent"
                 android:textSize="15sp"
@@ -82,7 +82,7 @@
                 android:text="@string/about_text"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorAccent"
-                android:textSize="16dp" />
+                android:textSize="@dimen/_16dp" />
         </LinearLayout>
 
 

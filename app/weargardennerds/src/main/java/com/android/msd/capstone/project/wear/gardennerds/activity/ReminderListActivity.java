@@ -12,14 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.android.msd.capstone.project.wear.gardennerds.R;
 import com.android.msd.capstone.project.wear.gardennerds.adapters.RemindersListAdapter;
 import com.android.msd.capstone.project.wear.gardennerds.databinding.ActivityReminderListBinding;
-import com.android.msd.capstone.project.wear.gardennerds.models.tempModels.Reminders;
+import com.android.msd.capstone.project.wear.gardennerds.db.ReminderDataSource;
+import com.android.msd.capstone.project.wear.gardennerds.models.Reminder;
 
 import java.util.ArrayList;
 
 public class ReminderListActivity extends AppCompatActivity {
 
     ActivityReminderListBinding binding;
-
+    ArrayList<Reminder> remindersArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,19 +38,29 @@ public class ReminderListActivity extends AppCompatActivity {
 
 
     }
-    /**
-     * Sets up the RecyclerView with reminder data and adapter.
-     */
-    public void setRecyclerView(){
-        // Create a list of reminder items
-        ArrayList<Reminders> remindersArrayList = new ArrayList<>();
-        // Set the LayoutManager and Adapter for the RecyclerView
-        remindersArrayList.add(new Reminders("Jade","2","Watering"));
-        remindersArrayList.add(new Reminders("Rose","1","Fertilize"));
-        remindersArrayList.add(new Reminders("Basil","3","Sun Light"));
 
-        binding.rvReminders.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        binding.rvReminders.setAdapter(new RemindersListAdapter(remindersArrayList,this));
+    public void setRecyclerView() {
 
+
+        loadreminders();
+        binding.rvReminders.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        binding.rvReminders.setAdapter(new RemindersListAdapter(remindersArrayList, this));
+
+    }
+
+    private void loadreminders() {
+        ReminderDataSource reminderDataSource = new ReminderDataSource(this);
+        remindersArrayList.clear();
+        remindersArrayList.addAll(reminderDataSource.getAllReminders());
+        if (remindersArrayList == null || remindersArrayList.isEmpty()) {
+            addDemoReminders();
+        }
+    }
+
+    private void addDemoReminders() {
+        remindersArrayList.add(new Reminder("Jade", "2", 1, "12:00AM"));
+        remindersArrayList.add(new Reminder("Rose", "1", 2, "12:00AM"));
+        remindersArrayList.add(new Reminder("Basil", "3", 3, "12:00AM"));
+        remindersArrayList.add(new Reminder("Lavender", "4", 4, "12:00AM"));
     }
 }

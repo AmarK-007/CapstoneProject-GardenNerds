@@ -16,7 +16,7 @@
             android:id="@+id/tvReminderTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reminder"
+            android:text="@string/reminder"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="It's time to water your plant."
+            android:text="@string/it_s_time_to_water_your_plant"
             android:textColor="@color/colorPrimary"
             android:textSize="15sp" />
 
@@ -52,7 +52,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                android:text="Snooze" />
+                android:text="@string/snooze" />
 
             <Button
                 android:id="@+id/btnDone"
@@ -61,7 +61,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
-                android:text="Okay" />
+                android:text="@string/okay" />
         </LinearLayout>
 
 

@@ -8,7 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.msd.capstone.project.wear.gardennerds.databinding.CustomReminderListItemBinding;
-import com.android.msd.capstone.project.wear.gardennerds.models.tempModels.Reminders;
+import com.android.msd.capstone.project.wear.gardennerds.models.Reminder;
+import com.android.msd.capstone.project.wear.gardennerds.utils.Utility;
 
 import java.util.ArrayList;
 
@@ -17,19 +18,10 @@ import java.util.ArrayList;
  * Adapter for displaying a list of reminders in a RecyclerView.
  */
 public class RemindersListAdapter extends RecyclerView.Adapter<RemindersListAdapter.MyViewHolder> {
-    // List of reminder items to display
-    ArrayList<Reminders> arrayList = new ArrayList<>();
-    // Context of the adapter
+    ArrayList<Reminder> arrayList = new ArrayList<>();
     Context context;
 
-
-    /**
-     * Constructor for the RemindersListAdapter.
-     *
-     * @param arrayList The list of reminder items to display.
-     * @param context   The context of the adapter.
-     */
-    public RemindersListAdapter(ArrayList<Reminders> arrayList, Context context) {
+    public RemindersListAdapter(ArrayList<Reminder> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -76,6 +68,7 @@ public class RemindersListAdapter extends RecyclerView.Adapter<RemindersListAdap
         // View binding for the reminder list item layout
         CustomReminderListItemBinding binding;
 
+
         /**
          * Constructor for the MyViewHolder.
          *
@@ -86,16 +79,10 @@ public class RemindersListAdapter extends RecyclerView.Adapter<RemindersListAdap
             this.binding = binding;
         }
 
-        /**
-         * Binds reminder data to the views in the ViewHolder.
-         *
-         * @param reminders The reminder data to bind.
-         */
-        public void bind(Reminders reminders){
-            // Set the text values for the name, frequency, and type
-            binding.tvName.setText(reminders.getName());
+        public void bind(Reminder reminders) {
+            binding.tvName.setText(reminders.getPlantId());
             binding.tvFrequency.setText(reminders.getFrequency());
-            binding.tvType.setText(reminders.getType());
+            binding.tvType.setText(Utility.getReminderTypeString(context, reminders.getReminderTypeId()));
         }
     }
 }

@@ -29,7 +29,7 @@
             android:layout_below="@id/iv_category"
             android:gravity="center_horizontal"
             style="@style/TextAppearance.AppCompat.Headline"
-            android:text="Indoor Garden"
+            android:text="@string/indoor_garden"
             android:textSize="20sp"
             android:textStyle="bold" />
 

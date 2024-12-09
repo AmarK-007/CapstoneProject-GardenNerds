@@ -14,6 +14,7 @@ import com.android.msd.capstone.project.wear.gardennerds.R;
 import com.android.msd.capstone.project.wear.gardennerds.adapters.GardenListAdapter;
 import com.android.msd.capstone.project.wear.gardennerds.databinding.ActivityHomeBinding;
 import com.android.msd.capstone.project.wear.gardennerds.databinding.ActivityMyGardenBinding;
+import com.android.msd.capstone.project.wear.gardennerds.db.GardenDataSource;
 import com.android.msd.capstone.project.wear.gardennerds.models.Garden;
 
 import java.util.ArrayList;
@@ -34,16 +35,26 @@ public class MyGardenActivity extends AppCompatActivity {
         init();
     }
 
-    private void init(){
+    private void init() {
         // Initialize adapter with an empty list
         myGardenBinding.wrcGardenList.setLayoutManager(new LinearLayoutManager(this));
         loadGarden();
-        gardenAdapter = new GardenListAdapter(gardenList,this);
+        gardenAdapter = new GardenListAdapter(gardenList, this);
         myGardenBinding.wrcGardenList.setAdapter(gardenAdapter);
 
     }
 
     private void loadGarden() {
+
+        GardenDataSource gardenDataSource = new GardenDataSource(this);
+        gardenList.clear();
+        gardenList.addAll(gardenDataSource.getAllGardens());
+        if (gardenList == null || gardenList.isEmpty()) {
+            addDemoGardens();
+        }
+    }
+
+    private void addDemoGardens() {
         // Add demo gardens (URL is null for placeholder image)
         gardenList.add(new Garden("Indoor Garden", "The garden is beautiful", "10"));
         gardenList.add(new Garden("Backyard Garden", "The garden is beautiful", "12"));

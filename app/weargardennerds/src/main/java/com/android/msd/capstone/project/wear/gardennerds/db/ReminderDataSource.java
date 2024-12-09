@@ -130,8 +130,8 @@ public class ReminderDataSource {
      * @return
      */
     @SuppressLint("Range")
-    public List<Reminder> getAllReminders() {
-        List<Reminder> reminders = new ArrayList<>();
+    public ArrayList<Reminder> getAllReminders() {
+        ArrayList<Reminder> reminders = new ArrayList<>();
 
         String selectQuery = "SELECT  * FROM " + TABLE_NAME;
         SQLiteDatabase db = dbHelper.getWritableDatabase();

@@ -7,7 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.android.msd.capstone.project.gardennerds.models.Garden;
-import com.android.msd.capstone.project.gardennerds.utils.DataSyncUtil;
+import com.android.msd.capstone.project.gardennerds.utils.PhoneDataSyncUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -229,6 +229,6 @@ public class GardenDataSource {
                 .append(garden.getImageUri()).append(", ")
                 .append(garden.getUserId()).append("\n");
 
-        DataSyncUtil.sendUserDataToWear(context, operation, TABLE_NAME, data.toString());
+        PhoneDataSyncUtil.sendUserDataToWear(context, operation, TABLE_NAME, data.toString());
     }
 }

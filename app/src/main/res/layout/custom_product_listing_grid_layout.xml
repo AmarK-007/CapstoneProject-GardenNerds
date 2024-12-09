@@ -54,7 +54,7 @@
             android:id="@+id/product_source"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:textSize="@dimen/_10sp"
             android:maxLines="1"
             android:textColor="@android:color/darker_gray"/>
     </LinearLayout>
