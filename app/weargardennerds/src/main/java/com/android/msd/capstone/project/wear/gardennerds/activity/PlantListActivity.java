@@ -75,7 +75,7 @@ public class PlantListActivity extends AppCompatActivity {
      * It adds pre-defined demo plants to the list for display.
      */
     private void addDemoPlants() {
-        // Add default values
+        // If sync up fails demo data will be added
         plantList.add(new Plant("Red Anthrium", "shady", "6"));
 
     }

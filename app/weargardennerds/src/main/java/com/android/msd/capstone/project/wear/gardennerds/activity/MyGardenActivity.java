@@ -73,7 +73,7 @@ public class MyGardenActivity extends AppCompatActivity {
      * It adds pre-defined demo gardens to the list for display.
      */
     private void addDemoGardens() {
-        // Add demo gardens (URL is null for placeholder image)
+        // If sync up fails demo data will be added
         gardenList.add(new Garden("Indoor Garden", "This is my Indoor Garden", "5", "50%", "6"));
     }
 }
