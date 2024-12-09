@@ -44,7 +44,8 @@ public class WearDataSyncUtil {
                         findNodeForDataTransfer(activity, capabilityInfo);
                     }
                 }).addOnFailureListener(e -> {
-                    Utility.showToast(activity, "Failed to get capabilities");
+                    //Utility.showToast(activity, "Failed to get capabilities");
+                    Log.v(TAG, "Failed to get capabilities");
                 });
     }
 
@@ -57,15 +58,18 @@ public class WearDataSyncUtil {
         }
         graphNode = pickBestNodeId(connectedNodes);
         if (graphNode == null) {
-            Utility.showToast(activity, "No node found for data transfer");
+            //Utility.showToast(activity, "No node found for data transfer");
+            Log.v(TAG, "No node found for data transfer");
         } else {
             try {
-                Utility.showToast(activity, "Sending data to the nodeID: " + graphNode);
+                Log.v(TAG, "Sending data to the nodeID: " + graphNode);
+                //Utility.showToast(activity, "Sending data to the nodeID: " + graphNode);
                 byte[] dataBytes = LOGIN_USER.toString().getBytes();
                 sendDataToPhone(activity, graphNode, dataBytes);
             } catch (Exception e) {
                 e.printStackTrace();
-                Utility.showToast(activity, "Failed to send data to the node");
+                //Utility.showToast(activity, "Failed to send data to the node");
+                Log.v(TAG, "Failed to send data to the node");
             }
         }
     }
@@ -75,12 +79,15 @@ public class WearDataSyncUtil {
 
             Task<Integer> sendTask = Wearable.getMessageClient(activity).sendMessage(graphNodeId, UPDATE_DATA_PATH, dataToSend);
             sendTask.addOnSuccessListener(statusInfo -> {
-                Utility.showToast(activity, "Data sent successfully");
+                //Utility.showToast(activity, "Data sent successfully");
+                Log.v(TAG, "Data sent successfully");
             }).addOnFailureListener(e -> {
-                Utility.showToast(activity, "Failed to send data");
+                //Utility.showToast(activity, "Failed to send data");
+                Log.v(TAG, "Failed to send data");
             });
         } else {
-            Utility.showToast(activity, "No node found for data transfer");
+            //Utility.showToast(activity, "No node found for data transfer");
+            Log.v(TAG, "No node found for data transfer");
         }
     }
 
